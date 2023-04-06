@@ -179,11 +179,15 @@ void Timebase_Reset_UpCounter(uint8_t window){
 } 
 
 void Timebase_Start_UpCounter(uint8_t window){
-  Timebase->UpCounter[window].Status = 1;
+  if(Timebase->UpCounter[window].Status != 1){
+    Timebase->UpCounter[window].Status = 1;    
+  }
 }
 
 void Timebase_Stop_UpCounter(uint8_t window){
-  Timebase->UpCounter[window].Status = 2;
+  if(Timebase->UpCounter[window].Status != 2){
+    Timebase->UpCounter[window].Status = 2;    
+  }
 }
 
 uint8_t Timebase_Check_UpCounter_Status(uint8_t window){
@@ -260,11 +264,15 @@ void Timebase_Reset_DownCounter(uint8_t window){
 } 
 
 void Timebase_Start_DownCounter(uint8_t window){
-  Timebase->DownCounter[window].Status = 1;
+  if(Timebase->DownCounter[window].Status != 1){
+    Timebase->DownCounter[window].Status = 1;    
+  }
 }
 
 void Timebase_Stop_DownCounter(uint8_t window){
-  Timebase->DownCounter[window].Status = 2;
+  if(Timebase->DownCounter[window].Status != 2){
+    Timebase->DownCounter[window].Status = 2;    
+  }
 }
 
 uint8_t Timebase_Check_DownCounter_Status(uint8_t window){
