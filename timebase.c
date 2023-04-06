@@ -220,6 +220,10 @@ void Timebase_Update_UpCounter(uint8_t window){
   }
 }
 
+void Timebase_UpCounter_Clear_Flags(uint8_t window){
+  Timebase_Reset_UpCounter( window );
+}
+
 uint8_t Timebase_UpCounter_Expired(uint8_t window){
   if(Timebase_Check_UpCounter_Status( window ) == 4){
     return 1;
@@ -230,7 +234,7 @@ uint8_t Timebase_UpCounter_Expired(uint8_t window){
 
 uint8_t Timebase_UpCounter_Expired_Event(uint8_t window){
   if(Timebase_Check_UpCounter_Status( window ) == 4){
-    Timebase_Reset_UpCounter( window );
+    Timebase_UpCounter_Clear_Flags( window );
     return 1;
   }else{
     return 0;
@@ -296,6 +300,10 @@ void Timebase_Update_DownCounter(uint8_t window){
   }
 }
 
+void Timebase_DownCounter_Clear_Flags(uint8_t window){
+  Timebase_Reset_DownCounter( window );
+}
+
 uint8_t Timebase_DownCounter_Expired(uint8_t window){
   if(Timebase_Check_DownCounter_Status( window ) == 4){
     return 1;
@@ -306,7 +314,7 @@ uint8_t Timebase_DownCounter_Expired(uint8_t window){
 
 uint8_t Timebase_DownCounter_Expired_Event(uint8_t window){
   if(Timebase_Check_DownCounter_Status( window ) == 4){
-    Timebase_Reset_DownCounter( window );
+    Timebase_DownCounter_Clear_Flags( window );
     return 1;
   }else{
     return 0;
@@ -354,5 +362,3 @@ void Timebase_ISR_Executables(void){
 ISR(TIMER0_COMPA_vect){
   Timebase_ISR_Executables();
 }
-
-
