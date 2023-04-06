@@ -1,5 +1,12 @@
 
 
+/* 
+ * File:   timebase.h
+ * Author: MD. Faridul Islam
+ * Atmega328P Timebase Library
+ * Created on October 30, 2022, 19:00
+ */
+
 void     Timebase_Struct_Init(void);
 void     Timebase_Timer_Config(uint16_t UpdateRateHz);
 void     Timebase_Wait_Unit_Time(void);

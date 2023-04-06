@@ -35,7 +35,8 @@ typedef struct timebase_time_t{
 typedef struct timebase_upcounter_t{
   uint8_t                     Status           ;
   int32_t                     EndValue         ;
-  int32_t                     TimeStamp        ;
+  int32_t                     Target           ;
+  int32_t                     Temporary        ;
   int32_t                     Value            ;
 }timebase_upcounter_t;
 
@@ -74,7 +75,8 @@ void Timebase_Struct_Init(void){
   for(uint8_t i=0; i < TIMEBASE_UPCOUNTER; i++){
     Timebase->UpCounter[i].Status = 0;  
     Timebase->UpCounter[i].EndValue = 0;
-    Timebase->UpCounter[i].TimeStamp = 0;
+    Timebase->UpCounter[i].Target = 0;
+    Timebase->UpCounter[i].Temporary = 0;    
     Timebase->UpCounter[i].Value = 0;
   }
   for(uint8_t i=0; i < TIMEBASE_DOWNCOUNTER; i++){
@@ -175,7 +177,8 @@ void Timebase_Reset_UpCounter(uint8_t window){
   Timebase->UpCounter[window].Status = 0;
   Timebase->UpCounter[window].Value = 0;
   Timebase->UpCounter[window].EndValue = 0;
-  Timebase->UpCounter[window].TimeStamp = 0;
+  Timebase->UpCounter[window].Target = 0;
+  Timebase->UpCounter[window].Temporary = 0;  
 } 
 
 void Timebase_Start_UpCounter(uint8_t window){
@@ -201,7 +204,8 @@ uint32_t Timebase_Get_UpCounter_Value(uint8_t window){
 void Timebase_Securely_Set_UpCounter(uint8_t window, uint32_t value){
   if( Timebase_Check_UpCounter_Status( window ) == 0 ){
     Timebase->UpCounter[window].Value = 0;
-    Timebase->UpCounter[window].TimeStamp = Timebase->Time.Seconds;
+    Timebase->UpCounter[window].Temporary = 0;    
+    Timebase->UpCounter[window].Target = value;
     Timebase->UpCounter[window].EndValue = Timebase->Time.Seconds + value;
     Timebase_Start_UpCounter(window);
   }
@@ -214,13 +218,17 @@ void Timebase_Forcefully_Set_UpCounter(uint8_t window, uint32_t value){
 
 void Timebase_Update_UpCounter(uint8_t window){
   if( Timebase_Check_UpCounter_Status( window ) == 1 ){       //counter running
-    Timebase->UpCounter[window].Value = Timebase->Time.Seconds - Timebase->UpCounter[window].TimeStamp;
-    if(Timebase->Time.Seconds >= Timebase->UpCounter[window].EndValue){
-      Timebase_Reset_UpCounter(window);
+    Timebase->UpCounter[window].Temporary = Timebase->UpCounter[window].EndValue - Timebase->Time.Seconds;
+    Timebase->UpCounter[window].Value = Timebase->UpCounter[window].Target - Timebase->UpCounter[window].Temporary;
+    if(Timebase->UpCounter[window].Temporary <= 0){
+      Timebase->UpCounter[window].EndValue = 0;
+      Timebase->UpCounter[window].Temporary = 0;  
+      Timebase->UpCounter[window].Value = Timebase->UpCounter[window].Target;
       Timebase->UpCounter[window].Status = 4;
     }
   } else if (Timebase_Check_UpCounter_Status( window ) == 2){ //counter stopped
-    Timebase->UpCounter[window].EndValue = Timebase->UpCounter[window].Value + Timebase->Time.Seconds;
+    Timebase->UpCounter[window].EndValue = Timebase->UpCounter[window].Temporary + Timebase->Time.Seconds;
+    Timebase->UpCounter[window].Value = Timebase->UpCounter[window].Target - Timebase->UpCounter[window].Temporary;
   }
 }
 
