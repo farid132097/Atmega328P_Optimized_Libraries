@@ -19,9 +19,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_frame  000002d0  00000000  00000000  00002a60  2**2
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_str    00000621  00000000  00000000  00002d30  2**0
+  8 .debug_str    00000661  00000000  00000000  00002d30  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    0000032d  00000000  00000000  00003351  2**0
+  9 .debug_loc    0000032d  00000000  00000000  00003391  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -82,12 +82,6 @@ Disassembly of section .text:
   8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000090 <main>:
-#include <util/delay.h>
-#include "timebase.h"
-
-int main(void){
-  
-  Timebase_Init(1000);
   90:	88 ee       	ldi	r24, 0xE8	; 232
   92:	93 e0       	ldi	r25, 0x03	; 3
   94:	0e 94 3c 05 	call	0xa78	; 0xa78 <Timebase_Init>
