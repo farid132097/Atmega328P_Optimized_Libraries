@@ -49,528 +49,3629 @@
   57 005c 1092 0000 		sts (Timebase_type+3)+3,__zero_reg__
   58               	.LM10:
   59 0060 1092 0000 		sts Timebase_type+15,__zero_reg__
-  60               	/* epilogue start */
+  60               	.LBB269:
   61               	.LM11:
-  62 0064 0895      		ret
-  63               	.LFE6:
-  65               	.global	Timebase_Timer_Config
-  67               	Timebase_Timer_Config:
-  68               	.LFB7:
-  69               	.LM12:
-  70               	.LVL0:
-  71               	/* prologue: function */
-  72               	/* frame size = 0 */
-  73 0066 9C01      		movw r18,r24
-  74               	.LM13:
-  75 0068 E091 0000 		lds r30,Timebase
-  76 006c F091 0000 		lds r31,(Timebase)+1
-  77 0070 8081      		ld r24,Z
-  78               	.LVL1:
-  79 0072 80FF      		sbrs r24,0
-  80 0074 00C0      		rjmp .L4
-  81               	.LBB10:
-  82               	.LM14:
-  83 0076 2130      		cpi r18,1
-  84 0078 3105      		cpc r19,__zero_reg__
-  85 007a 01F4      		brne .L5
-  86 007c 96E0      		ldi r25,lo8(6)
-  87               	.LVL2:
-  88 007e 00C0      		rjmp .L6
-  89               	.LVL3:
-  90               	.L5:
-  91               	.LM15:
-  92 0080 2230      		cpi r18,2
-  93 0082 3105      		cpc r19,__zero_reg__
-  94 0084 01F4      		brne .L7
-  95 0086 95E0      		ldi r25,lo8(5)
-  96               	.LVL4:
-  97 0088 00C0      		rjmp .L6
-  98               	.LVL5:
-  99               	.L7:
- 100               	.LM16:
- 101 008a 2430      		cpi r18,4
- 102 008c 3105      		cpc r19,__zero_reg__
- 103 008e 01F4      		brne .L8
- 104 0090 94E0      		ldi r25,lo8(4)
- 105               	.LVL6:
- 106 0092 00C0      		rjmp .L6
- 107               	.LVL7:
- 108               	.L8:
- 109               	.LM17:
- 110 0094 2830      		cpi r18,8
- 111 0096 3105      		cpc r19,__zero_reg__
- 112 0098 01F4      		brne .L9
- 113 009a 93E0      		ldi r25,lo8(3)
- 114               	.LVL8:
- 115 009c 00C0      		rjmp .L6
- 116               	.LVL9:
- 117               	.L9:
- 118               	.LM18:
- 119 009e 2031      		cpi r18,16
- 120 00a0 3105      		cpc r19,__zero_reg__
- 121 00a2 01F4      		brne .L10
- 122 00a4 92E0      		ldi r25,lo8(2)
- 123               	.LVL10:
- 124 00a6 00C0      		rjmp .L6
- 125               	.LVL11:
- 126               	.L10:
- 127 00a8 90E0      		ldi r25,lo8(0)
- 128               	.LVL12:
- 129 00aa 2032      		cpi r18,32
- 130 00ac 3105      		cpc r19,__zero_reg__
- 131 00ae 01F4      		brne .L6
- 132 00b0 91E0      		ldi r25,lo8(1)
- 133               	.L6:
- 134               	.LM19:
- 135               	/* #APP */
- 136               	 ;  136 "timebase.c" 1
- 137 00b2 F894      		cli
- 138               	 ;  0 "" 2
- 139               	.LM20:
- 140               	/* #NOAPP */
- 141 00b4 84B7      		in r24,84-32
- 142 00b6 877F      		andi r24,lo8(-9)
- 143 00b8 84BF      		out 84-32,r24
- 144               	.LM21:
- 145 00ba 8091 6000 		lds r24,96
- 146 00be 8068      		ori r24,lo8(-128)
- 147 00c0 8093 6000 		sts 96,r24
- 148               	.LM22:
- 149 00c4 8091 6000 		lds r24,96
- 150 00c8 8861      		ori r24,lo8(24)
- 151 00ca 8093 6000 		sts 96,r24
- 152               	.LM23:
- 153 00ce 9064      		ori r25,lo8(64)
- 154 00d0 9093 6000 		sts 96,r25
- 155               	.LM24:
- 156               	/* #APP */
- 157               	 ;  141 "timebase.c" 1
- 158 00d4 7894      		sei
- 159               	 ;  0 "" 2
- 160               	/* #NOAPP */
- 161 00d6 00C0      		rjmp .L12
- 162               	.LVL13:
- 163               	.L4:
- 164               	.LBE10:
- 165               	.LM25:
- 166 00d8 81FD      		sbrc r24,1
- 167 00da 00C0      		rjmp .L12
- 168               	.LM26:
- 169 00dc 82FF      		sbrs r24,2
- 170 00de 00C0      		rjmp .L12
- 171               	.LM27:
- 172 00e0 14BC      		out 68-32,__zero_reg__
- 173               	.LM28:
- 174 00e2 15BC      		out 69-32,__zero_reg__
- 175               	.LM29:
- 176 00e4 1092 6E00 		sts 110,__zero_reg__
- 177               	.LM30:
- 178 00e8 15BA      		out 53-32,__zero_reg__
- 179               	.LM31:
- 180 00ea 17BC      		out 71-32,__zero_reg__
- 181               	.LM32:
- 182 00ec 18BC      		out 72-32,__zero_reg__
- 183               	.LM33:
- 184 00ee 16BC      		out 70-32,__zero_reg__
- 185               	.LM34:
- 186 00f0 8AEF      		ldi r24,lo8(-6)
- 187 00f2 87BD      		out 71-32,r24
- 188               	.LM35:
- 189 00f4 92E0      		ldi r25,lo8(2)
- 190 00f6 94BD      		out 68-32,r25
- 191               	.LM36:
- 192 00f8 83E0      		ldi r24,lo8(3)
- 193 00fa 85BD      		out 69-32,r24
- 194               	.LM37:
- 195 00fc 9093 6E00 		sts 110,r25
- 196               	.LM38:
- 197               	/* #APP */
- 198               	 ;  156 "timebase.c" 1
- 199 0100 7894      		sei
- 200               	 ;  0 "" 2
- 201               	.LVL14:
- 202               	/* #NOAPP */
- 203               	.L12:
- 204               	.LM39:
- 205 0102 3283      		std Z+2,r19
- 206 0104 2183      		std Z+1,r18
- 207               	/* epilogue start */
- 208               	.LM40:
- 209 0106 0895      		ret
- 210               	.LFE7:
- 212               	.global	Timebase_Wait_Unit_Time
- 214               	Timebase_Wait_Unit_Time:
- 215               	.LFB8:
- 216               	.LM41:
- 217               	/* prologue: function */
- 218               	/* frame size = 0 */
- 219               	.LM42:
- 220 0108 E091 0000 		lds r30,Timebase
- 221 010c F091 0000 		lds r31,(Timebase)+1
- 222               	.L15:
- 223 0110 2381      		ldd r18,Z+3
- 224 0112 3481      		ldd r19,Z+4
- 225 0114 4581      		ldd r20,Z+5
- 226 0116 5681      		ldd r21,Z+6
- 227 0118 8781      		ldd r24,Z+7
- 228 011a 9085      		ldd r25,Z+8
- 229 011c A185      		ldd r26,Z+9
- 230 011e B285      		ldd r27,Z+10
- 231 0120 2817      		cp r18,r24
- 232 0122 3907      		cpc r19,r25
- 233 0124 4A07      		cpc r20,r26
- 234 0126 5B07      		cpc r21,r27
- 235 0128 01F0      		breq .L15
- 236               	.LM43:
- 237 012a 8781      		ldd r24,Z+7
- 238 012c 9085      		ldd r25,Z+8
- 239 012e A185      		ldd r26,Z+9
- 240 0130 B285      		ldd r27,Z+10
- 241 0132 8383      		std Z+3,r24
- 242 0134 9483      		std Z+4,r25
- 243 0136 A583      		std Z+5,r26
- 244 0138 B683      		std Z+6,r27
- 245               	/* epilogue start */
- 246               	.LM44:
- 247 013a 0895      		ret
- 248               	.LFE8:
- 250               	.global	Timebase_Tokens_Executing
- 252               	Timebase_Tokens_Executing:
- 253               	.LFB9:
- 254               	.LM45:
- 255               	/* prologue: function */
- 256               	/* frame size = 0 */
- 257               	.LM46:
- 258 013c E091 0000 		lds r30,Timebase
- 259 0140 F091 0000 		lds r31,(Timebase)+1
- 260 0144 8785      		ldd r24,Z+15
- 261               	/* epilogue start */
- 262               	.LM47:
- 263 0146 0895      		ret
- 264               	.LFE9:
- 266               	.global	Timebase_Add_Token
- 268               	Timebase_Add_Token:
- 269               	.LFB10:
- 270               	.LM48:
- 271               	/* prologue: function */
- 272               	/* frame size = 0 */
- 273               	.LBB11:
- 274               	.LBB12:
- 275               	.LM49:
- 276 0148 E091 0000 		lds r30,Timebase
- 277 014c F091 0000 		lds r31,(Timebase)+1
- 278 0150 8785      		ldd r24,Z+15
- 279               	.LBE12:
- 280               	.LBE11:
- 281               	.LM50:
- 282 0152 8F33      		cpi r24,lo8(63)
- 283 0154 00F4      		brsh .L22
- 284               	.LM51:
- 285 0156 8785      		ldd r24,Z+15
- 286 0158 8F5F      		subi r24,lo8(-(1))
- 287 015a 8787      		std Z+15,r24
- 288               	.L22:
- 289 015c 0895      		ret
- 290               	.LFE10:
- 292               	.global	Timebase_Remove_Token
- 294               	Timebase_Remove_Token:
- 295               	.LFB11:
- 296               	.LM52:
- 297               	/* prologue: function */
- 298               	/* frame size = 0 */
- 299               	.LBB13:
- 300               	.LBB14:
- 301               	.LM53:
- 302 015e E091 0000 		lds r30,Timebase
- 303 0162 F091 0000 		lds r31,(Timebase)+1
- 304 0166 8785      		ldd r24,Z+15
- 305               	.LBE14:
- 306               	.LBE13:
- 307               	.LM54:
- 308 0168 8823      		tst r24
- 309 016a 01F0      		breq .L25
- 310               	.LM55:
- 311 016c 8785      		ldd r24,Z+15
- 312 016e 8150      		subi r24,lo8(-(-1))
- 313 0170 8787      		std Z+15,r24
- 314               	.L25:
- 315 0172 0895      		ret
- 316               	.LFE11:
- 318               	.global	Timebase_Remove_All_Tokens
- 320               	Timebase_Remove_All_Tokens:
- 321               	.LFB12:
- 322               	.LM56:
- 323               	/* prologue: function */
- 324               	/* frame size = 0 */
- 325               	.LM57:
- 326 0174 E091 0000 		lds r30,Timebase
- 327 0178 F091 0000 		lds r31,(Timebase)+1
- 328 017c 1786      		std Z+15,__zero_reg__
- 329               	/* epilogue start */
- 330               	.LM58:
- 331 017e 0895      		ret
- 332               	.LFE12:
- 334               	.global	Timebase_Get_SubSeconds
- 336               	Timebase_Get_SubSeconds:
- 337               	.LFB13:
- 338               	.LM59:
- 339               	/* prologue: function */
- 340               	/* frame size = 0 */
- 341               	.LM60:
- 342 0180 E091 0000 		lds r30,Timebase
- 343 0184 F091 0000 		lds r31,(Timebase)+1
- 344 0188 2781      		ldd r18,Z+7
- 345 018a 3085      		ldd r19,Z+8
- 346 018c 4185      		ldd r20,Z+9
- 347 018e 5285      		ldd r21,Z+10
- 348               	.LM61:
- 349 0190 B901      		movw r22,r18
- 350 0192 CA01      		movw r24,r20
- 351               	/* epilogue start */
- 352 0194 0895      		ret
- 353               	.LFE13:
- 355               	.global	Timebase_Get_Seconds
- 357               	Timebase_Get_Seconds:
- 358               	.LFB14:
- 359               	.LM62:
- 360               	/* prologue: function */
- 361               	/* frame size = 0 */
- 362               	.LM63:
- 363 0196 E091 0000 		lds r30,Timebase
- 364 019a F091 0000 		lds r31,(Timebase)+1
- 365 019e 2385      		ldd r18,Z+11
- 366 01a0 3485      		ldd r19,Z+12
- 367 01a2 4585      		ldd r20,Z+13
- 368 01a4 5685      		ldd r21,Z+14
- 369               	.LM64:
- 370 01a6 B901      		movw r22,r18
- 371 01a8 CA01      		movw r24,r20
- 372               	/* epilogue start */
- 373 01aa 0895      		ret
- 374               	.LFE14:
- 376               	.global	Timebase_Set_SubSeconds
- 378               	Timebase_Set_SubSeconds:
- 379               	.LFB15:
- 380               	.LM65:
- 381               	.LVL15:
- 382               	/* prologue: function */
- 383               	/* frame size = 0 */
- 384               	.LM66:
- 385 01ac E091 0000 		lds r30,Timebase
- 386 01b0 F091 0000 		lds r31,(Timebase)+1
- 387 01b4 6783      		std Z+7,r22
- 388 01b6 7087      		std Z+8,r23
- 389 01b8 8187      		std Z+9,r24
- 390 01ba 9287      		std Z+10,r25
- 391               	/* epilogue start */
- 392               	.LM67:
- 393 01bc 0895      		ret
- 394               	.LFE15:
- 396               	.global	Timebase_Set_Seconds
- 398               	Timebase_Set_Seconds:
- 399               	.LFB16:
- 400               	.LM68:
- 401               	.LVL16:
- 402               	/* prologue: function */
- 403               	/* frame size = 0 */
- 404               	.LM69:
- 405 01be E091 0000 		lds r30,Timebase
- 406 01c2 F091 0000 		lds r31,(Timebase)+1
- 407 01c6 6387      		std Z+11,r22
- 408 01c8 7487      		std Z+12,r23
- 409 01ca 8587      		std Z+13,r24
- 410 01cc 9687      		std Z+14,r25
- 411               	/* epilogue start */
- 412               	.LM70:
- 413 01ce 0895      		ret
- 414               	.LFE16:
- 416               	.global	Timebase_Reset
- 418               	Timebase_Reset:
- 419               	.LFB17:
- 420               	.LM71:
- 421               	/* prologue: function */
- 422               	/* frame size = 0 */
- 423               	/* epilogue start */
- 424               	.LM72:
- 425 01d0 0895      		ret
- 426               	.LFE17:
- 428               	.global	Timebase_Init
- 430               	Timebase_Init:
- 431               	.LFB18:
- 432               	.LM73:
- 433               	.LVL17:
- 434 01d2 0F93      		push r16
- 435 01d4 1F93      		push r17
- 436               	/* prologue: function */
- 437               	/* frame size = 0 */
- 438 01d6 8C01      		movw r16,r24
- 439               	.LM74:
- 440 01d8 0E94 0000 		call Timebase_Struct_Init
- 441               	.LVL18:
- 442               	.LM75:
- 443 01dc C801      		movw r24,r16
- 444 01de 0E94 0000 		call Timebase_Timer_Config
- 445               	/* epilogue start */
- 446               	.LM76:
- 447 01e2 1F91      		pop r17
- 448 01e4 0F91      		pop r16
- 449               	.LVL19:
- 450 01e6 0895      		ret
- 451               	.LFE18:
- 453               	.global	Timebase_Main_Loop_Executables
- 455               	Timebase_Main_Loop_Executables:
- 456               	.LFB19:
- 457               	.LM77:
- 458               	/* prologue: function */
- 459               	/* frame size = 0 */
- 460               	/* epilogue start */
- 461               	.LM78:
- 462 01e8 0895      		ret
- 463               	.LFE19:
- 465               	.global	Timebase_ISR_Executables
- 467               	Timebase_ISR_Executables:
- 468               	.LFB20:
- 469               	.LM79:
- 470 01ea CF93      		push r28
- 471 01ec DF93      		push r29
- 472               	/* prologue: function */
- 473               	/* frame size = 0 */
- 474               	.LM80:
- 475 01ee C091 0000 		lds r28,Timebase
- 476 01f2 D091 0000 		lds r29,(Timebase)+1
- 477 01f6 8F81      		ldd r24,Y+7
- 478 01f8 9885      		ldd r25,Y+8
- 479 01fa A985      		ldd r26,Y+9
- 480 01fc BA85      		ldd r27,Y+10
- 481 01fe 0196      		adiw r24,1
- 482 0200 A11D      		adc r26,__zero_reg__
- 483 0202 B11D      		adc r27,__zero_reg__
- 484 0204 8F83      		std Y+7,r24
- 485 0206 9887      		std Y+8,r25
- 486 0208 A987      		std Y+9,r26
- 487 020a BA87      		std Y+10,r27
- 488               	.LM81:
- 489 020c 6F81      		ldd r22,Y+7
- 490 020e 7885      		ldd r23,Y+8
- 491 0210 8985      		ldd r24,Y+9
- 492 0212 9A85      		ldd r25,Y+10
- 493 0214 2981      		ldd r18,Y+1
- 494 0216 3A81      		ldd r19,Y+2
- 495 0218 40E0      		ldi r20,lo8(0)
- 496 021a 50E0      		ldi r21,hi8(0)
- 497 021c 0E94 0000 		call __udivmodsi4
- 498 0220 6115      		cp r22,__zero_reg__
- 499 0222 7105      		cpc r23,__zero_reg__
- 500 0224 8105      		cpc r24,__zero_reg__
- 501 0226 9105      		cpc r25,__zero_reg__
- 502 0228 01F4      		brne .L44
- 503               	.LM82:
- 504 022a 8B85      		ldd r24,Y+11
- 505 022c 9C85      		ldd r25,Y+12
- 506 022e AD85      		ldd r26,Y+13
- 507 0230 BE85      		ldd r27,Y+14
- 508 0232 0196      		adiw r24,1
- 509 0234 A11D      		adc r26,__zero_reg__
- 510 0236 B11D      		adc r27,__zero_reg__
- 511 0238 8B87      		std Y+11,r24
- 512 023a 9C87      		std Y+12,r25
- 513 023c AD87      		std Y+13,r26
- 514 023e BE87      		std Y+14,r27
- 515               	.LBB15:
- 516               	.LBB16:
- 517               	.LM83:
- 518 0240 8F85      		ldd r24,Y+15
- 519               	.LBE16:
- 520               	.LBE15:
- 521               	.LM84:
- 522 0242 8823      		tst r24
- 523 0244 01F4      		brne .L44
- 524               	.LM85:
- 525 0246 1F82      		std Y+7,__zero_reg__
- 526 0248 1886      		std Y+8,__zero_reg__
- 527 024a 1986      		std Y+9,__zero_reg__
- 528 024c 1A86      		std Y+10,__zero_reg__
- 529               	.L44:
- 530               	/* epilogue start */
- 531               	.LM86:
- 532 024e DF91      		pop r29
- 533 0250 CF91      		pop r28
- 534 0252 0895      		ret
- 535               	.LFE20:
- 537               	.global	__vector_14
- 539               	__vector_14:
- 540               	.LFB21:
- 541               	.LM87:
- 542 0254 1F92      		push __zero_reg__
- 543 0256 0F92      		push r0
- 544 0258 0FB6      		in r0,__SREG__
- 545 025a 0F92      		push r0
- 546 025c 1124      		clr __zero_reg__
- 547 025e 2F93      		push r18
- 548 0260 3F93      		push r19
- 549 0262 4F93      		push r20
- 550 0264 5F93      		push r21
- 551 0266 6F93      		push r22
- 552 0268 7F93      		push r23
- 553 026a 8F93      		push r24
- 554 026c 9F93      		push r25
- 555 026e AF93      		push r26
- 556 0270 BF93      		push r27
- 557 0272 EF93      		push r30
- 558 0274 FF93      		push r31
- 559               	/* prologue: Signal */
- 560               	/* frame size = 0 */
- 561               	.LM88:
- 562 0276 0E94 0000 		call Timebase_ISR_Executables
- 563               	/* epilogue start */
- 564               	.LM89:
- 565 027a FF91      		pop r31
- 566 027c EF91      		pop r30
- 567 027e BF91      		pop r27
- 568 0280 AF91      		pop r26
- 569 0282 9F91      		pop r25
- 570 0284 8F91      		pop r24
- 571 0286 7F91      		pop r23
- 572 0288 6F91      		pop r22
- 573 028a 5F91      		pop r21
- 574 028c 4F91      		pop r20
- 575 028e 3F91      		pop r19
- 576 0290 2F91      		pop r18
- 577 0292 0F90      		pop r0
- 578 0294 0FBE      		out __SREG__,r0
- 579 0296 0F90      		pop r0
- 580 0298 1F90      		pop __zero_reg__
- 581 029a 1895      		reti
- 582               	.LFE21:
- 584               		.comm Timebase_type,16,1
- 585               		.comm Timebase,2,1
- 730               	.Letext0:
+  62 0064 1092 0000 		sts Timebase_type+16,__zero_reg__
+  63               	.LM12:
+  64 0068 1092 0000 		sts Timebase_type+17,__zero_reg__
+  65 006c 1092 0000 		sts (Timebase_type+17)+1,__zero_reg__
+  66 0070 1092 0000 		sts (Timebase_type+17)+2,__zero_reg__
+  67 0074 1092 0000 		sts (Timebase_type+17)+3,__zero_reg__
+  68               	.LM13:
+  69 0078 1092 0000 		sts Timebase_type+21,__zero_reg__
+  70 007c 1092 0000 		sts (Timebase_type+21)+1,__zero_reg__
+  71 0080 1092 0000 		sts (Timebase_type+21)+2,__zero_reg__
+  72 0084 1092 0000 		sts (Timebase_type+21)+3,__zero_reg__
+  73               	.LM14:
+  74 0088 1092 0000 		sts Timebase_type+25,__zero_reg__
+  75 008c 1092 0000 		sts (Timebase_type+25)+1,__zero_reg__
+  76 0090 1092 0000 		sts (Timebase_type+25)+2,__zero_reg__
+  77 0094 1092 0000 		sts (Timebase_type+25)+3,__zero_reg__
+  78               	.LM15:
+  79 0098 1092 0000 		sts Timebase_type+29,__zero_reg__
+  80 009c 1092 0000 		sts (Timebase_type+29)+1,__zero_reg__
+  81 00a0 1092 0000 		sts (Timebase_type+29)+2,__zero_reg__
+  82 00a4 1092 0000 		sts (Timebase_type+29)+3,__zero_reg__
+  83               	.LM16:
+  84 00a8 1092 0000 		sts Timebase_type+33,__zero_reg__
+  85 00ac 1092 0000 		sts (Timebase_type+33)+1,__zero_reg__
+  86 00b0 1092 0000 		sts (Timebase_type+33)+2,__zero_reg__
+  87 00b4 1092 0000 		sts (Timebase_type+33)+3,__zero_reg__
+  88               	.LBE269:
+  89               	.LBB270:
+  90               	.LM17:
+  91 00b8 1092 0000 		sts Timebase_type+37,__zero_reg__
+  92               	.LM18:
+  93 00bc 1092 0000 		sts Timebase_type+38,__zero_reg__
+  94 00c0 1092 0000 		sts (Timebase_type+38)+1,__zero_reg__
+  95 00c4 1092 0000 		sts (Timebase_type+38)+2,__zero_reg__
+  96 00c8 1092 0000 		sts (Timebase_type+38)+3,__zero_reg__
+  97               	.LM19:
+  98 00cc 1092 0000 		sts Timebase_type+42,__zero_reg__
+  99 00d0 1092 0000 		sts (Timebase_type+42)+1,__zero_reg__
+ 100 00d4 1092 0000 		sts (Timebase_type+42)+2,__zero_reg__
+ 101 00d8 1092 0000 		sts (Timebase_type+42)+3,__zero_reg__
+ 102               	.LM20:
+ 103 00dc 1092 0000 		sts Timebase_type+46,__zero_reg__
+ 104 00e0 1092 0000 		sts (Timebase_type+46)+1,__zero_reg__
+ 105 00e4 1092 0000 		sts (Timebase_type+46)+2,__zero_reg__
+ 106 00e8 1092 0000 		sts (Timebase_type+46)+3,__zero_reg__
+ 107               	.LM21:
+ 108 00ec 1092 0000 		sts Timebase_type+50,__zero_reg__
+ 109               	.LM22:
+ 110 00f0 1092 0000 		sts Timebase_type+51,__zero_reg__
+ 111 00f4 1092 0000 		sts (Timebase_type+51)+1,__zero_reg__
+ 112 00f8 1092 0000 		sts (Timebase_type+51)+2,__zero_reg__
+ 113 00fc 1092 0000 		sts (Timebase_type+51)+3,__zero_reg__
+ 114               	.LM23:
+ 115 0100 1092 0000 		sts Timebase_type+55,__zero_reg__
+ 116 0104 1092 0000 		sts (Timebase_type+55)+1,__zero_reg__
+ 117 0108 1092 0000 		sts (Timebase_type+55)+2,__zero_reg__
+ 118 010c 1092 0000 		sts (Timebase_type+55)+3,__zero_reg__
+ 119               	.LM24:
+ 120 0110 1092 0000 		sts Timebase_type+59,__zero_reg__
+ 121 0114 1092 0000 		sts (Timebase_type+59)+1,__zero_reg__
+ 122 0118 1092 0000 		sts (Timebase_type+59)+2,__zero_reg__
+ 123 011c 1092 0000 		sts (Timebase_type+59)+3,__zero_reg__
+ 124               	/* epilogue start */
+ 125               	.LBE270:
+ 126               	.LM25:
+ 127 0120 0895      		ret
+ 128               	.LFE6:
+ 130               	.global	Timebase_Timer_Config
+ 132               	Timebase_Timer_Config:
+ 133               	.LFB7:
+ 134               	.LM26:
+ 135               	.LVL0:
+ 136               	/* prologue: function */
+ 137               	/* frame size = 0 */
+ 138 0122 9C01      		movw r18,r24
+ 139               	.LM27:
+ 140 0124 E091 0000 		lds r30,Timebase
+ 141 0128 F091 0000 		lds r31,(Timebase)+1
+ 142 012c 8081      		ld r24,Z
+ 143               	.LVL1:
+ 144 012e 80FF      		sbrs r24,0
+ 145 0130 00C0      		rjmp .L4
+ 146               	.LBB271:
+ 147               	.LM28:
+ 148 0132 2130      		cpi r18,1
+ 149 0134 3105      		cpc r19,__zero_reg__
+ 150 0136 01F4      		brne .L5
+ 151 0138 96E0      		ldi r25,lo8(6)
+ 152               	.LVL2:
+ 153 013a 00C0      		rjmp .L6
+ 154               	.LVL3:
+ 155               	.L5:
+ 156               	.LM29:
+ 157 013c 2230      		cpi r18,2
+ 158 013e 3105      		cpc r19,__zero_reg__
+ 159 0140 01F4      		brne .L7
+ 160 0142 95E0      		ldi r25,lo8(5)
+ 161               	.LVL4:
+ 162 0144 00C0      		rjmp .L6
+ 163               	.LVL5:
+ 164               	.L7:
+ 165               	.LM30:
+ 166 0146 2430      		cpi r18,4
+ 167 0148 3105      		cpc r19,__zero_reg__
+ 168 014a 01F4      		brne .L8
+ 169 014c 94E0      		ldi r25,lo8(4)
+ 170               	.LVL6:
+ 171 014e 00C0      		rjmp .L6
+ 172               	.LVL7:
+ 173               	.L8:
+ 174               	.LM31:
+ 175 0150 2830      		cpi r18,8
+ 176 0152 3105      		cpc r19,__zero_reg__
+ 177 0154 01F4      		brne .L9
+ 178 0156 93E0      		ldi r25,lo8(3)
+ 179               	.LVL8:
+ 180 0158 00C0      		rjmp .L6
+ 181               	.LVL9:
+ 182               	.L9:
+ 183               	.LM32:
+ 184 015a 2031      		cpi r18,16
+ 185 015c 3105      		cpc r19,__zero_reg__
+ 186 015e 01F4      		brne .L10
+ 187 0160 92E0      		ldi r25,lo8(2)
+ 188               	.LVL10:
+ 189 0162 00C0      		rjmp .L6
+ 190               	.LVL11:
+ 191               	.L10:
+ 192 0164 90E0      		ldi r25,lo8(0)
+ 193               	.LVL12:
+ 194 0166 2032      		cpi r18,32
+ 195 0168 3105      		cpc r19,__zero_reg__
+ 196 016a 01F4      		brne .L6
+ 197 016c 91E0      		ldi r25,lo8(1)
+ 198               	.L6:
+ 199               	.LM33:
+ 200               	/* #APP */
+ 201               	 ;  134 "timebase.c" 1
+ 202 016e F894      		cli
+ 203               	 ;  0 "" 2
+ 204               	.LM34:
+ 205               	/* #NOAPP */
+ 206 0170 84B7      		in r24,84-32
+ 207 0172 877F      		andi r24,lo8(-9)
+ 208 0174 84BF      		out 84-32,r24
+ 209               	.LM35:
+ 210 0176 8091 6000 		lds r24,96
+ 211 017a 8068      		ori r24,lo8(-128)
+ 212 017c 8093 6000 		sts 96,r24
+ 213               	.LM36:
+ 214 0180 8091 6000 		lds r24,96
+ 215 0184 8861      		ori r24,lo8(24)
+ 216 0186 8093 6000 		sts 96,r24
+ 217               	.LM37:
+ 218 018a 9064      		ori r25,lo8(64)
+ 219 018c 9093 6000 		sts 96,r25
+ 220               	.LM38:
+ 221               	/* #APP */
+ 222               	 ;  139 "timebase.c" 1
+ 223 0190 7894      		sei
+ 224               	 ;  0 "" 2
+ 225               	/* #NOAPP */
+ 226 0192 00C0      		rjmp .L12
+ 227               	.LVL13:
+ 228               	.L4:
+ 229               	.LBE271:
+ 230               	.LM39:
+ 231 0194 81FD      		sbrc r24,1
+ 232 0196 00C0      		rjmp .L12
+ 233               	.LM40:
+ 234 0198 82FF      		sbrs r24,2
+ 235 019a 00C0      		rjmp .L12
+ 236               	.LM41:
+ 237 019c 14BC      		out 68-32,__zero_reg__
+ 238               	.LM42:
+ 239 019e 15BC      		out 69-32,__zero_reg__
+ 240               	.LM43:
+ 241 01a0 1092 6E00 		sts 110,__zero_reg__
+ 242               	.LM44:
+ 243 01a4 15BA      		out 53-32,__zero_reg__
+ 244               	.LM45:
+ 245 01a6 17BC      		out 71-32,__zero_reg__
+ 246               	.LM46:
+ 247 01a8 18BC      		out 72-32,__zero_reg__
+ 248               	.LM47:
+ 249 01aa 16BC      		out 70-32,__zero_reg__
+ 250               	.LM48:
+ 251 01ac 8AEF      		ldi r24,lo8(-6)
+ 252 01ae 87BD      		out 71-32,r24
+ 253               	.LM49:
+ 254 01b0 92E0      		ldi r25,lo8(2)
+ 255 01b2 94BD      		out 68-32,r25
+ 256               	.LM50:
+ 257 01b4 83E0      		ldi r24,lo8(3)
+ 258 01b6 85BD      		out 69-32,r24
+ 259               	.LM51:
+ 260 01b8 9093 6E00 		sts 110,r25
+ 261               	.LM52:
+ 262               	/* #APP */
+ 263               	 ;  154 "timebase.c" 1
+ 264 01bc 7894      		sei
+ 265               	 ;  0 "" 2
+ 266               	.LVL14:
+ 267               	/* #NOAPP */
+ 268               	.L12:
+ 269               	.LM53:
+ 270 01be 3283      		std Z+2,r19
+ 271 01c0 2183      		std Z+1,r18
+ 272               	/* epilogue start */
+ 273               	.LM54:
+ 274 01c2 0895      		ret
+ 275               	.LFE7:
+ 277               	.global	Timebase_Token_Executing
+ 279               	Timebase_Token_Executing:
+ 280               	.LFB8:
+ 281               	.LM55:
+ 282               	/* prologue: function */
+ 283               	/* frame size = 0 */
+ 284               	.LM56:
+ 285 01c4 E091 0000 		lds r30,Timebase
+ 286 01c8 F091 0000 		lds r31,(Timebase)+1
+ 287 01cc 8785      		ldd r24,Z+15
+ 288               	/* epilogue start */
+ 289               	.LM57:
+ 290 01ce 0895      		ret
+ 291               	.LFE8:
+ 293               	.global	Timebase_Token_Add
+ 295               	Timebase_Token_Add:
+ 296               	.LFB9:
+ 297               	.LM58:
+ 298               	/* prologue: function */
+ 299               	/* frame size = 0 */
+ 300               	.LBB272:
+ 301               	.LBB273:
+ 302               	.LM59:
+ 303 01d0 E091 0000 		lds r30,Timebase
+ 304 01d4 F091 0000 		lds r31,(Timebase)+1
+ 305 01d8 8785      		ldd r24,Z+15
+ 306               	.LBE273:
+ 307               	.LBE272:
+ 308               	.LM60:
+ 309 01da 8F33      		cpi r24,lo8(63)
+ 310 01dc 00F4      		brsh .L18
+ 311               	.LM61:
+ 312 01de 8785      		ldd r24,Z+15
+ 313 01e0 8F5F      		subi r24,lo8(-(1))
+ 314 01e2 8787      		std Z+15,r24
+ 315               	.L18:
+ 316 01e4 0895      		ret
+ 317               	.LFE9:
+ 319               	.global	Timebase_Token_Remove
+ 321               	Timebase_Token_Remove:
+ 322               	.LFB10:
+ 323               	.LM62:
+ 324               	/* prologue: function */
+ 325               	/* frame size = 0 */
+ 326               	.LBB274:
+ 327               	.LBB275:
+ 328               	.LM63:
+ 329 01e6 E091 0000 		lds r30,Timebase
+ 330 01ea F091 0000 		lds r31,(Timebase)+1
+ 331 01ee 8785      		ldd r24,Z+15
+ 332               	.LBE275:
+ 333               	.LBE274:
+ 334               	.LM64:
+ 335 01f0 8823      		tst r24
+ 336 01f2 01F0      		breq .L21
+ 337               	.LM65:
+ 338 01f4 8785      		ldd r24,Z+15
+ 339 01f6 8150      		subi r24,lo8(-(-1))
+ 340 01f8 8787      		std Z+15,r24
+ 341               	.L21:
+ 342 01fa 0895      		ret
+ 343               	.LFE10:
+ 345               	.global	Timebase_Token_Remove_All
+ 347               	Timebase_Token_Remove_All:
+ 348               	.LFB11:
+ 349               	.LM66:
+ 350               	/* prologue: function */
+ 351               	/* frame size = 0 */
+ 352               	.LM67:
+ 353 01fc E091 0000 		lds r30,Timebase
+ 354 0200 F091 0000 		lds r31,(Timebase)+1
+ 355 0204 1786      		std Z+15,__zero_reg__
+ 356               	/* epilogue start */
+ 357               	.LM68:
+ 358 0206 0895      		ret
+ 359               	.LFE11:
+ 361               	.global	Timebase_Timer_Get_SubSeconds
+ 363               	Timebase_Timer_Get_SubSeconds:
+ 364               	.LFB12:
+ 365               	.LM69:
+ 366               	/* prologue: function */
+ 367               	/* frame size = 0 */
+ 368               	.LM70:
+ 369 0208 E091 0000 		lds r30,Timebase
+ 370 020c F091 0000 		lds r31,(Timebase)+1
+ 371 0210 2781      		ldd r18,Z+7
+ 372 0212 3085      		ldd r19,Z+8
+ 373 0214 4185      		ldd r20,Z+9
+ 374 0216 5285      		ldd r21,Z+10
+ 375               	.LM71:
+ 376 0218 B901      		movw r22,r18
+ 377 021a CA01      		movw r24,r20
+ 378               	/* epilogue start */
+ 379 021c 0895      		ret
+ 380               	.LFE12:
+ 382               	.global	Timebase_Timer_Get_Seconds
+ 384               	Timebase_Timer_Get_Seconds:
+ 385               	.LFB13:
+ 386               	.LM72:
+ 387               	/* prologue: function */
+ 388               	/* frame size = 0 */
+ 389               	.LM73:
+ 390 021e E091 0000 		lds r30,Timebase
+ 391 0222 F091 0000 		lds r31,(Timebase)+1
+ 392 0226 2385      		ldd r18,Z+11
+ 393 0228 3485      		ldd r19,Z+12
+ 394 022a 4585      		ldd r20,Z+13
+ 395 022c 5685      		ldd r21,Z+14
+ 396               	.LM74:
+ 397 022e B901      		movw r22,r18
+ 398 0230 CA01      		movw r24,r20
+ 399               	/* epilogue start */
+ 400 0232 0895      		ret
+ 401               	.LFE13:
+ 403               	.global	Timebase_Timer_Set_SubSeconds
+ 405               	Timebase_Timer_Set_SubSeconds:
+ 406               	.LFB14:
+ 407               	.LM75:
+ 408               	.LVL15:
+ 409               	/* prologue: function */
+ 410               	/* frame size = 0 */
+ 411               	.LM76:
+ 412 0234 E091 0000 		lds r30,Timebase
+ 413 0238 F091 0000 		lds r31,(Timebase)+1
+ 414 023c 6783      		std Z+7,r22
+ 415 023e 7087      		std Z+8,r23
+ 416 0240 8187      		std Z+9,r24
+ 417 0242 9287      		std Z+10,r25
+ 418               	/* epilogue start */
+ 419               	.LM77:
+ 420 0244 0895      		ret
+ 421               	.LFE14:
+ 423               	.global	Timebase_Timer_Set_Seconds
+ 425               	Timebase_Timer_Set_Seconds:
+ 426               	.LFB15:
+ 427               	.LM78:
+ 428               	.LVL16:
+ 429               	/* prologue: function */
+ 430               	/* frame size = 0 */
+ 431               	.LM79:
+ 432 0246 E091 0000 		lds r30,Timebase
+ 433 024a F091 0000 		lds r31,(Timebase)+1
+ 434 024e 6387      		std Z+11,r22
+ 435 0250 7487      		std Z+12,r23
+ 436 0252 8587      		std Z+13,r24
+ 437 0254 9687      		std Z+14,r25
+ 438               	/* epilogue start */
+ 439               	.LM80:
+ 440 0256 0895      		ret
+ 441               	.LFE15:
+ 443               	.global	Timebase_Timer_Delay_SubSeconds
+ 445               	Timebase_Timer_Delay_SubSeconds:
+ 446               	.LFB16:
+ 447               	.LM81:
+ 448               	.LVL17:
+ 449               	/* prologue: function */
+ 450               	/* frame size = 0 */
+ 451 0258 9C01      		movw r18,r24
+ 452               	.LBB276:
+ 453               	.LBB277:
+ 454               	.LBB278:
+ 455               	.LBB279:
+ 456               	.LM82:
+ 457 025a E091 0000 		lds r30,Timebase
+ 458 025e F091 0000 		lds r31,(Timebase)+1
+ 459 0262 8785      		ldd r24,Z+15
+ 460               	.LVL18:
+ 461               	.LBE279:
+ 462               	.LBE278:
+ 463               	.LM83:
+ 464 0264 8F33      		cpi r24,lo8(63)
+ 465 0266 00F4      		brsh .L33
+ 466               	.LM84:
+ 467 0268 8785      		ldd r24,Z+15
+ 468 026a 8F5F      		subi r24,lo8(-(1))
+ 469 026c 8787      		std Z+15,r24
+ 470               	.L33:
+ 471               	.LBE277:
+ 472               	.LBE276:
+ 473               	.LBB280:
+ 474               	.LBB281:
+ 475               	.LM85:
+ 476 026e 8781      		ldd r24,Z+7
+ 477 0270 9085      		ldd r25,Z+8
+ 478 0272 A185      		ldd r26,Z+9
+ 479 0274 B285      		ldd r27,Z+10
+ 480               	.LBE281:
+ 481               	.LBE280:
+ 482               	.LM86:
+ 483 0276 40E0      		ldi r20,lo8(0)
+ 484 0278 50E0      		ldi r21,hi8(0)
+ 485               	.LVL19:
+ 486 027a 280F      		add r18,r24
+ 487 027c 391F      		adc r19,r25
+ 488 027e 4A1F      		adc r20,r26
+ 489 0280 5B1F      		adc r21,r27
+ 490               	.LVL20:
+ 491               	.L34:
+ 492               	.LBB282:
+ 493               	.LBB283:
+ 494               	.LM87:
+ 495 0282 8781      		ldd r24,Z+7
+ 496 0284 9085      		ldd r25,Z+8
+ 497 0286 A185      		ldd r26,Z+9
+ 498 0288 B285      		ldd r27,Z+10
+ 499               	.LBE283:
+ 500               	.LBE282:
+ 501               	.LM88:
+ 502 028a 8217      		cp r24,r18
+ 503 028c 9307      		cpc r25,r19
+ 504 028e A407      		cpc r26,r20
+ 505 0290 B507      		cpc r27,r21
+ 506 0292 00F0      		brlo .L34
+ 507               	.LBB284:
+ 508               	.LBB285:
+ 509               	.LBB286:
+ 510               	.LBB287:
+ 511               	.LM89:
+ 512 0294 8785      		ldd r24,Z+15
+ 513               	.LBE287:
+ 514               	.LBE286:
+ 515               	.LM90:
+ 516 0296 8823      		tst r24
+ 517 0298 01F0      		breq .L36
+ 518               	.LM91:
+ 519 029a 8785      		ldd r24,Z+15
+ 520 029c 8150      		subi r24,lo8(-(-1))
+ 521 029e 8787      		std Z+15,r24
+ 522               	.L36:
+ 523 02a0 0895      		ret
+ 524               	.LBE285:
+ 525               	.LBE284:
+ 526               	.LFE16:
+ 528               	.global	Timebase_Timer_Delay_Seconds
+ 530               	Timebase_Timer_Delay_Seconds:
+ 531               	.LFB17:
+ 532               	.LM92:
+ 533               	.LVL21:
+ 534               	/* prologue: function */
+ 535               	/* frame size = 0 */
+ 536 02a2 9C01      		movw r18,r24
+ 537               	.LBB288:
+ 538               	.LBB289:
+ 539               	.LBB290:
+ 540               	.LBB291:
+ 541               	.LM93:
+ 542 02a4 E091 0000 		lds r30,Timebase
+ 543 02a8 F091 0000 		lds r31,(Timebase)+1
+ 544 02ac 8785      		ldd r24,Z+15
+ 545               	.LVL22:
+ 546               	.LBE291:
+ 547               	.LBE290:
+ 548               	.LM94:
+ 549 02ae 8F33      		cpi r24,lo8(63)
+ 550 02b0 00F4      		brsh .L39
+ 551               	.LM95:
+ 552 02b2 8785      		ldd r24,Z+15
+ 553 02b4 8F5F      		subi r24,lo8(-(1))
+ 554 02b6 8787      		std Z+15,r24
+ 555               	.L39:
+ 556               	.LBE289:
+ 557               	.LBE288:
+ 558               	.LBB292:
+ 559               	.LBB293:
+ 560               	.LM96:
+ 561 02b8 8385      		ldd r24,Z+11
+ 562 02ba 9485      		ldd r25,Z+12
+ 563 02bc A585      		ldd r26,Z+13
+ 564 02be B685      		ldd r27,Z+14
+ 565               	.LBE293:
+ 566               	.LBE292:
+ 567               	.LM97:
+ 568 02c0 40E0      		ldi r20,lo8(0)
+ 569 02c2 50E0      		ldi r21,hi8(0)
+ 570               	.LVL23:
+ 571 02c4 280F      		add r18,r24
+ 572 02c6 391F      		adc r19,r25
+ 573 02c8 4A1F      		adc r20,r26
+ 574 02ca 5B1F      		adc r21,r27
+ 575               	.LVL24:
+ 576               	.L40:
+ 577               	.LBB294:
+ 578               	.LBB295:
+ 579               	.LM98:
+ 580 02cc 8781      		ldd r24,Z+7
+ 581 02ce 9085      		ldd r25,Z+8
+ 582 02d0 A185      		ldd r26,Z+9
+ 583 02d2 B285      		ldd r27,Z+10
+ 584               	.LBE295:
+ 585               	.LBE294:
+ 586               	.LM99:
+ 587 02d4 8217      		cp r24,r18
+ 588 02d6 9307      		cpc r25,r19
+ 589 02d8 A407      		cpc r26,r20
+ 590 02da B507      		cpc r27,r21
+ 591 02dc 00F0      		brlo .L40
+ 592               	.LBB296:
+ 593               	.LBB297:
+ 594               	.LBB298:
+ 595               	.LBB299:
+ 596               	.LM100:
+ 597 02de 8785      		ldd r24,Z+15
+ 598               	.LBE299:
+ 599               	.LBE298:
+ 600               	.LM101:
+ 601 02e0 8823      		tst r24
+ 602 02e2 01F0      		breq .L42
+ 603               	.LM102:
+ 604 02e4 8785      		ldd r24,Z+15
+ 605 02e6 8150      		subi r24,lo8(-(-1))
+ 606 02e8 8787      		std Z+15,r24
+ 607               	.L42:
+ 608 02ea 0895      		ret
+ 609               	.LBE297:
+ 610               	.LBE296:
+ 611               	.LFE17:
+ 613               	.global	Timebase_UpCounter_Get_Status
+ 615               	Timebase_UpCounter_Get_Status:
+ 616               	.LFB18:
+ 617               	.LM103:
+ 618               	.LVL25:
+ 619               	/* prologue: function */
+ 620               	/* frame size = 0 */
+ 621               	.LM104:
+ 622 02ec E091 0000 		lds r30,Timebase
+ 623 02f0 F091 0000 		lds r31,(Timebase)+1
+ 624 02f4 90E0      		ldi r25,lo8(0)
+ 625               	.LVL26:
+ 626 02f6 25E1      		ldi r18,lo8(21)
+ 627 02f8 30E0      		ldi r19,hi8(21)
+ 628 02fa AC01      		movw r20,r24
+ 629 02fc 429F      		mul r20,r18
+ 630 02fe C001      		movw r24,r0
+ 631 0300 439F      		mul r20,r19
+ 632 0302 900D      		add r25,r0
+ 633 0304 529F      		mul r21,r18
+ 634 0306 900D      		add r25,r0
+ 635 0308 1124      		clr r1
+ 636               	.LVL27:
+ 637 030a E80F      		add r30,r24
+ 638 030c F91F      		adc r31,r25
+ 639 030e 8089      		ldd r24,Z+16
+ 640 0310 8695      		lsr r24
+ 641               	.LM105:
+ 642 0312 8F70      		andi r24,lo8(15)
+ 643               	/* epilogue start */
+ 644 0314 0895      		ret
+ 645               	.LFE18:
+ 647               	.global	Timebase_UpCounter_Set_Status
+ 649               	Timebase_UpCounter_Set_Status:
+ 650               	.LFB19:
+ 651               	.LM106:
+ 652               	.LVL28:
+ 653               	/* prologue: function */
+ 654               	/* frame size = 0 */
+ 655               	.LM107:
+ 656 0316 E091 0000 		lds r30,Timebase
+ 657 031a F091 0000 		lds r31,(Timebase)+1
+ 658 031e 90E0      		ldi r25,lo8(0)
+ 659               	.LVL29:
+ 660 0320 25E1      		ldi r18,lo8(21)
+ 661 0322 30E0      		ldi r19,hi8(21)
+ 662 0324 AC01      		movw r20,r24
+ 663 0326 429F      		mul r20,r18
+ 664 0328 C001      		movw r24,r0
+ 665 032a 439F      		mul r20,r19
+ 666 032c 900D      		add r25,r0
+ 667 032e 529F      		mul r21,r18
+ 668 0330 900D      		add r25,r0
+ 669 0332 1124      		clr r1
+ 670               	.LVL30:
+ 671 0334 E80F      		add r30,r24
+ 672 0336 F91F      		adc r31,r25
+ 673 0338 6F70      		andi r22,lo8(15)
+ 674               	.LVL31:
+ 675 033a 660F      		lsl r22
+ 676 033c 8089      		ldd r24,Z+16
+ 677 033e 817E      		andi r24,lo8(-31)
+ 678 0340 862B      		or r24,r22
+ 679 0342 808B      		std Z+16,r24
+ 680               	/* epilogue start */
+ 681               	.LM108:
+ 682 0344 0895      		ret
+ 683               	.LFE19:
+ 685               	.global	Timebase_UpCounter_Get_Value
+ 687               	Timebase_UpCounter_Get_Value:
+ 688               	.LFB20:
+ 689               	.LM109:
+ 690               	.LVL32:
+ 691               	/* prologue: function */
+ 692               	/* frame size = 0 */
+ 693               	.LM110:
+ 694 0346 E091 0000 		lds r30,Timebase
+ 695 034a F091 0000 		lds r31,(Timebase)+1
+ 696 034e 90E0      		ldi r25,lo8(0)
+ 697               	.LVL33:
+ 698 0350 25E1      		ldi r18,lo8(21)
+ 699 0352 30E0      		ldi r19,hi8(21)
+ 700 0354 AC01      		movw r20,r24
+ 701 0356 429F      		mul r20,r18
+ 702 0358 C001      		movw r24,r0
+ 703 035a 439F      		mul r20,r19
+ 704 035c 900D      		add r25,r0
+ 705 035e 529F      		mul r21,r18
+ 706 0360 900D      		add r25,r0
+ 707 0362 1124      		clr r1
+ 708               	.LVL34:
+ 709 0364 E80F      		add r30,r24
+ 710 0366 F91F      		adc r31,r25
+ 711 0368 DF01      		movw r26,r30
+ 712 036a 5D96      		adiw r26,29
+ 713 036c 658D      		ldd r22,Z+29
+ 714 036e 1196      		adiw r26,1
+ 715 0370 7C91      		ld r23,X
+ 716 0372 1197      		sbiw r26,1
+ 717               	.LM111:
+ 718 0374 1296      		adiw r26,2
+ 719 0376 8C91      		ld r24,X
+ 720 0378 1297      		sbiw r26,2
+ 721 037a 1396      		adiw r26,3
+ 722 037c 9C91      		ld r25,X
+ 723               	.LVL35:
+ 724               	/* epilogue start */
+ 725 037e 0895      		ret
+ 726               	.LFE20:
+ 728               	.global	Timebase_UpCounter_Set_Value
+ 730               	Timebase_UpCounter_Set_Value:
+ 731               	.LFB21:
+ 732               	.LM112:
+ 733               	.LVL36:
+ 734               	/* prologue: function */
+ 735               	/* frame size = 0 */
+ 736               	.LM113:
+ 737 0380 E091 0000 		lds r30,Timebase
+ 738 0384 F091 0000 		lds r31,(Timebase)+1
+ 739 0388 90E0      		ldi r25,lo8(0)
+ 740               	.LVL37:
+ 741 038a 25E1      		ldi r18,lo8(21)
+ 742 038c 30E0      		ldi r19,hi8(21)
+ 743 038e DC01      		movw r26,r24
+ 744 0390 A29F      		mul r26,r18
+ 745 0392 C001      		movw r24,r0
+ 746 0394 A39F      		mul r26,r19
+ 747 0396 900D      		add r25,r0
+ 748 0398 B29F      		mul r27,r18
+ 749 039a 900D      		add r25,r0
+ 750 039c 1124      		clr r1
+ 751               	.LVL38:
+ 752 039e E80F      		add r30,r24
+ 753 03a0 F91F      		adc r31,r25
+ 754 03a2 458F      		std Z+29,r20
+ 755 03a4 568F      		std Z+30,r21
+ 756 03a6 678F      		std Z+31,r22
+ 757 03a8 70A3      		std Z+32,r23
+ 758               	/* epilogue start */
+ 759               	.LM114:
+ 760 03aa 0895      		ret
+ 761               	.LFE21:
+ 763               	.global	Timebase_UpCounter_Get_EndValue
+ 765               	Timebase_UpCounter_Get_EndValue:
+ 766               	.LFB22:
+ 767               	.LM115:
+ 768               	.LVL39:
+ 769               	/* prologue: function */
+ 770               	/* frame size = 0 */
+ 771               	.LM116:
+ 772 03ac E091 0000 		lds r30,Timebase
+ 773 03b0 F091 0000 		lds r31,(Timebase)+1
+ 774 03b4 90E0      		ldi r25,lo8(0)
+ 775               	.LVL40:
+ 776 03b6 25E1      		ldi r18,lo8(21)
+ 777 03b8 30E0      		ldi r19,hi8(21)
+ 778 03ba AC01      		movw r20,r24
+ 779 03bc 429F      		mul r20,r18
+ 780 03be C001      		movw r24,r0
+ 781 03c0 439F      		mul r20,r19
+ 782 03c2 900D      		add r25,r0
+ 783 03c4 529F      		mul r21,r18
+ 784 03c6 900D      		add r25,r0
+ 785 03c8 1124      		clr r1
+ 786               	.LVL41:
+ 787 03ca E80F      		add r30,r24
+ 788 03cc F91F      		adc r31,r25
+ 789 03ce DF01      		movw r26,r30
+ 790 03d0 5196      		adiw r26,17
+ 791 03d2 6189      		ldd r22,Z+17
+ 792 03d4 1196      		adiw r26,1
+ 793 03d6 7C91      		ld r23,X
+ 794 03d8 1197      		sbiw r26,1
+ 795               	.LM117:
+ 796 03da 1296      		adiw r26,2
+ 797 03dc 8C91      		ld r24,X
+ 798 03de 1297      		sbiw r26,2
+ 799 03e0 1396      		adiw r26,3
+ 800 03e2 9C91      		ld r25,X
+ 801               	.LVL42:
+ 802               	/* epilogue start */
+ 803 03e4 0895      		ret
+ 804               	.LFE22:
+ 806               	.global	Timebase_UpCounter_Set_EndValue
+ 808               	Timebase_UpCounter_Set_EndValue:
+ 809               	.LFB23:
+ 810               	.LM118:
+ 811               	.LVL43:
+ 812               	/* prologue: function */
+ 813               	/* frame size = 0 */
+ 814               	.LM119:
+ 815 03e6 E091 0000 		lds r30,Timebase
+ 816 03ea F091 0000 		lds r31,(Timebase)+1
+ 817 03ee 90E0      		ldi r25,lo8(0)
+ 818               	.LVL44:
+ 819 03f0 25E1      		ldi r18,lo8(21)
+ 820 03f2 30E0      		ldi r19,hi8(21)
+ 821 03f4 DC01      		movw r26,r24
+ 822 03f6 A29F      		mul r26,r18
+ 823 03f8 C001      		movw r24,r0
+ 824 03fa A39F      		mul r26,r19
+ 825 03fc 900D      		add r25,r0
+ 826 03fe B29F      		mul r27,r18
+ 827 0400 900D      		add r25,r0
+ 828 0402 1124      		clr r1
+ 829               	.LVL45:
+ 830 0404 E80F      		add r30,r24
+ 831 0406 F91F      		adc r31,r25
+ 832 0408 418B      		std Z+17,r20
+ 833 040a 528B      		std Z+18,r21
+ 834 040c 638B      		std Z+19,r22
+ 835 040e 748B      		std Z+20,r23
+ 836               	/* epilogue start */
+ 837               	.LM120:
+ 838 0410 0895      		ret
+ 839               	.LFE23:
+ 841               	.global	Timebase_UpCounter_Get_TargetValue
+ 843               	Timebase_UpCounter_Get_TargetValue:
+ 844               	.LFB24:
+ 845               	.LM121:
+ 846               	.LVL46:
+ 847               	/* prologue: function */
+ 848               	/* frame size = 0 */
+ 849               	.LM122:
+ 850 0412 E091 0000 		lds r30,Timebase
+ 851 0416 F091 0000 		lds r31,(Timebase)+1
+ 852 041a 90E0      		ldi r25,lo8(0)
+ 853               	.LVL47:
+ 854 041c 0196      		adiw r24,1
+ 855               	.LVL48:
+ 856 041e 25E1      		ldi r18,lo8(21)
+ 857 0420 30E0      		ldi r19,hi8(21)
+ 858 0422 AC01      		movw r20,r24
+ 859 0424 429F      		mul r20,r18
+ 860 0426 C001      		movw r24,r0
+ 861 0428 439F      		mul r20,r19
+ 862 042a 900D      		add r25,r0
+ 863 042c 529F      		mul r21,r18
+ 864 042e 900D      		add r25,r0
+ 865 0430 1124      		clr r1
+ 866               	.LVL49:
+ 867 0432 E80F      		add r30,r24
+ 868 0434 F91F      		adc r31,r25
+ 869 0436 6081      		ld r22,Z
+ 870 0438 7181      		ldd r23,Z+1
+ 871               	.LM123:
+ 872 043a 8281      		ldd r24,Z+2
+ 873 043c 9381      		ldd r25,Z+3
+ 874               	.LVL50:
+ 875               	/* epilogue start */
+ 876 043e 0895      		ret
+ 877               	.LFE24:
+ 879               	.global	Timebase_UpCounter_Set_TargetValue
+ 881               	Timebase_UpCounter_Set_TargetValue:
+ 882               	.LFB25:
+ 883               	.LM124:
+ 884               	.LVL51:
+ 885               	/* prologue: function */
+ 886               	/* frame size = 0 */
+ 887               	.LM125:
+ 888 0440 E091 0000 		lds r30,Timebase
+ 889 0444 F091 0000 		lds r31,(Timebase)+1
+ 890 0448 90E0      		ldi r25,lo8(0)
+ 891               	.LVL52:
+ 892 044a 0196      		adiw r24,1
+ 893               	.LVL53:
+ 894 044c 25E1      		ldi r18,lo8(21)
+ 895 044e 30E0      		ldi r19,hi8(21)
+ 896 0450 DC01      		movw r26,r24
+ 897 0452 A29F      		mul r26,r18
+ 898 0454 C001      		movw r24,r0
+ 899 0456 A39F      		mul r26,r19
+ 900 0458 900D      		add r25,r0
+ 901 045a B29F      		mul r27,r18
+ 902 045c 900D      		add r25,r0
+ 903 045e 1124      		clr r1
+ 904               	.LVL54:
+ 905 0460 E80F      		add r30,r24
+ 906 0462 F91F      		adc r31,r25
+ 907 0464 4083      		st Z,r20
+ 908 0466 5183      		std Z+1,r21
+ 909 0468 6283      		std Z+2,r22
+ 910 046a 7383      		std Z+3,r23
+ 911               	/* epilogue start */
+ 912               	.LM126:
+ 913 046c 0895      		ret
+ 914               	.LFE25:
+ 916               	.global	Timebase_UpCounter_Get_TemporaryValue
+ 918               	Timebase_UpCounter_Get_TemporaryValue:
+ 919               	.LFB26:
+ 920               	.LM127:
+ 921               	.LVL55:
+ 922               	/* prologue: function */
+ 923               	/* frame size = 0 */
+ 924               	.LM128:
+ 925 046e E091 0000 		lds r30,Timebase
+ 926 0472 F091 0000 		lds r31,(Timebase)+1
+ 927 0476 90E0      		ldi r25,lo8(0)
+ 928               	.LVL56:
+ 929 0478 25E1      		ldi r18,lo8(21)
+ 930 047a 30E0      		ldi r19,hi8(21)
+ 931 047c AC01      		movw r20,r24
+ 932 047e 429F      		mul r20,r18
+ 933 0480 C001      		movw r24,r0
+ 934 0482 439F      		mul r20,r19
+ 935 0484 900D      		add r25,r0
+ 936 0486 529F      		mul r21,r18
+ 937 0488 900D      		add r25,r0
+ 938 048a 1124      		clr r1
+ 939               	.LVL57:
+ 940 048c E80F      		add r30,r24
+ 941 048e F91F      		adc r31,r25
+ 942 0490 DF01      		movw r26,r30
+ 943 0492 5996      		adiw r26,25
+ 944 0494 618D      		ldd r22,Z+25
+ 945 0496 1196      		adiw r26,1
+ 946 0498 7C91      		ld r23,X
+ 947 049a 1197      		sbiw r26,1
+ 948               	.LM129:
+ 949 049c 1296      		adiw r26,2
+ 950 049e 8C91      		ld r24,X
+ 951 04a0 1297      		sbiw r26,2
+ 952 04a2 1396      		adiw r26,3
+ 953 04a4 9C91      		ld r25,X
+ 954               	.LVL58:
+ 955               	/* epilogue start */
+ 956 04a6 0895      		ret
+ 957               	.LFE26:
+ 959               	.global	Timebase_UpCounter_Set_TemporaryValue
+ 961               	Timebase_UpCounter_Set_TemporaryValue:
+ 962               	.LFB27:
+ 963               	.LM130:
+ 964               	.LVL59:
+ 965               	/* prologue: function */
+ 966               	/* frame size = 0 */
+ 967               	.LM131:
+ 968 04a8 E091 0000 		lds r30,Timebase
+ 969 04ac F091 0000 		lds r31,(Timebase)+1
+ 970 04b0 90E0      		ldi r25,lo8(0)
+ 971               	.LVL60:
+ 972 04b2 25E1      		ldi r18,lo8(21)
+ 973 04b4 30E0      		ldi r19,hi8(21)
+ 974 04b6 DC01      		movw r26,r24
+ 975 04b8 A29F      		mul r26,r18
+ 976 04ba C001      		movw r24,r0
+ 977 04bc A39F      		mul r26,r19
+ 978 04be 900D      		add r25,r0
+ 979 04c0 B29F      		mul r27,r18
+ 980 04c2 900D      		add r25,r0
+ 981 04c4 1124      		clr r1
+ 982               	.LVL61:
+ 983 04c6 E80F      		add r30,r24
+ 984 04c8 F91F      		adc r31,r25
+ 985 04ca 418F      		std Z+25,r20
+ 986 04cc 528F      		std Z+26,r21
+ 987 04ce 638F      		std Z+27,r22
+ 988 04d0 748F      		std Z+28,r23
+ 989               	/* epilogue start */
+ 990               	.LM132:
+ 991 04d2 0895      		ret
+ 992               	.LFE27:
+ 994               	.global	Timebase_UpCounter_Get_PeriodValue
+ 996               	Timebase_UpCounter_Get_PeriodValue:
+ 997               	.LFB28:
+ 998               	.LM133:
+ 999               	.LVL62:
+ 1000               	/* prologue: function */
+ 1001               	/* frame size = 0 */
+ 1002               	.LM134:
+ 1003 04d4 E091 0000 		lds r30,Timebase
+ 1004 04d8 F091 0000 		lds r31,(Timebase)+1
+ 1005 04dc 90E0      		ldi r25,lo8(0)
+ 1006               	.LVL63:
+ 1007 04de 25E1      		ldi r18,lo8(21)
+ 1008 04e0 30E0      		ldi r19,hi8(21)
+ 1009 04e2 AC01      		movw r20,r24
+ 1010 04e4 429F      		mul r20,r18
+ 1011 04e6 C001      		movw r24,r0
+ 1012 04e8 439F      		mul r20,r19
+ 1013 04ea 900D      		add r25,r0
+ 1014 04ec 529F      		mul r21,r18
+ 1015 04ee 900D      		add r25,r0
+ 1016 04f0 1124      		clr r1
+ 1017               	.LVL64:
+ 1018 04f2 E80F      		add r30,r24
+ 1019 04f4 F91F      		adc r31,r25
+ 1020 04f6 DF01      		movw r26,r30
+ 1021 04f8 9196      		adiw r26,33
+ 1022 04fa 61A1      		ldd r22,Z+33
+ 1023 04fc 1196      		adiw r26,1
+ 1024 04fe 7C91      		ld r23,X
+ 1025 0500 1197      		sbiw r26,1
+ 1026               	.LM135:
+ 1027 0502 1296      		adiw r26,2
+ 1028 0504 8C91      		ld r24,X
+ 1029 0506 1297      		sbiw r26,2
+ 1030 0508 1396      		adiw r26,3
+ 1031 050a 9C91      		ld r25,X
+ 1032               	.LVL65:
+ 1033               	/* epilogue start */
+ 1034 050c 0895      		ret
+ 1035               	.LFE28:
+ 1037               	.global	Timebase_UpCounter_Set_PeriodValue
+ 1039               	Timebase_UpCounter_Set_PeriodValue:
+ 1040               	.LFB29:
+ 1041               	.LM136:
+ 1042               	.LVL66:
+ 1043               	/* prologue: function */
+ 1044               	/* frame size = 0 */
+ 1045               	.LM137:
+ 1046 050e E091 0000 		lds r30,Timebase
+ 1047 0512 F091 0000 		lds r31,(Timebase)+1
+ 1048 0516 90E0      		ldi r25,lo8(0)
+ 1049               	.LVL67:
+ 1050 0518 25E1      		ldi r18,lo8(21)
+ 1051 051a 30E0      		ldi r19,hi8(21)
+ 1052 051c DC01      		movw r26,r24
+ 1053 051e A29F      		mul r26,r18
+ 1054 0520 C001      		movw r24,r0
+ 1055 0522 A39F      		mul r26,r19
+ 1056 0524 900D      		add r25,r0
+ 1057 0526 B29F      		mul r27,r18
+ 1058 0528 900D      		add r25,r0
+ 1059 052a 1124      		clr r1
+ 1060               	.LVL68:
+ 1061 052c E80F      		add r30,r24
+ 1062 052e F91F      		adc r31,r25
+ 1063 0530 41A3      		std Z+33,r20
+ 1064 0532 52A3      		std Z+34,r21
+ 1065 0534 63A3      		std Z+35,r22
+ 1066 0536 74A3      		std Z+36,r23
+ 1067               	/* epilogue start */
+ 1068               	.LM138:
+ 1069 0538 0895      		ret
+ 1070               	.LFE29:
+ 1072               	.global	Timebase_UpCounter_Get_Period_Flag
+ 1074               	Timebase_UpCounter_Get_Period_Flag:
+ 1075               	.LFB30:
+ 1076               	.LM139:
+ 1077               	.LVL69:
+ 1078               	/* prologue: function */
+ 1079               	/* frame size = 0 */
+ 1080               	.LM140:
+ 1081 053a E091 0000 		lds r30,Timebase
+ 1082 053e F091 0000 		lds r31,(Timebase)+1
+ 1083 0542 90E0      		ldi r25,lo8(0)
+ 1084               	.LVL70:
+ 1085 0544 25E1      		ldi r18,lo8(21)
+ 1086 0546 30E0      		ldi r19,hi8(21)
+ 1087 0548 AC01      		movw r20,r24
+ 1088 054a 429F      		mul r20,r18
+ 1089 054c C001      		movw r24,r0
+ 1090 054e 439F      		mul r20,r19
+ 1091 0550 900D      		add r25,r0
+ 1092 0552 529F      		mul r21,r18
+ 1093 0554 900D      		add r25,r0
+ 1094 0556 1124      		clr r1
+ 1095               	.LVL71:
+ 1096 0558 E80F      		add r30,r24
+ 1097 055a F91F      		adc r31,r25
+ 1098 055c 8089      		ldd r24,Z+16
+ 1099               	.LM141:
+ 1100 055e 8170      		andi r24,lo8(1)
+ 1101               	/* epilogue start */
+ 1102 0560 0895      		ret
+ 1103               	.LFE30:
+ 1105               	.global	Timebase_UpCounter_Set_Period_Flag
+ 1107               	Timebase_UpCounter_Set_Period_Flag:
+ 1108               	.LFB31:
+ 1109               	.LM142:
+ 1110               	.LVL72:
+ 1111               	/* prologue: function */
+ 1112               	/* frame size = 0 */
+ 1113               	.LM143:
+ 1114 0562 E091 0000 		lds r30,Timebase
+ 1115 0566 F091 0000 		lds r31,(Timebase)+1
+ 1116 056a 90E0      		ldi r25,lo8(0)
+ 1117               	.LVL73:
+ 1118 056c 25E1      		ldi r18,lo8(21)
+ 1119 056e 30E0      		ldi r19,hi8(21)
+ 1120 0570 AC01      		movw r20,r24
+ 1121 0572 429F      		mul r20,r18
+ 1122 0574 C001      		movw r24,r0
+ 1123 0576 439F      		mul r20,r19
+ 1124 0578 900D      		add r25,r0
+ 1125 057a 529F      		mul r21,r18
+ 1126 057c 900D      		add r25,r0
+ 1127 057e 1124      		clr r1
+ 1128               	.LVL74:
+ 1129 0580 E80F      		add r30,r24
+ 1130 0582 F91F      		adc r31,r25
+ 1131 0584 8089      		ldd r24,Z+16
+ 1132 0586 8160      		ori r24,lo8(1)
+ 1133 0588 808B      		std Z+16,r24
+ 1134               	/* epilogue start */
+ 1135               	.LM144:
+ 1136 058a 0895      		ret
+ 1137               	.LFE31:
+ 1139               	.global	Timebase_UpCounter_Clear_Period_Flag
+ 1141               	Timebase_UpCounter_Clear_Period_Flag:
+ 1142               	.LFB32:
+ 1143               	.LM145:
+ 1144               	.LVL75:
+ 1145               	/* prologue: function */
+ 1146               	/* frame size = 0 */
+ 1147               	.LM146:
+ 1148 058c E091 0000 		lds r30,Timebase
+ 1149 0590 F091 0000 		lds r31,(Timebase)+1
+ 1150 0594 90E0      		ldi r25,lo8(0)
+ 1151               	.LVL76:
+ 1152 0596 25E1      		ldi r18,lo8(21)
+ 1153 0598 30E0      		ldi r19,hi8(21)
+ 1154 059a AC01      		movw r20,r24
+ 1155 059c 429F      		mul r20,r18
+ 1156 059e C001      		movw r24,r0
+ 1157 05a0 439F      		mul r20,r19
+ 1158 05a2 900D      		add r25,r0
+ 1159 05a4 529F      		mul r21,r18
+ 1160 05a6 900D      		add r25,r0
+ 1161 05a8 1124      		clr r1
+ 1162               	.LVL77:
+ 1163 05aa E80F      		add r30,r24
+ 1164 05ac F91F      		adc r31,r25
+ 1165 05ae 8089      		ldd r24,Z+16
+ 1166 05b0 8E7F      		andi r24,lo8(-2)
+ 1167 05b2 808B      		std Z+16,r24
+ 1168               	/* epilogue start */
+ 1169               	.LM147:
+ 1170 05b4 0895      		ret
+ 1171               	.LFE32:
+ 1173               	.global	Timebase_UpCounter_Reset
+ 1175               	Timebase_UpCounter_Reset:
+ 1176               	.LFB33:
+ 1177               	.LM148:
+ 1178               	.LVL78:
+ 1179               	/* prologue: function */
+ 1180               	/* frame size = 0 */
+ 1181               	.LBB300:
+ 1182               	.LBB301:
+ 1183               	.LM149:
+ 1184 05b6 A091 0000 		lds r26,Timebase
+ 1185 05ba B091 0000 		lds r27,(Timebase)+1
+ 1186 05be 90E0      		ldi r25,lo8(0)
+ 1187 05c0 45E1      		ldi r20,lo8(21)
+ 1188 05c2 50E0      		ldi r21,hi8(21)
+ 1189 05c4 849F      		mul r24,r20
+ 1190 05c6 F001      		movw r30,r0
+ 1191 05c8 859F      		mul r24,r21
+ 1192 05ca F00D      		add r31,r0
+ 1193 05cc 949F      		mul r25,r20
+ 1194 05ce F00D      		add r31,r0
+ 1195 05d0 1124      		clr r1
+ 1196               	.LVL79:
+ 1197 05d2 EA0F      		add r30,r26
+ 1198 05d4 FB1F      		adc r31,r27
+ 1199 05d6 2089      		ldd r18,Z+16
+ 1200 05d8 217E      		andi r18,lo8(-31)
+ 1201 05da 208B      		std Z+16,r18
+ 1202               	.LBE301:
+ 1203               	.LBE300:
+ 1204               	.LBB302:
+ 1205               	.LBB303:
+ 1206               	.LM150:
+ 1207 05dc 158E      		std Z+29,__zero_reg__
+ 1208 05de 168E      		std Z+30,__zero_reg__
+ 1209 05e0 178E      		std Z+31,__zero_reg__
+ 1210 05e2 10A2      		std Z+32,__zero_reg__
+ 1211               	.LBE303:
+ 1212               	.LBE302:
+ 1213               	.LBB304:
+ 1214               	.LBB305:
+ 1215               	.LM151:
+ 1216 05e4 118A      		std Z+17,__zero_reg__
+ 1217 05e6 128A      		std Z+18,__zero_reg__
+ 1218 05e8 138A      		std Z+19,__zero_reg__
+ 1219 05ea 148A      		std Z+20,__zero_reg__
+ 1220               	.LBE305:
+ 1221               	.LBE304:
+ 1222               	.LBB306:
+ 1223               	.LBB307:
+ 1224               	.LM152:
+ 1225 05ec 0196      		adiw r24,1
+ 1226 05ee 9C01      		movw r18,r24
+ 1227 05f0 249F      		mul r18,r20
+ 1228 05f2 C001      		movw r24,r0
+ 1229 05f4 259F      		mul r18,r21
+ 1230 05f6 900D      		add r25,r0
+ 1231 05f8 349F      		mul r19,r20
+ 1232 05fa 900D      		add r25,r0
+ 1233 05fc 1124      		clr r1
+ 1234 05fe A80F      		add r26,r24
+ 1235 0600 B91F      		adc r27,r25
+ 1236 0602 1D92      		st X+,__zero_reg__
+ 1237 0604 1D92      		st X+,__zero_reg__
+ 1238 0606 1D92      		st X+,__zero_reg__
+ 1239 0608 1C92      		st X,__zero_reg__
+ 1240 060a 1397      		sbiw r26,3
+ 1241               	.LBE307:
+ 1242               	.LBE306:
+ 1243               	.LBB308:
+ 1244               	.LBB309:
+ 1245               	.LM153:
+ 1246 060c 118E      		std Z+25,__zero_reg__
+ 1247 060e 128E      		std Z+26,__zero_reg__
+ 1248 0610 138E      		std Z+27,__zero_reg__
+ 1249 0612 148E      		std Z+28,__zero_reg__
+ 1250               	.LBE309:
+ 1251               	.LBE308:
+ 1252               	.LBB310:
+ 1253               	.LBB311:
+ 1254               	.LM154:
+ 1255 0614 11A2      		std Z+33,__zero_reg__
+ 1256 0616 12A2      		std Z+34,__zero_reg__
+ 1257 0618 13A2      		std Z+35,__zero_reg__
+ 1258 061a 14A2      		std Z+36,__zero_reg__
+ 1259               	.LBE311:
+ 1260               	.LBE310:
+ 1261               	.LBB312:
+ 1262               	.LBB313:
+ 1263               	.LM155:
+ 1264 061c 8089      		ldd r24,Z+16
+ 1265 061e 8E7F      		andi r24,lo8(-2)
+ 1266 0620 808B      		std Z+16,r24
+ 1267               	/* epilogue start */
+ 1268               	.LBE313:
+ 1269               	.LBE312:
+ 1270               	.LM156:
+ 1271 0622 0895      		ret
+ 1272               	.LFE33:
+ 1274               	.global	Timebase_UpCounter_Clear_All_Flags
+ 1276               	Timebase_UpCounter_Clear_All_Flags:
+ 1277               	.LFB34:
+ 1278               	.LM157:
+ 1279               	.LVL80:
+ 1280               	/* prologue: function */
+ 1281               	/* frame size = 0 */
+ 1282               	.LM158:
+ 1283 0624 0E94 0000 		call Timebase_UpCounter_Reset
+ 1284               	.LVL81:
+ 1285               	/* epilogue start */
+ 1286               	.LM159:
+ 1287 0628 0895      		ret
+ 1288               	.LFE34:
+ 1290               	.global	Timebase_UpCounter_Start
+ 1292               	Timebase_UpCounter_Start:
+ 1293               	.LFB35:
+ 1294               	.LM160:
+ 1295               	.LVL82:
+ 1296               	/* prologue: function */
+ 1297               	/* frame size = 0 */
+ 1298               	.LBB314:
+ 1299               	.LBB315:
+ 1300               	.LM161:
+ 1301 062a E091 0000 		lds r30,Timebase
+ 1302 062e F091 0000 		lds r31,(Timebase)+1
+ 1303 0632 90E0      		ldi r25,lo8(0)
+ 1304               	.LBE315:
+ 1305               	.LBE314:
+ 1306               	.LM162:
+ 1307 0634 25E1      		ldi r18,lo8(21)
+ 1308 0636 30E0      		ldi r19,hi8(21)
+ 1309 0638 AC01      		movw r20,r24
+ 1310               	.LVL83:
+ 1311 063a 429F      		mul r20,r18
+ 1312 063c C001      		movw r24,r0
+ 1313 063e 439F      		mul r20,r19
+ 1314 0640 900D      		add r25,r0
+ 1315 0642 529F      		mul r21,r18
+ 1316 0644 900D      		add r25,r0
+ 1317 0646 1124      		clr r1
+ 1318 0648 E80F      		add r30,r24
+ 1319 064a F91F      		adc r31,r25
+ 1320 064c 9089      		ldd r25,Z+16
+ 1321 064e 892F      		mov r24,r25
+ 1322 0650 8695      		lsr r24
+ 1323 0652 8F70      		andi r24,lo8(15)
+ 1324 0654 8130      		cpi r24,lo8(1)
+ 1325 0656 01F0      		breq .L80
+ 1326               	.LBB316:
+ 1327               	.LBB317:
+ 1328               	.LM163:
+ 1329 0658 917E      		andi r25,lo8(-31)
+ 1330 065a 9260      		ori r25,lo8(2)
+ 1331 065c 908B      		std Z+16,r25
+ 1332               	.L80:
+ 1333 065e 0895      		ret
+ 1334               	.LBE317:
+ 1335               	.LBE316:
+ 1336               	.LFE35:
+ 1338               	.global	Timebase_UpCounter_Stop
+ 1340               	Timebase_UpCounter_Stop:
+ 1341               	.LFB36:
+ 1342               	.LM164:
+ 1343               	.LVL84:
+ 1344               	/* prologue: function */
+ 1345               	/* frame size = 0 */
+ 1346               	.LBB318:
+ 1347               	.LBB319:
+ 1348               	.LM165:
+ 1349 0660 E091 0000 		lds r30,Timebase
+ 1350 0664 F091 0000 		lds r31,(Timebase)+1
+ 1351 0668 90E0      		ldi r25,lo8(0)
+ 1352               	.LBE319:
+ 1353               	.LBE318:
+ 1354               	.LM166:
+ 1355 066a 25E1      		ldi r18,lo8(21)
+ 1356 066c 30E0      		ldi r19,hi8(21)
+ 1357 066e AC01      		movw r20,r24
+ 1358               	.LVL85:
+ 1359 0670 429F      		mul r20,r18
+ 1360 0672 C001      		movw r24,r0
+ 1361 0674 439F      		mul r20,r19
+ 1362 0676 900D      		add r25,r0
+ 1363 0678 529F      		mul r21,r18
+ 1364 067a 900D      		add r25,r0
+ 1365 067c 1124      		clr r1
+ 1366 067e E80F      		add r30,r24
+ 1367 0680 F91F      		adc r31,r25
+ 1368 0682 9089      		ldd r25,Z+16
+ 1369 0684 892F      		mov r24,r25
+ 1370 0686 8695      		lsr r24
+ 1371 0688 8F70      		andi r24,lo8(15)
+ 1372 068a 8230      		cpi r24,lo8(2)
+ 1373 068c 01F0      		breq .L83
+ 1374               	.LBB320:
+ 1375               	.LBB321:
+ 1376               	.LM167:
+ 1377 068e 917E      		andi r25,lo8(-31)
+ 1378 0690 9460      		ori r25,lo8(4)
+ 1379 0692 908B      		std Z+16,r25
+ 1380               	.L83:
+ 1381 0694 0895      		ret
+ 1382               	.LBE321:
+ 1383               	.LBE320:
+ 1384               	.LFE36:
+ 1386               	.global	Timebase_UpCounter_Set_Securely
+ 1388               	Timebase_UpCounter_Set_Securely:
+ 1389               	.LFB37:
+ 1390               	.LM168:
+ 1391               	.LVL86:
+ 1392 0696 0F93      		push r16
+ 1393 0698 1F93      		push r17
+ 1394 069a CF93      		push r28
+ 1395 069c DF93      		push r29
+ 1396               	/* prologue: function */
+ 1397               	/* frame size = 0 */
+ 1398               	.LBB322:
+ 1399               	.LBB323:
+ 1400               	.LM169:
+ 1401 069e A091 0000 		lds r26,Timebase
+ 1402 06a2 B091 0000 		lds r27,(Timebase)+1
+ 1403 06a6 282F      		mov r18,r24
+ 1404 06a8 30E0      		ldi r19,lo8(0)
+ 1405               	.LBE323:
+ 1406               	.LBE322:
+ 1407               	.LM170:
+ 1408 06aa 05E1      		ldi r16,lo8(21)
+ 1409 06ac 10E0      		ldi r17,hi8(21)
+ 1410 06ae 209F      		mul r18,r16
+ 1411 06b0 E001      		movw r28,r0
+ 1412 06b2 219F      		mul r18,r17
+ 1413 06b4 D00D      		add r29,r0
+ 1414 06b6 309F      		mul r19,r16
+ 1415 06b8 D00D      		add r29,r0
+ 1416 06ba 1124      		clr r1
+ 1417 06bc CA0F      		add r28,r26
+ 1418 06be DB1F      		adc r29,r27
+ 1419 06c0 8889      		ldd r24,Y+16
+ 1420               	.LVL87:
+ 1421 06c2 8695      		lsr r24
+ 1422 06c4 8F70      		andi r24,lo8(15)
+ 1423 06c6 01F4      		brne .L86
+ 1424               	.LBB324:
+ 1425               	.LBB325:
+ 1426               	.LM171:
+ 1427 06c8 1D8E      		std Y+29,__zero_reg__
+ 1428 06ca 1E8E      		std Y+30,__zero_reg__
+ 1429 06cc 1F8E      		std Y+31,__zero_reg__
+ 1430 06ce 18A2      		std Y+32,__zero_reg__
+ 1431               	.LBE325:
+ 1432               	.LBE324:
+ 1433               	.LBB326:
+ 1434               	.LBB327:
+ 1435               	.LM172:
+ 1436 06d0 198E      		std Y+25,__zero_reg__
+ 1437 06d2 1A8E      		std Y+26,__zero_reg__
+ 1438 06d4 1B8E      		std Y+27,__zero_reg__
+ 1439 06d6 1C8E      		std Y+28,__zero_reg__
+ 1440               	.LBE327:
+ 1441               	.LBE326:
+ 1442               	.LBB328:
+ 1443               	.LBB329:
+ 1444               	.LM173:
+ 1445 06d8 2F5F      		subi r18,lo8(-(1))
+ 1446 06da 3F4F      		sbci r19,hi8(-(1))
+ 1447 06dc 209F      		mul r18,r16
+ 1448 06de F001      		movw r30,r0
+ 1449 06e0 219F      		mul r18,r17
+ 1450 06e2 F00D      		add r31,r0
+ 1451 06e4 309F      		mul r19,r16
+ 1452 06e6 F00D      		add r31,r0
+ 1453 06e8 1124      		clr r1
+ 1454 06ea EA0F      		add r30,r26
+ 1455 06ec FB1F      		adc r31,r27
+ 1456 06ee 4083      		st Z,r20
+ 1457 06f0 5183      		std Z+1,r21
+ 1458 06f2 6283      		std Z+2,r22
+ 1459 06f4 7383      		std Z+3,r23
+ 1460               	.LBE329:
+ 1461               	.LBE328:
+ 1462               	.LBB330:
+ 1463               	.LBB331:
+ 1464               	.LM174:
+ 1465 06f6 1B96      		adiw r26,11
+ 1466 06f8 8D91      		ld r24,X+
+ 1467 06fa 9D91      		ld r25,X+
+ 1468 06fc 0D90      		ld __tmp_reg__,X+
+ 1469 06fe BC91      		ld r27,X
+ 1470 0700 A02D      		mov r26,__tmp_reg__
+ 1471               	.LBE331:
+ 1472               	.LBE330:
+ 1473               	.LBB332:
+ 1474               	.LBB333:
+ 1475               	.LM175:
+ 1476 0702 840F      		add r24,r20
+ 1477 0704 951F      		adc r25,r21
+ 1478 0706 A61F      		adc r26,r22
+ 1479 0708 B71F      		adc r27,r23
+ 1480 070a 898B      		std Y+17,r24
+ 1481 070c 9A8B      		std Y+18,r25
+ 1482 070e AB8B      		std Y+19,r26
+ 1483 0710 BC8B      		std Y+20,r27
+ 1484               	.LBE333:
+ 1485               	.LBE332:
+ 1486               	.LBB334:
+ 1487               	.LBB335:
+ 1488               	.LM176:
+ 1489 0712 9889      		ldd r25,Y+16
+ 1490 0714 892F      		mov r24,r25
+ 1491 0716 8695      		lsr r24
+ 1492 0718 8F70      		andi r24,lo8(15)
+ 1493 071a 8130      		cpi r24,lo8(1)
+ 1494 071c 01F0      		breq .L86
+ 1495               	.LBB336:
+ 1496               	.LBB337:
+ 1497               	.LM177:
+ 1498 071e 917E      		andi r25,lo8(-31)
+ 1499 0720 9260      		ori r25,lo8(2)
+ 1500 0722 988B      		std Y+16,r25
+ 1501               	.L86:
+ 1502               	/* epilogue start */
+ 1503               	.LBE337:
+ 1504               	.LBE336:
+ 1505               	.LBE335:
+ 1506               	.LBE334:
+ 1507               	.LM178:
+ 1508 0724 DF91      		pop r29
+ 1509 0726 CF91      		pop r28
+ 1510 0728 1F91      		pop r17
+ 1511 072a 0F91      		pop r16
+ 1512 072c 0895      		ret
+ 1513               	.LFE37:
+ 1515               	.global	Timebase_UpCounter_Set_Forcefully
+ 1517               	Timebase_UpCounter_Set_Forcefully:
+ 1518               	.LFB38:
+ 1519               	.LM179:
+ 1520               	.LVL88:
+ 1521 072e DF92      		push r13
+ 1522 0730 EF92      		push r14
+ 1523 0732 FF92      		push r15
+ 1524 0734 0F93      		push r16
+ 1525 0736 1F93      		push r17
+ 1526               	/* prologue: function */
+ 1527               	/* frame size = 0 */
+ 1528 0738 D82E      		mov r13,r24
+ 1529 073a 7A01      		movw r14,r20
+ 1530 073c 8B01      		movw r16,r22
+ 1531               	.LM180:
+ 1532 073e 0E94 0000 		call Timebase_UpCounter_Reset
+ 1533               	.LVL89:
+ 1534               	.LM181:
+ 1535 0742 8D2D      		mov r24,r13
+ 1536 0744 B801      		movw r22,r16
+ 1537 0746 A701      		movw r20,r14
+ 1538 0748 0E94 0000 		call Timebase_UpCounter_Set_Securely
+ 1539               	/* epilogue start */
+ 1540               	.LM182:
+ 1541 074c 1F91      		pop r17
+ 1542 074e 0F91      		pop r16
+ 1543 0750 FF90      		pop r15
+ 1544 0752 EF90      		pop r14
+ 1545               	.LVL90:
+ 1546 0754 DF90      		pop r13
+ 1547               	.LVL91:
+ 1548 0756 0895      		ret
+ 1549               	.LFE38:
+ 1551               	.global	Timebase_UpCounter_Update
+ 1553               	Timebase_UpCounter_Update:
+ 1554               	.LFB39:
+ 1555               	.LM183:
+ 1556               	.LVL92:
+ 1557 0758 EF92      		push r14
+ 1558 075a FF92      		push r15
+ 1559 075c 0F93      		push r16
+ 1560 075e 1F93      		push r17
+ 1561 0760 CF93      		push r28
+ 1562 0762 DF93      		push r29
+ 1563               	/* prologue: function */
+ 1564               	/* frame size = 0 */
+ 1565               	.LBB338:
+ 1566               	.LBB339:
+ 1567               	.LM184:
+ 1568 0764 C091 0000 		lds r28,Timebase
+ 1569 0768 D091 0000 		lds r29,(Timebase)+1
+ 1570 076c 682F      		mov r22,r24
+ 1571 076e 70E0      		ldi r23,lo8(0)
+ 1572 0770 05E1      		ldi r16,lo8(21)
+ 1573 0772 10E0      		ldi r17,hi8(21)
+ 1574 0774 609F      		mul r22,r16
+ 1575 0776 F001      		movw r30,r0
+ 1576 0778 619F      		mul r22,r17
+ 1577 077a F00D      		add r31,r0
+ 1578 077c 709F      		mul r23,r16
+ 1579 077e F00D      		add r31,r0
+ 1580 0780 1124      		clr r1
+ 1581 0782 EC0F      		add r30,r28
+ 1582 0784 FD1F      		adc r31,r29
+ 1583 0786 8089      		ldd r24,Z+16
+ 1584               	.LVL93:
+ 1585 0788 8695      		lsr r24
+ 1586 078a 8F70      		andi r24,lo8(15)
+ 1587               	.LBE339:
+ 1588               	.LBE338:
+ 1589               	.LM185:
+ 1590 078c 8130      		cpi r24,lo8(1)
+ 1591 078e 01F0      		breq .+2
+ 1592 0790 00C0      		rjmp .L90
+ 1593               	.LBB340:
+ 1594               	.LBB341:
+ 1595               	.LM186:
+ 1596 0792 8B85      		ldd r24,Y+11
+ 1597 0794 9C85      		ldd r25,Y+12
+ 1598 0796 AD85      		ldd r26,Y+13
+ 1599 0798 BE85      		ldd r27,Y+14
+ 1600               	.LBE341:
+ 1601               	.LBE340:
+ 1602               	.LM187:
+ 1603 079a 2189      		ldd r18,Z+17
+ 1604 079c 3289      		ldd r19,Z+18
+ 1605 079e 4389      		ldd r20,Z+19
+ 1606 07a0 5489      		ldd r21,Z+20
+ 1607 07a2 281B      		sub r18,r24
+ 1608 07a4 390B      		sbc r19,r25
+ 1609 07a6 4A0B      		sbc r20,r26
+ 1610 07a8 5B0B      		sbc r21,r27
+ 1611               	.LBB342:
+ 1612               	.LBB343:
+ 1613               	.LM188:
+ 1614 07aa 218F      		std Z+25,r18
+ 1615 07ac 328F      		std Z+26,r19
+ 1616 07ae 438F      		std Z+27,r20
+ 1617 07b0 548F      		std Z+28,r21
+ 1618               	.LBE343:
+ 1619               	.LBE342:
+ 1620               	.LBB344:
+ 1621               	.LBB345:
+ 1622               	.LM189:
+ 1623 07b2 6F5F      		subi r22,lo8(-(1))
+ 1624 07b4 7F4F      		sbci r23,hi8(-(1))
+ 1625 07b6 609F      		mul r22,r16
+ 1626 07b8 C001      		movw r24,r0
+ 1627 07ba 619F      		mul r22,r17
+ 1628 07bc 900D      		add r25,r0
+ 1629 07be 709F      		mul r23,r16
+ 1630 07c0 900D      		add r25,r0
+ 1631 07c2 1124      		clr r1
+ 1632 07c4 C80F      		add r28,r24
+ 1633 07c6 D91F      		adc r29,r25
+ 1634 07c8 E880      		ld r14,Y
+ 1635 07ca F980      		ldd r15,Y+1
+ 1636 07cc 0A81      		ldd r16,Y+2
+ 1637 07ce 1B81      		ldd r17,Y+3
+ 1638 07d0 D801      		movw r26,r16
+ 1639 07d2 C701      		movw r24,r14
+ 1640 07d4 821B      		sub r24,r18
+ 1641 07d6 930B      		sbc r25,r19
+ 1642 07d8 A40B      		sbc r26,r20
+ 1643 07da B50B      		sbc r27,r21
+ 1644 07dc 858F      		std Z+29,r24
+ 1645 07de 968F      		std Z+30,r25
+ 1646 07e0 A78F      		std Z+31,r26
+ 1647 07e2 B0A3      		std Z+32,r27
+ 1648               	.LBE345:
+ 1649               	.LBE344:
+ 1650               	.LM190:
+ 1651 07e4 2115      		cp r18,__zero_reg__
+ 1652 07e6 3105      		cpc r19,__zero_reg__
+ 1653 07e8 4105      		cpc r20,__zero_reg__
+ 1654 07ea 5105      		cpc r21,__zero_reg__
+ 1655 07ec 01F4      		brne .L92
+ 1656               	.LBB346:
+ 1657               	.LBB347:
+ 1658               	.LM191:
+ 1659 07ee 118A      		std Z+17,__zero_reg__
+ 1660 07f0 128A      		std Z+18,__zero_reg__
+ 1661 07f2 138A      		std Z+19,__zero_reg__
+ 1662 07f4 148A      		std Z+20,__zero_reg__
+ 1663               	.LBE347:
+ 1664               	.LBE346:
+ 1665               	.LBB348:
+ 1666               	.LBB349:
+ 1667               	.LM192:
+ 1668 07f6 118E      		std Z+25,__zero_reg__
+ 1669 07f8 128E      		std Z+26,__zero_reg__
+ 1670 07fa 138E      		std Z+27,__zero_reg__
+ 1671 07fc 148E      		std Z+28,__zero_reg__
+ 1672               	.LBE349:
+ 1673               	.LBE348:
+ 1674               	.LBB350:
+ 1675               	.LBB351:
+ 1676               	.LM193:
+ 1677 07fe E58E      		std Z+29,r14
+ 1678 0800 F68E      		std Z+30,r15
+ 1679 0802 078F      		std Z+31,r16
+ 1680 0804 10A3      		std Z+32,r17
+ 1681               	.LBE351:
+ 1682               	.LBE350:
+ 1683               	.LBB352:
+ 1684               	.LBB353:
+ 1685               	.LM194:
+ 1686 0806 8089      		ldd r24,Z+16
+ 1687 0808 817E      		andi r24,lo8(-31)
+ 1688 080a 8860      		ori r24,lo8(8)
+ 1689 080c 808B      		std Z+16,r24
+ 1690 080e 00C0      		rjmp .L92
+ 1691               	.L90:
+ 1692               	.LBE353:
+ 1693               	.LBE352:
+ 1694               	.LM195:
+ 1695 0810 8230      		cpi r24,lo8(2)
+ 1696 0812 01F4      		brne .L92
+ 1697               	.LBB354:
+ 1698               	.LBB355:
+ 1699               	.LM196:
+ 1700 0814 8B85      		ldd r24,Y+11
+ 1701 0816 9C85      		ldd r25,Y+12
+ 1702 0818 AD85      		ldd r26,Y+13
+ 1703 081a BE85      		ldd r27,Y+14
+ 1704               	.LBE355:
+ 1705               	.LBE354:
+ 1706               	.LBB356:
+ 1707               	.LBB357:
+ 1708               	.LM197:
+ 1709 081c 218D      		ldd r18,Z+25
+ 1710 081e 328D      		ldd r19,Z+26
+ 1711 0820 438D      		ldd r20,Z+27
+ 1712 0822 548D      		ldd r21,Z+28
+ 1713 0824 820F      		add r24,r18
+ 1714 0826 931F      		adc r25,r19
+ 1715 0828 A41F      		adc r26,r20
+ 1716 082a B51F      		adc r27,r21
+ 1717 082c 818B      		std Z+17,r24
+ 1718 082e 928B      		std Z+18,r25
+ 1719 0830 A38B      		std Z+19,r26
+ 1720 0832 B48B      		std Z+20,r27
+ 1721               	.LBE357:
+ 1722               	.LBE356:
+ 1723               	.LBB358:
+ 1724               	.LBB359:
+ 1725               	.LM198:
+ 1726 0834 6F5F      		subi r22,lo8(-(1))
+ 1727 0836 7F4F      		sbci r23,hi8(-(1))
+ 1728 0838 609F      		mul r22,r16
+ 1729 083a C001      		movw r24,r0
+ 1730 083c 619F      		mul r22,r17
+ 1731 083e 900D      		add r25,r0
+ 1732 0840 709F      		mul r23,r16
+ 1733 0842 900D      		add r25,r0
+ 1734 0844 1124      		clr r1
+ 1735 0846 C80F      		add r28,r24
+ 1736 0848 D91F      		adc r29,r25
+ 1737 084a 8881      		ld r24,Y
+ 1738 084c 9981      		ldd r25,Y+1
+ 1739 084e AA81      		ldd r26,Y+2
+ 1740 0850 BB81      		ldd r27,Y+3
+ 1741 0852 821B      		sub r24,r18
+ 1742 0854 930B      		sbc r25,r19
+ 1743 0856 A40B      		sbc r26,r20
+ 1744 0858 B50B      		sbc r27,r21
+ 1745 085a 858F      		std Z+29,r24
+ 1746 085c 968F      		std Z+30,r25
+ 1747 085e A78F      		std Z+31,r26
+ 1748 0860 B0A3      		std Z+32,r27
+ 1749               	.L92:
+ 1750               	/* epilogue start */
+ 1751               	.LBE359:
+ 1752               	.LBE358:
+ 1753               	.LM199:
+ 1754 0862 DF91      		pop r29
+ 1755 0864 CF91      		pop r28
+ 1756 0866 1F91      		pop r17
+ 1757 0868 0F91      		pop r16
+ 1758 086a FF90      		pop r15
+ 1759 086c EF90      		pop r14
+ 1760 086e 0895      		ret
+ 1761               	.LFE39:
+ 1763               	.global	Timebase_UpCounter_Expired
+ 1765               	Timebase_UpCounter_Expired:
+ 1766               	.LFB40:
+ 1767               	.LM200:
+ 1768               	.LVL94:
+ 1769               	/* prologue: function */
+ 1770               	/* frame size = 0 */
+ 1771               	.LM201:
+ 1772 0870 40E0      		ldi r20,lo8(0)
+ 1773 0872 E091 0000 		lds r30,Timebase
+ 1774 0876 F091 0000 		lds r31,(Timebase)+1
+ 1775 087a 90E0      		ldi r25,lo8(0)
+ 1776               	.LVL95:
+ 1777 087c 25E1      		ldi r18,lo8(21)
+ 1778 087e 30E0      		ldi r19,hi8(21)
+ 1779 0880 BC01      		movw r22,r24
+ 1780 0882 629F      		mul r22,r18
+ 1781 0884 C001      		movw r24,r0
+ 1782 0886 639F      		mul r22,r19
+ 1783 0888 900D      		add r25,r0
+ 1784 088a 729F      		mul r23,r18
+ 1785 088c 900D      		add r25,r0
+ 1786 088e 1124      		clr r1
+ 1787               	.LVL96:
+ 1788 0890 E80F      		add r30,r24
+ 1789 0892 F91F      		adc r31,r25
+ 1790 0894 8089      		ldd r24,Z+16
+ 1791 0896 8695      		lsr r24
+ 1792 0898 8F70      		andi r24,lo8(15)
+ 1793 089a 8430      		cpi r24,lo8(4)
+ 1794 089c 01F4      		brne .L94
+ 1795 089e 41E0      		ldi r20,lo8(1)
+ 1796               	.L94:
+ 1797               	.LM202:
+ 1798 08a0 842F      		mov r24,r20
+ 1799               	/* epilogue start */
+ 1800 08a2 0895      		ret
+ 1801               	.LFE40:
+ 1803               	.global	Timebase_UpCounter_Expired_Event
+ 1805               	Timebase_UpCounter_Expired_Event:
+ 1806               	.LFB41:
+ 1807               	.LM203:
+ 1808               	.LVL97:
+ 1809               	/* prologue: function */
+ 1810               	/* frame size = 0 */
+ 1811 08a4 482F      		mov r20,r24
+ 1812               	.LM204:
+ 1813 08a6 E091 0000 		lds r30,Timebase
+ 1814 08aa F091 0000 		lds r31,(Timebase)+1
+ 1815 08ae 282F      		mov r18,r24
+ 1816 08b0 30E0      		ldi r19,lo8(0)
+ 1817               	.LVL98:
+ 1818 08b2 85E1      		ldi r24,lo8(21)
+ 1819 08b4 90E0      		ldi r25,hi8(21)
+ 1820               	.LVL99:
+ 1821 08b6 BC01      		movw r22,r24
+ 1822 08b8 269F      		mul r18,r22
+ 1823 08ba C001      		movw r24,r0
+ 1824 08bc 279F      		mul r18,r23
+ 1825 08be 900D      		add r25,r0
+ 1826 08c0 369F      		mul r19,r22
+ 1827 08c2 900D      		add r25,r0
+ 1828 08c4 1124      		clr r1
+ 1829 08c6 E80F      		add r30,r24
+ 1830 08c8 F91F      		adc r31,r25
+ 1831 08ca 8089      		ldd r24,Z+16
+ 1832 08cc 8695      		lsr r24
+ 1833 08ce 8F70      		andi r24,lo8(15)
+ 1834 08d0 8430      		cpi r24,lo8(4)
+ 1835 08d2 01F0      		breq .L97
+ 1836 08d4 80E0      		ldi r24,lo8(0)
+ 1837 08d6 0895      		ret
+ 1838               	.L97:
+ 1839               	.LBB360:
+ 1840               	.LBB361:
+ 1841               	.LM205:
+ 1842 08d8 842F      		mov r24,r20
+ 1843 08da 0E94 0000 		call Timebase_UpCounter_Reset
+ 1844               	.LVL100:
+ 1845 08de 81E0      		ldi r24,lo8(1)
+ 1846               	.LBE361:
+ 1847               	.LBE360:
+ 1848               	.LM206:
+ 1849 08e0 0895      		ret
+ 1850               	.LFE41:
+ 1852               	.global	Timebase_UpCounter_Set_Period_Value_Securely
+ 1854               	Timebase_UpCounter_Set_Period_Value_Securely:
+ 1855               	.LFB42:
+ 1856               	.LM207:
+ 1857               	.LVL101:
+ 1858               	/* prologue: function */
+ 1859               	/* frame size = 0 */
+ 1860               	.LBB362:
+ 1861               	.LBB363:
+ 1862               	.LM208:
+ 1863 08e2 E091 0000 		lds r30,Timebase
+ 1864 08e6 F091 0000 		lds r31,(Timebase)+1
+ 1865 08ea 90E0      		ldi r25,lo8(0)
+ 1866               	.LBE363:
+ 1867               	.LBE362:
+ 1868               	.LM209:
+ 1869 08ec 25E1      		ldi r18,lo8(21)
+ 1870 08ee 30E0      		ldi r19,hi8(21)
+ 1871 08f0 DC01      		movw r26,r24
+ 1872               	.LVL102:
+ 1873 08f2 A29F      		mul r26,r18
+ 1874 08f4 C001      		movw r24,r0
+ 1875 08f6 A39F      		mul r26,r19
+ 1876 08f8 900D      		add r25,r0
+ 1877 08fa B29F      		mul r27,r18
+ 1878 08fc 900D      		add r25,r0
+ 1879 08fe 1124      		clr r1
+ 1880 0900 E80F      		add r30,r24
+ 1881 0902 F91F      		adc r31,r25
+ 1882 0904 8089      		ldd r24,Z+16
+ 1883 0906 80FD      		sbrc r24,0
+ 1884 0908 00C0      		rjmp .L102
+ 1885               	.LBB364:
+ 1886               	.LBB365:
+ 1887               	.LM210:
+ 1888 090a 858D      		ldd r24,Z+29
+ 1889 090c 968D      		ldd r25,Z+30
+ 1890 090e A78D      		ldd r26,Z+31
+ 1891 0910 B0A1      		ldd r27,Z+32
+ 1892 0912 840F      		add r24,r20
+ 1893 0914 951F      		adc r25,r21
+ 1894 0916 A61F      		adc r26,r22
+ 1895 0918 B71F      		adc r27,r23
+ 1896 091a 81A3      		std Z+33,r24
+ 1897 091c 92A3      		std Z+34,r25
+ 1898 091e A3A3      		std Z+35,r26
+ 1899 0920 B4A3      		std Z+36,r27
+ 1900               	.LBE365:
+ 1901               	.LBE364:
+ 1902               	.LBB366:
+ 1903               	.LBB367:
+ 1904               	.LM211:
+ 1905 0922 8089      		ldd r24,Z+16
+ 1906 0924 8160      		ori r24,lo8(1)
+ 1907 0926 808B      		std Z+16,r24
+ 1908               	.L102:
+ 1909 0928 0895      		ret
+ 1910               	.LBE367:
+ 1911               	.LBE366:
+ 1912               	.LFE42:
+ 1914               	.global	Timebase_UpCounter_Get_Remaining_Period_Value
+ 1916               	Timebase_UpCounter_Get_Remaining_Period_Value:
+ 1917               	.LFB43:
+ 1918               	.LM212:
+ 1919               	.LVL103:
+ 1920               	/* prologue: function */
+ 1921               	/* frame size = 0 */
+ 1922               	.LBB368:
+ 1923               	.LBB369:
+ 1924               	.LM213:
+ 1925 092a E091 0000 		lds r30,Timebase
+ 1926 092e F091 0000 		lds r31,(Timebase)+1
+ 1927 0932 90E0      		ldi r25,lo8(0)
+ 1928               	.LBE369:
+ 1929               	.LBE368:
+ 1930               	.LM214:
+ 1931 0934 25E1      		ldi r18,lo8(21)
+ 1932 0936 30E0      		ldi r19,hi8(21)
+ 1933 0938 AC01      		movw r20,r24
+ 1934               	.LVL104:
+ 1935 093a 429F      		mul r20,r18
+ 1936 093c C001      		movw r24,r0
+ 1937 093e 439F      		mul r20,r19
+ 1938 0940 900D      		add r25,r0
+ 1939 0942 529F      		mul r21,r18
+ 1940 0944 900D      		add r25,r0
+ 1941 0946 1124      		clr r1
+ 1942 0948 E80F      		add r30,r24
+ 1943 094a F91F      		adc r31,r25
+ 1944 094c 21A1      		ldd r18,Z+33
+ 1945 094e 32A1      		ldd r19,Z+34
+ 1946 0950 43A1      		ldd r20,Z+35
+ 1947 0952 54A1      		ldd r21,Z+36
+ 1948               	.LVL105:
+ 1949 0954 858D      		ldd r24,Z+29
+ 1950 0956 968D      		ldd r25,Z+30
+ 1951 0958 A78D      		ldd r26,Z+31
+ 1952 095a B0A1      		ldd r27,Z+32
+ 1953 095c 281B      		sub r18,r24
+ 1954 095e 390B      		sbc r19,r25
+ 1955 0960 4A0B      		sbc r20,r26
+ 1956 0962 5B0B      		sbc r21,r27
+ 1957 0964 57FF      		sbrs r21,7
+ 1958 0966 00C0      		rjmp .L104
+ 1959 0968 20E0      		ldi r18,lo8(0)
+ 1960 096a 30E0      		ldi r19,hi8(0)
+ 1961 096c 40E0      		ldi r20,hlo8(0)
+ 1962 096e 50E0      		ldi r21,hhi8(0)
+ 1963               	.L104:
+ 1964               	.LM215:
+ 1965 0970 B901      		movw r22,r18
+ 1966               	.LVL106:
+ 1967 0972 CA01      		movw r24,r20
+ 1968               	/* epilogue start */
+ 1969 0974 0895      		ret
+ 1970               	.LFE43:
+ 1972               	.global	Timebase_UpCounter_Period_Value_Expired
+ 1974               	Timebase_UpCounter_Period_Value_Expired:
+ 1975               	.LFB44:
+ 1976               	.LM216:
+ 1977               	.LVL107:
+ 1978 0976 CF93      		push r28
+ 1979 0978 DF93      		push r29
+ 1980               	/* prologue: function */
+ 1981               	/* frame size = 0 */
+ 1982               	.LBB370:
+ 1983               	.LBB371:
+ 1984               	.LBB372:
+ 1985               	.LBB373:
+ 1986               	.LM217:
+ 1987 097a C091 0000 		lds r28,Timebase
+ 1988 097e D091 0000 		lds r29,(Timebase)+1
+ 1989 0982 682F      		mov r22,r24
+ 1990 0984 70E0      		ldi r23,lo8(0)
+ 1991               	.LBE373:
+ 1992               	.LBE372:
+ 1993               	.LM218:
+ 1994 0986 85E1      		ldi r24,lo8(21)
+ 1995 0988 90E0      		ldi r25,hi8(21)
+ 1996               	.LVL108:
+ 1997 098a 689F      		mul r22,r24
+ 1998 098c F001      		movw r30,r0
+ 1999 098e 699F      		mul r22,r25
+ 2000 0990 F00D      		add r31,r0
+ 2001 0992 789F      		mul r23,r24
+ 2002 0994 F00D      		add r31,r0
+ 2003 0996 1124      		clr r1
+ 2004 0998 EC0F      		add r30,r28
+ 2005 099a FD1F      		adc r31,r29
+ 2006 099c 21A1      		ldd r18,Z+33
+ 2007 099e 32A1      		ldd r19,Z+34
+ 2008 09a0 43A1      		ldd r20,Z+35
+ 2009 09a2 54A1      		ldd r21,Z+36
+ 2010               	.LVL109:
+ 2011 09a4 858D      		ldd r24,Z+29
+ 2012 09a6 968D      		ldd r25,Z+30
+ 2013 09a8 A78D      		ldd r26,Z+31
+ 2014 09aa B0A1      		ldd r27,Z+32
+ 2015 09ac 281B      		sub r18,r24
+ 2016 09ae 390B      		sbc r19,r25
+ 2017 09b0 4A0B      		sbc r20,r26
+ 2018 09b2 5B0B      		sbc r21,r27
+ 2019               	.LM219:
+ 2020 09b4 57FD      		sbrc r21,7
+ 2021 09b6 00C0      		rjmp .L107
+ 2022               	.LBE371:
+ 2023               	.LBE370:
+ 2024               	.LM220:
+ 2025 09b8 2115      		cp r18,__zero_reg__
+ 2026 09ba 3105      		cpc r19,__zero_reg__
+ 2027 09bc 4105      		cpc r20,__zero_reg__
+ 2028 09be 5105      		cpc r21,__zero_reg__
+ 2029 09c0 01F0      		breq .L107
+ 2030 09c2 20E0      		ldi r18,lo8(0)
+ 2031               	.LVL110:
+ 2032 09c4 00C0      		rjmp .L108
+ 2033               	.LVL111:
+ 2034               	.L107:
+ 2035 09c6 20E0      		ldi r18,lo8(0)
+ 2036               	.LVL112:
+ 2037 09c8 85E1      		ldi r24,lo8(21)
+ 2038 09ca 90E0      		ldi r25,hi8(21)
+ 2039 09cc AC01      		movw r20,r24
+ 2040 09ce 649F      		mul r22,r20
+ 2041 09d0 C001      		movw r24,r0
+ 2042 09d2 659F      		mul r22,r21
+ 2043 09d4 900D      		add r25,r0
+ 2044 09d6 749F      		mul r23,r20
+ 2045 09d8 900D      		add r25,r0
+ 2046 09da 1124      		clr r1
+ 2047 09dc C80F      		add r28,r24
+ 2048 09de D91F      		adc r29,r25
+ 2049 09e0 8889      		ldd r24,Y+16
+ 2050 09e2 80FF      		sbrs r24,0
+ 2051 09e4 21E0      		ldi r18,lo8(1)
+ 2052               	.L109:
+ 2053 09e6 81E0      		ldi r24,lo8(1)
+ 2054 09e8 2827      		eor r18,r24
+ 2055               	.L108:
+ 2056               	.LM221:
+ 2057 09ea 822F      		mov r24,r18
+ 2058               	/* epilogue start */
+ 2059 09ec DF91      		pop r29
+ 2060 09ee CF91      		pop r28
+ 2061 09f0 0895      		ret
+ 2062               	.LFE44:
+ 2064               	.global	Timebase_UpCounter_Period_Value_Expired_Event
+ 2066               	Timebase_UpCounter_Period_Value_Expired_Event:
+ 2067               	.LFB45:
+ 2068               	.LM222:
+ 2069               	.LVL113:
+ 2070 09f2 1F93      		push r17
+ 2071               	/* prologue: function */
+ 2072               	/* frame size = 0 */
+ 2073 09f4 182F      		mov r17,r24
+ 2074               	.LM223:
+ 2075 09f6 0E94 0000 		call Timebase_UpCounter_Period_Value_Expired
+ 2076               	.LVL114:
+ 2077 09fa 8130      		cpi r24,lo8(1)
+ 2078 09fc 01F0      		breq .L112
+ 2079 09fe 80E0      		ldi r24,lo8(0)
+ 2080 0a00 00C0      		rjmp .L113
+ 2081               	.L112:
+ 2082               	.LBB374:
+ 2083               	.LBB375:
+ 2084               	.LM224:
+ 2085 0a02 E091 0000 		lds r30,Timebase
+ 2086 0a06 F091 0000 		lds r31,(Timebase)+1
+ 2087 0a0a 212F      		mov r18,r17
+ 2088 0a0c 30E0      		ldi r19,lo8(0)
+ 2089               	.LVL115:
+ 2090 0a0e 85E1      		ldi r24,lo8(21)
+ 2091 0a10 90E0      		ldi r25,hi8(21)
+ 2092 0a12 AC01      		movw r20,r24
+ 2093 0a14 249F      		mul r18,r20
+ 2094 0a16 C001      		movw r24,r0
+ 2095 0a18 259F      		mul r18,r21
+ 2096 0a1a 900D      		add r25,r0
+ 2097 0a1c 349F      		mul r19,r20
+ 2098 0a1e 900D      		add r25,r0
+ 2099 0a20 1124      		clr r1
+ 2100 0a22 E80F      		add r30,r24
+ 2101 0a24 F91F      		adc r31,r25
+ 2102 0a26 8089      		ldd r24,Z+16
+ 2103 0a28 8E7F      		andi r24,lo8(-2)
+ 2104 0a2a 808B      		std Z+16,r24
+ 2105 0a2c 81E0      		ldi r24,lo8(1)
+ 2106               	.L113:
+ 2107               	/* epilogue start */
+ 2108               	.LBE375:
+ 2109               	.LBE374:
+ 2110               	.LM225:
+ 2111 0a2e 1F91      		pop r17
+ 2112               	.LVL116:
+ 2113 0a30 0895      		ret
+ 2114               	.LFE45:
+ 2116               	.global	Timebase_UpCounter_Update_All
+ 2118               	Timebase_UpCounter_Update_All:
+ 2119               	.LFB46:
+ 2120               	.LM226:
+ 2121               	/* prologue: function */
+ 2122               	/* frame size = 0 */
+ 2123               	.LBB376:
+ 2124               	.LM227:
+ 2125 0a32 80E0      		ldi r24,lo8(0)
+ 2126 0a34 0E94 0000 		call Timebase_UpCounter_Update
+ 2127               	/* epilogue start */
+ 2128               	.LBE376:
+ 2129               	.LM228:
+ 2130 0a38 0895      		ret
+ 2131               	.LFE46:
+ 2133               	.global	Timebase_UpCounter_Reset_All
+ 2135               	Timebase_UpCounter_Reset_All:
+ 2136               	.LFB47:
+ 2137               	.LM229:
+ 2138               	/* prologue: function */
+ 2139               	/* frame size = 0 */
+ 2140               	.LBB377:
+ 2141               	.LM230:
+ 2142 0a3a 80E0      		ldi r24,lo8(0)
+ 2143 0a3c 0E94 0000 		call Timebase_UpCounter_Reset
+ 2144               	/* epilogue start */
+ 2145               	.LBE377:
+ 2146               	.LM231:
+ 2147 0a40 0895      		ret
+ 2148               	.LFE47:
+ 2150               	.global	Timebase_DownCounter_Get_Status
+ 2152               	Timebase_DownCounter_Get_Status:
+ 2153               	.LFB48:
+ 2154               	.LM232:
+ 2155               	.LVL117:
+ 2156               	/* prologue: function */
+ 2157               	/* frame size = 0 */
+ 2158               	.LM233:
+ 2159 0a42 E091 0000 		lds r30,Timebase
+ 2160 0a46 F091 0000 		lds r31,(Timebase)+1
+ 2161 0a4a 90E0      		ldi r25,lo8(0)
+ 2162               	.LVL118:
+ 2163 0a4c 2DE0      		ldi r18,lo8(13)
+ 2164 0a4e 30E0      		ldi r19,hi8(13)
+ 2165 0a50 AC01      		movw r20,r24
+ 2166 0a52 429F      		mul r20,r18
+ 2167 0a54 C001      		movw r24,r0
+ 2168 0a56 439F      		mul r20,r19
+ 2169 0a58 900D      		add r25,r0
+ 2170 0a5a 529F      		mul r21,r18
+ 2171 0a5c 900D      		add r25,r0
+ 2172 0a5e 1124      		clr r1
+ 2173               	.LVL119:
+ 2174 0a60 E80F      		add r30,r24
+ 2175 0a62 F91F      		adc r31,r25
+ 2176 0a64 85A1      		ldd r24,Z+37
+ 2177 0a66 8695      		lsr r24
+ 2178               	.LM234:
+ 2179 0a68 8F70      		andi r24,lo8(15)
+ 2180               	/* epilogue start */
+ 2181 0a6a 0895      		ret
+ 2182               	.LFE48:
+ 2184               	.global	Timebase_DownCounter_Set_Status
+ 2186               	Timebase_DownCounter_Set_Status:
+ 2187               	.LFB49:
+ 2188               	.LM235:
+ 2189               	.LVL120:
+ 2190               	/* prologue: function */
+ 2191               	/* frame size = 0 */
+ 2192               	.LM236:
+ 2193 0a6c E091 0000 		lds r30,Timebase
+ 2194 0a70 F091 0000 		lds r31,(Timebase)+1
+ 2195 0a74 90E0      		ldi r25,lo8(0)
+ 2196               	.LVL121:
+ 2197 0a76 2DE0      		ldi r18,lo8(13)
+ 2198 0a78 30E0      		ldi r19,hi8(13)
+ 2199 0a7a AC01      		movw r20,r24
+ 2200 0a7c 429F      		mul r20,r18
+ 2201 0a7e C001      		movw r24,r0
+ 2202 0a80 439F      		mul r20,r19
+ 2203 0a82 900D      		add r25,r0
+ 2204 0a84 529F      		mul r21,r18
+ 2205 0a86 900D      		add r25,r0
+ 2206 0a88 1124      		clr r1
+ 2207               	.LVL122:
+ 2208 0a8a E80F      		add r30,r24
+ 2209 0a8c F91F      		adc r31,r25
+ 2210 0a8e 6F70      		andi r22,lo8(15)
+ 2211               	.LVL123:
+ 2212 0a90 660F      		lsl r22
+ 2213 0a92 85A1      		ldd r24,Z+37
+ 2214 0a94 817E      		andi r24,lo8(-31)
+ 2215 0a96 862B      		or r24,r22
+ 2216 0a98 85A3      		std Z+37,r24
+ 2217               	/* epilogue start */
+ 2218               	.LM237:
+ 2219 0a9a 0895      		ret
+ 2220               	.LFE49:
+ 2222               	.global	Timebase_DownCounter_Get_Value
+ 2224               	Timebase_DownCounter_Get_Value:
+ 2225               	.LFB50:
+ 2226               	.LM238:
+ 2227               	.LVL124:
+ 2228               	/* prologue: function */
+ 2229               	/* frame size = 0 */
+ 2230               	.LM239:
+ 2231 0a9c E091 0000 		lds r30,Timebase
+ 2232 0aa0 F091 0000 		lds r31,(Timebase)+1
+ 2233 0aa4 90E0      		ldi r25,lo8(0)
+ 2234               	.LVL125:
+ 2235 0aa6 2DE0      		ldi r18,lo8(13)
+ 2236 0aa8 30E0      		ldi r19,hi8(13)
+ 2237 0aaa AC01      		movw r20,r24
+ 2238 0aac 429F      		mul r20,r18
+ 2239 0aae C001      		movw r24,r0
+ 2240 0ab0 439F      		mul r20,r19
+ 2241 0ab2 900D      		add r25,r0
+ 2242 0ab4 529F      		mul r21,r18
+ 2243 0ab6 900D      		add r25,r0
+ 2244 0ab8 1124      		clr r1
+ 2245               	.LVL126:
+ 2246 0aba E80F      		add r30,r24
+ 2247 0abc F91F      		adc r31,r25
+ 2248 0abe DF01      		movw r26,r30
+ 2249 0ac0 9A96      		adiw r26,42
+ 2250 0ac2 62A5      		ldd r22,Z+42
+ 2251 0ac4 1196      		adiw r26,1
+ 2252 0ac6 7C91      		ld r23,X
+ 2253 0ac8 1197      		sbiw r26,1
+ 2254               	.LM240:
+ 2255 0aca 1296      		adiw r26,2
+ 2256 0acc 8C91      		ld r24,X
+ 2257 0ace 1297      		sbiw r26,2
+ 2258 0ad0 1396      		adiw r26,3
+ 2259 0ad2 9C91      		ld r25,X
+ 2260               	.LVL127:
+ 2261               	/* epilogue start */
+ 2262 0ad4 0895      		ret
+ 2263               	.LFE50:
+ 2265               	.global	Timebase_DownCounter_Set_Value
+ 2267               	Timebase_DownCounter_Set_Value:
+ 2268               	.LFB51:
+ 2269               	.LM241:
+ 2270               	.LVL128:
+ 2271               	/* prologue: function */
+ 2272               	/* frame size = 0 */
+ 2273               	.LM242:
+ 2274 0ad6 E091 0000 		lds r30,Timebase
+ 2275 0ada F091 0000 		lds r31,(Timebase)+1
+ 2276 0ade 90E0      		ldi r25,lo8(0)
+ 2277               	.LVL129:
+ 2278 0ae0 2DE0      		ldi r18,lo8(13)
+ 2279 0ae2 30E0      		ldi r19,hi8(13)
+ 2280 0ae4 DC01      		movw r26,r24
+ 2281 0ae6 A29F      		mul r26,r18
+ 2282 0ae8 C001      		movw r24,r0
+ 2283 0aea A39F      		mul r26,r19
+ 2284 0aec 900D      		add r25,r0
+ 2285 0aee B29F      		mul r27,r18
+ 2286 0af0 900D      		add r25,r0
+ 2287 0af2 1124      		clr r1
+ 2288               	.LVL130:
+ 2289 0af4 E80F      		add r30,r24
+ 2290 0af6 F91F      		adc r31,r25
+ 2291 0af8 42A7      		std Z+42,r20
+ 2292 0afa 53A7      		std Z+43,r21
+ 2293 0afc 64A7      		std Z+44,r22
+ 2294 0afe 75A7      		std Z+45,r23
+ 2295               	/* epilogue start */
+ 2296               	.LM243:
+ 2297 0b00 0895      		ret
+ 2298               	.LFE51:
+ 2300               	.global	Timebase_DownCounter_Get_EndValue
+ 2302               	Timebase_DownCounter_Get_EndValue:
+ 2303               	.LFB52:
+ 2304               	.LM244:
+ 2305               	.LVL131:
+ 2306               	/* prologue: function */
+ 2307               	/* frame size = 0 */
+ 2308               	.LM245:
+ 2309 0b02 E091 0000 		lds r30,Timebase
+ 2310 0b06 F091 0000 		lds r31,(Timebase)+1
+ 2311 0b0a 90E0      		ldi r25,lo8(0)
+ 2312               	.LVL132:
+ 2313 0b0c 2DE0      		ldi r18,lo8(13)
+ 2314 0b0e 30E0      		ldi r19,hi8(13)
+ 2315 0b10 AC01      		movw r20,r24
+ 2316 0b12 429F      		mul r20,r18
+ 2317 0b14 C001      		movw r24,r0
+ 2318 0b16 439F      		mul r20,r19
+ 2319 0b18 900D      		add r25,r0
+ 2320 0b1a 529F      		mul r21,r18
+ 2321 0b1c 900D      		add r25,r0
+ 2322 0b1e 1124      		clr r1
+ 2323               	.LVL133:
+ 2324 0b20 E80F      		add r30,r24
+ 2325 0b22 F91F      		adc r31,r25
+ 2326 0b24 DF01      		movw r26,r30
+ 2327 0b26 9696      		adiw r26,38
+ 2328 0b28 66A1      		ldd r22,Z+38
+ 2329 0b2a 1196      		adiw r26,1
+ 2330 0b2c 7C91      		ld r23,X
+ 2331 0b2e 1197      		sbiw r26,1
+ 2332               	.LM246:
+ 2333 0b30 1296      		adiw r26,2
+ 2334 0b32 8C91      		ld r24,X
+ 2335 0b34 1297      		sbiw r26,2
+ 2336 0b36 1396      		adiw r26,3
+ 2337 0b38 9C91      		ld r25,X
+ 2338               	.LVL134:
+ 2339               	/* epilogue start */
+ 2340 0b3a 0895      		ret
+ 2341               	.LFE52:
+ 2343               	.global	Timebase_DownCounter_Set_EndValue
+ 2345               	Timebase_DownCounter_Set_EndValue:
+ 2346               	.LFB53:
+ 2347               	.LM247:
+ 2348               	.LVL135:
+ 2349               	/* prologue: function */
+ 2350               	/* frame size = 0 */
+ 2351               	.LM248:
+ 2352 0b3c E091 0000 		lds r30,Timebase
+ 2353 0b40 F091 0000 		lds r31,(Timebase)+1
+ 2354 0b44 90E0      		ldi r25,lo8(0)
+ 2355               	.LVL136:
+ 2356 0b46 2DE0      		ldi r18,lo8(13)
+ 2357 0b48 30E0      		ldi r19,hi8(13)
+ 2358 0b4a DC01      		movw r26,r24
+ 2359 0b4c A29F      		mul r26,r18
+ 2360 0b4e C001      		movw r24,r0
+ 2361 0b50 A39F      		mul r26,r19
+ 2362 0b52 900D      		add r25,r0
+ 2363 0b54 B29F      		mul r27,r18
+ 2364 0b56 900D      		add r25,r0
+ 2365 0b58 1124      		clr r1
+ 2366               	.LVL137:
+ 2367 0b5a E80F      		add r30,r24
+ 2368 0b5c F91F      		adc r31,r25
+ 2369 0b5e 46A3      		std Z+38,r20
+ 2370 0b60 57A3      		std Z+39,r21
+ 2371 0b62 60A7      		std Z+40,r22
+ 2372 0b64 71A7      		std Z+41,r23
+ 2373               	/* epilogue start */
+ 2374               	.LM249:
+ 2375 0b66 0895      		ret
+ 2376               	.LFE53:
+ 2378               	.global	Timebase_DownCounter_Get_PeriodValue
+ 2380               	Timebase_DownCounter_Get_PeriodValue:
+ 2381               	.LFB54:
+ 2382               	.LM250:
+ 2383               	.LVL138:
+ 2384               	/* prologue: function */
+ 2385               	/* frame size = 0 */
+ 2386               	.LM251:
+ 2387 0b68 E091 0000 		lds r30,Timebase
+ 2388 0b6c F091 0000 		lds r31,(Timebase)+1
+ 2389 0b70 90E0      		ldi r25,lo8(0)
+ 2390               	.LVL139:
+ 2391 0b72 2DE0      		ldi r18,lo8(13)
+ 2392 0b74 30E0      		ldi r19,hi8(13)
+ 2393 0b76 AC01      		movw r20,r24
+ 2394 0b78 429F      		mul r20,r18
+ 2395 0b7a C001      		movw r24,r0
+ 2396 0b7c 439F      		mul r20,r19
+ 2397 0b7e 900D      		add r25,r0
+ 2398 0b80 529F      		mul r21,r18
+ 2399 0b82 900D      		add r25,r0
+ 2400 0b84 1124      		clr r1
+ 2401               	.LVL140:
+ 2402 0b86 E80F      		add r30,r24
+ 2403 0b88 F91F      		adc r31,r25
+ 2404 0b8a DF01      		movw r26,r30
+ 2405 0b8c 9E96      		adiw r26,46
+ 2406 0b8e 66A5      		ldd r22,Z+46
+ 2407 0b90 1196      		adiw r26,1
+ 2408 0b92 7C91      		ld r23,X
+ 2409 0b94 1197      		sbiw r26,1
+ 2410               	.LM252:
+ 2411 0b96 1296      		adiw r26,2
+ 2412 0b98 8C91      		ld r24,X
+ 2413 0b9a 1297      		sbiw r26,2
+ 2414 0b9c 1396      		adiw r26,3
+ 2415 0b9e 9C91      		ld r25,X
+ 2416               	.LVL141:
+ 2417               	/* epilogue start */
+ 2418 0ba0 0895      		ret
+ 2419               	.LFE54:
+ 2421               	.global	Timebase_DownCounter_Set_PeriodValue
+ 2423               	Timebase_DownCounter_Set_PeriodValue:
+ 2424               	.LFB55:
+ 2425               	.LM253:
+ 2426               	.LVL142:
+ 2427               	/* prologue: function */
+ 2428               	/* frame size = 0 */
+ 2429               	.LM254:
+ 2430 0ba2 E091 0000 		lds r30,Timebase
+ 2431 0ba6 F091 0000 		lds r31,(Timebase)+1
+ 2432 0baa 90E0      		ldi r25,lo8(0)
+ 2433               	.LVL143:
+ 2434 0bac 2DE0      		ldi r18,lo8(13)
+ 2435 0bae 30E0      		ldi r19,hi8(13)
+ 2436 0bb0 DC01      		movw r26,r24
+ 2437 0bb2 A29F      		mul r26,r18
+ 2438 0bb4 C001      		movw r24,r0
+ 2439 0bb6 A39F      		mul r26,r19
+ 2440 0bb8 900D      		add r25,r0
+ 2441 0bba B29F      		mul r27,r18
+ 2442 0bbc 900D      		add r25,r0
+ 2443 0bbe 1124      		clr r1
+ 2444               	.LVL144:
+ 2445 0bc0 E80F      		add r30,r24
+ 2446 0bc2 F91F      		adc r31,r25
+ 2447 0bc4 46A7      		std Z+46,r20
+ 2448 0bc6 57A7      		std Z+47,r21
+ 2449 0bc8 60AB      		std Z+48,r22
+ 2450 0bca 71AB      		std Z+49,r23
+ 2451               	/* epilogue start */
+ 2452               	.LM255:
+ 2453 0bcc 0895      		ret
+ 2454               	.LFE55:
+ 2456               	.global	Timebase_DownCounter_Get_Period_Flag
+ 2458               	Timebase_DownCounter_Get_Period_Flag:
+ 2459               	.LFB56:
+ 2460               	.LM256:
+ 2461               	.LVL145:
+ 2462               	/* prologue: function */
+ 2463               	/* frame size = 0 */
+ 2464               	.LM257:
+ 2465 0bce E091 0000 		lds r30,Timebase
+ 2466 0bd2 F091 0000 		lds r31,(Timebase)+1
+ 2467 0bd6 90E0      		ldi r25,lo8(0)
+ 2468               	.LVL146:
+ 2469 0bd8 2DE0      		ldi r18,lo8(13)
+ 2470 0bda 30E0      		ldi r19,hi8(13)
+ 2471 0bdc AC01      		movw r20,r24
+ 2472 0bde 429F      		mul r20,r18
+ 2473 0be0 C001      		movw r24,r0
+ 2474 0be2 439F      		mul r20,r19
+ 2475 0be4 900D      		add r25,r0
+ 2476 0be6 529F      		mul r21,r18
+ 2477 0be8 900D      		add r25,r0
+ 2478 0bea 1124      		clr r1
+ 2479               	.LVL147:
+ 2480 0bec E80F      		add r30,r24
+ 2481 0bee F91F      		adc r31,r25
+ 2482 0bf0 85A1      		ldd r24,Z+37
+ 2483               	.LM258:
+ 2484 0bf2 8170      		andi r24,lo8(1)
+ 2485               	/* epilogue start */
+ 2486 0bf4 0895      		ret
+ 2487               	.LFE56:
+ 2489               	.global	Timebase_DownCounter_Set_Period_Flag
+ 2491               	Timebase_DownCounter_Set_Period_Flag:
+ 2492               	.LFB57:
+ 2493               	.LM259:
+ 2494               	.LVL148:
+ 2495               	/* prologue: function */
+ 2496               	/* frame size = 0 */
+ 2497               	.LM260:
+ 2498 0bf6 E091 0000 		lds r30,Timebase
+ 2499 0bfa F091 0000 		lds r31,(Timebase)+1
+ 2500 0bfe 90E0      		ldi r25,lo8(0)
+ 2501               	.LVL149:
+ 2502 0c00 2DE0      		ldi r18,lo8(13)
+ 2503 0c02 30E0      		ldi r19,hi8(13)
+ 2504 0c04 AC01      		movw r20,r24
+ 2505 0c06 429F      		mul r20,r18
+ 2506 0c08 C001      		movw r24,r0
+ 2507 0c0a 439F      		mul r20,r19
+ 2508 0c0c 900D      		add r25,r0
+ 2509 0c0e 529F      		mul r21,r18
+ 2510 0c10 900D      		add r25,r0
+ 2511 0c12 1124      		clr r1
+ 2512               	.LVL150:
+ 2513 0c14 E80F      		add r30,r24
+ 2514 0c16 F91F      		adc r31,r25
+ 2515 0c18 85A1      		ldd r24,Z+37
+ 2516 0c1a 8160      		ori r24,lo8(1)
+ 2517 0c1c 85A3      		std Z+37,r24
+ 2518               	/* epilogue start */
+ 2519               	.LM261:
+ 2520 0c1e 0895      		ret
+ 2521               	.LFE57:
+ 2523               	.global	Timebase_DownCounter_Clear_Period_Flag
+ 2525               	Timebase_DownCounter_Clear_Period_Flag:
+ 2526               	.LFB58:
+ 2527               	.LM262:
+ 2528               	.LVL151:
+ 2529               	/* prologue: function */
+ 2530               	/* frame size = 0 */
+ 2531               	.LM263:
+ 2532 0c20 E091 0000 		lds r30,Timebase
+ 2533 0c24 F091 0000 		lds r31,(Timebase)+1
+ 2534 0c28 90E0      		ldi r25,lo8(0)
+ 2535               	.LVL152:
+ 2536 0c2a 2DE0      		ldi r18,lo8(13)
+ 2537 0c2c 30E0      		ldi r19,hi8(13)
+ 2538 0c2e AC01      		movw r20,r24
+ 2539 0c30 429F      		mul r20,r18
+ 2540 0c32 C001      		movw r24,r0
+ 2541 0c34 439F      		mul r20,r19
+ 2542 0c36 900D      		add r25,r0
+ 2543 0c38 529F      		mul r21,r18
+ 2544 0c3a 900D      		add r25,r0
+ 2545 0c3c 1124      		clr r1
+ 2546               	.LVL153:
+ 2547 0c3e E80F      		add r30,r24
+ 2548 0c40 F91F      		adc r31,r25
+ 2549 0c42 85A1      		ldd r24,Z+37
+ 2550 0c44 8E7F      		andi r24,lo8(-2)
+ 2551 0c46 85A3      		std Z+37,r24
+ 2552               	/* epilogue start */
+ 2553               	.LM264:
+ 2554 0c48 0895      		ret
+ 2555               	.LFE58:
+ 2557               	.global	Timebase_DownCounter_Reset
+ 2559               	Timebase_DownCounter_Reset:
+ 2560               	.LFB59:
+ 2561               	.LM265:
+ 2562               	.LVL154:
+ 2563               	/* prologue: function */
+ 2564               	/* frame size = 0 */
+ 2565               	.LBB378:
+ 2566               	.LBB379:
+ 2567               	.LM266:
+ 2568 0c4a E091 0000 		lds r30,Timebase
+ 2569 0c4e F091 0000 		lds r31,(Timebase)+1
+ 2570 0c52 90E0      		ldi r25,lo8(0)
+ 2571 0c54 2DE0      		ldi r18,lo8(13)
+ 2572 0c56 30E0      		ldi r19,hi8(13)
+ 2573 0c58 AC01      		movw r20,r24
+ 2574               	.LVL155:
+ 2575 0c5a 429F      		mul r20,r18
+ 2576 0c5c C001      		movw r24,r0
+ 2577 0c5e 439F      		mul r20,r19
+ 2578 0c60 900D      		add r25,r0
+ 2579 0c62 529F      		mul r21,r18
+ 2580 0c64 900D      		add r25,r0
+ 2581 0c66 1124      		clr r1
+ 2582 0c68 E80F      		add r30,r24
+ 2583 0c6a F91F      		adc r31,r25
+ 2584 0c6c 16A2      		std Z+38,__zero_reg__
+ 2585 0c6e 17A2      		std Z+39,__zero_reg__
+ 2586 0c70 10A6      		std Z+40,__zero_reg__
+ 2587 0c72 11A6      		std Z+41,__zero_reg__
+ 2588               	.LBE379:
+ 2589               	.LBE378:
+ 2590               	.LBB380:
+ 2591               	.LBB381:
+ 2592               	.LM267:
+ 2593 0c74 12A6      		std Z+42,__zero_reg__
+ 2594 0c76 13A6      		std Z+43,__zero_reg__
+ 2595 0c78 14A6      		std Z+44,__zero_reg__
+ 2596 0c7a 15A6      		std Z+45,__zero_reg__
+ 2597               	.LBE381:
+ 2598               	.LBE380:
+ 2599               	.LBB382:
+ 2600               	.LBB383:
+ 2601               	.LM268:
+ 2602 0c7c 85A1      		ldd r24,Z+37
+ 2603               	.LBE383:
+ 2604               	.LBE382:
+ 2605               	.LBB384:
+ 2606               	.LBB385:
+ 2607               	.LM269:
+ 2608 0c7e 807E      		andi r24,lo8(-32)
+ 2609 0c80 85A3      		std Z+37,r24
+ 2610               	/* epilogue start */
+ 2611               	.LBE385:
+ 2612               	.LBE384:
+ 2613               	.LM270:
+ 2614 0c82 0895      		ret
+ 2615               	.LFE59:
+ 2617               	.global	Timebase_DownCounter_Clear_All_Flags
+ 2619               	Timebase_DownCounter_Clear_All_Flags:
+ 2620               	.LFB60:
+ 2621               	.LM271:
+ 2622               	.LVL156:
+ 2623               	/* prologue: function */
+ 2624               	/* frame size = 0 */
+ 2625               	.LBB386:
+ 2626               	.LBB387:
+ 2627               	.LBB388:
+ 2628               	.LBB389:
+ 2629               	.LM272:
+ 2630 0c84 E091 0000 		lds r30,Timebase
+ 2631 0c88 F091 0000 		lds r31,(Timebase)+1
+ 2632 0c8c 90E0      		ldi r25,lo8(0)
+ 2633 0c8e 2DE0      		ldi r18,lo8(13)
+ 2634 0c90 30E0      		ldi r19,hi8(13)
+ 2635 0c92 AC01      		movw r20,r24
+ 2636               	.LVL157:
+ 2637 0c94 429F      		mul r20,r18
+ 2638 0c96 C001      		movw r24,r0
+ 2639 0c98 439F      		mul r20,r19
+ 2640 0c9a 900D      		add r25,r0
+ 2641 0c9c 529F      		mul r21,r18
+ 2642 0c9e 900D      		add r25,r0
+ 2643 0ca0 1124      		clr r1
+ 2644 0ca2 E80F      		add r30,r24
+ 2645 0ca4 F91F      		adc r31,r25
+ 2646 0ca6 16A2      		std Z+38,__zero_reg__
+ 2647 0ca8 17A2      		std Z+39,__zero_reg__
+ 2648 0caa 10A6      		std Z+40,__zero_reg__
+ 2649 0cac 11A6      		std Z+41,__zero_reg__
+ 2650               	.LBE389:
+ 2651               	.LBE388:
+ 2652               	.LBB390:
+ 2653               	.LBB391:
+ 2654               	.LM273:
+ 2655 0cae 12A6      		std Z+42,__zero_reg__
+ 2656 0cb0 13A6      		std Z+43,__zero_reg__
+ 2657 0cb2 14A6      		std Z+44,__zero_reg__
+ 2658 0cb4 15A6      		std Z+45,__zero_reg__
+ 2659               	.LBE391:
+ 2660               	.LBE390:
+ 2661               	.LBB392:
+ 2662               	.LBB393:
+ 2663               	.LM274:
+ 2664 0cb6 85A1      		ldd r24,Z+37
+ 2665               	.LBE393:
+ 2666               	.LBE392:
+ 2667               	.LBB394:
+ 2668               	.LBB395:
+ 2669               	.LM275:
+ 2670 0cb8 807E      		andi r24,lo8(-32)
+ 2671 0cba 85A3      		std Z+37,r24
+ 2672               	/* epilogue start */
+ 2673               	.LBE395:
+ 2674               	.LBE394:
+ 2675               	.LBE387:
+ 2676               	.LBE386:
+ 2677               	.LM276:
+ 2678 0cbc 0895      		ret
+ 2679               	.LFE60:
+ 2681               	.global	Timebase_DownCounter_Start
+ 2683               	Timebase_DownCounter_Start:
+ 2684               	.LFB61:
+ 2685               	.LM277:
+ 2686               	.LVL158:
+ 2687               	/* prologue: function */
+ 2688               	/* frame size = 0 */
+ 2689               	.LBB396:
+ 2690               	.LBB397:
+ 2691               	.LM278:
+ 2692 0cbe E091 0000 		lds r30,Timebase
+ 2693 0cc2 F091 0000 		lds r31,(Timebase)+1
+ 2694 0cc6 90E0      		ldi r25,lo8(0)
+ 2695               	.LBE397:
+ 2696               	.LBE396:
+ 2697               	.LM279:
+ 2698 0cc8 2DE0      		ldi r18,lo8(13)
+ 2699 0cca 30E0      		ldi r19,hi8(13)
+ 2700 0ccc AC01      		movw r20,r24
+ 2701               	.LVL159:
+ 2702 0cce 429F      		mul r20,r18
+ 2703 0cd0 C001      		movw r24,r0
+ 2704 0cd2 439F      		mul r20,r19
+ 2705 0cd4 900D      		add r25,r0
+ 2706 0cd6 529F      		mul r21,r18
+ 2707 0cd8 900D      		add r25,r0
+ 2708 0cda 1124      		clr r1
+ 2709 0cdc E80F      		add r30,r24
+ 2710 0cde F91F      		adc r31,r25
+ 2711 0ce0 95A1      		ldd r25,Z+37
+ 2712 0ce2 892F      		mov r24,r25
+ 2713 0ce4 8695      		lsr r24
+ 2714 0ce6 8F70      		andi r24,lo8(15)
+ 2715 0ce8 8130      		cpi r24,lo8(1)
+ 2716 0cea 01F0      		breq .L147
+ 2717               	.LBB398:
+ 2718               	.LBB399:
+ 2719               	.LM280:
+ 2720 0cec 917E      		andi r25,lo8(-31)
+ 2721 0cee 9260      		ori r25,lo8(2)
+ 2722 0cf0 95A3      		std Z+37,r25
+ 2723               	.L147:
+ 2724 0cf2 0895      		ret
+ 2725               	.LBE399:
+ 2726               	.LBE398:
+ 2727               	.LFE61:
+ 2729               	.global	Timebase_DownCounter_Stop
+ 2731               	Timebase_DownCounter_Stop:
+ 2732               	.LFB62:
+ 2733               	.LM281:
+ 2734               	.LVL160:
+ 2735               	/* prologue: function */
+ 2736               	/* frame size = 0 */
+ 2737               	.LBB400:
+ 2738               	.LBB401:
+ 2739               	.LM282:
+ 2740 0cf4 E091 0000 		lds r30,Timebase
+ 2741 0cf8 F091 0000 		lds r31,(Timebase)+1
+ 2742 0cfc 90E0      		ldi r25,lo8(0)
+ 2743               	.LBE401:
+ 2744               	.LBE400:
+ 2745               	.LM283:
+ 2746 0cfe 2DE0      		ldi r18,lo8(13)
+ 2747 0d00 30E0      		ldi r19,hi8(13)
+ 2748 0d02 AC01      		movw r20,r24
+ 2749               	.LVL161:
+ 2750 0d04 429F      		mul r20,r18
+ 2751 0d06 C001      		movw r24,r0
+ 2752 0d08 439F      		mul r20,r19
+ 2753 0d0a 900D      		add r25,r0
+ 2754 0d0c 529F      		mul r21,r18
+ 2755 0d0e 900D      		add r25,r0
+ 2756 0d10 1124      		clr r1
+ 2757 0d12 E80F      		add r30,r24
+ 2758 0d14 F91F      		adc r31,r25
+ 2759 0d16 95A1      		ldd r25,Z+37
+ 2760 0d18 892F      		mov r24,r25
+ 2761 0d1a 8695      		lsr r24
+ 2762 0d1c 8F70      		andi r24,lo8(15)
+ 2763 0d1e 8230      		cpi r24,lo8(2)
+ 2764 0d20 01F0      		breq .L150
+ 2765               	.LBB402:
+ 2766               	.LBB403:
+ 2767               	.LM284:
+ 2768 0d22 917E      		andi r25,lo8(-31)
+ 2769 0d24 9460      		ori r25,lo8(4)
+ 2770 0d26 95A3      		std Z+37,r25
+ 2771               	.L150:
+ 2772 0d28 0895      		ret
+ 2773               	.LBE403:
+ 2774               	.LBE402:
+ 2775               	.LFE62:
+ 2777               	.global	Timebase_DownCounter_Set_Securely
+ 2779               	Timebase_DownCounter_Set_Securely:
+ 2780               	.LFB63:
+ 2781               	.LM285:
+ 2782               	.LVL162:
+ 2783               	/* prologue: function */
+ 2784               	/* frame size = 0 */
+ 2785               	.LBB404:
+ 2786               	.LBB405:
+ 2787               	.LM286:
+ 2788 0d2a A091 0000 		lds r26,Timebase
+ 2789 0d2e B091 0000 		lds r27,(Timebase)+1
+ 2790 0d32 90E0      		ldi r25,lo8(0)
+ 2791               	.LBE405:
+ 2792               	.LBE404:
+ 2793               	.LM287:
+ 2794 0d34 2DE0      		ldi r18,lo8(13)
+ 2795 0d36 30E0      		ldi r19,hi8(13)
+ 2796 0d38 829F      		mul r24,r18
+ 2797 0d3a F001      		movw r30,r0
+ 2798 0d3c 839F      		mul r24,r19
+ 2799 0d3e F00D      		add r31,r0
+ 2800 0d40 929F      		mul r25,r18
+ 2801 0d42 F00D      		add r31,r0
+ 2802 0d44 1124      		clr r1
+ 2803               	.LVL163:
+ 2804 0d46 EA0F      		add r30,r26
+ 2805 0d48 FB1F      		adc r31,r27
+ 2806 0d4a 85A1      		ldd r24,Z+37
+ 2807 0d4c 8695      		lsr r24
+ 2808 0d4e 8F70      		andi r24,lo8(15)
+ 2809 0d50 01F4      		brne .L153
+ 2810               	.LBB406:
+ 2811               	.LBB407:
+ 2812               	.LM288:
+ 2813 0d52 42A7      		std Z+42,r20
+ 2814 0d54 53A7      		std Z+43,r21
+ 2815 0d56 64A7      		std Z+44,r22
+ 2816 0d58 75A7      		std Z+45,r23
+ 2817               	.LBE407:
+ 2818               	.LBE406:
+ 2819               	.LBB408:
+ 2820               	.LBB409:
+ 2821               	.LM289:
+ 2822 0d5a 1B96      		adiw r26,11
+ 2823 0d5c 8D91      		ld r24,X+
+ 2824 0d5e 9D91      		ld r25,X+
+ 2825 0d60 0D90      		ld __tmp_reg__,X+
+ 2826 0d62 BC91      		ld r27,X
+ 2827 0d64 A02D      		mov r26,__tmp_reg__
+ 2828               	.LBE409:
+ 2829               	.LBE408:
+ 2830               	.LBB410:
+ 2831               	.LBB411:
+ 2832               	.LM290:
+ 2833 0d66 840F      		add r24,r20
+ 2834 0d68 951F      		adc r25,r21
+ 2835 0d6a A61F      		adc r26,r22
+ 2836 0d6c B71F      		adc r27,r23
+ 2837 0d6e 86A3      		std Z+38,r24
+ 2838 0d70 97A3      		std Z+39,r25
+ 2839 0d72 A0A7      		std Z+40,r26
+ 2840 0d74 B1A7      		std Z+41,r27
+ 2841               	.LBE411:
+ 2842               	.LBE410:
+ 2843               	.LBB412:
+ 2844               	.LBB413:
+ 2845               	.LM291:
+ 2846 0d76 95A1      		ldd r25,Z+37
+ 2847 0d78 892F      		mov r24,r25
+ 2848 0d7a 8695      		lsr r24
+ 2849 0d7c 8F70      		andi r24,lo8(15)
+ 2850 0d7e 8130      		cpi r24,lo8(1)
+ 2851 0d80 01F0      		breq .L153
+ 2852               	.LBB414:
+ 2853               	.LBB415:
+ 2854               	.LM292:
+ 2855 0d82 917E      		andi r25,lo8(-31)
+ 2856 0d84 9260      		ori r25,lo8(2)
+ 2857 0d86 95A3      		std Z+37,r25
+ 2858               	.L153:
+ 2859 0d88 0895      		ret
+ 2860               	.LBE415:
+ 2861               	.LBE414:
+ 2862               	.LBE413:
+ 2863               	.LBE412:
+ 2864               	.LFE63:
+ 2866               	.global	Timebase_DownCounter_Set_Forcefully
+ 2868               	Timebase_DownCounter_Set_Forcefully:
+ 2869               	.LFB64:
+ 2870               	.LM293:
+ 2871               	.LVL164:
+ 2872 0d8a CF93      		push r28
+ 2873 0d8c DF93      		push r29
+ 2874               	/* prologue: function */
+ 2875               	/* frame size = 0 */
+ 2876               	.LBB416:
+ 2877               	.LBB417:
+ 2878               	.LBB418:
+ 2879               	.LBB419:
+ 2880               	.LM294:
+ 2881 0d8e E091 0000 		lds r30,Timebase
+ 2882 0d92 F091 0000 		lds r31,(Timebase)+1
+ 2883 0d96 A82F      		mov r26,r24
+ 2884 0d98 B0E0      		ldi r27,lo8(0)
+ 2885 0d9a 2DE0      		ldi r18,lo8(13)
+ 2886 0d9c 30E0      		ldi r19,hi8(13)
+ 2887 0d9e E901      		movw r28,r18
+ 2888 0da0 AC9F      		mul r26,r28
+ 2889 0da2 9001      		movw r18,r0
+ 2890 0da4 AD9F      		mul r26,r29
+ 2891 0da6 300D      		add r19,r0
+ 2892 0da8 BC9F      		mul r27,r28
+ 2893 0daa 300D      		add r19,r0
+ 2894 0dac 1124      		clr r1
+ 2895 0dae E20F      		add r30,r18
+ 2896 0db0 F31F      		adc r31,r19
+ 2897 0db2 16A2      		std Z+38,__zero_reg__
+ 2898 0db4 17A2      		std Z+39,__zero_reg__
+ 2899 0db6 10A6      		std Z+40,__zero_reg__
+ 2900 0db8 11A6      		std Z+41,__zero_reg__
+ 2901               	.LBE419:
+ 2902               	.LBE418:
+ 2903               	.LBB420:
+ 2904               	.LBB421:
+ 2905               	.LM295:
+ 2906 0dba 12A6      		std Z+42,__zero_reg__
+ 2907 0dbc 13A6      		std Z+43,__zero_reg__
+ 2908 0dbe 14A6      		std Z+44,__zero_reg__
+ 2909 0dc0 15A6      		std Z+45,__zero_reg__
+ 2910               	.LBE421:
+ 2911               	.LBE420:
+ 2912               	.LBB422:
+ 2913               	.LBB423:
+ 2914               	.LM296:
+ 2915 0dc2 95A1      		ldd r25,Z+37
+ 2916               	.LBE423:
+ 2917               	.LBE422:
+ 2918               	.LBB424:
+ 2919               	.LBB425:
+ 2920               	.LM297:
+ 2921 0dc4 907E      		andi r25,lo8(-32)
+ 2922 0dc6 95A3      		std Z+37,r25
+ 2923               	.LBE425:
+ 2924               	.LBE424:
+ 2925               	.LBE417:
+ 2926               	.LBE416:
+ 2927               	.LM298:
+ 2928 0dc8 0E94 0000 		call Timebase_DownCounter_Set_Securely
+ 2929               	.LVL165:
+ 2930               	/* epilogue start */
+ 2931               	.LM299:
+ 2932 0dcc DF91      		pop r29
+ 2933 0dce CF91      		pop r28
+ 2934 0dd0 0895      		ret
+ 2935               	.LFE64:
+ 2937               	.global	Timebase_DownCounter_Update
+ 2939               	Timebase_DownCounter_Update:
+ 2940               	.LFB65:
+ 2941               	.LM300:
+ 2942               	.LVL166:
+ 2943               	/* prologue: function */
+ 2944               	/* frame size = 0 */
+ 2945               	.LBB426:
+ 2946               	.LBB427:
+ 2947               	.LM301:
+ 2948 0dd2 A091 0000 		lds r26,Timebase
+ 2949 0dd6 B091 0000 		lds r27,(Timebase)+1
+ 2950 0dda 90E0      		ldi r25,lo8(0)
+ 2951 0ddc 2DE0      		ldi r18,lo8(13)
+ 2952 0dde 30E0      		ldi r19,hi8(13)
+ 2953 0de0 829F      		mul r24,r18
+ 2954 0de2 F001      		movw r30,r0
+ 2955 0de4 839F      		mul r24,r19
+ 2956 0de6 F00D      		add r31,r0
+ 2957 0de8 929F      		mul r25,r18
+ 2958 0dea F00D      		add r31,r0
+ 2959 0dec 1124      		clr r1
+ 2960               	.LVL167:
+ 2961 0dee EA0F      		add r30,r26
+ 2962 0df0 FB1F      		adc r31,r27
+ 2963 0df2 85A1      		ldd r24,Z+37
+ 2964 0df4 8695      		lsr r24
+ 2965 0df6 8F70      		andi r24,lo8(15)
+ 2966               	.LBE427:
+ 2967               	.LBE426:
+ 2968               	.LM302:
+ 2969 0df8 8130      		cpi r24,lo8(1)
+ 2970 0dfa 01F4      		brne .L157
+ 2971               	.LBB428:
+ 2972               	.LBB429:
+ 2973               	.LM303:
+ 2974 0dfc 1B96      		adiw r26,11
+ 2975 0dfe 2D91      		ld r18,X+
+ 2976 0e00 3D91      		ld r19,X+
+ 2977 0e02 4D91      		ld r20,X+
+ 2978 0e04 5C91      		ld r21,X
+ 2979 0e06 1E97      		sbiw r26,11+3
+ 2980               	.LBE429:
+ 2981               	.LBE428:
+ 2982               	.LBB430:
+ 2983               	.LBB431:
+ 2984               	.LM304:
+ 2985 0e08 86A1      		ldd r24,Z+38
+ 2986 0e0a 97A1      		ldd r25,Z+39
+ 2987 0e0c A0A5      		ldd r26,Z+40
+ 2988 0e0e B1A5      		ldd r27,Z+41
+ 2989 0e10 821B      		sub r24,r18
+ 2990 0e12 930B      		sbc r25,r19
+ 2991 0e14 A40B      		sbc r26,r20
+ 2992 0e16 B50B      		sbc r27,r21
+ 2993 0e18 82A7      		std Z+42,r24
+ 2994 0e1a 93A7      		std Z+43,r25
+ 2995 0e1c A4A7      		std Z+44,r26
+ 2996 0e1e B5A7      		std Z+45,r27
+ 2997               	.LBE431:
+ 2998               	.LBE430:
+ 2999               	.LM305:
+ 3000 0e20 0097      		sbiw r24,0
+ 3001 0e22 A105      		cpc r26,__zero_reg__
+ 3002 0e24 B105      		cpc r27,__zero_reg__
+ 3003 0e26 01F4      		brne .L159
+ 3004               	.LBB432:
+ 3005               	.LBB433:
+ 3006               	.LBB434:
+ 3007               	.LBB435:
+ 3008               	.LM306:
+ 3009 0e28 16A2      		std Z+38,__zero_reg__
+ 3010 0e2a 17A2      		std Z+39,__zero_reg__
+ 3011 0e2c 10A6      		std Z+40,__zero_reg__
+ 3012 0e2e 11A6      		std Z+41,__zero_reg__
+ 3013               	.LBE435:
+ 3014               	.LBE434:
+ 3015               	.LBB436:
+ 3016               	.LBB437:
+ 3017               	.LM307:
+ 3018 0e30 12A6      		std Z+42,__zero_reg__
+ 3019 0e32 13A6      		std Z+43,__zero_reg__
+ 3020 0e34 14A6      		std Z+44,__zero_reg__
+ 3021 0e36 15A6      		std Z+45,__zero_reg__
+ 3022               	.LBE437:
+ 3023               	.LBE436:
+ 3024               	.LBB438:
+ 3025               	.LBB439:
+ 3026               	.LM308:
+ 3027 0e38 85A1      		ldd r24,Z+37
+ 3028               	.LBE439:
+ 3029               	.LBE438:
+ 3030               	.LBE433:
+ 3031               	.LBE432:
+ 3032               	.LBB440:
+ 3033               	.LBB441:
+ 3034               	.LM309:
+ 3035 0e3a 807E      		andi r24,lo8(-32)
+ 3036 0e3c 8860      		ori r24,lo8(8)
+ 3037 0e3e 85A3      		std Z+37,r24
+ 3038 0e40 0895      		ret
+ 3039               	.L157:
+ 3040               	.LBE441:
+ 3041               	.LBE440:
+ 3042               	.LM310:
+ 3043 0e42 8230      		cpi r24,lo8(2)
+ 3044 0e44 01F4      		brne .L159
+ 3045               	.LBB442:
+ 3046               	.LBB443:
+ 3047               	.LM311:
+ 3048 0e46 1B96      		adiw r26,11
+ 3049 0e48 2D91      		ld r18,X+
+ 3050 0e4a 3D91      		ld r19,X+
+ 3051 0e4c 4D91      		ld r20,X+
+ 3052 0e4e 5C91      		ld r21,X
+ 3053 0e50 1E97      		sbiw r26,11+3
+ 3054               	.LBE443:
+ 3055               	.LBE442:
+ 3056               	.LBB444:
+ 3057               	.LBB445:
+ 3058               	.LM312:
+ 3059 0e52 82A5      		ldd r24,Z+42
+ 3060 0e54 93A5      		ldd r25,Z+43
+ 3061 0e56 A4A5      		ldd r26,Z+44
+ 3062 0e58 B5A5      		ldd r27,Z+45
+ 3063 0e5a 820F      		add r24,r18
+ 3064 0e5c 931F      		adc r25,r19
+ 3065 0e5e A41F      		adc r26,r20
+ 3066 0e60 B51F      		adc r27,r21
+ 3067 0e62 86A3      		std Z+38,r24
+ 3068 0e64 97A3      		std Z+39,r25
+ 3069 0e66 A0A7      		std Z+40,r26
+ 3070 0e68 B1A7      		std Z+41,r27
+ 3071               	.L159:
+ 3072 0e6a 0895      		ret
+ 3073               	.LBE445:
+ 3074               	.LBE444:
+ 3075               	.LFE65:
+ 3077               	.global	Timebase_DownCounter_Expired
+ 3079               	Timebase_DownCounter_Expired:
+ 3080               	.LFB66:
+ 3081               	.LM313:
+ 3082               	.LVL168:
+ 3083               	/* prologue: function */
+ 3084               	/* frame size = 0 */
+ 3085               	.LM314:
+ 3086 0e6c 40E0      		ldi r20,lo8(0)
+ 3087 0e6e E091 0000 		lds r30,Timebase
+ 3088 0e72 F091 0000 		lds r31,(Timebase)+1
+ 3089 0e76 90E0      		ldi r25,lo8(0)
+ 3090               	.LVL169:
+ 3091 0e78 2DE0      		ldi r18,lo8(13)
+ 3092 0e7a 30E0      		ldi r19,hi8(13)
+ 3093 0e7c BC01      		movw r22,r24
+ 3094 0e7e 629F      		mul r22,r18
+ 3095 0e80 C001      		movw r24,r0
+ 3096 0e82 639F      		mul r22,r19
+ 3097 0e84 900D      		add r25,r0
+ 3098 0e86 729F      		mul r23,r18
+ 3099 0e88 900D      		add r25,r0
+ 3100 0e8a 1124      		clr r1
+ 3101               	.LVL170:
+ 3102 0e8c E80F      		add r30,r24
+ 3103 0e8e F91F      		adc r31,r25
+ 3104 0e90 85A1      		ldd r24,Z+37
+ 3105 0e92 8695      		lsr r24
+ 3106 0e94 8F70      		andi r24,lo8(15)
+ 3107 0e96 8430      		cpi r24,lo8(4)
+ 3108 0e98 01F4      		brne .L161
+ 3109 0e9a 41E0      		ldi r20,lo8(1)
+ 3110               	.L161:
+ 3111               	.LM315:
+ 3112 0e9c 842F      		mov r24,r20
+ 3113               	/* epilogue start */
+ 3114 0e9e 0895      		ret
+ 3115               	.LFE66:
+ 3117               	.global	Timebase_DownCounter_Expired_Event
+ 3119               	Timebase_DownCounter_Expired_Event:
+ 3120               	.LFB67:
+ 3121               	.LM316:
+ 3122               	.LVL171:
+ 3123               	/* prologue: function */
+ 3124               	/* frame size = 0 */
+ 3125               	.LBB446:
+ 3126               	.LBB447:
+ 3127               	.LM317:
+ 3128 0ea0 E091 0000 		lds r30,Timebase
+ 3129 0ea4 F091 0000 		lds r31,(Timebase)+1
+ 3130 0ea8 90E0      		ldi r25,lo8(0)
+ 3131               	.LBE447:
+ 3132               	.LBE446:
+ 3133               	.LM318:
+ 3134 0eaa 2DE0      		ldi r18,lo8(13)
+ 3135 0eac 30E0      		ldi r19,hi8(13)
+ 3136 0eae AC01      		movw r20,r24
+ 3137               	.LVL172:
+ 3138 0eb0 429F      		mul r20,r18
+ 3139 0eb2 C001      		movw r24,r0
+ 3140 0eb4 439F      		mul r20,r19
+ 3141 0eb6 900D      		add r25,r0
+ 3142 0eb8 529F      		mul r21,r18
+ 3143 0eba 900D      		add r25,r0
+ 3144 0ebc 1124      		clr r1
+ 3145 0ebe E80F      		add r30,r24
+ 3146 0ec0 F91F      		adc r31,r25
+ 3147 0ec2 85A1      		ldd r24,Z+37
+ 3148 0ec4 8695      		lsr r24
+ 3149 0ec6 8F70      		andi r24,lo8(15)
+ 3150 0ec8 8430      		cpi r24,lo8(4)
+ 3151 0eca 01F0      		breq .L164
+ 3152 0ecc 80E0      		ldi r24,lo8(0)
+ 3153 0ece 0895      		ret
+ 3154               	.L164:
+ 3155               	.LBB448:
+ 3156               	.LBB449:
+ 3157               	.LBB450:
+ 3158               	.LBB451:
+ 3159               	.LBB452:
+ 3160               	.LBB453:
+ 3161               	.LM319:
+ 3162 0ed0 16A2      		std Z+38,__zero_reg__
+ 3163 0ed2 17A2      		std Z+39,__zero_reg__
+ 3164 0ed4 10A6      		std Z+40,__zero_reg__
+ 3165 0ed6 11A6      		std Z+41,__zero_reg__
+ 3166               	.LBE453:
+ 3167               	.LBE452:
+ 3168               	.LBB454:
+ 3169               	.LBB455:
+ 3170               	.LM320:
+ 3171 0ed8 12A6      		std Z+42,__zero_reg__
+ 3172 0eda 13A6      		std Z+43,__zero_reg__
+ 3173 0edc 14A6      		std Z+44,__zero_reg__
+ 3174 0ede 15A6      		std Z+45,__zero_reg__
+ 3175               	.LBE455:
+ 3176               	.LBE454:
+ 3177               	.LBB456:
+ 3178               	.LBB457:
+ 3179               	.LM321:
+ 3180 0ee0 85A1      		ldd r24,Z+37
+ 3181               	.LBE457:
+ 3182               	.LBE456:
+ 3183               	.LBB458:
+ 3184               	.LBB459:
+ 3185               	.LM322:
+ 3186 0ee2 807E      		andi r24,lo8(-32)
+ 3187 0ee4 85A3      		std Z+37,r24
+ 3188 0ee6 81E0      		ldi r24,lo8(1)
+ 3189               	.LBE459:
+ 3190               	.LBE458:
+ 3191               	.LBE451:
+ 3192               	.LBE450:
+ 3193               	.LBE449:
+ 3194               	.LBE448:
+ 3195               	.LM323:
+ 3196 0ee8 0895      		ret
+ 3197               	.LFE67:
+ 3199               	.global	Timebase_DownCounter_Set_Period_Value_Securely
+ 3201               	Timebase_DownCounter_Set_Period_Value_Securely:
+ 3202               	.LFB68:
+ 3203               	.LM324:
+ 3204               	.LVL173:
+ 3205               	/* prologue: function */
+ 3206               	/* frame size = 0 */
+ 3207               	.LBB460:
+ 3208               	.LBB461:
+ 3209               	.LM325:
+ 3210 0eea E091 0000 		lds r30,Timebase
+ 3211 0eee F091 0000 		lds r31,(Timebase)+1
+ 3212 0ef2 90E0      		ldi r25,lo8(0)
+ 3213               	.LBE461:
+ 3214               	.LBE460:
+ 3215               	.LM326:
+ 3216 0ef4 2DE0      		ldi r18,lo8(13)
+ 3217 0ef6 30E0      		ldi r19,hi8(13)
+ 3218 0ef8 DC01      		movw r26,r24
+ 3219               	.LVL174:
+ 3220 0efa A29F      		mul r26,r18
+ 3221 0efc C001      		movw r24,r0
+ 3222 0efe A39F      		mul r26,r19
+ 3223 0f00 900D      		add r25,r0
+ 3224 0f02 B29F      		mul r27,r18
+ 3225 0f04 900D      		add r25,r0
+ 3226 0f06 1124      		clr r1
+ 3227 0f08 E80F      		add r30,r24
+ 3228 0f0a F91F      		adc r31,r25
+ 3229 0f0c 85A1      		ldd r24,Z+37
+ 3230 0f0e 80FD      		sbrc r24,0
+ 3231 0f10 00C0      		rjmp .L169
+ 3232               	.LBB462:
+ 3233               	.LBB463:
+ 3234               	.LM327:
+ 3235 0f12 82A5      		ldd r24,Z+42
+ 3236 0f14 93A5      		ldd r25,Z+43
+ 3237 0f16 A4A5      		ldd r26,Z+44
+ 3238 0f18 B5A5      		ldd r27,Z+45
+ 3239 0f1a 841B      		sub r24,r20
+ 3240 0f1c 950B      		sbc r25,r21
+ 3241 0f1e A60B      		sbc r26,r22
+ 3242 0f20 B70B      		sbc r27,r23
+ 3243 0f22 86A7      		std Z+46,r24
+ 3244 0f24 97A7      		std Z+47,r25
+ 3245 0f26 A0AB      		std Z+48,r26
+ 3246 0f28 B1AB      		std Z+49,r27
+ 3247               	.LBE463:
+ 3248               	.LBE462:
+ 3249               	.LBB464:
+ 3250               	.LBB465:
+ 3251               	.LM328:
+ 3252 0f2a 85A1      		ldd r24,Z+37
+ 3253 0f2c 8160      		ori r24,lo8(1)
+ 3254 0f2e 85A3      		std Z+37,r24
+ 3255               	.L169:
+ 3256 0f30 0895      		ret
+ 3257               	.LBE465:
+ 3258               	.LBE464:
+ 3259               	.LFE68:
+ 3261               	.global	Timebase_DownCounter_Get_Remaining_Period_Value
+ 3263               	Timebase_DownCounter_Get_Remaining_Period_Value:
+ 3264               	.LFB69:
+ 3265               	.LM329:
+ 3266               	.LVL175:
+ 3267               	/* prologue: function */
+ 3268               	/* frame size = 0 */
+ 3269               	.LBB466:
+ 3270               	.LBB467:
+ 3271               	.LM330:
+ 3272 0f32 E091 0000 		lds r30,Timebase
+ 3273 0f36 F091 0000 		lds r31,(Timebase)+1
+ 3274 0f3a 90E0      		ldi r25,lo8(0)
+ 3275               	.LBE467:
+ 3276               	.LBE466:
+ 3277               	.LM331:
+ 3278 0f3c 2DE0      		ldi r18,lo8(13)
+ 3279 0f3e 30E0      		ldi r19,hi8(13)
+ 3280 0f40 AC01      		movw r20,r24
+ 3281               	.LVL176:
+ 3282 0f42 429F      		mul r20,r18
+ 3283 0f44 C001      		movw r24,r0
+ 3284 0f46 439F      		mul r20,r19
+ 3285 0f48 900D      		add r25,r0
+ 3286 0f4a 529F      		mul r21,r18
+ 3287 0f4c 900D      		add r25,r0
+ 3288 0f4e 1124      		clr r1
+ 3289 0f50 E80F      		add r30,r24
+ 3290 0f52 F91F      		adc r31,r25
+ 3291 0f54 22A5      		ldd r18,Z+42
+ 3292 0f56 33A5      		ldd r19,Z+43
+ 3293 0f58 44A5      		ldd r20,Z+44
+ 3294 0f5a 55A5      		ldd r21,Z+45
+ 3295               	.LVL177:
+ 3296 0f5c 86A5      		ldd r24,Z+46
+ 3297 0f5e 97A5      		ldd r25,Z+47
+ 3298 0f60 A0A9      		ldd r26,Z+48
+ 3299 0f62 B1A9      		ldd r27,Z+49
+ 3300 0f64 281B      		sub r18,r24
+ 3301 0f66 390B      		sbc r19,r25
+ 3302 0f68 4A0B      		sbc r20,r26
+ 3303 0f6a 5B0B      		sbc r21,r27
+ 3304 0f6c 57FF      		sbrs r21,7
+ 3305 0f6e 00C0      		rjmp .L171
+ 3306 0f70 20E0      		ldi r18,lo8(0)
+ 3307 0f72 30E0      		ldi r19,hi8(0)
+ 3308 0f74 40E0      		ldi r20,hlo8(0)
+ 3309 0f76 50E0      		ldi r21,hhi8(0)
+ 3310               	.L171:
+ 3311               	.LM332:
+ 3312 0f78 B901      		movw r22,r18
+ 3313               	.LVL178:
+ 3314 0f7a CA01      		movw r24,r20
+ 3315               	/* epilogue start */
+ 3316 0f7c 0895      		ret
+ 3317               	.LFE69:
+ 3319               	.global	Timebase_DownCounter_Period_Value_Expired
+ 3321               	Timebase_DownCounter_Period_Value_Expired:
+ 3322               	.LFB70:
+ 3323               	.LM333:
+ 3324               	.LVL179:
+ 3325 0f7e CF93      		push r28
+ 3326 0f80 DF93      		push r29
+ 3327               	/* prologue: function */
+ 3328               	/* frame size = 0 */
+ 3329               	.LBB468:
+ 3330               	.LBB469:
+ 3331               	.LBB470:
+ 3332               	.LBB471:
+ 3333               	.LM334:
+ 3334 0f82 C091 0000 		lds r28,Timebase
+ 3335 0f86 D091 0000 		lds r29,(Timebase)+1
+ 3336 0f8a 682F      		mov r22,r24
+ 3337 0f8c 70E0      		ldi r23,lo8(0)
+ 3338               	.LBE471:
+ 3339               	.LBE470:
+ 3340               	.LM335:
+ 3341 0f8e 8DE0      		ldi r24,lo8(13)
+ 3342 0f90 90E0      		ldi r25,hi8(13)
+ 3343               	.LVL180:
+ 3344 0f92 689F      		mul r22,r24
+ 3345 0f94 F001      		movw r30,r0
+ 3346 0f96 699F      		mul r22,r25
+ 3347 0f98 F00D      		add r31,r0
+ 3348 0f9a 789F      		mul r23,r24
+ 3349 0f9c F00D      		add r31,r0
+ 3350 0f9e 1124      		clr r1
+ 3351 0fa0 EC0F      		add r30,r28
+ 3352 0fa2 FD1F      		adc r31,r29
+ 3353 0fa4 22A5      		ldd r18,Z+42
+ 3354 0fa6 33A5      		ldd r19,Z+43
+ 3355 0fa8 44A5      		ldd r20,Z+44
+ 3356 0faa 55A5      		ldd r21,Z+45
+ 3357               	.LVL181:
+ 3358 0fac 86A5      		ldd r24,Z+46
+ 3359 0fae 97A5      		ldd r25,Z+47
+ 3360 0fb0 A0A9      		ldd r26,Z+48
+ 3361 0fb2 B1A9      		ldd r27,Z+49
+ 3362 0fb4 281B      		sub r18,r24
+ 3363 0fb6 390B      		sbc r19,r25
+ 3364 0fb8 4A0B      		sbc r20,r26
+ 3365 0fba 5B0B      		sbc r21,r27
+ 3366               	.LM336:
+ 3367 0fbc 57FD      		sbrc r21,7
+ 3368 0fbe 00C0      		rjmp .L174
+ 3369               	.LBE469:
+ 3370               	.LBE468:
+ 3371               	.LM337:
+ 3372 0fc0 2115      		cp r18,__zero_reg__
+ 3373 0fc2 3105      		cpc r19,__zero_reg__
+ 3374 0fc4 4105      		cpc r20,__zero_reg__
+ 3375 0fc6 5105      		cpc r21,__zero_reg__
+ 3376 0fc8 01F0      		breq .L174
+ 3377 0fca 20E0      		ldi r18,lo8(0)
+ 3378               	.LVL182:
+ 3379 0fcc 00C0      		rjmp .L175
+ 3380               	.LVL183:
+ 3381               	.L174:
+ 3382 0fce 20E0      		ldi r18,lo8(0)
+ 3383               	.LVL184:
+ 3384 0fd0 8DE0      		ldi r24,lo8(13)
+ 3385 0fd2 90E0      		ldi r25,hi8(13)
+ 3386 0fd4 AC01      		movw r20,r24
+ 3387 0fd6 649F      		mul r22,r20
+ 3388 0fd8 C001      		movw r24,r0
+ 3389 0fda 659F      		mul r22,r21
+ 3390 0fdc 900D      		add r25,r0
+ 3391 0fde 749F      		mul r23,r20
+ 3392 0fe0 900D      		add r25,r0
+ 3393 0fe2 1124      		clr r1
+ 3394 0fe4 C80F      		add r28,r24
+ 3395 0fe6 D91F      		adc r29,r25
+ 3396 0fe8 8DA1      		ldd r24,Y+37
+ 3397 0fea 80FF      		sbrs r24,0
+ 3398 0fec 21E0      		ldi r18,lo8(1)
+ 3399               	.L176:
+ 3400 0fee 81E0      		ldi r24,lo8(1)
+ 3401 0ff0 2827      		eor r18,r24
+ 3402               	.L175:
+ 3403               	.LM338:
+ 3404 0ff2 822F      		mov r24,r18
+ 3405               	/* epilogue start */
+ 3406 0ff4 DF91      		pop r29
+ 3407 0ff6 CF91      		pop r28
+ 3408 0ff8 0895      		ret
+ 3409               	.LFE70:
+ 3411               	.global	Timebase_DownCounter_Period_Value_Expired_Event
+ 3413               	Timebase_DownCounter_Period_Value_Expired_Event:
+ 3414               	.LFB71:
+ 3415               	.LM339:
+ 3416               	.LVL185:
+ 3417 0ffa 1F93      		push r17
+ 3418               	/* prologue: function */
+ 3419               	/* frame size = 0 */
+ 3420 0ffc 182F      		mov r17,r24
+ 3421               	.LM340:
+ 3422 0ffe 0E94 0000 		call Timebase_DownCounter_Period_Value_Expired
+ 3423               	.LVL186:
+ 3424 1002 8130      		cpi r24,lo8(1)
+ 3425 1004 01F0      		breq .L179
+ 3426 1006 80E0      		ldi r24,lo8(0)
+ 3427 1008 00C0      		rjmp .L180
+ 3428               	.L179:
+ 3429               	.LBB472:
+ 3430               	.LBB473:
+ 3431               	.LM341:
+ 3432 100a E091 0000 		lds r30,Timebase
+ 3433 100e F091 0000 		lds r31,(Timebase)+1
+ 3434 1012 212F      		mov r18,r17
+ 3435 1014 30E0      		ldi r19,lo8(0)
+ 3436               	.LVL187:
+ 3437 1016 8DE0      		ldi r24,lo8(13)
+ 3438 1018 90E0      		ldi r25,hi8(13)
+ 3439 101a AC01      		movw r20,r24
+ 3440 101c 249F      		mul r18,r20
+ 3441 101e C001      		movw r24,r0
+ 3442 1020 259F      		mul r18,r21
+ 3443 1022 900D      		add r25,r0
+ 3444 1024 349F      		mul r19,r20
+ 3445 1026 900D      		add r25,r0
+ 3446 1028 1124      		clr r1
+ 3447 102a E80F      		add r30,r24
+ 3448 102c F91F      		adc r31,r25
+ 3449 102e 85A1      		ldd r24,Z+37
+ 3450 1030 8E7F      		andi r24,lo8(-2)
+ 3451 1032 85A3      		std Z+37,r24
+ 3452 1034 81E0      		ldi r24,lo8(1)
+ 3453               	.L180:
+ 3454               	/* epilogue start */
+ 3455               	.LBE473:
+ 3456               	.LBE472:
+ 3457               	.LM342:
+ 3458 1036 1F91      		pop r17
+ 3459               	.LVL188:
+ 3460 1038 0895      		ret
+ 3461               	.LFE71:
+ 3463               	.global	Timebase_DownCounter_Update_All
+ 3465               	Timebase_DownCounter_Update_All:
+ 3466               	.LFB72:
+ 3467               	.LM343:
+ 3468               	/* prologue: function */
+ 3469               	/* frame size = 0 */
+ 3470               	.LBB474:
+ 3471               	.LM344:
+ 3472 103a 80E0      		ldi r24,lo8(0)
+ 3473 103c 0E94 0000 		call Timebase_DownCounter_Update
+ 3474 1040 81E0      		ldi r24,lo8(1)
+ 3475 1042 0E94 0000 		call Timebase_DownCounter_Update
+ 3476               	/* epilogue start */
+ 3477               	.LBE474:
+ 3478               	.LM345:
+ 3479 1046 0895      		ret
+ 3480               	.LFE72:
+ 3482               	.global	Timebase_DownCounter_Reset_All
+ 3484               	Timebase_DownCounter_Reset_All:
+ 3485               	.LFB73:
+ 3486               	.LM346:
+ 3487               	/* prologue: function */
+ 3488               	/* frame size = 0 */
+ 3489               	.LBB475:
+ 3490               	.LBB476:
+ 3491               	.LBB477:
+ 3492               	.LBB478:
+ 3493               	.LBB479:
+ 3494               	.LM347:
+ 3495 1048 E091 0000 		lds r30,Timebase
+ 3496 104c F091 0000 		lds r31,(Timebase)+1
+ 3497 1050 16A2      		std Z+38,__zero_reg__
+ 3498 1052 17A2      		std Z+39,__zero_reg__
+ 3499 1054 10A6      		std Z+40,__zero_reg__
+ 3500 1056 11A6      		std Z+41,__zero_reg__
+ 3501               	.LBE479:
+ 3502               	.LBE478:
+ 3503               	.LBB481:
+ 3504               	.LBB482:
+ 3505               	.LM348:
+ 3506 1058 12A6      		std Z+42,__zero_reg__
+ 3507 105a 13A6      		std Z+43,__zero_reg__
+ 3508 105c 14A6      		std Z+44,__zero_reg__
+ 3509 105e 15A6      		std Z+45,__zero_reg__
+ 3510               	.LBE482:
+ 3511               	.LBE481:
+ 3512               	.LBB484:
+ 3513               	.LBB485:
+ 3514               	.LM349:
+ 3515 1060 85A1      		ldd r24,Z+37
+ 3516               	.LBE485:
+ 3517               	.LBE484:
+ 3518               	.LBB487:
+ 3519               	.LBB488:
+ 3520               	.LM350:
+ 3521 1062 807E      		andi r24,lo8(-32)
+ 3522 1064 85A3      		std Z+37,r24
+ 3523               	.LBE488:
+ 3524               	.LBE487:
+ 3525               	.LBB490:
+ 3526               	.LBB480:
+ 3527               	.LM351:
+ 3528 1066 13AA      		std Z+51,__zero_reg__
+ 3529 1068 14AA      		std Z+52,__zero_reg__
+ 3530 106a 15AA      		std Z+53,__zero_reg__
+ 3531 106c 16AA      		std Z+54,__zero_reg__
+ 3532               	.LBE480:
+ 3533               	.LBE490:
+ 3534               	.LBB491:
+ 3535               	.LBB483:
+ 3536               	.LM352:
+ 3537 106e 17AA      		std Z+55,__zero_reg__
+ 3538 1070 10AE      		std Z+56,__zero_reg__
+ 3539 1072 11AE      		std Z+57,__zero_reg__
+ 3540 1074 12AE      		std Z+58,__zero_reg__
+ 3541               	.LBE483:
+ 3542               	.LBE491:
+ 3543               	.LBB492:
+ 3544               	.LBB486:
+ 3545               	.LM353:
+ 3546 1076 82A9      		ldd r24,Z+50
+ 3547               	.LBE486:
+ 3548               	.LBE492:
+ 3549               	.LBB493:
+ 3550               	.LBB489:
+ 3551               	.LM354:
+ 3552 1078 807E      		andi r24,lo8(-32)
+ 3553 107a 82AB      		std Z+50,r24
+ 3554               	/* epilogue start */
+ 3555               	.LBE489:
+ 3556               	.LBE493:
+ 3557               	.LBE477:
+ 3558               	.LBE476:
+ 3559               	.LBE475:
+ 3560               	.LM355:
+ 3561 107c 0895      		ret
+ 3562               	.LFE73:
+ 3564               	.global	Timebase_Reset
+ 3566               	Timebase_Reset:
+ 3567               	.LFB74:
+ 3568               	.LM356:
+ 3569               	/* prologue: function */
+ 3570               	/* frame size = 0 */
+ 3571               	.LM357:
+ 3572 107e 0E94 0000 		call Timebase_UpCounter_Reset_All
+ 3573               	.LM358:
+ 3574 1082 0E94 0000 		call Timebase_DownCounter_Reset_All
+ 3575               	/* epilogue start */
+ 3576               	.LM359:
+ 3577 1086 0895      		ret
+ 3578               	.LFE74:
+ 3580               	.global	Timebase_Init
+ 3582               	Timebase_Init:
+ 3583               	.LFB75:
+ 3584               	.LM360:
+ 3585               	.LVL189:
+ 3586 1088 0F93      		push r16
+ 3587 108a 1F93      		push r17
+ 3588               	/* prologue: function */
+ 3589               	/* frame size = 0 */
+ 3590 108c 8C01      		movw r16,r24
+ 3591               	.LM361:
+ 3592 108e 0E94 0000 		call Timebase_Struct_Init
+ 3593               	.LVL190:
+ 3594               	.LM362:
+ 3595 1092 C801      		movw r24,r16
+ 3596 1094 0E94 0000 		call Timebase_Timer_Config
+ 3597               	.LM363:
+ 3598 1098 0E94 0000 		call Timebase_Reset
+ 3599               	/* epilogue start */
+ 3600               	.LM364:
+ 3601 109c 1F91      		pop r17
+ 3602 109e 0F91      		pop r16
+ 3603               	.LVL191:
+ 3604 10a0 0895      		ret
+ 3605               	.LFE75:
+ 3607               	.global	Timebase_Main_Loop_Executables
+ 3609               	Timebase_Main_Loop_Executables:
+ 3610               	.LFB76:
+ 3611               	.LM365:
+ 3612               	/* prologue: function */
+ 3613               	/* frame size = 0 */
+ 3614               	.LM366:
+ 3615 10a2 0E94 0000 		call Timebase_UpCounter_Update_All
+ 3616               	.LM367:
+ 3617 10a6 0E94 0000 		call Timebase_DownCounter_Update_All
+ 3618               	/* epilogue start */
+ 3619               	.LM368:
+ 3620 10aa 0895      		ret
+ 3621               	.LFE76:
+ 3623               	.global	Timebase_ISR_Executables
+ 3625               	Timebase_ISR_Executables:
+ 3626               	.LFB77:
+ 3627               	.LM369:
+ 3628 10ac CF93      		push r28
+ 3629 10ae DF93      		push r29
+ 3630               	/* prologue: function */
+ 3631               	/* frame size = 0 */
+ 3632               	.LM370:
+ 3633 10b0 C091 0000 		lds r28,Timebase
+ 3634 10b4 D091 0000 		lds r29,(Timebase)+1
+ 3635 10b8 8F81      		ldd r24,Y+7
+ 3636 10ba 9885      		ldd r25,Y+8
+ 3637 10bc A985      		ldd r26,Y+9
+ 3638 10be BA85      		ldd r27,Y+10
+ 3639 10c0 0196      		adiw r24,1
+ 3640 10c2 A11D      		adc r26,__zero_reg__
+ 3641 10c4 B11D      		adc r27,__zero_reg__
+ 3642 10c6 8F83      		std Y+7,r24
+ 3643 10c8 9887      		std Y+8,r25
+ 3644 10ca A987      		std Y+9,r26
+ 3645 10cc BA87      		std Y+10,r27
+ 3646               	.LM371:
+ 3647 10ce 6F81      		ldd r22,Y+7
+ 3648 10d0 7885      		ldd r23,Y+8
+ 3649 10d2 8985      		ldd r24,Y+9
+ 3650 10d4 9A85      		ldd r25,Y+10
+ 3651 10d6 2981      		ldd r18,Y+1
+ 3652 10d8 3A81      		ldd r19,Y+2
+ 3653 10da 40E0      		ldi r20,lo8(0)
+ 3654 10dc 50E0      		ldi r21,hi8(0)
+ 3655 10de 0E94 0000 		call __udivmodsi4
+ 3656 10e2 6115      		cp r22,__zero_reg__
+ 3657 10e4 7105      		cpc r23,__zero_reg__
+ 3658 10e6 8105      		cpc r24,__zero_reg__
+ 3659 10e8 9105      		cpc r25,__zero_reg__
+ 3660 10ea 01F4      		brne .L194
+ 3661               	.LM372:
+ 3662 10ec 8B85      		ldd r24,Y+11
+ 3663 10ee 9C85      		ldd r25,Y+12
+ 3664 10f0 AD85      		ldd r26,Y+13
+ 3665 10f2 BE85      		ldd r27,Y+14
+ 3666 10f4 0196      		adiw r24,1
+ 3667 10f6 A11D      		adc r26,__zero_reg__
+ 3668 10f8 B11D      		adc r27,__zero_reg__
+ 3669 10fa 8B87      		std Y+11,r24
+ 3670 10fc 9C87      		std Y+12,r25
+ 3671 10fe AD87      		std Y+13,r26
+ 3672 1100 BE87      		std Y+14,r27
+ 3673               	.LBB494:
+ 3674               	.LBB495:
+ 3675               	.LM373:
+ 3676 1102 8F85      		ldd r24,Y+15
+ 3677               	.LBE495:
+ 3678               	.LBE494:
+ 3679               	.LM374:
+ 3680 1104 8823      		tst r24
+ 3681 1106 01F4      		brne .L194
+ 3682               	.LM375:
+ 3683 1108 1F82      		std Y+7,__zero_reg__
+ 3684 110a 1886      		std Y+8,__zero_reg__
+ 3685 110c 1986      		std Y+9,__zero_reg__
+ 3686 110e 1A86      		std Y+10,__zero_reg__
+ 3687               	.L194:
+ 3688               	/* epilogue start */
+ 3689               	.LM376:
+ 3690 1110 DF91      		pop r29
+ 3691 1112 CF91      		pop r28
+ 3692 1114 0895      		ret
+ 3693               	.LFE77:
+ 3695               	.global	__vector_14
+ 3697               	__vector_14:
+ 3698               	.LFB78:
+ 3699               	.LM377:
+ 3700 1116 1F92      		push __zero_reg__
+ 3701 1118 0F92      		push r0
+ 3702 111a 0FB6      		in r0,__SREG__
+ 3703 111c 0F92      		push r0
+ 3704 111e 1124      		clr __zero_reg__
+ 3705 1120 2F93      		push r18
+ 3706 1122 3F93      		push r19
+ 3707 1124 4F93      		push r20
+ 3708 1126 5F93      		push r21
+ 3709 1128 6F93      		push r22
+ 3710 112a 7F93      		push r23
+ 3711 112c 8F93      		push r24
+ 3712 112e 9F93      		push r25
+ 3713 1130 AF93      		push r26
+ 3714 1132 BF93      		push r27
+ 3715 1134 EF93      		push r30
+ 3716 1136 FF93      		push r31
+ 3717               	/* prologue: Signal */
+ 3718               	/* frame size = 0 */
+ 3719               	.LM378:
+ 3720 1138 0E94 0000 		call Timebase_ISR_Executables
+ 3721               	/* epilogue start */
+ 3722               	.LM379:
+ 3723 113c FF91      		pop r31
+ 3724 113e EF91      		pop r30
+ 3725 1140 BF91      		pop r27
+ 3726 1142 AF91      		pop r26
+ 3727 1144 9F91      		pop r25
+ 3728 1146 8F91      		pop r24
+ 3729 1148 7F91      		pop r23
+ 3730 114a 6F91      		pop r22
+ 3731 114c 5F91      		pop r21
+ 3732 114e 4F91      		pop r20
+ 3733 1150 3F91      		pop r19
+ 3734 1152 2F91      		pop r18
+ 3735 1154 0F90      		pop r0
+ 3736 1156 0FBE      		out __SREG__,r0
+ 3737 1158 0F90      		pop r0
+ 3738 115a 1F90      		pop __zero_reg__
+ 3739 115c 1895      		reti
+ 3740               	.LFE78:
+ 3742               		.comm Timebase_type,63,1
+ 3743               		.comm Timebase,2,1
+ 4344               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 timebase.c
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:2      *ABS*:0000003f __SREG__
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:3      *ABS*:0000003e __SP_H__
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:4      *ABS*:0000003d __SP_L__
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:5      *ABS*:00000034 __CCP__
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:18     .text:00000000 Timebase_Struct_Init
-                            *COM*:00000010 Timebase_type
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2      *ABS*:0000003f __SREG__
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3      *ABS*:0000003e __SP_H__
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:4      *ABS*:0000003d __SP_L__
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:5      *ABS*:00000034 __CCP__
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:18     .text:00000000 Timebase_Struct_Init
+                            *COM*:0000003f Timebase_type
                             *COM*:00000002 Timebase
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:67     .text:00000066 Timebase_Timer_Config
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:214    .text:00000108 Timebase_Wait_Unit_Time
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:252    .text:0000013c Timebase_Tokens_Executing
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:268    .text:00000148 Timebase_Add_Token
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:294    .text:0000015e Timebase_Remove_Token
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:320    .text:00000174 Timebase_Remove_All_Tokens
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:336    .text:00000180 Timebase_Get_SubSeconds
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:357    .text:00000196 Timebase_Get_Seconds
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:378    .text:000001ac Timebase_Set_SubSeconds
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:398    .text:000001be Timebase_Set_Seconds
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:418    .text:000001d0 Timebase_Reset
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:430    .text:000001d2 Timebase_Init
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:455    .text:000001e8 Timebase_Main_Loop_Executables
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:467    .text:000001ea Timebase_ISR_Executables
-C:\Users\farid\AppData\Local\Temp/cc0lmCqt.s:539    .text:00000254 __vector_14
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:132    .text:00000122 Timebase_Timer_Config
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:279    .text:000001c4 Timebase_Token_Executing
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:295    .text:000001d0 Timebase_Token_Add
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:321    .text:000001e6 Timebase_Token_Remove
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:347    .text:000001fc Timebase_Token_Remove_All
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:363    .text:00000208 Timebase_Timer_Get_SubSeconds
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:384    .text:0000021e Timebase_Timer_Get_Seconds
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:405    .text:00000234 Timebase_Timer_Set_SubSeconds
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:425    .text:00000246 Timebase_Timer_Set_Seconds
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:445    .text:00000258 Timebase_Timer_Delay_SubSeconds
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:530    .text:000002a2 Timebase_Timer_Delay_Seconds
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:615    .text:000002ec Timebase_UpCounter_Get_Status
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:649    .text:00000316 Timebase_UpCounter_Set_Status
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:687    .text:00000346 Timebase_UpCounter_Get_Value
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:730    .text:00000380 Timebase_UpCounter_Set_Value
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:765    .text:000003ac Timebase_UpCounter_Get_EndValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:808    .text:000003e6 Timebase_UpCounter_Set_EndValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:843    .text:00000412 Timebase_UpCounter_Get_TargetValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:881    .text:00000440 Timebase_UpCounter_Set_TargetValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:918    .text:0000046e Timebase_UpCounter_Get_TemporaryValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:961    .text:000004a8 Timebase_UpCounter_Set_TemporaryValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:996    .text:000004d4 Timebase_UpCounter_Get_PeriodValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1039   .text:0000050e Timebase_UpCounter_Set_PeriodValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1074   .text:0000053a Timebase_UpCounter_Get_Period_Flag
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1107   .text:00000562 Timebase_UpCounter_Set_Period_Flag
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1141   .text:0000058c Timebase_UpCounter_Clear_Period_Flag
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1175   .text:000005b6 Timebase_UpCounter_Reset
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1276   .text:00000624 Timebase_UpCounter_Clear_All_Flags
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1292   .text:0000062a Timebase_UpCounter_Start
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1340   .text:00000660 Timebase_UpCounter_Stop
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1388   .text:00000696 Timebase_UpCounter_Set_Securely
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1517   .text:0000072e Timebase_UpCounter_Set_Forcefully
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1553   .text:00000758 Timebase_UpCounter_Update
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1765   .text:00000870 Timebase_UpCounter_Expired
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1805   .text:000008a4 Timebase_UpCounter_Expired_Event
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1854   .text:000008e2 Timebase_UpCounter_Set_Period_Value_Securely
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1916   .text:0000092a Timebase_UpCounter_Get_Remaining_Period_Value
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:1974   .text:00000976 Timebase_UpCounter_Period_Value_Expired
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2066   .text:000009f2 Timebase_UpCounter_Period_Value_Expired_Event
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2118   .text:00000a32 Timebase_UpCounter_Update_All
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2135   .text:00000a3a Timebase_UpCounter_Reset_All
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2152   .text:00000a42 Timebase_DownCounter_Get_Status
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2186   .text:00000a6c Timebase_DownCounter_Set_Status
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2224   .text:00000a9c Timebase_DownCounter_Get_Value
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2267   .text:00000ad6 Timebase_DownCounter_Set_Value
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2302   .text:00000b02 Timebase_DownCounter_Get_EndValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2345   .text:00000b3c Timebase_DownCounter_Set_EndValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2380   .text:00000b68 Timebase_DownCounter_Get_PeriodValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2423   .text:00000ba2 Timebase_DownCounter_Set_PeriodValue
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2458   .text:00000bce Timebase_DownCounter_Get_Period_Flag
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2491   .text:00000bf6 Timebase_DownCounter_Set_Period_Flag
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2525   .text:00000c20 Timebase_DownCounter_Clear_Period_Flag
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2559   .text:00000c4a Timebase_DownCounter_Reset
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2619   .text:00000c84 Timebase_DownCounter_Clear_All_Flags
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2683   .text:00000cbe Timebase_DownCounter_Start
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2731   .text:00000cf4 Timebase_DownCounter_Stop
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2779   .text:00000d2a Timebase_DownCounter_Set_Securely
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2868   .text:00000d8a Timebase_DownCounter_Set_Forcefully
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:2939   .text:00000dd2 Timebase_DownCounter_Update
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3079   .text:00000e6c Timebase_DownCounter_Expired
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3119   .text:00000ea0 Timebase_DownCounter_Expired_Event
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3201   .text:00000eea Timebase_DownCounter_Set_Period_Value_Securely
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3263   .text:00000f32 Timebase_DownCounter_Get_Remaining_Period_Value
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3321   .text:00000f7e Timebase_DownCounter_Period_Value_Expired
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3413   .text:00000ffa Timebase_DownCounter_Period_Value_Expired_Event
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3465   .text:0000103a Timebase_DownCounter_Update_All
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3484   .text:00001048 Timebase_DownCounter_Reset_All
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3566   .text:0000107e Timebase_Reset
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3582   .text:00001088 Timebase_Init
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3609   .text:000010a2 Timebase_Main_Loop_Executables
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3625   .text:000010ac Timebase_ISR_Executables
+C:\Users\farid\AppData\Local\Temp/cc55GSzZ.s:3697   .text:00001116 __vector_14
 
 UNDEFINED SYMBOLS
 __udivmodsi4
