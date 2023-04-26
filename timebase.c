@@ -204,10 +204,8 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
 }
 
 void Timebase_Timer_Delay_Seconds(uint16_t value){
-  Timebase_Token_Add();
   uint32_t temp = Timebase_Timer_Get_Seconds() + value;
   while(temp > Timebase_Timer_Get_SubSeconds());
-  Timebase_Token_Remove();
 }
 
 
