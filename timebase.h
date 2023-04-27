@@ -1,5 +1,5 @@
 /* 
- * File:   timebase.c
+ * File:   timebase.h
  * Author: MD. Faridul Islam
  * Atmega328P Timebase Library
  * Created on October 30, 2022, 19:00

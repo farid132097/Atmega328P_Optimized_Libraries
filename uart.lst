@@ -6,1259 +6,1374 @@
    6               	__tmp_reg__ = 0
    7               	__zero_reg__ = 1
   15               	.Ltext0:
-  16               	.global	UART_Reset_Registers
-  18               	UART_Reset_Registers:
+  16               	.global	UART_Config_GPIO
+  18               	UART_Config_GPIO:
   19               	.LFB6:
   20               	.LM1:
   21               	/* prologue: function */
   22               	/* frame size = 0 */
-  23               	.LM2:
-  24 0000 1092 C000 		sts 192,__zero_reg__
-  25               	.LM3:
-  26 0004 1092 C100 		sts 193,__zero_reg__
-  27               	.LM4:
-  28 0008 1092 C200 		sts 194,__zero_reg__
-  29               	.LM5:
-  30 000c 1092 C500 		sts 197,__zero_reg__
-  31               	.LM6:
-  32 0010 1092 C400 		sts 196,__zero_reg__
-  33               	.LM7:
-  34 0014 1092 C600 		sts 198,__zero_reg__
+  23               	/* epilogue start */
+  24               	.LM2:
+  25 0000 0895      		ret
+  26               	.LFE6:
+  28               	.global	UART_Config_Clock
+  30               	UART_Config_Clock:
+  31               	.LFB7:
+  32               	.LM3:
+  33               	/* prologue: function */
+  34               	/* frame size = 0 */
   35               	/* epilogue start */
-  36               	.LM8:
-  37 0018 0895      		ret
-  38               	.LFE6:
-  40               	.global	UART_BAUD_Rate
-  42               	UART_BAUD_Rate:
-  43               	.LFB7:
-  44               	.LM9:
+  36               	.LM4:
+  37 0002 0895      		ret
+  38               	.LFE7:
+  40               	.global	UART_Config_BAUD_Rate
+  42               	UART_Config_BAUD_Rate:
+  43               	.LFB8:
+  44               	.LM5:
   45               	.LVL0:
   46               	/* prologue: function */
   47               	/* frame size = 0 */
-  48 001a 9B01      		movw r18,r22
-  49 001c AC01      		movw r20,r24
-  50               	.LM10:
-  51 001e 1092 C500 		sts 197,__zero_reg__
-  52               	.LM11:
-  53 0022 60E2      		ldi r22,lo8(500000)
-  54 0024 71EA      		ldi r23,hi8(500000)
-  55 0026 87E0      		ldi r24,hlo8(500000)
-  56 0028 90E0      		ldi r25,hhi8(500000)
-  57               	.LVL1:
-  58 002a 0E94 0000 		call __udivmodsi4
-  59               	.LVL2:
-  60 002e 2150      		subi r18,lo8(-(-1))
-  61 0030 3040      		sbci r19,hi8(-(-1))
-  62 0032 4040      		sbci r20,hlo8(-(-1))
-  63 0034 5040      		sbci r21,hhi8(-(-1))
-  64 0036 2093 C400 		sts 196,r18
-  65               	/* epilogue start */
-  66               	.LM12:
-  67 003a 0895      		ret
-  68               	.LFE7:
-  70               	.global	UART_Config_Transmitter
-  72               	UART_Config_Transmitter:
-  73               	.LFB8:
-  74               	.LM13:
-  75               	/* prologue: function */
-  76               	/* frame size = 0 */
-  77               	.LM14:
-  78 003c E1EC      		ldi r30,lo8(193)
-  79 003e F0E0      		ldi r31,hi8(193)
-  80 0040 8081      		ld r24,Z
-  81 0042 8860      		ori r24,lo8(8)
-  82 0044 8083      		st Z,r24
-  83               	.LM15:
-  84 0046 E2EC      		ldi r30,lo8(194)
-  85 0048 F0E0      		ldi r31,hi8(194)
-  86 004a 8081      		ld r24,Z
-  87 004c 8660      		ori r24,lo8(6)
-  88 004e 8083      		st Z,r24
-  89               	/* epilogue start */
-  90               	.LM16:
-  91 0050 0895      		ret
-  92               	.LFE8:
-  94               	.global	UART_Config_Receiver
-  96               	UART_Config_Receiver:
-  97               	.LFB9:
-  98               	.LM17:
-  99               	/* prologue: function */
- 100               	/* frame size = 0 */
- 101               	.LM18:
- 102 0052 E1EC      		ldi r30,lo8(193)
- 103 0054 F0E0      		ldi r31,hi8(193)
- 104 0056 8081      		ld r24,Z
- 105 0058 8061      		ori r24,lo8(16)
- 106 005a 8083      		st Z,r24
- 107               	.LM19:
- 108 005c E2EC      		ldi r30,lo8(194)
- 109 005e F0E0      		ldi r31,hi8(194)
- 110 0060 8081      		ld r24,Z
- 111 0062 8660      		ori r24,lo8(6)
- 112 0064 8083      		st Z,r24
- 113               	/* epilogue start */
- 114               	.LM20:
- 115 0066 0895      		ret
- 116               	.LFE9:
- 118               	.global	UART_Config_Receiver_Interrupt
- 120               	UART_Config_Receiver_Interrupt:
- 121               	.LFB10:
- 122               	.LM21:
- 123               	/* prologue: function */
- 124               	/* frame size = 0 */
- 125               	.LM22:
- 126 0068 E1EC      		ldi r30,lo8(193)
- 127 006a F0E0      		ldi r31,hi8(193)
- 128 006c 8081      		ld r24,Z
- 129 006e 8068      		ori r24,lo8(-128)
- 130 0070 8083      		st Z,r24
- 131               	.LM23:
- 132               	/* #APP */
- 133               	 ;  122 "uart.c" 1
- 134 0072 7894      		sei
- 135               	 ;  0 "" 2
- 136               	/* epilogue start */
- 137               	.LM24:
- 138               	/* #NOAPP */
- 139 0074 0895      		ret
- 140               	.LFE10:
- 142               	.global	UART_Transmit_Byte
- 144               	UART_Transmit_Byte:
- 145               	.LFB11:
- 146               	.LM25:
- 147               	.LVL3:
- 148               	/* prologue: function */
- 149               	/* frame size = 0 */
- 150               	.LM26:
- 151 0076 8093 C600 		sts 198,r24
- 152               	.L12:
- 153               	.LM27:
- 154 007a 8091 C000 		lds r24,192
- 155               	.LVL4:
- 156 007e 85FF      		sbrs r24,5
- 157 0080 00C0      		rjmp .L12
- 158               	/* epilogue start */
- 159               	.LM28:
- 160 0082 0895      		ret
- 161               	.LFE11:
- 163               	.global	UART_Receive_Byte
- 165               	UART_Receive_Byte:
- 166               	.LFB12:
- 167               	.LM29:
- 168 0084 DF93      		push r29
- 169 0086 CF93      		push r28
- 170 0088 0F92      		push __tmp_reg__
- 171 008a CDB7      		in r28,__SP_L__
- 172 008c DEB7      		in r29,__SP_H__
- 173               	/* prologue: function */
- 174               	/* frame size = 1 */
- 175               	.LM30:
- 176 008e 1982      		std Y+1,__zero_reg__
- 177               	.LVL5:
- 178               	.LM31:
- 179 0090 8091 C000 		lds r24,192
- 180 0094 84FF      		sbrs r24,4
- 181 0096 00C0      		rjmp .L16
- 182               	.LM32:
- 183 0098 8091 C600 		lds r24,198
+  48 0004 9B01      		movw r18,r22
+  49 0006 AC01      		movw r20,r24
+  50               	.LM6:
+  51 0008 60E4      		ldi r22,lo8(1000000)
+  52 000a 72E4      		ldi r23,hi8(1000000)
+  53 000c 8FE0      		ldi r24,hlo8(1000000)
+  54 000e 90E0      		ldi r25,hhi8(1000000)
+  55               	.LVL1:
+  56 0010 0E94 0000 		call __udivmodsi4
+  57               	.LVL2:
+  58 0014 2150      		subi r18,lo8(-(-1))
+  59 0016 3040      		sbci r19,hi8(-(-1))
+  60 0018 4040      		sbci r20,hlo8(-(-1))
+  61 001a 5040      		sbci r21,hhi8(-(-1))
+  62               	.LVL3:
+  63               	.LM7:
+  64 001c E0EC      		ldi r30,lo8(192)
+  65 001e F0E0      		ldi r31,hi8(192)
+  66 0020 8081      		ld r24,Z
+  67 0022 8260      		ori r24,lo8(2)
+  68 0024 8083      		st Z,r24
+  69               	.LM8:
+  70 0026 BB27      		clr r27
+  71 0028 A52F      		mov r26,r21
+  72 002a 942F      		mov r25,r20
+  73 002c 832F      		mov r24,r19
+  74 002e 8093 C500 		sts 197,r24
+  75               	.LM9:
+  76 0032 2093 C400 		sts 196,r18
+  77               	/* epilogue start */
+  78               	.LM10:
+  79 0036 0895      		ret
+  80               	.LFE8:
+  82               	.global	UART_Config_Transmitter
+  84               	UART_Config_Transmitter:
+  85               	.LFB9:
+  86               	.LM11:
+  87               	/* prologue: function */
+  88               	/* frame size = 0 */
+  89               	.LM12:
+  90 0038 E1EC      		ldi r30,lo8(193)
+  91 003a F0E0      		ldi r31,hi8(193)
+  92 003c 8081      		ld r24,Z
+  93 003e 8860      		ori r24,lo8(8)
+  94 0040 8083      		st Z,r24
+  95               	.LM13:
+  96 0042 86E0      		ldi r24,lo8(6)
+  97 0044 8093 C200 		sts 194,r24
+  98               	/* epilogue start */
+  99               	.LM14:
+ 100 0048 0895      		ret
+ 101               	.LFE9:
+ 103               	.global	UART_Config_Receiver
+ 105               	UART_Config_Receiver:
+ 106               	.LFB10:
+ 107               	.LM15:
+ 108               	/* prologue: function */
+ 109               	/* frame size = 0 */
+ 110               	.LM16:
+ 111 004a E1EC      		ldi r30,lo8(193)
+ 112 004c F0E0      		ldi r31,hi8(193)
+ 113 004e 8081      		ld r24,Z
+ 114 0050 8061      		ori r24,lo8(16)
+ 115 0052 8083      		st Z,r24
+ 116               	.LM17:
+ 117 0054 86E0      		ldi r24,lo8(6)
+ 118 0056 8093 C200 		sts 194,r24
+ 119               	/* epilogue start */
+ 120               	.LM18:
+ 121 005a 0895      		ret
+ 122               	.LFE10:
+ 124               	.global	UART_Config_Receiver_Interrupt
+ 126               	UART_Config_Receiver_Interrupt:
+ 127               	.LFB11:
+ 128               	.LM19:
+ 129               	/* prologue: function */
+ 130               	/* frame size = 0 */
+ 131               	.LM20:
+ 132 005c E1EC      		ldi r30,lo8(193)
+ 133 005e F0E0      		ldi r31,hi8(193)
+ 134 0060 8081      		ld r24,Z
+ 135 0062 8068      		ori r24,lo8(-128)
+ 136 0064 8083      		st Z,r24
+ 137               	.LM21:
+ 138               	/* #APP */
+ 139               	 ;  89 "uart.c" 1
+ 140 0066 7894      		sei
+ 141               	 ;  0 "" 2
+ 142               	/* epilogue start */
+ 143               	.LM22:
+ 144               	/* #NOAPP */
+ 145 0068 0895      		ret
+ 146               	.LFE11:
+ 148               	.global	UART_Transmit_Byte
+ 150               	UART_Transmit_Byte:
+ 151               	.LFB12:
+ 152               	.LM23:
+ 153               	.LVL4:
+ 154               	/* prologue: function */
+ 155               	/* frame size = 0 */
+ 156 006a 982F      		mov r25,r24
+ 157               	.LVL5:
+ 158               	.L14:
+ 159               	.LM24:
+ 160 006c 8091 C000 		lds r24,192
+ 161 0070 85FF      		sbrs r24,5
+ 162 0072 00C0      		rjmp .L14
+ 163               	.LM25:
+ 164 0074 9093 C600 		sts 198,r25
+ 165               	/* epilogue start */
+ 166               	.LM26:
+ 167 0078 0895      		ret
+ 168               	.LFE12:
+ 170               	.global	UART_Receive_Byte
+ 172               	UART_Receive_Byte:
+ 173               	.LFB13:
+ 174               	.LM27:
+ 175 007a DF93      		push r29
+ 176 007c CF93      		push r28
+ 177 007e 0F92      		push __tmp_reg__
+ 178 0080 CDB7      		in r28,__SP_L__
+ 179 0082 DEB7      		in r29,__SP_H__
+ 180               	/* prologue: function */
+ 181               	/* frame size = 1 */
+ 182               	.LM28:
+ 183 0084 1982      		std Y+1,__zero_reg__
  184               	.LVL6:
- 185 009c 8983      		std Y+1,r24
- 186               	.LM33:
- 187 009e 81E0      		ldi r24,lo8(1)
- 188               	.LVL7:
- 189 00a0 00C0      		rjmp .L20
- 190               	.L16:
- 191               	.LM34:
- 192 00a2 8091 C000 		lds r24,192
- 193 00a6 83FF      		sbrs r24,3
- 194 00a8 00C0      		rjmp .L18
- 195               	.LM35:
- 196 00aa 8091 C600 		lds r24,198
- 197               	.LVL8:
- 198 00ae 8983      		std Y+1,r24
- 199               	.LM36:
- 200 00b0 82E0      		ldi r24,lo8(2)
- 201               	.LVL9:
- 202               	.L20:
- 203 00b2 8093 0000 		sts UART,r24
- 204 00b6 00C0      		rjmp .L17
- 205               	.L18:
- 206               	.LM37:
- 207 00b8 8091 C600 		lds r24,198
+ 185               	.LM29:
+ 186 0086 8091 C000 		lds r24,192
+ 187 008a 84FF      		sbrs r24,4
+ 188 008c 00C0      		rjmp .L18
+ 189               	.LM30:
+ 190 008e 8091 C600 		lds r24,198
+ 191               	.LVL7:
+ 192 0092 8983      		std Y+1,r24
+ 193               	.LM31:
+ 194 0094 81E0      		ldi r24,lo8(1)
+ 195               	.LVL8:
+ 196 0096 00C0      		rjmp .L22
+ 197               	.L18:
+ 198               	.LM32:
+ 199 0098 8091 C000 		lds r24,192
+ 200 009c 83FF      		sbrs r24,3
+ 201 009e 00C0      		rjmp .L20
+ 202               	.LM33:
+ 203 00a0 8091 C600 		lds r24,198
+ 204               	.LVL9:
+ 205 00a4 8983      		std Y+1,r24
+ 206               	.LM34:
+ 207 00a6 82E0      		ldi r24,lo8(2)
  208               	.LVL10:
- 209 00bc 8983      		std Y+1,r24
- 210               	.LM38:
- 211 00be 1092 0000 		sts UART,__zero_reg__
- 212               	.LVL11:
- 213               	.L17:
- 214               	.LM39:
- 215 00c2 8981      		ldd r24,Y+1
- 216               	/* epilogue start */
- 217               	.LM40:
- 218 00c4 0F90      		pop __tmp_reg__
- 219 00c6 CF91      		pop r28
- 220 00c8 DF91      		pop r29
- 221 00ca 0895      		ret
- 222               	.LFE12:
- 224               	.global	UART_Struct_Init
- 226               	UART_Struct_Init:
- 227               	.LFB13:
- 228               	.LM41:
- 229               	/* prologue: function */
- 230               	/* frame size = 0 */
- 231               	.LM42:
- 232 00cc 8AEF      		ldi r24,lo8(250)
- 233 00ce 90E0      		ldi r25,hi8(250)
- 234 00d0 9093 0000 		sts (UART+260)+1,r25
- 235 00d4 8093 0000 		sts UART+260,r24
- 236               	.LM43:
- 237 00d8 1092 0000 		sts UART,__zero_reg__
- 238               	.LM44:
- 239 00dc 1092 0000 		sts (UART+264)+1,__zero_reg__
- 240 00e0 1092 0000 		sts UART+264,__zero_reg__
- 241               	.LM45:
- 242 00e4 1092 0000 		sts (UART+266)+1,__zero_reg__
- 243 00e8 1092 0000 		sts UART+266,__zero_reg__
- 244 00ec 20E0      		ldi r18,lo8(0)
- 245               	.LVL12:
- 246 00ee 00C0      		rjmp .L22
- 247               	.LVL13:
- 248               	.L23:
- 249               	.LBB38:
- 250               	.LM46:
- 251 00f0 E050      		subi r30,lo8(-(UART))
- 252 00f2 F040      		sbci r31,hi8(-(UART))
- 253               	.LVL14:
- 254 00f4 1286      		std Z+10,__zero_reg__
- 255               	.LM47:
- 256 00f6 2F5F      		subi r18,lo8(-(1))
- 257               	.LVL15:
- 258               	.L22:
- 259 00f8 8091 0000 		lds r24,UART+260
- 260 00fc 9091 0000 		lds r25,(UART+260)+1
- 261 0100 E22F      		mov r30,r18
- 262 0102 F0E0      		ldi r31,lo8(0)
- 263 0104 E817      		cp r30,r24
- 264 0106 F907      		cpc r31,r25
- 265 0108 00F0      		brlo .L23
- 266               	.LVL16:
- 267 010a E0E0      		ldi r30,lo8(UART+1)
- 268 010c F0E0      		ldi r31,hi8(UART+1)
- 269               	.LVL17:
- 270               	.L24:
- 271               	.LBE38:
- 272               	.LBB39:
- 273               	.LM48:
- 274 010e 1192      		st Z+,__zero_reg__
- 275               	.LM49:
- 276 0110 80E0      		ldi r24,hi8(UART+9)
- 277 0112 E030      		cpi r30,lo8(UART+9)
- 278 0114 F807      		cpc r31,r24
- 279 0116 01F4      		brne .L24
- 280               	.LBE39:
- 281               	.LM50:
- 282 0118 1082      		st Z,__zero_reg__
- 283               	.LM51:
- 284 011a 1092 0000 		sts (UART+262)+1,__zero_reg__
- 285 011e 1092 0000 		sts UART+262,__zero_reg__
- 286               	.LM52:
- 287 0122 1092 0000 		sts UART+268,__zero_reg__
- 288 0126 1092 0000 		sts (UART+268)+1,__zero_reg__
- 289 012a 1092 0000 		sts (UART+268)+2,__zero_reg__
- 290 012e 1092 0000 		sts (UART+268)+3,__zero_reg__
- 291               	/* epilogue start */
- 292               	.LM53:
- 293 0132 0895      		ret
- 294               	.LFE13:
- 296               	.global	UART_Init
- 298               	UART_Init:
- 299               	.LFB14:
- 300               	.LM54:
- 301               	.LVL18:
- 302 0134 EF92      		push r14
- 303 0136 FF92      		push r15
- 304 0138 0F93      		push r16
- 305 013a 1F93      		push r17
- 306               	/* prologue: function */
- 307               	/* frame size = 0 */
- 308 013c 7B01      		movw r14,r22
- 309 013e 8C01      		movw r16,r24
- 310               	.LM55:
- 311 0140 0E94 0000 		call UART_Struct_Init
+ 209               	.L22:
+ 210 00a8 8093 0000 		sts UART,r24
+ 211 00ac 00C0      		rjmp .L19
+ 212               	.L20:
+ 213               	.LM35:
+ 214 00ae 8091 C600 		lds r24,198
+ 215               	.LVL11:
+ 216 00b2 8983      		std Y+1,r24
+ 217               	.LM36:
+ 218 00b4 1092 0000 		sts UART,__zero_reg__
+ 219               	.LVL12:
+ 220               	.L19:
+ 221               	.LM37:
+ 222 00b8 8981      		ldd r24,Y+1
+ 223               	/* epilogue start */
+ 224               	.LM38:
+ 225 00ba 0F90      		pop __tmp_reg__
+ 226 00bc CF91      		pop r28
+ 227 00be DF91      		pop r29
+ 228 00c0 0895      		ret
+ 229               	.LFE13:
+ 231               	.global	UART_Struct_Init
+ 233               	UART_Struct_Init:
+ 234               	.LFB15:
+ 235               	.LM39:
+ 236               	/* prologue: function */
+ 237               	/* frame size = 0 */
+ 238               	.LM40:
+ 239 00c2 1092 0000 		sts UART,__zero_reg__
+ 240 00c6 E0E0      		ldi r30,lo8(UART+1)
+ 241 00c8 F0E0      		ldi r31,hi8(UART+1)
+ 242               	.L24:
+ 243               	.LBB43:
+ 244               	.LM41:
+ 245 00ca 1192      		st Z+,__zero_reg__
+ 246               	.LM42:
+ 247 00cc 80E0      		ldi r24,hi8(UART+9)
+ 248 00ce E030      		cpi r30,lo8(UART+9)
+ 249 00d0 F807      		cpc r31,r24
+ 250 00d2 01F4      		brne .L24
+ 251               	.LBE43:
+ 252               	.LM43:
+ 253 00d4 1082      		st Z,__zero_reg__
+ 254               	.LM44:
+ 255 00d6 80E2      		ldi r24,lo8(32)
+ 256 00d8 90E0      		ldi r25,hi8(32)
+ 257 00da 92A3      		std Z+34,r25
+ 258 00dc 81A3      		std Z+33,r24
+ 259               	.LM45:
+ 260 00de 14A2      		std Z+36,__zero_reg__
+ 261 00e0 13A2      		std Z+35,__zero_reg__
+ 262 00e2 20E0      		ldi r18,lo8(0)
+ 263               	.LVL13:
+ 264 00e4 00C0      		rjmp .L25
+ 265               	.LVL14:
+ 266               	.L26:
+ 267               	.LBB44:
+ 268               	.LM46:
+ 269 00e6 E050      		subi r30,lo8(-(UART))
+ 270 00e8 F040      		sbci r31,hi8(-(UART))
+ 271               	.LVL15:
+ 272 00ea 1286      		std Z+10,__zero_reg__
+ 273               	.LM47:
+ 274 00ec 2F5F      		subi r18,lo8(-(1))
+ 275               	.LVL16:
+ 276               	.L25:
+ 277 00ee 8091 0000 		lds r24,UART+42
+ 278 00f2 9091 0000 		lds r25,(UART+42)+1
+ 279 00f6 E22F      		mov r30,r18
+ 280 00f8 F0E0      		ldi r31,lo8(0)
+ 281 00fa E817      		cp r30,r24
+ 282 00fc F907      		cpc r31,r25
+ 283 00fe 00F0      		brlo .L26
+ 284               	.LVL17:
+ 285               	.LBE44:
+ 286               	.LM48:
+ 287 0100 1092 0000 		sts (UART+46)+1,__zero_reg__
+ 288 0104 1092 0000 		sts UART+46,__zero_reg__
+ 289               	.LM49:
+ 290 0108 1092 0000 		sts (UART+48)+1,__zero_reg__
+ 291 010c 1092 0000 		sts UART+48,__zero_reg__
+ 292               	.LM50:
+ 293 0110 1092 0000 		sts UART+50,__zero_reg__
+ 294 0114 1092 0000 		sts (UART+50)+1,__zero_reg__
+ 295 0118 1092 0000 		sts (UART+50)+2,__zero_reg__
+ 296 011c 1092 0000 		sts (UART+50)+3,__zero_reg__
+ 297               	/* epilogue start */
+ 298               	.LM51:
+ 299 0120 0895      		ret
+ 300               	.LFE15:
+ 302               	.global	UART_Init
+ 304               	UART_Init:
+ 305               	.LFB16:
+ 306               	.LM52:
+ 307               	.LVL18:
+ 308               	/* prologue: function */
+ 309               	/* frame size = 0 */
+ 310               	.LM53:
+ 311 0122 0E94 0000 		call UART_Config_BAUD_Rate
  312               	.LVL19:
- 313               	.LM56:
- 314 0144 0E94 0000 		call UART_Reset_Registers
- 315               	.LM57:
- 316 0148 C801      		movw r24,r16
- 317 014a B701      		movw r22,r14
- 318 014c 0E94 0000 		call UART_BAUD_Rate
- 319               	.LBB40:
- 320               	.LBB41:
- 321               	.LM58:
- 322 0150 A1EC      		ldi r26,lo8(193)
- 323 0152 B0E0      		ldi r27,hi8(193)
- 324 0154 8C91      		ld r24,X
- 325 0156 8860      		ori r24,lo8(8)
- 326 0158 8C93      		st X,r24
- 327               	.LM59:
- 328 015a E2EC      		ldi r30,lo8(194)
- 329 015c F0E0      		ldi r31,hi8(194)
- 330 015e 8081      		ld r24,Z
- 331 0160 8660      		ori r24,lo8(6)
- 332 0162 8083      		st Z,r24
- 333               	.LBE41:
- 334               	.LBE40:
- 335               	.LBB42:
- 336               	.LBB43:
- 337               	.LM60:
- 338 0164 8C91      		ld r24,X
- 339 0166 8061      		ori r24,lo8(16)
- 340 0168 8C93      		st X,r24
- 341               	.LM61:
- 342 016a 8081      		ld r24,Z
- 343 016c 8660      		ori r24,lo8(6)
- 344 016e 8083      		st Z,r24
- 345               	.LBE43:
- 346               	.LBE42:
- 347               	.LBB44:
- 348               	.LBB45:
- 349               	.LM62:
- 350 0170 8C91      		ld r24,X
- 351 0172 8068      		ori r24,lo8(-128)
- 352 0174 8C93      		st X,r24
- 353               	.LM63:
- 354               	/* #APP */
- 355               	 ;  122 "uart.c" 1
- 356 0176 7894      		sei
- 357               	 ;  0 "" 2
- 358               	/* epilogue start */
- 359               	/* #NOAPP */
- 360               	.LBE45:
- 361               	.LBE44:
- 362               	.LM64:
- 363 0178 1F91      		pop r17
- 364 017a 0F91      		pop r16
- 365 017c FF90      		pop r15
- 366 017e EF90      		pop r14
- 367               	.LVL20:
- 368 0180 0895      		ret
- 369               	.LFE14:
- 371               	.global	UART_Transmit_Byte_Hex
- 373               	UART_Transmit_Byte_Hex:
- 374               	.LFB15:
- 375               	.LM65:
- 376               	.LVL21:
- 377               	/* prologue: function */
- 378               	/* frame size = 0 */
- 379               	.LM66:
- 380 0182 982F      		mov r25,r24
- 381 0184 9295      		swap r25
- 382 0186 9F70      		andi r25,lo8(15)
- 383               	.LM67:
- 384 0188 8F70      		andi r24,lo8(15)
- 385               	.LVL22:
- 386               	.LM68:
- 387 018a 9A30      		cpi r25,lo8(10)
- 388 018c 00F0      		brlo .L30
- 389 018e 292F      		mov r18,r25
- 390 0190 295C      		subi r18,lo8(-(55))
- 391 0192 00C0      		rjmp .L31
- 392               	.L30:
- 393               	.LM69:
- 394 0194 292F      		mov r18,r25
- 395 0196 205D      		subi r18,lo8(-(48))
- 396               	.L31:
- 397               	.LM70:
- 398 0198 8A30      		cpi r24,lo8(10)
- 399 019a 00F0      		brlo .L32
- 400 019c 982F      		mov r25,r24
- 401 019e 995C      		subi r25,lo8(-(55))
- 402 01a0 00C0      		rjmp .L33
- 403               	.L32:
- 404               	.LM71:
- 405 01a2 982F      		mov r25,r24
- 406 01a4 905D      		subi r25,lo8(-(48))
- 407               	.L33:
- 408               	.LBB46:
- 409               	.LBB47:
- 410               	.LM72:
- 411 01a6 80E3      		ldi r24,lo8(48)
- 412 01a8 8093 C600 		sts 198,r24
- 413               	.L34:
- 414               	.LM73:
- 415 01ac 8091 C000 		lds r24,192
- 416 01b0 85FF      		sbrs r24,5
- 417 01b2 00C0      		rjmp .L34
- 418               	.LBE47:
- 419               	.LBE46:
- 420               	.LBB48:
- 421               	.LBB49:
- 422               	.LM74:
- 423 01b4 88E7      		ldi r24,lo8(120)
- 424 01b6 8093 C600 		sts 198,r24
- 425               	.L35:
- 426               	.LM75:
- 427 01ba 8091 C000 		lds r24,192
- 428 01be 85FF      		sbrs r24,5
- 429 01c0 00C0      		rjmp .L35
- 430               	.LBE49:
- 431               	.LBE48:
- 432               	.LBB50:
- 433               	.LBB51:
- 434               	.LM76:
- 435 01c2 2093 C600 		sts 198,r18
- 436               	.L36:
- 437               	.LM77:
- 438 01c6 8091 C000 		lds r24,192
- 439 01ca 85FF      		sbrs r24,5
- 440 01cc 00C0      		rjmp .L36
- 441               	.LBE51:
- 442               	.LBE50:
- 443               	.LBB52:
- 444               	.LBB53:
- 445               	.LM78:
- 446 01ce 9093 C600 		sts 198,r25
- 447               	.L37:
- 448               	.LM79:
- 449 01d2 8091 C000 		lds r24,192
- 450 01d6 85FF      		sbrs r24,5
- 451 01d8 00C0      		rjmp .L37
- 452               	/* epilogue start */
- 453               	.LBE53:
- 454               	.LBE52:
- 455               	.LM80:
- 456 01da 0895      		ret
- 457               	.LFE15:
- 459               	.global	UART_Transmit_Byte_Bin
- 461               	UART_Transmit_Byte_Bin:
- 462               	.LFB16:
- 463               	.LM81:
- 464               	.LVL23:
- 465 01dc DF93      		push r29
- 466 01de CF93      		push r28
- 467 01e0 CDB7      		in r28,__SP_L__
- 468 01e2 DEB7      		in r29,__SP_H__
- 469 01e4 2897      		sbiw r28,8
- 470 01e6 0FB6      		in __tmp_reg__,__SREG__
- 471 01e8 F894      		cli
- 472 01ea DEBF      		out __SP_H__,r29
- 473 01ec 0FBE      		out __SREG__,__tmp_reg__
- 474 01ee CDBF      		out __SP_L__,r28
- 475               	/* prologue: function */
- 476               	/* frame size = 8 */
- 477 01f0 982F      		mov r25,r24
- 478               	.LM82:
- 479 01f2 FE01      		movw r30,r28
- 480 01f4 3196      		adiw r30,1
- 481               	.LBB54:
- 482               	.LM83:
- 483 01f6 9E01      		movw r18,r28
- 484 01f8 275F      		subi r18,lo8(-(9))
- 485 01fa 3F4F      		sbci r19,hi8(-(9))
- 486               	.LVL24:
- 487               	.L44:
- 488               	.LM84:
- 489 01fc 892F      		mov r24,r25
- 490 01fe 8170      		andi r24,lo8(1)
- 491 0200 805D      		subi r24,lo8(-(48))
- 492 0202 8193      		st Z+,r24
- 493               	.LM85:
- 494 0204 9695      		lsr r25
- 495               	.LM86:
- 496 0206 E217      		cp r30,r18
- 497 0208 F307      		cpc r31,r19
- 498 020a 01F4      		brne .L44
- 499               	.LBE54:
- 500               	.LBB55:
- 501               	.LBB56:
- 502               	.LM87:
- 503 020c 80E3      		ldi r24,lo8(48)
- 504 020e 8093 C600 		sts 198,r24
- 505               	.L45:
- 506               	.LM88:
- 507 0212 8091 C000 		lds r24,192
- 508 0216 85FF      		sbrs r24,5
- 509 0218 00C0      		rjmp .L45
- 510               	.LBE56:
- 511               	.LBE55:
- 512               	.LBB57:
- 513               	.LBB58:
- 514               	.LM89:
- 515 021a 82E6      		ldi r24,lo8(98)
- 516 021c 8093 C600 		sts 198,r24
- 517               	.L46:
- 518               	.LM90:
- 519 0220 8091 C000 		lds r24,192
- 520 0224 85FF      		sbrs r24,5
- 521 0226 00C0      		rjmp .L46
- 522 0228 88E0      		ldi r24,lo8(8)
- 523               	.LVL25:
- 524               	.LBE58:
- 525               	.LBE57:
- 526               	.LBB59:
- 527               	.LBB60:
- 528               	.LM91:
- 529 022a 9E01      		movw r18,r28
- 530 022c 2F5F      		subi r18,lo8(-(1))
- 531 022e 3F4F      		sbci r19,hi8(-(1))
- 532               	.LVL26:
- 533               	.L48:
- 534               	.LM92:
- 535 0230 982F      		mov r25,r24
- 536               	.LVL27:
- 537 0232 9150      		subi r25,lo8(-(-1))
- 538               	.LM93:
- 539 0234 F901      		movw r30,r18
- 540 0236 E90F      		add r30,r25
- 541 0238 F11D      		adc r31,__zero_reg__
- 542 023a 8081      		ld r24,Z
- 543               	.LVL28:
- 544               	.LBB61:
- 545               	.LBB62:
- 546               	.LM94:
- 547 023c 8093 C600 		sts 198,r24
- 548               	.L47:
- 549               	.LM95:
- 550 0240 8091 C000 		lds r24,192
- 551 0244 85FF      		sbrs r24,5
- 552 0246 00C0      		rjmp .L47
- 553 0248 892F      		mov r24,r25
- 554               	.LVL29:
- 555               	.LBE62:
- 556               	.LBE61:
- 557               	.LBE60:
- 558               	.LM96:
- 559 024a 9923      		tst r25
- 560 024c 01F4      		brne .L48
- 561               	.LVL30:
- 562               	/* epilogue start */
- 563               	.LBE59:
- 564               	.LM97:
- 565 024e 2896      		adiw r28,8
- 566 0250 0FB6      		in __tmp_reg__,__SREG__
- 567 0252 F894      		cli
- 568 0254 DEBF      		out __SP_H__,r29
- 569 0256 0FBE      		out __SREG__,__tmp_reg__
- 570 0258 CDBF      		out __SP_L__,r28
- 571 025a CF91      		pop r28
- 572 025c DF91      		pop r29
- 573 025e 0895      		ret
- 574               	.LFE16:
- 576               	.global	UART_Transmit_Text
- 578               	UART_Transmit_Text:
- 579               	.LFB17:
- 580               	.LM98:
- 581               	.LVL31:
- 582               	/* prologue: function */
- 583               	/* frame size = 0 */
- 584 0260 AC01      		movw r20,r24
- 585               	.LM99:
- 586 0262 20E0      		ldi r18,lo8(0)
- 587               	.LVL32:
- 588 0264 00C0      		rjmp .L56
- 589               	.LVL33:
- 590               	.L58:
- 591               	.LBB63:
- 592               	.LBB64:
- 593               	.LM100:
- 594 0266 E093 C600 		sts 198,r30
- 595               	.L57:
- 596               	.LM101:
- 597 026a 8091 C000 		lds r24,192
- 598 026e 85FF      		sbrs r24,5
- 599 0270 00C0      		rjmp .L57
- 600               	.LBE64:
- 601               	.LBE63:
- 602               	.LM102:
- 603 0272 2F5F      		subi r18,lo8(-(1))
- 604               	.LVL34:
- 605               	.L56:
- 606               	.LM103:
- 607 0274 FA01      		movw r30,r20
- 608 0276 E20F      		add r30,r18
- 609 0278 F11D      		adc r31,__zero_reg__
- 610 027a E081      		ld r30,Z
- 611 027c EE23      		tst r30
- 612 027e 01F4      		brne .L58
- 613               	/* epilogue start */
- 614               	.LM104:
- 615 0280 0895      		ret
- 616               	.LFE17:
- 618               	.global	UART_Determine_Digit_Numbers
- 620               	UART_Determine_Digit_Numbers:
- 621               	.LFB18:
- 622               	.LM105:
- 623               	.LVL35:
- 624 0282 BF92      		push r11
- 625 0284 CF92      		push r12
- 626 0286 DF92      		push r13
- 627 0288 EF92      		push r14
- 628 028a FF92      		push r15
- 629 028c 0F93      		push r16
- 630 028e 1F93      		push r17
- 631               	/* prologue: function */
- 632               	/* frame size = 0 */
- 633 0290 6B01      		movw r12,r22
- 634 0292 7C01      		movw r14,r24
- 635               	.LM106:
- 636 0294 6115      		cp r22,__zero_reg__
- 637 0296 7105      		cpc r23,__zero_reg__
- 638 0298 8105      		cpc r24,__zero_reg__
- 639 029a 9105      		cpc r25,__zero_reg__
- 640 029c 01F4      		brne .L62
- 641               	.LM107:
- 642 029e 1092 0000 		sts UART+1,__zero_reg__
- 643               	.LM108:
- 644 02a2 81E0      		ldi r24,lo8(1)
- 645 02a4 8093 0000 		sts UART+9,r24
- 646 02a8 00C0      		rjmp .L65
- 647               	.L62:
- 648 02aa BB24      		clr r11
- 649               	.LVL36:
- 650               	.L64:
- 651               	.LM109:
- 652 02ac 0B2D      		mov r16,r11
- 653 02ae 10E0      		ldi r17,lo8(0)
- 654               	.LVL37:
- 655 02b0 0050      		subi r16,lo8(-(UART))
- 656 02b2 1040      		sbci r17,hi8(-(UART))
- 657               	.LVL38:
- 658 02b4 C701      		movw r24,r14
- 659 02b6 B601      		movw r22,r12
- 660               	.LVL39:
- 661 02b8 2AE0      		ldi r18,lo8(10)
- 662 02ba 30E0      		ldi r19,hi8(10)
- 663 02bc 40E0      		ldi r20,hlo8(10)
- 664 02be 50E0      		ldi r21,hhi8(10)
- 665 02c0 0E94 0000 		call __udivmodsi4
- 666 02c4 F801      		movw r30,r16
- 667 02c6 6183      		std Z+1,r22
- 668               	.LM110:
- 669 02c8 C701      		movw r24,r14
- 670 02ca B601      		movw r22,r12
- 671 02cc 2AE0      		ldi r18,lo8(10)
- 672 02ce 30E0      		ldi r19,hi8(10)
- 673 02d0 40E0      		ldi r20,hlo8(10)
- 674 02d2 50E0      		ldi r21,hhi8(10)
- 675 02d4 0E94 0000 		call __udivmodsi4
- 676 02d8 C901      		movw r24,r18
- 677 02da DA01      		movw r26,r20
- 678 02dc 6C01      		movw r12,r24
- 679 02de 7D01      		movw r14,r26
- 680               	.LM111:
- 681 02e0 B394      		inc r11
- 682               	.LVL40:
- 683               	.LM112:
- 684 02e2 C114      		cp r12,__zero_reg__
- 685 02e4 D104      		cpc r13,__zero_reg__
- 686 02e6 E104      		cpc r14,__zero_reg__
- 687 02e8 F104      		cpc r15,__zero_reg__
- 688 02ea 01F4      		brne .L64
- 689               	.LM113:
- 690 02ec B092 0000 		sts UART+9,r11
- 691               	.LVL41:
- 692               	.L65:
- 693               	/* epilogue start */
- 694               	.LM114:
- 695 02f0 1F91      		pop r17
- 696               	.LVL42:
- 697 02f2 0F91      		pop r16
- 698 02f4 FF90      		pop r15
- 699 02f6 EF90      		pop r14
- 700 02f8 DF90      		pop r13
- 701 02fa CF90      		pop r12
- 702               	.LVL43:
- 703 02fc BF90      		pop r11
- 704               	.LVL44:
- 705 02fe 0895      		ret
- 706               	.LFE18:
- 708               	.global	UART_Transmit_Number_Digits
- 710               	UART_Transmit_Number_Digits:
- 711               	.LFB19:
- 712               	.LM115:
- 713               	/* prologue: function */
- 714               	/* frame size = 0 */
- 715               	.LBB65:
- 716               	.LM116:
- 717 0300 9091 0000 		lds r25,UART+9
- 718               	.LVL45:
- 719 0304 00C0      		rjmp .L68
- 720               	.LVL46:
- 721               	.L70:
- 722               	.LBB66:
- 723               	.LM117:
- 724 0306 292F      		mov r18,r25
- 725 0308 2150      		subi r18,lo8(-(-1))
- 726               	.LM118:
- 727 030a E22F      		mov r30,r18
- 728 030c F0E0      		ldi r31,lo8(0)
- 729 030e E050      		subi r30,lo8(-(UART))
- 730 0310 F040      		sbci r31,hi8(-(UART))
- 731 0312 8181      		ldd r24,Z+1
- 732               	.LVL47:
- 733               	.LM119:
- 734 0314 805D      		subi r24,lo8(-(48))
- 735               	.LBB67:
- 736               	.LBB68:
- 737               	.LM120:
- 738 0316 8093 C600 		sts 198,r24
- 739               	.L69:
- 740               	.LM121:
- 741 031a 8091 C000 		lds r24,192
- 742               	.LVL48:
- 743 031e 922F      		mov r25,r18
- 744               	.LVL49:
- 745 0320 85FF      		sbrs r24,5
- 746 0322 00C0      		rjmp .L69
- 747               	.L68:
- 748               	.LBE68:
- 749               	.LBE67:
- 750               	.LBE66:
- 751               	.LM122:
- 752 0324 9923      		tst r25
- 753 0326 01F4      		brne .L70
- 754               	/* epilogue start */
- 755               	.LBE65:
- 756               	.LM123:
- 757 0328 0895      		ret
- 758               	.LFE19:
- 760               	.global	UART_Transmit_Number
- 762               	UART_Transmit_Number:
- 763               	.LFB20:
- 764               	.LM124:
- 765               	.LVL50:
- 766               	/* prologue: function */
- 767               	/* frame size = 0 */
- 768 032a 9B01      		movw r18,r22
- 769 032c AC01      		movw r20,r24
- 770               	.LM125:
- 771 032e 97FF      		sbrs r25,7
- 772 0330 00C0      		rjmp .L74
- 773               	.LBB69:
- 774               	.LBB70:
- 775               	.LM126:
- 776 0332 8DE2      		ldi r24,lo8(45)
- 777 0334 8093 C600 		sts 198,r24
- 778               	.L75:
- 779               	.LM127:
- 780 0338 8091 C000 		lds r24,192
- 781 033c 85FF      		sbrs r24,5
- 782 033e 00C0      		rjmp .L75
- 783               	.LBE70:
- 784               	.LBE69:
- 785               	.LM128:
- 786 0340 5095      		com r21
- 787 0342 4095      		com r20
- 788 0344 3095      		com r19
- 789 0346 2195      		neg r18
- 790 0348 3F4F      		sbci r19,lo8(-1)
- 791 034a 4F4F      		sbci r20,lo8(-1)
- 792 034c 5F4F      		sbci r21,lo8(-1)
- 793               	.LVL51:
- 794               	.L74:
- 795               	.LM129:
- 796 034e CA01      		movw r24,r20
- 797 0350 B901      		movw r22,r18
- 798 0352 0E94 0000 		call UART_Determine_Digit_Numbers
- 799               	.LVL52:
- 800               	.LM130:
- 801 0356 0E94 0000 		call UART_Transmit_Number_Digits
- 802               	/* epilogue start */
- 803               	.LM131:
- 804 035a 0895      		ret
- 805               	.LFE20:
- 807               	.global	UART_Transmit_Fixed_Digit_Number
- 809               	UART_Transmit_Fixed_Digit_Number:
- 810               	.LFB21:
- 811               	.LM132:
- 812               	.LVL53:
- 813 035c FF92      		push r15
- 814 035e 0F93      		push r16
- 815 0360 1F93      		push r17
- 816               	/* prologue: function */
- 817               	/* frame size = 0 */
- 818 0362 8B01      		movw r16,r22
- 819 0364 9C01      		movw r18,r24
- 820 0366 F42E      		mov r15,r20
- 821               	.LM133:
- 822 0368 97FF      		sbrs r25,7
- 823 036a 00C0      		rjmp .L79
- 824               	.LVL54:
- 825               	.LBB71:
- 826               	.LBB72:
- 827               	.LM134:
- 828 036c 8DE2      		ldi r24,lo8(45)
- 829 036e 8093 C600 		sts 198,r24
- 830               	.L80:
- 831               	.LM135:
- 832 0372 8091 C000 		lds r24,192
- 833 0376 85FF      		sbrs r24,5
- 834 0378 00C0      		rjmp .L80
- 835               	.LBE72:
- 836               	.LBE71:
- 837               	.LM136:
- 838 037a 3095      		com r19
- 839 037c 2095      		com r18
- 840 037e 1095      		com r17
- 841 0380 0195      		neg r16
- 842 0382 1F4F      		sbci r17,lo8(-1)
- 843 0384 2F4F      		sbci r18,lo8(-1)
- 844 0386 3F4F      		sbci r19,lo8(-1)
- 845               	.LVL55:
- 846               	.L79:
- 847               	.LM137:
- 848 0388 C901      		movw r24,r18
- 849 038a B801      		movw r22,r16
- 850 038c 0E94 0000 		call UART_Determine_Digit_Numbers
- 851               	.LBB73:
- 852               	.LM138:
- 853 0390 4F2D      		mov r20,r15
- 854 0392 50E0      		ldi r21,lo8(0)
- 855 0394 8091 0000 		lds r24,UART+9
- 856 0398 481B      		sub r20,r24
- 857 039a 5109      		sbc r21,__zero_reg__
- 858 039c 20E0      		ldi r18,lo8(0)
- 859 039e 30E0      		ldi r19,hi8(0)
- 860               	.LVL56:
- 861               	.LBB74:
- 862               	.LBB75:
- 863               	.LM139:
- 864 03a0 90E3      		ldi r25,lo8(48)
- 865 03a2 00C0      		rjmp .L81
- 866               	.L83:
- 867 03a4 9093 C600 		sts 198,r25
- 868               	.L82:
- 869               	.LM140:
- 870 03a8 8091 C000 		lds r24,192
- 871 03ac 85FF      		sbrs r24,5
- 872 03ae 00C0      		rjmp .L82
- 873               	.LBE75:
- 874               	.LBE74:
- 875               	.LM141:
- 876 03b0 2F5F      		subi r18,lo8(-(1))
- 877 03b2 3F4F      		sbci r19,hi8(-(1))
- 878               	.L81:
- 879 03b4 2417      		cp r18,r20
- 880 03b6 3507      		cpc r19,r21
- 881 03b8 04F0      		brlt .L83
- 882               	.LBE73:
- 883               	.LM142:
- 884 03ba 0E94 0000 		call UART_Transmit_Number_Digits
- 885               	.LVL57:
- 886               	/* epilogue start */
- 887               	.LM143:
- 888 03be 1F91      		pop r17
- 889 03c0 0F91      		pop r16
- 890               	.LVL58:
- 891 03c2 FF90      		pop r15
- 892               	.LVL59:
- 893 03c4 0895      		ret
- 894               	.LFE21:
- 896               		.data
- 897               	.LC0:
- 898 0000 2020 00   		.string	"  "
- 899               		.text
- 900               	.global	UART_Print_Debug_Data
- 902               	UART_Print_Debug_Data:
- 903               	.LFB22:
- 904               	.LM144:
- 905               	.LVL60:
- 906 03c6 EF92      		push r14
- 907 03c8 FF92      		push r15
- 908 03ca 0F93      		push r16
- 909 03cc 1F93      		push r17
- 910 03ce CF93      		push r28
- 911 03d0 DF93      		push r29
- 912               	/* prologue: function */
- 913               	/* frame size = 0 */
- 914 03d2 7C01      		movw r14,r24
- 915               	.LM145:
- 916 03d4 8C01      		movw r16,r24
- 917 03d6 C1E0      		ldi r28,lo8(1)
- 918 03d8 D0E0      		ldi r29,hi8(1)
- 919               	.LVL61:
- 920 03da 00C0      		rjmp .L88
- 921               	.LVL62:
- 922               	.L89:
- 923               	.LBB76:
- 924               	.LM146:
- 925 03dc F801      		movw r30,r16
- 926 03de 6081      		ld r22,Z
- 927 03e0 7181      		ldd r23,Z+1
- 928 03e2 8827      		clr r24
- 929 03e4 77FD      		sbrc r23,7
- 930 03e6 8095      		com r24
- 931 03e8 982F      		mov r25,r24
- 932 03ea 44E0      		ldi r20,lo8(4)
- 933 03ec 0E94 0000 		call UART_Transmit_Fixed_Digit_Number
- 934               	.LM147:
- 935 03f0 80E0      		ldi r24,lo8(.LC0)
- 936 03f2 90E0      		ldi r25,hi8(.LC0)
- 937 03f4 0E94 0000 		call UART_Transmit_Text
- 938               	.LM148:
- 939 03f8 2196      		adiw r28,1
- 940               	.LVL63:
- 941               	.L88:
- 942 03fa 0E5F      		subi r16,lo8(-(2))
- 943 03fc 1F4F      		sbci r17,hi8(-(2))
- 944 03fe F701      		movw r30,r14
- 945 0400 8081      		ld r24,Z
- 946 0402 9181      		ldd r25,Z+1
- 947 0404 8C17      		cp r24,r28
- 948 0406 9D07      		cpc r25,r29
- 949 0408 04F4      		brge .L89
- 950               	/* epilogue start */
- 951               	.LBE76:
- 952               	.LM149:
- 953 040a DF91      		pop r29
- 954 040c CF91      		pop r28
- 955               	.LVL64:
- 956 040e 1F91      		pop r17
- 957 0410 0F91      		pop r16
- 958 0412 FF90      		pop r15
- 959 0414 EF90      		pop r14
- 960               	.LVL65:
- 961 0416 0895      		ret
- 962               	.LFE22:
- 964               	.global	UART_Read_From_Buffer
- 966               	UART_Read_From_Buffer:
- 967               	.LFB23:
- 968               	.LM150:
- 969               	.LVL66:
- 970               	/* prologue: function */
- 971               	/* frame size = 0 */
- 972               	.LM151:
- 973 0418 FC01      		movw r30,r24
- 974 041a E050      		subi r30,lo8(-(UART))
- 975 041c F040      		sbci r31,hi8(-(UART))
- 976 041e 8285      		ldd r24,Z+10
- 977               	.LVL67:
- 978               	/* epilogue start */
- 979               	.LM152:
- 980 0420 0895      		ret
- 981               	.LFE23:
- 983               	.global	UART_Current_Buffer_Index
- 985               	UART_Current_Buffer_Index:
- 986               	.LFB24:
- 987               	.LM153:
- 988               	/* prologue: function */
- 989               	/* frame size = 0 */
- 990               	.LM154:
- 991 0422 2091 0000 		lds r18,UART+262
- 992 0426 3091 0000 		lds r19,(UART+262)+1
- 993               	.LM155:
- 994 042a C901      		movw r24,r18
- 995               	/* epilogue start */
- 996 042c 0895      		ret
- 997               	.LFE24:
- 999               	.global	UART_Current_Read_Index
- 1001               	UART_Current_Read_Index:
- 1002               	.LFB25:
- 1003               	.LM156:
- 1004               	/* prologue: function */
- 1005               	/* frame size = 0 */
- 1006               	.LM157:
- 1007 042e 2091 0000 		lds r18,UART+266
- 1008 0432 3091 0000 		lds r19,(UART+266)+1
- 1009               	.LM158:
- 1010 0436 C901      		movw r24,r18
- 1011               	/* epilogue start */
- 1012 0438 0895      		ret
- 1013               	.LFE25:
- 1015               	.global	UART_Bytes_Available_To_Read
- 1017               	UART_Bytes_Available_To_Read:
- 1018               	.LFB26:
- 1019               	.LM159:
- 1020               	/* prologue: function */
- 1021               	/* frame size = 0 */
- 1022               	.LM160:
- 1023 043a 2091 0000 		lds r18,UART+264
- 1024 043e 3091 0000 		lds r19,(UART+264)+1
- 1025               	.LM161:
- 1026 0442 C901      		movw r24,r18
- 1027               	/* epilogue start */
- 1028 0444 0895      		ret
- 1029               	.LFE26:
- 1031               	.global	UART_Read
- 1033               	UART_Read:
- 1034               	.LFB27:
- 1035               	.LM162:
- 1036               	/* prologue: function */
- 1037               	/* frame size = 0 */
- 1038               	.LM163:
- 1039 0446 E091 0000 		lds r30,UART+266
- 1040 044a F091 0000 		lds r31,(UART+266)+1
- 1041 044e E050      		subi r30,lo8(-(UART))
- 1042 0450 F040      		sbci r31,hi8(-(UART))
- 1043 0452 4285      		ldd r20,Z+10
- 1044               	.LVL68:
- 1045               	.LM164:
- 1046 0454 8091 0000 		lds r24,UART+266
- 1047 0458 9091 0000 		lds r25,(UART+266)+1
- 1048 045c 0196      		adiw r24,1
- 1049 045e 9093 0000 		sts (UART+266)+1,r25
- 1050 0462 8093 0000 		sts UART+266,r24
- 1051               	.LM165:
- 1052 0466 2091 0000 		lds r18,UART+266
- 1053 046a 3091 0000 		lds r19,(UART+266)+1
- 1054 046e 8091 0000 		lds r24,UART+260
- 1055 0472 9091 0000 		lds r25,(UART+260)+1
- 1056 0476 2817      		cp r18,r24
- 1057 0478 3907      		cpc r19,r25
- 1058 047a 00F0      		brlo .L100
- 1059               	.LM166:
- 1060 047c 1092 0000 		sts (UART+266)+1,__zero_reg__
- 1061 0480 1092 0000 		sts UART+266,__zero_reg__
- 1062               	.L100:
- 1063               	.LM167:
- 1064 0484 8091 0000 		lds r24,UART+264
- 1065 0488 9091 0000 		lds r25,(UART+264)+1
- 1066 048c 892B      		or r24,r25
- 1067 048e 01F0      		breq .L101
- 1068               	.LM168:
- 1069 0490 8091 0000 		lds r24,UART+264
- 1070 0494 9091 0000 		lds r25,(UART+264)+1
- 1071 0498 0197      		sbiw r24,1
- 1072 049a 9093 0000 		sts (UART+264)+1,r25
- 1073 049e 8093 0000 		sts UART+264,r24
- 1074               	.L101:
- 1075               	.LM169:
- 1076 04a2 842F      		mov r24,r20
- 1077               	/* epilogue start */
- 1078 04a4 0895      		ret
- 1079               	.LFE27:
- 1081               	.global	UART_Flush_Buffer
- 1083               	UART_Flush_Buffer:
- 1084               	.LFB28:
- 1085               	.LM170:
- 1086               	/* prologue: function */
- 1087               	/* frame size = 0 */
- 1088               	.LM171:
- 1089 04a6 1092 0000 		sts UART,__zero_reg__
- 1090 04aa 20E0      		ldi r18,lo8(0)
- 1091 04ac 30E0      		ldi r19,hi8(0)
- 1092               	.LVL69:
- 1093 04ae 00C0      		rjmp .L104
- 1094               	.L105:
- 1095               	.LBB77:
- 1096               	.LM172:
- 1097 04b0 F901      		movw r30,r18
- 1098 04b2 E050      		subi r30,lo8(-(UART))
- 1099 04b4 F040      		sbci r31,hi8(-(UART))
- 1100 04b6 1286      		std Z+10,__zero_reg__
- 1101               	.LM173:
- 1102 04b8 2F5F      		subi r18,lo8(-(1))
- 1103 04ba 3F4F      		sbci r19,hi8(-(1))
- 1104               	.L104:
- 1105 04bc 8091 0000 		lds r24,UART+260
- 1106 04c0 9091 0000 		lds r25,(UART+260)+1
- 1107 04c4 2817      		cp r18,r24
- 1108 04c6 3907      		cpc r19,r25
- 1109 04c8 00F0      		brlo .L105
- 1110               	.LBE77:
- 1111               	.LM174:
- 1112 04ca 1092 0000 		sts (UART+266)+1,__zero_reg__
- 1113 04ce 1092 0000 		sts UART+266,__zero_reg__
- 1114               	.LM175:
- 1115 04d2 1092 0000 		sts (UART+262)+1,__zero_reg__
- 1116 04d6 1092 0000 		sts UART+262,__zero_reg__
- 1117               	.LM176:
- 1118 04da 1092 0000 		sts (UART+264)+1,__zero_reg__
- 1119 04de 1092 0000 		sts UART+264,__zero_reg__
- 1120               	/* epilogue start */
- 1121               	.LM177:
- 1122 04e2 0895      		ret
- 1123               	.LFE28:
- 1125               	.global	UART_Last_Byte_Recevied_Time_Stamp
- 1127               	UART_Last_Byte_Recevied_Time_Stamp:
- 1128               	.LFB29:
- 1129               	.LM178:
- 1130               	/* prologue: function */
- 1131               	/* frame size = 0 */
- 1132               	.LM179:
- 1133 04e4 2091 0000 		lds r18,UART+268
- 1134 04e8 3091 0000 		lds r19,(UART+268)+1
- 1135 04ec 4091 0000 		lds r20,(UART+268)+2
- 1136 04f0 5091 0000 		lds r21,(UART+268)+3
- 1137               	.LM180:
- 1138 04f4 B901      		movw r22,r18
- 1139 04f6 CA01      		movw r24,r20
- 1140               	/* epilogue start */
- 1141 04f8 0895      		ret
- 1142               	.LFE29:
- 1144               	.global	UART_Interrupt_Service_Routine
- 1146               	UART_Interrupt_Service_Routine:
- 1147               	.LFB30:
- 1148               	.LM181:
- 1149 04fa DF93      		push r29
- 1150 04fc CF93      		push r28
- 1151 04fe 0F92      		push __tmp_reg__
- 1152 0500 CDB7      		in r28,__SP_L__
- 1153 0502 DEB7      		in r29,__SP_H__
- 1154               	/* prologue: function */
- 1155               	/* frame size = 1 */
- 1156               	.LM182:
- 1157 0504 0E94 0000 		call UART_Receive_Byte
- 1158 0508 8983      		std Y+1,r24
- 1159               	.LVL70:
- 1160               	.LM183:
- 1161 050a 8091 0000 		lds r24,UART
- 1162               	.LVL71:
- 1163 050e 8823      		tst r24
- 1164 0510 01F0      		breq .+2
- 1165 0512 00C0      		rjmp .L112
- 1166               	.LM184:
- 1167 0514 E091 0000 		lds r30,UART+262
- 1168 0518 F091 0000 		lds r31,(UART+262)+1
- 1169 051c 8981      		ldd r24,Y+1
- 1170 051e E050      		subi r30,lo8(-(UART))
- 1171 0520 F040      		sbci r31,hi8(-(UART))
- 1172 0522 8287      		std Z+10,r24
- 1173               	.LM185:
- 1174 0524 8091 0000 		lds r24,UART+262
- 1175 0528 9091 0000 		lds r25,(UART+262)+1
- 1176 052c 0196      		adiw r24,1
- 1177 052e 9093 0000 		sts (UART+262)+1,r25
- 1178 0532 8093 0000 		sts UART+262,r24
- 1179               	.LM186:
- 1180 0536 8091 0000 		lds r24,UART+264
- 1181 053a 9091 0000 		lds r25,(UART+264)+1
- 1182 053e 0196      		adiw r24,1
- 1183 0540 9093 0000 		sts (UART+264)+1,r25
- 1184 0544 8093 0000 		sts UART+264,r24
- 1185               	.LM187:
- 1186 0548 2091 0000 		lds r18,UART+264
- 1187 054c 3091 0000 		lds r19,(UART+264)+1
- 1188 0550 8091 0000 		lds r24,UART+260
- 1189 0554 9091 0000 		lds r25,(UART+260)+1
- 1190 0558 8217      		cp r24,r18
- 1191 055a 9307      		cpc r25,r19
- 1192 055c 00F4      		brsh .L111
- 1193               	.LM188:
- 1194 055e 8091 0000 		lds r24,UART+260
- 1195 0562 9091 0000 		lds r25,(UART+260)+1
- 1196 0566 9093 0000 		sts (UART+264)+1,r25
- 1197 056a 8093 0000 		sts UART+264,r24
- 1198               	.LM189:
- 1199 056e 8091 0000 		lds r24,UART+266
- 1200 0572 9091 0000 		lds r25,(UART+266)+1
- 1201 0576 0196      		adiw r24,1
- 1202 0578 9093 0000 		sts (UART+266)+1,r25
- 1203 057c 8093 0000 		sts UART+266,r24
- 1204               	.LM190:
- 1205 0580 2091 0000 		lds r18,UART+266
- 1206 0584 3091 0000 		lds r19,(UART+266)+1
- 1207 0588 8091 0000 		lds r24,UART+260
- 1208 058c 9091 0000 		lds r25,(UART+260)+1
- 1209 0590 2817      		cp r18,r24
- 1210 0592 3907      		cpc r19,r25
- 1211 0594 00F0      		brlo .L111
- 1212               	.LM191:
- 1213 0596 1092 0000 		sts (UART+266)+1,__zero_reg__
- 1214 059a 1092 0000 		sts UART+266,__zero_reg__
- 1215               	.L111:
- 1216               	.LM192:
- 1217 059e 2091 0000 		lds r18,UART+262
- 1218 05a2 3091 0000 		lds r19,(UART+262)+1
- 1219 05a6 8091 0000 		lds r24,UART+260
- 1220 05aa 9091 0000 		lds r25,(UART+260)+1
- 1221 05ae 2817      		cp r18,r24
- 1222 05b0 3907      		cpc r19,r25
- 1223 05b2 00F0      		brlo .L112
- 1224 05b4 1092 0000 		sts (UART+262)+1,__zero_reg__
- 1225 05b8 1092 0000 		sts UART+262,__zero_reg__
- 1226               	.L112:
- 1227               	/* epilogue start */
- 1228               	.LM193:
- 1229 05bc 0F90      		pop __tmp_reg__
- 1230 05be CF91      		pop r28
- 1231 05c0 DF91      		pop r29
- 1232 05c2 0895      		ret
- 1233               	.LFE30:
- 1235               	.global	__vector_18
- 1237               	__vector_18:
- 1238               	.LFB31:
- 1239               	.LM194:
- 1240 05c4 1F92      		push __zero_reg__
- 1241 05c6 0F92      		push r0
- 1242 05c8 0FB6      		in r0,__SREG__
- 1243 05ca 0F92      		push r0
- 1244 05cc 1124      		clr __zero_reg__
- 1245 05ce 2F93      		push r18
- 1246 05d0 3F93      		push r19
- 1247 05d2 4F93      		push r20
- 1248 05d4 5F93      		push r21
- 1249 05d6 6F93      		push r22
- 1250 05d8 7F93      		push r23
- 1251 05da 8F93      		push r24
- 1252 05dc 9F93      		push r25
- 1253 05de AF93      		push r26
- 1254 05e0 BF93      		push r27
- 1255 05e2 EF93      		push r30
- 1256 05e4 FF93      		push r31
- 1257               	/* prologue: Signal */
- 1258               	/* frame size = 0 */
- 1259               	.LM195:
- 1260 05e6 0E94 0000 		call UART_Interrupt_Service_Routine
- 1261               	/* epilogue start */
- 1262               	.LM196:
- 1263 05ea FF91      		pop r31
- 1264 05ec EF91      		pop r30
- 1265 05ee BF91      		pop r27
- 1266 05f0 AF91      		pop r26
- 1267 05f2 9F91      		pop r25
- 1268 05f4 8F91      		pop r24
- 1269 05f6 7F91      		pop r23
- 1270 05f8 6F91      		pop r22
- 1271 05fa 5F91      		pop r21
- 1272 05fc 4F91      		pop r20
- 1273 05fe 3F91      		pop r19
- 1274 0600 2F91      		pop r18
- 1275 0602 0F90      		pop r0
- 1276 0604 0FBE      		out __SREG__,r0
- 1277 0606 0F90      		pop r0
- 1278 0608 1F90      		pop __zero_reg__
- 1279 060a 1895      		reti
- 1280               	.LFE31:
- 1282               		.comm UART,272,1
- 1507               	.Letext0:
+ 313               	.LBB45:
+ 314               	.LBB46:
+ 315               	.LM54:
+ 316 0126 E1EC      		ldi r30,lo8(193)
+ 317 0128 F0E0      		ldi r31,hi8(193)
+ 318 012a 8081      		ld r24,Z
+ 319 012c 8860      		ori r24,lo8(8)
+ 320 012e 8083      		st Z,r24
+ 321               	.LM55:
+ 322 0130 A2EC      		ldi r26,lo8(194)
+ 323 0132 B0E0      		ldi r27,hi8(194)
+ 324 0134 96E0      		ldi r25,lo8(6)
+ 325 0136 9C93      		st X,r25
+ 326               	.LBE46:
+ 327               	.LBE45:
+ 328               	.LBB47:
+ 329               	.LBB48:
+ 330               	.LM56:
+ 331 0138 8081      		ld r24,Z
+ 332 013a 8061      		ori r24,lo8(16)
+ 333 013c 8083      		st Z,r24
+ 334               	.LM57:
+ 335 013e 9C93      		st X,r25
+ 336               	.LBE48:
+ 337               	.LBE47:
+ 338               	.LBB49:
+ 339               	.LBB50:
+ 340               	.LM58:
+ 341 0140 8081      		ld r24,Z
+ 342 0142 8068      		ori r24,lo8(-128)
+ 343 0144 8083      		st Z,r24
+ 344               	.LM59:
+ 345               	/* #APP */
+ 346               	 ;  89 "uart.c" 1
+ 347 0146 7894      		sei
+ 348               	 ;  0 "" 2
+ 349               	/* epilogue start */
+ 350               	/* #NOAPP */
+ 351               	.LBE50:
+ 352               	.LBE49:
+ 353               	.LM60:
+ 354 0148 0895      		ret
+ 355               	.LFE16:
+ 357               	.global	UART_Transmit_Byte_Hex
+ 359               	UART_Transmit_Byte_Hex:
+ 360               	.LFB17:
+ 361               	.LM61:
+ 362               	.LVL20:
+ 363 014a 1F93      		push r17
+ 364 014c CF93      		push r28
+ 365 014e DF93      		push r29
+ 366               	/* prologue: function */
+ 367               	/* frame size = 0 */
+ 368 0150 AB01      		movw r20,r22
+ 369 0152 BC01      		movw r22,r24
+ 370               	.LM62:
+ 371 0154 4F3F      		cpi r20,lo8(255)
+ 372 0156 5105      		cpc r21,__zero_reg__
+ 373 0158 6105      		cpc r22,__zero_reg__
+ 374 015a 7105      		cpc r23,__zero_reg__
+ 375 015c 01F0      		breq .+2
+ 376 015e 00F4      		brsh .L32
+ 377               	.LVL21:
+ 378 0160 E8E0      		ldi r30,lo8(8)
+ 379 0162 F0E0      		ldi r31,hi8(8)
+ 380               	.LVL22:
+ 381 0164 C2E0      		ldi r28,lo8(2)
+ 382 0166 D0E0      		ldi r29,hi8(2)
+ 383               	.LVL23:
+ 384 0168 00C0      		rjmp .L42
+ 385               	.LVL24:
+ 386               	.L32:
+ 387               	.LM63:
+ 388 016a 4030      		cpi r20,lo8(65536)
+ 389 016c 80E0      		ldi r24,hi8(65536)
+ 390 016e 5807      		cpc r21,r24
+ 391 0170 81E0      		ldi r24,hlo8(65536)
+ 392 0172 6807      		cpc r22,r24
+ 393 0174 80E0      		ldi r24,hhi8(65536)
+ 394 0176 7807      		cpc r23,r24
+ 395 0178 00F0      		brlo .L34
+ 396 017a E0E2      		ldi r30,lo8(32)
+ 397 017c F0E0      		ldi r31,hi8(32)
+ 398               	.LVL25:
+ 399 017e C8E0      		ldi r28,lo8(8)
+ 400 0180 D0E0      		ldi r29,hi8(8)
+ 401               	.LVL26:
+ 402 0182 00C0      		rjmp .L42
+ 403               	.LVL27:
+ 404               	.L34:
+ 405 0184 E0E1      		ldi r30,lo8(16)
+ 406 0186 F0E0      		ldi r31,hi8(16)
+ 407               	.LVL28:
+ 408 0188 C4E0      		ldi r28,lo8(4)
+ 409 018a D0E0      		ldi r29,hi8(4)
+ 410               	.LVL29:
+ 411               	.L42:
+ 412               	.LBB51:
+ 413               	.LBB52:
+ 414               	.LM64:
+ 415 018c 8091 C000 		lds r24,192
+ 416 0190 85FF      		sbrs r24,5
+ 417 0192 00C0      		rjmp .L42
+ 418               	.LM65:
+ 419 0194 80E3      		ldi r24,lo8(48)
+ 420 0196 8093 C600 		sts 198,r24
+ 421               	.L35:
+ 422               	.LBE52:
+ 423               	.LBE51:
+ 424               	.LBB53:
+ 425               	.LBB54:
+ 426               	.LM66:
+ 427 019a 8091 C000 		lds r24,192
+ 428 019e 85FF      		sbrs r24,5
+ 429 01a0 00C0      		rjmp .L35
+ 430               	.LM67:
+ 431 01a2 88E7      		ldi r24,lo8(120)
+ 432 01a4 8093 C600 		sts 198,r24
+ 433 01a8 10E0      		ldi r17,lo8(0)
+ 434               	.LVL30:
+ 435 01aa 00C0      		rjmp .L36
+ 436               	.LVL31:
+ 437               	.L39:
+ 438               	.LBE54:
+ 439               	.LBE53:
+ 440               	.LBB55:
+ 441               	.LM68:
+ 442 01ac 3497      		sbiw r30,4
+ 443               	.LM69:
+ 444 01ae DB01      		movw r26,r22
+ 445 01b0 CA01      		movw r24,r20
+ 446               	.LVL32:
+ 447 01b2 0E2E      		mov r0,r30
+ 448 01b4 00C0      		rjmp 2f
+ 449 01b6 B695      	1:	lsr r27
+ 450 01b8 A795      		ror r26
+ 451 01ba 9795      		ror r25
+ 452 01bc 8795      		ror r24
+ 453 01be 0A94      	2:	dec r0
+ 454 01c0 02F4      		brpl 1b
+ 455 01c2 90E0      		ldi r25,lo8(0)
+ 456               	.LVL33:
+ 457 01c4 8F70      		andi r24,lo8(15)
+ 458 01c6 9070      		andi r25,hi8(15)
+ 459               	.LVL34:
+ 460               	.LM70:
+ 461 01c8 8A30      		cpi r24,10
+ 462 01ca 9105      		cpc r25,__zero_reg__
+ 463 01cc 00F0      		brlo .L37
+ 464               	.LM71:
+ 465 01ce 9C01      		movw r18,r24
+ 466 01d0 295C      		subi r18,lo8(-(55))
+ 467 01d2 3F4F      		sbci r19,hi8(-(55))
+ 468               	.LVL35:
+ 469 01d4 00C0      		rjmp .L41
+ 470               	.LVL36:
+ 471               	.L37:
+ 472               	.LM72:
+ 473 01d6 9C01      		movw r18,r24
+ 474 01d8 205D      		subi r18,lo8(-(48))
+ 475 01da 3F4F      		sbci r19,hi8(-(48))
+ 476               	.LVL37:
+ 477               	.L41:
+ 478               	.LBB56:
+ 479               	.LBB57:
+ 480               	.LM73:
+ 481 01dc 8091 C000 		lds r24,192
+ 482 01e0 85FF      		sbrs r24,5
+ 483 01e2 00C0      		rjmp .L41
+ 484               	.LM74:
+ 485 01e4 2093 C600 		sts 198,r18
+ 486               	.LBE57:
+ 487               	.LBE56:
+ 488               	.LM75:
+ 489 01e8 1F5F      		subi r17,lo8(-(1))
+ 490               	.L36:
+ 491 01ea 812F      		mov r24,r17
+ 492 01ec 90E0      		ldi r25,lo8(0)
+ 493               	.LVL38:
+ 494 01ee 8C17      		cp r24,r28
+ 495 01f0 9D07      		cpc r25,r29
+ 496 01f2 00F0      		brlo .L39
+ 497               	.LVL39:
+ 498               	/* epilogue start */
+ 499               	.LBE55:
+ 500               	.LM76:
+ 501 01f4 DF91      		pop r29
+ 502 01f6 CF91      		pop r28
+ 503               	.LVL40:
+ 504 01f8 1F91      		pop r17
+ 505 01fa 0895      		ret
+ 506               	.LFE17:
+ 508               	.global	UART_Transmit_Byte_Bin
+ 510               	UART_Transmit_Byte_Bin:
+ 511               	.LFB18:
+ 512               	.LM77:
+ 513               	.LVL41:
+ 514 01fc CF92      		push r12
+ 515 01fe DF92      		push r13
+ 516 0200 EF92      		push r14
+ 517 0202 FF92      		push r15
+ 518 0204 0F93      		push r16
+ 519 0206 1F93      		push r17
+ 520 0208 CF93      		push r28
+ 521 020a DF93      		push r29
+ 522               	/* prologue: function */
+ 523               	/* frame size = 0 */
+ 524 020c AB01      		movw r20,r22
+ 525 020e BC01      		movw r22,r24
+ 526               	.LM78:
+ 527 0210 4F3F      		cpi r20,lo8(255)
+ 528 0212 5105      		cpc r21,__zero_reg__
+ 529 0214 6105      		cpc r22,__zero_reg__
+ 530 0216 7105      		cpc r23,__zero_reg__
+ 531 0218 01F0      		breq .+2
+ 532 021a 00F4      		brsh .L47
+ 533               	.LVL42:
+ 534 021c 97E0      		ldi r25,lo8(7)
+ 535               	.LVL43:
+ 536 021e 00C0      		rjmp .L58
+ 537               	.LVL44:
+ 538               	.L47:
+ 539               	.LM79:
+ 540 0220 4030      		cpi r20,lo8(65536)
+ 541 0222 80E0      		ldi r24,hi8(65536)
+ 542 0224 5807      		cpc r21,r24
+ 543 0226 81E0      		ldi r24,hlo8(65536)
+ 544 0228 6807      		cpc r22,r24
+ 545 022a 80E0      		ldi r24,hhi8(65536)
+ 546 022c 7807      		cpc r23,r24
+ 547 022e 00F0      		brlo .L49
+ 548 0230 9FE1      		ldi r25,lo8(31)
+ 549               	.LVL45:
+ 550 0232 00C0      		rjmp .L58
+ 551               	.LVL46:
+ 552               	.L49:
+ 553 0234 9FE0      		ldi r25,lo8(15)
+ 554               	.LVL47:
+ 555               	.L58:
+ 556               	.LBB58:
+ 557               	.LBB59:
+ 558               	.LM80:
+ 559 0236 8091 C000 		lds r24,192
+ 560 023a 85FF      		sbrs r24,5
+ 561 023c 00C0      		rjmp .L58
+ 562               	.LM81:
+ 563 023e 80E3      		ldi r24,lo8(48)
+ 564 0240 8093 C600 		sts 198,r24
+ 565               	.L50:
+ 566               	.LBE59:
+ 567               	.LBE58:
+ 568               	.LBB60:
+ 569               	.LBB61:
+ 570               	.LM82:
+ 571 0244 8091 C000 		lds r24,192
+ 572 0248 85FF      		sbrs r24,5
+ 573 024a 00C0      		rjmp .L50
+ 574               	.LM83:
+ 575 024c 82E6      		ldi r24,lo8(98)
+ 576 024e 8093 C600 		sts 198,r24
+ 577 0252 20E0      		ldi r18,lo8(0)
+ 578 0254 30E0      		ldi r19,hi8(0)
+ 579               	.LM84:
+ 580 0256 E92F      		mov r30,r25
+ 581 0258 F0E0      		ldi r31,lo8(0)
+ 582               	.LBE61:
+ 583               	.LBE60:
+ 584               	.LBB62:
+ 585               	.LBB63:
+ 586               	.LBB64:
+ 587               	.LM85:
+ 588 025a 00E3      		ldi r16,lo8(48)
+ 589               	.LBE64:
+ 590               	.LBE63:
+ 591               	.LBB66:
+ 592               	.LBB67:
+ 593 025c 11E3      		ldi r17,lo8(49)
+ 594               	.LBE67:
+ 595               	.LBE66:
+ 596               	.LM86:
+ 597 025e EF01      		movw r28,r30
+ 598 0260 2196      		adiw r28,1
+ 599               	.L54:
+ 600               	.LM87:
+ 601 0262 CF01      		movw r24,r30
+ 602 0264 821B      		sub r24,r18
+ 603 0266 930B      		sbc r25,r19
+ 604 0268 6A01      		movw r12,r20
+ 605 026a 7B01      		movw r14,r22
+ 606 026c 00C0      		rjmp 2f
+ 607 026e F694      	1:	lsr r15
+ 608 0270 E794      		ror r14
+ 609 0272 D794      		ror r13
+ 610 0274 C794      		ror r12
+ 611 0276 8A95      	2:	dec r24
+ 612 0278 02F4      		brpl 1b
+ 613 027a D701      		movw r26,r14
+ 614 027c C601      		movw r24,r12
+ 615 027e 8170      		andi r24,lo8(1)
+ 616 0280 9070      		andi r25,hi8(1)
+ 617 0282 892B      		or r24,r25
+ 618 0284 01F0      		breq .L57
+ 619               	.L56:
+ 620               	.LBB69:
+ 621               	.LBB68:
+ 622               	.LM88:
+ 623 0286 8091 C000 		lds r24,192
+ 624 028a 85FF      		sbrs r24,5
+ 625 028c 00C0      		rjmp .L56
+ 626               	.LM89:
+ 627 028e 1093 C600 		sts 198,r17
+ 628 0292 00C0      		rjmp .L53
+ 629               	.L57:
+ 630               	.LBE68:
+ 631               	.LBE69:
+ 632               	.LBB70:
+ 633               	.LBB65:
+ 634               	.LM90:
+ 635 0294 8091 C000 		lds r24,192
+ 636 0298 85FF      		sbrs r24,5
+ 637 029a 00C0      		rjmp .L57
+ 638               	.LM91:
+ 639 029c 0093 C600 		sts 198,r16
+ 640               	.L53:
+ 641 02a0 2F5F      		subi r18,lo8(-(1))
+ 642 02a2 3F4F      		sbci r19,hi8(-(1))
+ 643               	.LBE65:
+ 644               	.LBE70:
+ 645               	.LM92:
+ 646 02a4 2C17      		cp r18,r28
+ 647 02a6 3D07      		cpc r19,r29
+ 648 02a8 01F4      		brne .L54
+ 649               	/* epilogue start */
+ 650               	.LBE62:
+ 651               	.LM93:
+ 652 02aa DF91      		pop r29
+ 653 02ac CF91      		pop r28
+ 654 02ae 1F91      		pop r17
+ 655 02b0 0F91      		pop r16
+ 656 02b2 FF90      		pop r15
+ 657 02b4 EF90      		pop r14
+ 658 02b6 DF90      		pop r13
+ 659 02b8 CF90      		pop r12
+ 660 02ba 0895      		ret
+ 661               	.LFE18:
+ 663               	.global	UART_Transmit_Text
+ 665               	UART_Transmit_Text:
+ 666               	.LFB19:
+ 667               	.LM94:
+ 668               	.LVL48:
+ 669               	/* prologue: function */
+ 670               	/* frame size = 0 */
+ 671 02bc AC01      		movw r20,r24
+ 672               	.LM95:
+ 673 02be 20E0      		ldi r18,lo8(0)
+ 674               	.LVL49:
+ 675 02c0 00C0      		rjmp .L65
+ 676               	.LVL50:
+ 677               	.L68:
+ 678               	.LBB71:
+ 679               	.LBB72:
+ 680               	.LM96:
+ 681 02c2 8091 C000 		lds r24,192
+ 682 02c6 85FF      		sbrs r24,5
+ 683 02c8 00C0      		rjmp .L68
+ 684               	.LM97:
+ 685 02ca E093 C600 		sts 198,r30
+ 686               	.LBE72:
+ 687               	.LBE71:
+ 688               	.LM98:
+ 689 02ce 2F5F      		subi r18,lo8(-(1))
+ 690               	.LVL51:
+ 691               	.L65:
+ 692               	.LM99:
+ 693 02d0 FA01      		movw r30,r20
+ 694 02d2 E20F      		add r30,r18
+ 695 02d4 F11D      		adc r31,__zero_reg__
+ 696 02d6 E081      		ld r30,Z
+ 697 02d8 EE23      		tst r30
+ 698 02da 01F4      		brne .L68
+ 699               	/* epilogue start */
+ 700               	.LM100:
+ 701 02dc 0895      		ret
+ 702               	.LFE19:
+ 704               	.global	UART_Determine_Digit_Numbers
+ 706               	UART_Determine_Digit_Numbers:
+ 707               	.LFB20:
+ 708               	.LM101:
+ 709               	.LVL52:
+ 710 02de BF92      		push r11
+ 711 02e0 CF92      		push r12
+ 712 02e2 DF92      		push r13
+ 713 02e4 EF92      		push r14
+ 714 02e6 FF92      		push r15
+ 715 02e8 0F93      		push r16
+ 716 02ea 1F93      		push r17
+ 717               	/* prologue: function */
+ 718               	/* frame size = 0 */
+ 719 02ec 6B01      		movw r12,r22
+ 720 02ee 7C01      		movw r14,r24
+ 721               	.LM102:
+ 722 02f0 6115      		cp r22,__zero_reg__
+ 723 02f2 7105      		cpc r23,__zero_reg__
+ 724 02f4 8105      		cpc r24,__zero_reg__
+ 725 02f6 9105      		cpc r25,__zero_reg__
+ 726 02f8 01F4      		brne .L71
+ 727               	.LM103:
+ 728 02fa 1092 0000 		sts UART+1,__zero_reg__
+ 729               	.LM104:
+ 730 02fe 81E0      		ldi r24,lo8(1)
+ 731 0300 8093 0000 		sts UART+9,r24
+ 732 0304 00C0      		rjmp .L74
+ 733               	.L71:
+ 734 0306 BB24      		clr r11
+ 735               	.LVL53:
+ 736               	.L73:
+ 737               	.LM105:
+ 738 0308 0B2D      		mov r16,r11
+ 739 030a 10E0      		ldi r17,lo8(0)
+ 740               	.LVL54:
+ 741 030c 0050      		subi r16,lo8(-(UART))
+ 742 030e 1040      		sbci r17,hi8(-(UART))
+ 743               	.LVL55:
+ 744 0310 C701      		movw r24,r14
+ 745 0312 B601      		movw r22,r12
+ 746               	.LVL56:
+ 747 0314 2AE0      		ldi r18,lo8(10)
+ 748 0316 30E0      		ldi r19,hi8(10)
+ 749 0318 40E0      		ldi r20,hlo8(10)
+ 750 031a 50E0      		ldi r21,hhi8(10)
+ 751 031c 0E94 0000 		call __udivmodsi4
+ 752 0320 F801      		movw r30,r16
+ 753 0322 6183      		std Z+1,r22
+ 754               	.LM106:
+ 755 0324 C701      		movw r24,r14
+ 756 0326 B601      		movw r22,r12
+ 757 0328 2AE0      		ldi r18,lo8(10)
+ 758 032a 30E0      		ldi r19,hi8(10)
+ 759 032c 40E0      		ldi r20,hlo8(10)
+ 760 032e 50E0      		ldi r21,hhi8(10)
+ 761 0330 0E94 0000 		call __udivmodsi4
+ 762 0334 C901      		movw r24,r18
+ 763 0336 DA01      		movw r26,r20
+ 764 0338 6C01      		movw r12,r24
+ 765 033a 7D01      		movw r14,r26
+ 766               	.LM107:
+ 767 033c B394      		inc r11
+ 768               	.LVL57:
+ 769               	.LM108:
+ 770 033e C114      		cp r12,__zero_reg__
+ 771 0340 D104      		cpc r13,__zero_reg__
+ 772 0342 E104      		cpc r14,__zero_reg__
+ 773 0344 F104      		cpc r15,__zero_reg__
+ 774 0346 01F4      		brne .L73
+ 775               	.LM109:
+ 776 0348 B092 0000 		sts UART+9,r11
+ 777               	.LVL58:
+ 778               	.L74:
+ 779               	/* epilogue start */
+ 780               	.LM110:
+ 781 034c 1F91      		pop r17
+ 782               	.LVL59:
+ 783 034e 0F91      		pop r16
+ 784 0350 FF90      		pop r15
+ 785 0352 EF90      		pop r14
+ 786 0354 DF90      		pop r13
+ 787 0356 CF90      		pop r12
+ 788               	.LVL60:
+ 789 0358 BF90      		pop r11
+ 790               	.LVL61:
+ 791 035a 0895      		ret
+ 792               	.LFE20:
+ 794               	.global	UART_Transmit_Number_Digits
+ 796               	UART_Transmit_Number_Digits:
+ 797               	.LFB21:
+ 798               	.LM111:
+ 799               	/* prologue: function */
+ 800               	/* frame size = 0 */
+ 801               	.LBB73:
+ 802               	.LM112:
+ 803 035c E091 0000 		lds r30,UART+9
+ 804               	.LVL62:
+ 805 0360 00C0      		rjmp .L77
+ 806               	.LVL63:
+ 807               	.L79:
+ 808               	.LBB74:
+ 809               	.LM113:
+ 810 0362 2E2F      		mov r18,r30
+ 811 0364 2150      		subi r18,lo8(-(-1))
+ 812               	.LM114:
+ 813 0366 E22F      		mov r30,r18
+ 814               	.LVL64:
+ 815 0368 F0E0      		ldi r31,lo8(0)
+ 816 036a E050      		subi r30,lo8(-(UART))
+ 817 036c F040      		sbci r31,hi8(-(UART))
+ 818 036e 9181      		ldd r25,Z+1
+ 819               	.LVL65:
+ 820               	.L78:
+ 821               	.LBB75:
+ 822               	.LBB76:
+ 823               	.LM115:
+ 824 0370 8091 C000 		lds r24,192
+ 825 0374 85FF      		sbrs r24,5
+ 826 0376 00C0      		rjmp .L78
+ 827               	.LBE76:
+ 828               	.LBE75:
+ 829               	.LM116:
+ 830 0378 905D      		subi r25,lo8(-(48))
+ 831               	.LBB78:
+ 832               	.LBB77:
+ 833               	.LM117:
+ 834 037a 9093 C600 		sts 198,r25
+ 835 037e E22F      		mov r30,r18
+ 836               	.LVL66:
+ 837               	.L77:
+ 838               	.LBE77:
+ 839               	.LBE78:
+ 840               	.LBE74:
+ 841               	.LM118:
+ 842 0380 EE23      		tst r30
+ 843 0382 01F4      		brne .L79
+ 844               	/* epilogue start */
+ 845               	.LBE73:
+ 846               	.LM119:
+ 847 0384 0895      		ret
+ 848               	.LFE21:
+ 850               	.global	UART_Transmit_Number
+ 852               	UART_Transmit_Number:
+ 853               	.LFB22:
+ 854               	.LM120:
+ 855               	.LVL67:
+ 856               	/* prologue: function */
+ 857               	/* frame size = 0 */
+ 858 0386 9B01      		movw r18,r22
+ 859 0388 AC01      		movw r20,r24
+ 860               	.LM121:
+ 861 038a 97FF      		sbrs r25,7
+ 862 038c 00C0      		rjmp .L83
+ 863               	.L86:
+ 864               	.LBB79:
+ 865               	.LBB80:
+ 866               	.LM122:
+ 867 038e 8091 C000 		lds r24,192
+ 868 0392 85FF      		sbrs r24,5
+ 869 0394 00C0      		rjmp .L86
+ 870               	.LM123:
+ 871 0396 8DE2      		ldi r24,lo8(45)
+ 872 0398 8093 C600 		sts 198,r24
+ 873               	.LBE80:
+ 874               	.LBE79:
+ 875               	.LM124:
+ 876 039c 5095      		com r21
+ 877 039e 4095      		com r20
+ 878 03a0 3095      		com r19
+ 879 03a2 2195      		neg r18
+ 880 03a4 3F4F      		sbci r19,lo8(-1)
+ 881 03a6 4F4F      		sbci r20,lo8(-1)
+ 882 03a8 5F4F      		sbci r21,lo8(-1)
+ 883               	.LVL68:
+ 884               	.L83:
+ 885               	.LM125:
+ 886 03aa CA01      		movw r24,r20
+ 887 03ac B901      		movw r22,r18
+ 888 03ae 0E94 0000 		call UART_Determine_Digit_Numbers
+ 889               	.LVL69:
+ 890               	.LM126:
+ 891 03b2 0E94 0000 		call UART_Transmit_Number_Digits
+ 892               	/* epilogue start */
+ 893               	.LM127:
+ 894 03b6 0895      		ret
+ 895               	.LFE22:
+ 897               	.global	UART_Transmit_Fixed_Digit_Number
+ 899               	UART_Transmit_Fixed_Digit_Number:
+ 900               	.LFB23:
+ 901               	.LM128:
+ 902               	.LVL70:
+ 903 03b8 FF92      		push r15
+ 904 03ba 0F93      		push r16
+ 905 03bc 1F93      		push r17
+ 906               	/* prologue: function */
+ 907               	/* frame size = 0 */
+ 908 03be 8B01      		movw r16,r22
+ 909 03c0 9C01      		movw r18,r24
+ 910 03c2 F42E      		mov r15,r20
+ 911               	.LM129:
+ 912 03c4 97FF      		sbrs r25,7
+ 913 03c6 00C0      		rjmp .L89
+ 914               	.LVL71:
+ 915               	.L95:
+ 916               	.LBB81:
+ 917               	.LBB82:
+ 918               	.LM130:
+ 919 03c8 8091 C000 		lds r24,192
+ 920 03cc 85FF      		sbrs r24,5
+ 921 03ce 00C0      		rjmp .L95
+ 922               	.LM131:
+ 923 03d0 8DE2      		ldi r24,lo8(45)
+ 924 03d2 8093 C600 		sts 198,r24
+ 925               	.LBE82:
+ 926               	.LBE81:
+ 927               	.LM132:
+ 928 03d6 3095      		com r19
+ 929 03d8 2095      		com r18
+ 930 03da 1095      		com r17
+ 931 03dc 0195      		neg r16
+ 932 03de 1F4F      		sbci r17,lo8(-1)
+ 933 03e0 2F4F      		sbci r18,lo8(-1)
+ 934 03e2 3F4F      		sbci r19,lo8(-1)
+ 935               	.LVL72:
+ 936               	.L89:
+ 937               	.LM133:
+ 938 03e4 C901      		movw r24,r18
+ 939 03e6 B801      		movw r22,r16
+ 940 03e8 0E94 0000 		call UART_Determine_Digit_Numbers
+ 941               	.LBB83:
+ 942               	.LM134:
+ 943 03ec 4F2D      		mov r20,r15
+ 944 03ee 50E0      		ldi r21,lo8(0)
+ 945 03f0 8091 0000 		lds r24,UART+9
+ 946 03f4 481B      		sub r20,r24
+ 947 03f6 5109      		sbc r21,__zero_reg__
+ 948 03f8 20E0      		ldi r18,lo8(0)
+ 949 03fa 30E0      		ldi r19,hi8(0)
+ 950               	.LVL73:
+ 951               	.LBB84:
+ 952               	.LBB85:
+ 953               	.LM135:
+ 954 03fc 90E3      		ldi r25,lo8(48)
+ 955 03fe 00C0      		rjmp .L91
+ 956               	.L94:
+ 957               	.LM136:
+ 958 0400 8091 C000 		lds r24,192
+ 959 0404 85FF      		sbrs r24,5
+ 960 0406 00C0      		rjmp .L94
+ 961               	.LM137:
+ 962 0408 9093 C600 		sts 198,r25
+ 963               	.LBE85:
+ 964               	.LBE84:
+ 965               	.LM138:
+ 966 040c 2F5F      		subi r18,lo8(-(1))
+ 967 040e 3F4F      		sbci r19,hi8(-(1))
+ 968               	.L91:
+ 969 0410 2417      		cp r18,r20
+ 970 0412 3507      		cpc r19,r21
+ 971 0414 04F0      		brlt .L94
+ 972               	.LBE83:
+ 973               	.LM139:
+ 974 0416 0E94 0000 		call UART_Transmit_Number_Digits
+ 975               	.LVL74:
+ 976               	/* epilogue start */
+ 977               	.LM140:
+ 978 041a 1F91      		pop r17
+ 979 041c 0F91      		pop r16
+ 980               	.LVL75:
+ 981 041e FF90      		pop r15
+ 982               	.LVL76:
+ 983 0420 0895      		ret
+ 984               	.LFE23:
+ 986               		.data
+ 987               	.LC0:
+ 988 0000 2020 00   		.string	"  "
+ 989               		.text
+ 990               	.global	UART_Print_Debug_Data
+ 992               	UART_Print_Debug_Data:
+ 993               	.LFB24:
+ 994               	.LM141:
+ 995               	.LVL77:
+ 996 0422 EF92      		push r14
+ 997 0424 FF92      		push r15
+ 998 0426 0F93      		push r16
+ 999 0428 1F93      		push r17
+ 1000 042a CF93      		push r28
+ 1001 042c DF93      		push r29
+ 1002               	/* prologue: function */
+ 1003               	/* frame size = 0 */
+ 1004 042e 7C01      		movw r14,r24
+ 1005               	.LM142:
+ 1006 0430 8C01      		movw r16,r24
+ 1007 0432 C1E0      		ldi r28,lo8(1)
+ 1008 0434 D0E0      		ldi r29,hi8(1)
+ 1009               	.LVL78:
+ 1010 0436 00C0      		rjmp .L99
+ 1011               	.LVL79:
+ 1012               	.L100:
+ 1013               	.LBB86:
+ 1014               	.LM143:
+ 1015 0438 F801      		movw r30,r16
+ 1016 043a 6081      		ld r22,Z
+ 1017 043c 7181      		ldd r23,Z+1
+ 1018 043e 8827      		clr r24
+ 1019 0440 77FD      		sbrc r23,7
+ 1020 0442 8095      		com r24
+ 1021 0444 982F      		mov r25,r24
+ 1022 0446 44E0      		ldi r20,lo8(4)
+ 1023 0448 0E94 0000 		call UART_Transmit_Fixed_Digit_Number
+ 1024               	.LM144:
+ 1025 044c 80E0      		ldi r24,lo8(.LC0)
+ 1026 044e 90E0      		ldi r25,hi8(.LC0)
+ 1027 0450 0E94 0000 		call UART_Transmit_Text
+ 1028               	.LM145:
+ 1029 0454 2196      		adiw r28,1
+ 1030               	.LVL80:
+ 1031               	.L99:
+ 1032 0456 0E5F      		subi r16,lo8(-(2))
+ 1033 0458 1F4F      		sbci r17,hi8(-(2))
+ 1034 045a F701      		movw r30,r14
+ 1035 045c 8081      		ld r24,Z
+ 1036 045e 9181      		ldd r25,Z+1
+ 1037 0460 8C17      		cp r24,r28
+ 1038 0462 9D07      		cpc r25,r29
+ 1039 0464 04F4      		brge .L100
+ 1040               	/* epilogue start */
+ 1041               	.LBE86:
+ 1042               	.LM146:
+ 1043 0466 DF91      		pop r29
+ 1044 0468 CF91      		pop r28
+ 1045               	.LVL81:
+ 1046 046a 1F91      		pop r17
+ 1047 046c 0F91      		pop r16
+ 1048 046e FF90      		pop r15
+ 1049 0470 EF90      		pop r14
+ 1050               	.LVL82:
+ 1051 0472 0895      		ret
+ 1052               	.LFE24:
+ 1054               	.global	UART_Read_From_Buffer
+ 1056               	UART_Read_From_Buffer:
+ 1057               	.LFB25:
+ 1058               	.LM147:
+ 1059               	.LVL83:
+ 1060               	/* prologue: function */
+ 1061               	/* frame size = 0 */
+ 1062               	.LM148:
+ 1063 0474 FC01      		movw r30,r24
+ 1064 0476 E050      		subi r30,lo8(-(UART))
+ 1065 0478 F040      		sbci r31,hi8(-(UART))
+ 1066 047a 8285      		ldd r24,Z+10
+ 1067               	.LVL84:
+ 1068               	/* epilogue start */
+ 1069               	.LM149:
+ 1070 047c 0895      		ret
+ 1071               	.LFE25:
+ 1073               	.global	UART_Current_Buffer_Index
+ 1075               	UART_Current_Buffer_Index:
+ 1076               	.LFB26:
+ 1077               	.LM150:
+ 1078               	/* prologue: function */
+ 1079               	/* frame size = 0 */
+ 1080               	.LM151:
+ 1081 047e 2091 0000 		lds r18,UART+44
+ 1082 0482 3091 0000 		lds r19,(UART+44)+1
+ 1083               	.LM152:
+ 1084 0486 C901      		movw r24,r18
+ 1085               	/* epilogue start */
+ 1086 0488 0895      		ret
+ 1087               	.LFE26:
+ 1089               	.global	UART_Current_Read_Index
+ 1091               	UART_Current_Read_Index:
+ 1092               	.LFB27:
+ 1093               	.LM153:
+ 1094               	/* prologue: function */
+ 1095               	/* frame size = 0 */
+ 1096               	.LM154:
+ 1097 048a 2091 0000 		lds r18,UART+48
+ 1098 048e 3091 0000 		lds r19,(UART+48)+1
+ 1099               	.LM155:
+ 1100 0492 C901      		movw r24,r18
+ 1101               	/* epilogue start */
+ 1102 0494 0895      		ret
+ 1103               	.LFE27:
+ 1105               	.global	UART_Bytes_Available_To_Read
+ 1107               	UART_Bytes_Available_To_Read:
+ 1108               	.LFB28:
+ 1109               	.LM156:
+ 1110               	/* prologue: function */
+ 1111               	/* frame size = 0 */
+ 1112               	.LM157:
+ 1113 0496 2091 0000 		lds r18,UART+46
+ 1114 049a 3091 0000 		lds r19,(UART+46)+1
+ 1115               	.LM158:
+ 1116 049e C901      		movw r24,r18
+ 1117               	/* epilogue start */
+ 1118 04a0 0895      		ret
+ 1119               	.LFE28:
+ 1121               	.global	UART_Read
+ 1123               	UART_Read:
+ 1124               	.LFB29:
+ 1125               	.LM159:
+ 1126               	/* prologue: function */
+ 1127               	/* frame size = 0 */
+ 1128               	.LM160:
+ 1129 04a2 E091 0000 		lds r30,UART+48
+ 1130 04a6 F091 0000 		lds r31,(UART+48)+1
+ 1131 04aa E050      		subi r30,lo8(-(UART))
+ 1132 04ac F040      		sbci r31,hi8(-(UART))
+ 1133 04ae 4285      		ldd r20,Z+10
+ 1134               	.LVL85:
+ 1135               	.LM161:
+ 1136 04b0 8091 0000 		lds r24,UART+48
+ 1137 04b4 9091 0000 		lds r25,(UART+48)+1
+ 1138 04b8 0196      		adiw r24,1
+ 1139 04ba 9093 0000 		sts (UART+48)+1,r25
+ 1140 04be 8093 0000 		sts UART+48,r24
+ 1141               	.LM162:
+ 1142 04c2 2091 0000 		lds r18,UART+48
+ 1143 04c6 3091 0000 		lds r19,(UART+48)+1
+ 1144 04ca 8091 0000 		lds r24,UART+42
+ 1145 04ce 9091 0000 		lds r25,(UART+42)+1
+ 1146 04d2 2817      		cp r18,r24
+ 1147 04d4 3907      		cpc r19,r25
+ 1148 04d6 00F0      		brlo .L111
+ 1149               	.LM163:
+ 1150 04d8 1092 0000 		sts (UART+48)+1,__zero_reg__
+ 1151 04dc 1092 0000 		sts UART+48,__zero_reg__
+ 1152               	.L111:
+ 1153               	.LM164:
+ 1154 04e0 8091 0000 		lds r24,UART+46
+ 1155 04e4 9091 0000 		lds r25,(UART+46)+1
+ 1156 04e8 892B      		or r24,r25
+ 1157 04ea 01F0      		breq .L112
+ 1158               	.LM165:
+ 1159 04ec 8091 0000 		lds r24,UART+46
+ 1160 04f0 9091 0000 		lds r25,(UART+46)+1
+ 1161 04f4 0197      		sbiw r24,1
+ 1162 04f6 9093 0000 		sts (UART+46)+1,r25
+ 1163 04fa 8093 0000 		sts UART+46,r24
+ 1164               	.L112:
+ 1165               	.LM166:
+ 1166 04fe 842F      		mov r24,r20
+ 1167               	/* epilogue start */
+ 1168 0500 0895      		ret
+ 1169               	.LFE29:
+ 1171               	.global	UART_Flush_Buffer
+ 1173               	UART_Flush_Buffer:
+ 1174               	.LFB30:
+ 1175               	.LM167:
+ 1176               	/* prologue: function */
+ 1177               	/* frame size = 0 */
+ 1178               	.LM168:
+ 1179 0502 1092 0000 		sts UART,__zero_reg__
+ 1180 0506 20E0      		ldi r18,lo8(0)
+ 1181 0508 30E0      		ldi r19,hi8(0)
+ 1182               	.LVL86:
+ 1183 050a 00C0      		rjmp .L115
+ 1184               	.L116:
+ 1185               	.LBB87:
+ 1186               	.LM169:
+ 1187 050c F901      		movw r30,r18
+ 1188 050e E050      		subi r30,lo8(-(UART))
+ 1189 0510 F040      		sbci r31,hi8(-(UART))
+ 1190 0512 1286      		std Z+10,__zero_reg__
+ 1191               	.LM170:
+ 1192 0514 2F5F      		subi r18,lo8(-(1))
+ 1193 0516 3F4F      		sbci r19,hi8(-(1))
+ 1194               	.L115:
+ 1195 0518 8091 0000 		lds r24,UART+42
+ 1196 051c 9091 0000 		lds r25,(UART+42)+1
+ 1197 0520 2817      		cp r18,r24
+ 1198 0522 3907      		cpc r19,r25
+ 1199 0524 00F0      		brlo .L116
+ 1200               	.LBE87:
+ 1201               	.LM171:
+ 1202 0526 1092 0000 		sts (UART+44)+1,__zero_reg__
+ 1203 052a 1092 0000 		sts UART+44,__zero_reg__
+ 1204               	.LM172:
+ 1205 052e 1092 0000 		sts (UART+48)+1,__zero_reg__
+ 1206 0532 1092 0000 		sts UART+48,__zero_reg__
+ 1207               	.LM173:
+ 1208 0536 1092 0000 		sts (UART+46)+1,__zero_reg__
+ 1209 053a 1092 0000 		sts UART+46,__zero_reg__
+ 1210               	/* epilogue start */
+ 1211               	.LM174:
+ 1212 053e 0895      		ret
+ 1213               	.LFE30:
+ 1215               	.global	UART_Last_Byte_Recevied_Time_Stamp
+ 1217               	UART_Last_Byte_Recevied_Time_Stamp:
+ 1218               	.LFB31:
+ 1219               	.LM175:
+ 1220               	/* prologue: function */
+ 1221               	/* frame size = 0 */
+ 1222               	.LM176:
+ 1223 0540 2091 0000 		lds r18,UART+50
+ 1224 0544 3091 0000 		lds r19,(UART+50)+1
+ 1225 0548 4091 0000 		lds r20,(UART+50)+2
+ 1226 054c 5091 0000 		lds r21,(UART+50)+3
+ 1227               	.LM177:
+ 1228 0550 B901      		movw r22,r18
+ 1229 0552 CA01      		movw r24,r20
+ 1230               	/* epilogue start */
+ 1231 0554 0895      		ret
+ 1232               	.LFE31:
+ 1234               	.global	UART_Reference_Time
+ 1236               	UART_Reference_Time:
+ 1237               	.LFB14:
+ 1238               	.LM178:
+ 1239               	/* prologue: function */
+ 1240               	/* frame size = 0 */
+ 1241               	.LM179:
+ 1242 0556 0E94 0000 		call Timebase_Timer_Get_SubSeconds
+ 1243               	/* epilogue start */
+ 1244               	.LM180:
+ 1245 055a 0895      		ret
+ 1246               	.LFE14:
+ 1248               	.global	UART_Interrupt_Service_Routine
+ 1250               	UART_Interrupt_Service_Routine:
+ 1251               	.LFB32:
+ 1252               	.LM181:
+ 1253 055c DF93      		push r29
+ 1254 055e CF93      		push r28
+ 1255 0560 0F92      		push __tmp_reg__
+ 1256 0562 CDB7      		in r28,__SP_L__
+ 1257 0564 DEB7      		in r29,__SP_H__
+ 1258               	/* prologue: function */
+ 1259               	/* frame size = 1 */
+ 1260               	.LM182:
+ 1261 0566 1982      		std Y+1,__zero_reg__
+ 1262               	.LVL87:
+ 1263               	.LM183:
+ 1264 0568 0E94 0000 		call UART_Receive_Byte
+ 1265 056c 8983      		std Y+1,r24
+ 1266               	.LM184:
+ 1267 056e 8091 0000 		lds r24,UART
+ 1268 0572 8823      		tst r24
+ 1269 0574 01F0      		breq .+2
+ 1270 0576 00C0      		rjmp .L126
+ 1271               	.LM185:
+ 1272 0578 E091 0000 		lds r30,UART+44
+ 1273 057c F091 0000 		lds r31,(UART+44)+1
+ 1274 0580 8981      		ldd r24,Y+1
+ 1275 0582 E050      		subi r30,lo8(-(UART))
+ 1276 0584 F040      		sbci r31,hi8(-(UART))
+ 1277 0586 8287      		std Z+10,r24
+ 1278               	.LM186:
+ 1279 0588 8091 0000 		lds r24,UART+44
+ 1280 058c 9091 0000 		lds r25,(UART+44)+1
+ 1281 0590 0196      		adiw r24,1
+ 1282 0592 9093 0000 		sts (UART+44)+1,r25
+ 1283 0596 8093 0000 		sts UART+44,r24
+ 1284               	.LM187:
+ 1285 059a 8091 0000 		lds r24,UART+46
+ 1286 059e 9091 0000 		lds r25,(UART+46)+1
+ 1287 05a2 0196      		adiw r24,1
+ 1288 05a4 9093 0000 		sts (UART+46)+1,r25
+ 1289 05a8 8093 0000 		sts UART+46,r24
+ 1290               	.LM188:
+ 1291 05ac 2091 0000 		lds r18,UART+46
+ 1292 05b0 3091 0000 		lds r19,(UART+46)+1
+ 1293 05b4 8091 0000 		lds r24,UART+42
+ 1294 05b8 9091 0000 		lds r25,(UART+42)+1
+ 1295 05bc 8217      		cp r24,r18
+ 1296 05be 9307      		cpc r25,r19
+ 1297 05c0 00F4      		brsh .L124
+ 1298               	.LM189:
+ 1299 05c2 8091 0000 		lds r24,UART+42
+ 1300 05c6 9091 0000 		lds r25,(UART+42)+1
+ 1301 05ca 9093 0000 		sts (UART+46)+1,r25
+ 1302 05ce 8093 0000 		sts UART+46,r24
+ 1303               	.LM190:
+ 1304 05d2 8091 0000 		lds r24,UART+48
+ 1305 05d6 9091 0000 		lds r25,(UART+48)+1
+ 1306 05da 0196      		adiw r24,1
+ 1307 05dc 9093 0000 		sts (UART+48)+1,r25
+ 1308 05e0 8093 0000 		sts UART+48,r24
+ 1309               	.LM191:
+ 1310 05e4 2091 0000 		lds r18,UART+48
+ 1311 05e8 3091 0000 		lds r19,(UART+48)+1
+ 1312 05ec 8091 0000 		lds r24,UART+42
+ 1313 05f0 9091 0000 		lds r25,(UART+42)+1
+ 1314 05f4 2817      		cp r18,r24
+ 1315 05f6 3907      		cpc r19,r25
+ 1316 05f8 00F0      		brlo .L124
+ 1317               	.LM192:
+ 1318 05fa 1092 0000 		sts (UART+48)+1,__zero_reg__
+ 1319 05fe 1092 0000 		sts UART+48,__zero_reg__
+ 1320               	.L124:
+ 1321               	.LM193:
+ 1322 0602 2091 0000 		lds r18,UART+44
+ 1323 0606 3091 0000 		lds r19,(UART+44)+1
+ 1324 060a 8091 0000 		lds r24,UART+42
+ 1325 060e 9091 0000 		lds r25,(UART+42)+1
+ 1326 0612 2817      		cp r18,r24
+ 1327 0614 3907      		cpc r19,r25
+ 1328 0616 00F0      		brlo .L125
+ 1329               	.LM194:
+ 1330 0618 1092 0000 		sts (UART+44)+1,__zero_reg__
+ 1331 061c 1092 0000 		sts UART+44,__zero_reg__
+ 1332               	.L125:
+ 1333               	.LBB88:
+ 1334               	.LM195:
+ 1335 0620 0E94 0000 		call Timebase_Timer_Get_SubSeconds
+ 1336               	.LBE88:
+ 1337               	.LM196:
+ 1338 0624 6093 0000 		sts UART+50,r22
+ 1339 0628 7093 0000 		sts (UART+50)+1,r23
+ 1340 062c 8093 0000 		sts (UART+50)+2,r24
+ 1341 0630 9093 0000 		sts (UART+50)+3,r25
+ 1342               	.L126:
+ 1343               	/* epilogue start */
+ 1344               	.LM197:
+ 1345 0634 0F90      		pop __tmp_reg__
+ 1346 0636 CF91      		pop r28
+ 1347 0638 DF91      		pop r29
+ 1348 063a 0895      		ret
+ 1349               	.LFE32:
+ 1351               	.global	__vector_18
+ 1353               	__vector_18:
+ 1354               	.LFB33:
+ 1355               	.LM198:
+ 1356 063c 1F92      		push __zero_reg__
+ 1357 063e 0F92      		push r0
+ 1358 0640 0FB6      		in r0,__SREG__
+ 1359 0642 0F92      		push r0
+ 1360 0644 1124      		clr __zero_reg__
+ 1361 0646 2F93      		push r18
+ 1362 0648 3F93      		push r19
+ 1363 064a 4F93      		push r20
+ 1364 064c 5F93      		push r21
+ 1365 064e 6F93      		push r22
+ 1366 0650 7F93      		push r23
+ 1367 0652 8F93      		push r24
+ 1368 0654 9F93      		push r25
+ 1369 0656 AF93      		push r26
+ 1370 0658 BF93      		push r27
+ 1371 065a EF93      		push r30
+ 1372 065c FF93      		push r31
+ 1373               	/* prologue: Signal */
+ 1374               	/* frame size = 0 */
+ 1375               	.LM199:
+ 1376 065e 0E94 0000 		call UART_Interrupt_Service_Routine
+ 1377               	/* epilogue start */
+ 1378               	.LM200:
+ 1379 0662 FF91      		pop r31
+ 1380 0664 EF91      		pop r30
+ 1381 0666 BF91      		pop r27
+ 1382 0668 AF91      		pop r26
+ 1383 066a 9F91      		pop r25
+ 1384 066c 8F91      		pop r24
+ 1385 066e 7F91      		pop r23
+ 1386 0670 6F91      		pop r22
+ 1387 0672 5F91      		pop r21
+ 1388 0674 4F91      		pop r20
+ 1389 0676 3F91      		pop r19
+ 1390 0678 2F91      		pop r18
+ 1391 067a 0F90      		pop r0
+ 1392 067c 0FBE      		out __SREG__,r0
+ 1393 067e 0F90      		pop r0
+ 1394 0680 1F90      		pop __zero_reg__
+ 1395 0682 1895      		reti
+ 1396               	.LFE33:
+ 1398               		.lcomm UART,54
+ 1639               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 uart.c
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:2      *ABS*:0000003f __SREG__
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:3      *ABS*:0000003e __SP_H__
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:4      *ABS*:0000003d __SP_L__
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:5      *ABS*:00000034 __CCP__
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:18     .text:00000000 UART_Reset_Registers
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:42     .text:0000001a UART_BAUD_Rate
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:72     .text:0000003c UART_Config_Transmitter
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:96     .text:00000052 UART_Config_Receiver
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:120    .text:00000068 UART_Config_Receiver_Interrupt
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:144    .text:00000076 UART_Transmit_Byte
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:165    .text:00000084 UART_Receive_Byte
-                            *COM*:00000110 UART
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:226    .text:000000cc UART_Struct_Init
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:298    .text:00000134 UART_Init
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:373    .text:00000182 UART_Transmit_Byte_Hex
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:461    .text:000001dc UART_Transmit_Byte_Bin
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:578    .text:00000260 UART_Transmit_Text
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:620    .text:00000282 UART_Determine_Digit_Numbers
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:710    .text:00000300 UART_Transmit_Number_Digits
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:762    .text:0000032a UART_Transmit_Number
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:809    .text:0000035c UART_Transmit_Fixed_Digit_Number
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:902    .text:000003c6 UART_Print_Debug_Data
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:966    .text:00000418 UART_Read_From_Buffer
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:985    .text:00000422 UART_Current_Buffer_Index
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:1001   .text:0000042e UART_Current_Read_Index
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:1017   .text:0000043a UART_Bytes_Available_To_Read
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:1033   .text:00000446 UART_Read
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:1083   .text:000004a6 UART_Flush_Buffer
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:1127   .text:000004e4 UART_Last_Byte_Recevied_Time_Stamp
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:1146   .text:000004fa UART_Interrupt_Service_Routine
-C:\Users\EED-R&I\AppData\Local\Temp/ccoQelhd.s:1237   .text:000005c4 __vector_18
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:2      *ABS*:0000003f __SREG__
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:3      *ABS*:0000003e __SP_H__
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:4      *ABS*:0000003d __SP_L__
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:5      *ABS*:00000034 __CCP__
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:18     .text:00000000 UART_Config_GPIO
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:30     .text:00000002 UART_Config_Clock
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:42     .text:00000004 UART_Config_BAUD_Rate
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:84     .text:00000038 UART_Config_Transmitter
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:105    .text:0000004a UART_Config_Receiver
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:126    .text:0000005c UART_Config_Receiver_Interrupt
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:150    .text:0000006a UART_Transmit_Byte
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:172    .text:0000007a UART_Receive_Byte
+                             .bss:00000000 UART
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:233    .text:000000c2 UART_Struct_Init
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:304    .text:00000122 UART_Init
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:359    .text:0000014a UART_Transmit_Byte_Hex
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:510    .text:000001fc UART_Transmit_Byte_Bin
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:665    .text:000002bc UART_Transmit_Text
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:706    .text:000002de UART_Determine_Digit_Numbers
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:796    .text:0000035c UART_Transmit_Number_Digits
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:852    .text:00000386 UART_Transmit_Number
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:899    .text:000003b8 UART_Transmit_Fixed_Digit_Number
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:992    .text:00000422 UART_Print_Debug_Data
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1056   .text:00000474 UART_Read_From_Buffer
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1075   .text:0000047e UART_Current_Buffer_Index
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1091   .text:0000048a UART_Current_Read_Index
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1107   .text:00000496 UART_Bytes_Available_To_Read
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1123   .text:000004a2 UART_Read
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1173   .text:00000502 UART_Flush_Buffer
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1217   .text:00000540 UART_Last_Byte_Recevied_Time_Stamp
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1236   .text:00000556 UART_Reference_Time
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1250   .text:0000055c UART_Interrupt_Service_Routine
+C:\Users\EED-R&I\AppData\Local\Temp/ccTHrDqg.s:1353   .text:0000063c __vector_18
 
 UNDEFINED SYMBOLS
 __udivmodsi4
+Timebase_Timer_Get_SubSeconds
 __do_copy_data
 __do_clear_bss

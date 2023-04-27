@@ -16,19 +16,26 @@
   24 0000 88EE      		ldi r24,lo8(1000)
   25 0002 93E0      		ldi r25,hi8(1000)
   26 0004 0E94 0000 		call Timebase_Init
-  27               	.L2:
-  28 0008 00C0      		rjmp .L2
-  29               	.LFE6:
-  55               	.Letext0:
+  27               	.LM3:
+  28 0008 60E8      		ldi r22,lo8(9600)
+  29 000a 75E2      		ldi r23,hi8(9600)
+  30 000c 80E0      		ldi r24,hlo8(9600)
+  31 000e 90E0      		ldi r25,hhi8(9600)
+  32 0010 0E94 0000 		call UART_Init
+  33               	.L2:
+  34 0014 00C0      		rjmp .L2
+  35               	.LFE6:
+  61               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\EED-R&I\AppData\Local\Temp/cc9GoctM.s:2      *ABS*:0000003f __SREG__
-C:\Users\EED-R&I\AppData\Local\Temp/cc9GoctM.s:3      *ABS*:0000003e __SP_H__
-C:\Users\EED-R&I\AppData\Local\Temp/cc9GoctM.s:4      *ABS*:0000003d __SP_L__
-C:\Users\EED-R&I\AppData\Local\Temp/cc9GoctM.s:5      *ABS*:00000034 __CCP__
-C:\Users\EED-R&I\AppData\Local\Temp/cc9GoctM.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\EED-R&I\AppData\Local\Temp/cc9GoctM.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\EED-R&I\AppData\Local\Temp/cc9GoctM.s:18     .text:00000000 main
+C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:2      *ABS*:0000003f __SREG__
+C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:3      *ABS*:0000003e __SP_H__
+C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:4      *ABS*:0000003d __SP_L__
+C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:5      *ABS*:00000034 __CCP__
+C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:18     .text:00000000 main
 
 UNDEFINED SYMBOLS
 Timebase_Init
+UART_Init

@@ -10,7 +10,8 @@
 #include <avr/interrupt.h>
 
 #define  TIMEBASE_UPCOUNTER    1
-#define  TIMEBASE_DOWNCOUNTER  2
+#define  TIMEBASE_DOWNCOUNTER  1
+#define  TIMEBASE_TOKEN_FUNCTIONS
 
 
 typedef union {
@@ -66,13 +67,19 @@ typedef struct timebase_config_t{
 typedef struct timebase_t{
   timebase_config_t      Config                             ;
   timebase_time_t        Time                               ;
+  
+  #ifdef TIMEBASE_TOKEN_FUNCTIONS
   volatile uint8_t       ActiveTokens                       ;
+  #endif
+  
   #ifdef TIMEBASE_UPCOUNTER
   timebase_upcounter_t   UpCounter[TIMEBASE_UPCOUNTER]      ;
   #endif
+  
   #ifdef TIMEBASE_DOWNCOUNTER
   timebase_downcounter_t DownCounter[TIMEBASE_DOWNCOUNTER]  ;
   #endif
+  
 }timebase_t;
 
 timebase_t Timebase_type;
@@ -87,7 +94,10 @@ void Timebase_Struct_Init(void){
   Timebase->Time.SubSeconds = 0;
   Timebase->Time.Seconds = 0;
   Timebase->Time.LastSample = 0;
+  
+  #ifdef TIMEBASE_TOKEN_FUNCTIONS
   Timebase->ActiveTokens = 0;
+  #endif
 
   #ifdef TIMEBASE_UPCOUNTER
   for(uint8_t i=0; i < TIMEBASE_UPCOUNTER; i++){
@@ -158,6 +168,7 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
 
 
 //Token Functions
+#ifdef TIMEBASE_TOKEN_FUNCTIONS
 uint8_t Timebase_Token_Executing(void){
   return Timebase->ActiveTokens;
 }
@@ -177,6 +188,7 @@ void Timebase_Token_Remove(void){
 void Timebase_Token_Remove_All(void){
   Timebase->ActiveTokens=0;
 }
+#endif
 
 
 //Timer Functions
@@ -197,10 +209,16 @@ void Timebase_Timer_Set_Seconds(uint32_t value){
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
+  #ifdef TIMEBASE_TOKEN_FUNCTIONS
   Timebase_Token_Add();
+  #endif
+  
   uint32_t temp = Timebase_Timer_Get_SubSeconds() + value;
   while(temp > Timebase_Timer_Get_SubSeconds());
+  
+  #ifdef TIMEBASE_TOKEN_FUNCTIONS
   Timebase_Token_Remove();
+  #endif
 }
 
 void Timebase_Timer_Delay_Seconds(uint16_t value){
@@ -591,9 +609,11 @@ void Timebase_ISR_Executables(void){
   Timebase->Time.SubSeconds++;
   if((Timebase->Time.SubSeconds % Timebase->Config.UpdateRate) == 0){
     Timebase->Time.Seconds++;
+	#ifdef TIMEBASE_TOKEN_FUNCTIONS
     if(Timebase_Token_Executing() == 0){
       Timebase->Time.SubSeconds = 0;
     }
+	#endif
   }
 }
 
