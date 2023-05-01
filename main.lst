@@ -22,20 +22,23 @@
   30 000c 80E0      		ldi r24,hlo8(9600)
   31 000e 90E0      		ldi r25,hhi8(9600)
   32 0010 0E94 0000 		call UART_Init
-  33               	.L2:
-  34 0014 00C0      		rjmp .L2
-  35               	.LFE6:
-  61               	.Letext0:
+  33               	.LM4:
+  34 0014 0E94 0000 		call LPF_Init
+  35               	.L2:
+  36 0018 00C0      		rjmp .L2
+  37               	.LFE6:
+  63               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:2      *ABS*:0000003f __SREG__
-C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:3      *ABS*:0000003e __SP_H__
-C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:4      *ABS*:0000003d __SP_L__
-C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:5      *ABS*:00000034 __CCP__
-C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\EED-R&I\AppData\Local\Temp/ccHvMeHf.s:18     .text:00000000 main
+C:\Users\farid\AppData\Local\Temp/cct6nEjd.s:2      *ABS*:0000003f __SREG__
+C:\Users\farid\AppData\Local\Temp/cct6nEjd.s:3      *ABS*:0000003e __SP_H__
+C:\Users\farid\AppData\Local\Temp/cct6nEjd.s:4      *ABS*:0000003d __SP_L__
+C:\Users\farid\AppData\Local\Temp/cct6nEjd.s:5      *ABS*:00000034 __CCP__
+C:\Users\farid\AppData\Local\Temp/cct6nEjd.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\farid\AppData\Local\Temp/cct6nEjd.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\farid\AppData\Local\Temp/cct6nEjd.s:18     .text:00000000 main
 
 UNDEFINED SYMBOLS
 Timebase_Init
 UART_Init
+LPF_Init
