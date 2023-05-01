@@ -69,25 +69,21 @@ void UART_Config_BAUD_Rate(uint32_t baud_rate){
   UBRR0L = UBRR_VAL & 0xFF ;
 }
 
+
 void UART_Config_Transmitter(void){
-  #ifdef UART_ENABLE_TX   
   UCSR0B|=(1<<TXEN0);
   UCSR0C=(1<<UCSZ00)| (1<<UCSZ01);
-  #endif
 }
 
+
 void UART_Config_Receiver(void){
-  #ifdef UART_ENABLE_RX
   UCSR0B|=(1<<RXEN0);
   UCSR0C=(1<<UCSZ00)| (1<<UCSZ01);
-  #endif
 }
 
 void UART_Config_Receiver_Interrupt(void){
-  #ifdef UART_ENABLE_RX_INT
   UCSR0B|=(1<<RXCIE0);
   sei();
-  #endif
 }
 
 void UART_Transmit_Byte(uint8_t val){
@@ -110,11 +106,13 @@ uint8_t UART_Receive_Byte(void){
   return val;
 }
 
+
 #ifdef UART_LAST_RECEIVED_TIMESTAMP
 uint32_t UART_Reference_Time(void){
   return Timebase_Timer_Get_SubSeconds();
 }
 #endif
+
 
 void UART_Struct_Init(void){
   UART.Error=0;
@@ -146,10 +144,20 @@ void UART_Init(uint32_t baud){
   UART_Config_GPIO();
   UART_Config_Clock();
   UART_Config_BAUD_Rate(baud);
+  
+  #ifdef UART_ENABLE_TX  
   UART_Config_Transmitter();
+  #endif
+  
+  #ifdef UART_ENABLE_RX
   UART_Config_Receiver();
+  #endif
+  
+  #ifdef UART_ENABLE_RX_INT
   UART_Config_Receiver_Interrupt();
+  #endif
 }
+
 
 #ifdef UART_AUXILIARY_PRINT_FUNCTIONS
 void UART_Transmit_Byte_Hex(uint32_t val){
@@ -339,7 +347,7 @@ uint32_t UART_Last_Byte_Recevied_Time_Stamp(void){
 #ifdef UART_ENABLE_RX_INT
 void UART_Interrupt_Service_Routine(void){
   volatile uint8_t received_byte=0;
-	received_byte=(uint8_t)UART_Receive_Byte();
+  received_byte=(uint8_t)UART_Receive_Byte();
   if(UART.Error==0x00){
     UART.Buffer[UART.BufferIndex]=received_byte;
     UART.BufferIndex++;

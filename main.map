@@ -466,24 +466,24 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_pubnames
                 0x00000a7d      0x2f0 uart.o
 
-.debug_info     0x00000000     0x264d
+.debug_info     0x00000000     0x2653
  *(.debug_info)
  .debug_info    0x00000000       0x76 main.o
  .debug_info    0x00000076     0x1e14 timebase.o
- .debug_info    0x00001e8a      0x7c3 uart.o
+ .debug_info    0x00001e8a      0x7c9 uart.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x5d2
+.debug_abbrev   0x00000000      0x601
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0x41 main.o
  .debug_abbrev  0x00000041      0x304 timebase.o
- .debug_abbrev  0x00000345      0x28d uart.o
+ .debug_abbrev  0x00000345      0x2bc uart.o
 
-.debug_line     0x00000000     0x13d5
+.debug_line     0x00000000     0x13d8
  *(.debug_line)
  .debug_line    0x00000000       0x60 main.o
  .debug_line    0x00000060      0xc87 timebase.o
- .debug_line    0x00000ce7      0x6ee uart.o
+ .debug_line    0x00000ce7      0x6f1 uart.o
 
 .debug_frame    0x00000000      0x690
  *(.debug_frame)
@@ -491,14 +491,14 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_frame   0x00000020      0x4a0 timebase.o
  .debug_frame   0x000004c0      0x1d0 uart.o
 
-.debug_str      0x00000000      0xe63
+.debug_str      0x00000000      0xead
  *(.debug_str)
  .debug_str     0x00000000       0x94 main.o
                                  0xc8 (size before relaxing)
  .debug_str     0x00000094      0xa92 timebase.o
                                 0xb97 (size before relaxing)
- .debug_str     0x00000b26      0x33d uart.o
-                                0x433 (size before relaxing)
+ .debug_str     0x00000b26      0x387 uart.o
+                                0x434 (size before relaxing)
 
 .debug_loc      0x00000000      0xc86
  *(.debug_loc)
