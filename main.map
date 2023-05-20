@@ -132,7 +132,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x1a1c
+.text           0x00000000     0x1a1e
  *(.vectors)
  .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vectors
@@ -317,31 +317,31 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x0000165c                UART_Bytes_Available_To_Read
                 0x00001802                __vector_18
                 0x00001310                UART_Transmit_Byte_Hex
- .text          0x0000184a      0x14c lpf.o
-                0x000018ec                LPF_Filter
-                0x00001990                LPF_Init
+ .text          0x0000184a      0x14e lpf.o
+                0x00001992                LPF_Init
+                0x000018ec                LPF_Get_Filtered_Value
                 0x000018d2                LPF_Get_Alpha
                 0x000018b8                LPF_Set_Alpha
                 0x0000184a                LPF_Struct_Init
- .text          0x00001996        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
- .text          0x00001996        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
- .text          0x00001996        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text          0x00001996        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text          0x00001996        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x00001996                . = ALIGN (0x2)
+ .text          0x00001998        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+ .text          0x00001998        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .text          0x00001998        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x00001998        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x00001998        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x00001998                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00001996       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
-                0x00001996                __mulsi3
- .text.libgcc   0x000019d4       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
-                0x000019d4                __udivmodsi4
- .text.libgcc   0x00001a18        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x00001a18        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x00001a18        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x00001a18                . = ALIGN (0x2)
+ .text.libgcc   0x00001998       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+                0x00001998                __mulsi3
+ .text.libgcc   0x000019d6       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x000019d6                __udivmodsi4
+ .text.libgcc   0x00001a1a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00001a1a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00001a1a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x00001a1a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001a18        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00001a18                exit
-                0x00001a18                _exit
+ .fini9         0x00001a1a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00001a1a                exit
+                0x00001a1a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -360,11 +360,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001a18        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x00001a1a        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00001a1c                _etext = .
+                0x00001a1e                _etext = .
 
-.data           0x00800100        0x4 load address 0x00001a1c
+.data           0x00800100        0x4 load address 0x00001a1e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
@@ -407,8 +407,8 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  COMMON         0x0080016e       0x1b lpf.o
                 0x0080016e                LPF
                 0x00800189                PROVIDE (__bss_end, .)
-                0x00001a1c                __data_load_start = LOADADDR (.data)
-                0x00001a20                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00001a1e                __data_load_start = LOADADDR (.data)
+                0x00001a22                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800189        0x0
                 0x00800189                PROVIDE (__noinit_start, .)
@@ -478,7 +478,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00000060       0x20 lpf.o
 
 .debug_pubnames
-                0x00000000      0xddb
+                0x00000000      0xde7
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000       0x1b main.o
@@ -487,29 +487,29 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_pubnames
                 0x00000a7d      0x2f0 uart.o
  .debug_pubnames
-                0x00000d6d       0x6e lpf.o
+                0x00000d6d       0x7a lpf.o
 
-.debug_info     0x00000000     0x282f
+.debug_info     0x00000000     0x284d
  *(.debug_info)
  .debug_info    0x00000000       0x76 main.o
  .debug_info    0x00000076     0x1e14 timebase.o
  .debug_info    0x00001e8a      0x7c9 uart.o
- .debug_info    0x00002653      0x1dc lpf.o
+ .debug_info    0x00002653      0x1fa lpf.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x75a
+.debug_abbrev   0x00000000      0x769
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0x41 main.o
  .debug_abbrev  0x00000041      0x304 timebase.o
  .debug_abbrev  0x00000345      0x2bc uart.o
- .debug_abbrev  0x00000601      0x159 lpf.o
+ .debug_abbrev  0x00000601      0x168 lpf.o
 
-.debug_line     0x00000000     0x1520
+.debug_line     0x00000000     0x1530
  *(.debug_line)
  .debug_line    0x00000000       0x68 main.o
  .debug_line    0x00000068      0xc87 timebase.o
  .debug_line    0x00000cef      0x6f1 uart.o
- .debug_line    0x000013e0      0x140 lpf.o
+ .debug_line    0x000013e0      0x150 lpf.o
 
 .debug_frame    0x00000000      0x6f0
  *(.debug_frame)
@@ -518,22 +518,22 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_frame   0x000004c0      0x1d0 uart.o
  .debug_frame   0x00000690       0x60 lpf.o
 
-.debug_str      0x00000000      0xec1
+.debug_str      0x00000000      0xf20
  *(.debug_str)
- .debug_str     0x00000000       0x95 main.o
-                                 0xc9 (size before relaxing)
- .debug_str     0x00000095      0xa92 timebase.o
+ .debug_str     0x00000000       0x94 main.o
+                                 0xc8 (size before relaxing)
+ .debug_str     0x00000094      0xadc timebase.o
                                 0xb98 (size before relaxing)
- .debug_str     0x00000b27      0x337 uart.o
+ .debug_str     0x00000b70      0x337 uart.o
                                 0x434 (size before relaxing)
- .debug_str     0x00000e5e       0x63 lpf.o
-                                0x136 (size before relaxing)
+ .debug_str     0x00000ea7       0x79 lpf.o
+                                0x14b (size before relaxing)
 
-.debug_loc      0x00000000      0xd13
+.debug_loc      0x00000000      0xd4f
  *(.debug_loc)
  .debug_loc     0x00000000      0x7e6 timebase.o
  .debug_loc     0x000007e6      0x4a0 uart.o
- .debug_loc     0x00000c86       0x8d lpf.o
+ .debug_loc     0x00000c86       0xc9 lpf.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -547,8 +547,8 @@ Cross Reference Table
 
 Symbol                                            File
 LPF                                               lpf.o
-LPF_Filter                                        lpf.o
 LPF_Get_Alpha                                     lpf.o
+LPF_Get_Filtered_Value                            lpf.o
 LPF_Init                                          lpf.o
                                                   main.o
 LPF_Set_Alpha                                     lpf.o

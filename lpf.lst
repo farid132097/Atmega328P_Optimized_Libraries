@@ -105,8 +105,8 @@
  117               	/* epilogue start */
  118 00a0 0895      		ret
  119               	.LFE4:
- 121               	.global	LPF_Filter
- 123               	LPF_Filter:
+ 121               	.global	LPF_Get_Filtered_Value
+ 123               	LPF_Get_Filtered_Value:
  124               	.LFB5:
  125               	.LM18:
  126               	.LVL5:
@@ -132,106 +132,117 @@
  146               	.LBB8:
  147               	.LM19:
  148 00c2 90E0      		ldi r25,lo8(0)
- 149 00c4 4C01      		movw r8,r24
+ 149 00c4 6C01      		movw r12,r24
  150               	.LVL6:
  151 00c6 43E0      		ldi r20,3
- 152 00c8 880C      	1:	lsl r8
- 153 00ca 991C      		rol r9
+ 152 00c8 CC0C      	1:	lsl r12
+ 153 00ca DD1C      		rol r13
  154 00cc 4A95      		dec r20
  155 00ce 01F4      		brne 1b
  156               	.LVL7:
- 157 00d0 880E      		add r8,r24
- 158 00d2 991E      		adc r9,r25
+ 157 00d0 C80E      		add r12,r24
+ 158 00d2 D91E      		adc r13,r25
  159 00d4 80E0      		ldi r24,lo8(LPF)
  160 00d6 90E0      		ldi r25,hi8(LPF)
- 161 00d8 880E      		add r8,r24
- 162 00da 991E      		adc r9,r25
- 163 00dc F401      		movw r30,r8
- 164 00de A080      		ld r10,Z
+ 161 00d8 C80E      		add r12,r24
+ 162 00da D91E      		adc r13,r25
+ 163 00dc F601      		movw r30,r12
+ 164 00de 2081      		ld r18,Z
  165               	.LBE8:
  166               	.LBE7:
  167               	.LM20:
- 168 00e0 64E6      		ldi r22,lo8(100)
- 169 00e2 70E0      		ldi r23,hi8(100)
- 170 00e4 6A19      		sub r22,r10
- 171 00e6 7109      		sbc r23,__zero_reg__
- 172 00e8 8827      		clr r24
- 173 00ea 77FD      		sbrc r23,7
- 174 00ec 8095      		com r24
- 175 00ee 982F      		mov r25,r24
- 176 00f0 2581      		ldd r18,Z+5
- 177 00f2 3681      		ldd r19,Z+6
- 178 00f4 4781      		ldd r20,Z+7
- 179 00f6 5085      		ldd r21,Z+8
- 180 00f8 0E94 0000 		call __mulsi3
- 181 00fc 7B01      		movw r14,r22
- 182 00fe 8C01      		movw r16,r24
- 183 0100 BB24      		clr r11
- 184 0102 CC24      		clr r12
- 185 0104 DD24      		clr r13
- 186 0106 C301      		movw r24,r6
- 187 0108 B201      		movw r22,r4
- 188 010a A601      		movw r20,r12
- 189 010c 9501      		movw r18,r10
- 190 010e 0E94 0000 		call __mulsi3
- 191 0112 E60E      		add r14,r22
- 192 0114 F71E      		adc r15,r23
- 193 0116 081F      		adc r16,r24
- 194 0118 191F      		adc r17,r25
- 195 011a F401      		movw r30,r8
- 196 011c E582      		std Z+5,r14
- 197 011e F682      		std Z+6,r15
- 198 0120 0783      		std Z+7,r16
- 199 0122 1087      		std Z+8,r17
- 200               	.LM21:
- 201 0124 B701      		movw r22,r14
- 202 0126 C801      		movw r24,r16
- 203               	/* epilogue start */
- 204 0128 1F91      		pop r17
- 205 012a 0F91      		pop r16
- 206 012c FF90      		pop r15
- 207 012e EF90      		pop r14
- 208 0130 DF90      		pop r13
- 209 0132 CF90      		pop r12
- 210 0134 BF90      		pop r11
- 211 0136 AF90      		pop r10
- 212 0138 9F90      		pop r9
- 213 013a 8F90      		pop r8
- 214 013c 7F90      		pop r7
- 215 013e 6F90      		pop r6
- 216 0140 5F90      		pop r5
- 217 0142 4F90      		pop r4
- 218               	.LVL8:
- 219 0144 0895      		ret
- 220               	.LFE5:
- 222               	.global	LPF_Init
- 224               	LPF_Init:
- 225               	.LFB6:
- 226               	.LM22:
- 227               	/* prologue: function */
- 228               	/* frame size = 0 */
- 229               	.LM23:
- 230 0146 0E94 0000 		call LPF_Struct_Init
- 231               	/* epilogue start */
- 232               	.LM24:
- 233 014a 0895      		ret
- 234               	.LFE6:
- 236               		.comm LPF,27,1
- 293               	.Letext0:
+ 168 00e0 822E      		mov r8,r18
+ 169               	.LVL8:
+ 170 00e2 9924      		clr r9
+ 171               	.LVL9:
+ 172 00e4 AA24      		clr r10
+ 173 00e6 BB24      		clr r11
+ 174               	.LVL10:
+ 175               	.LM21:
+ 176 00e8 64E6      		ldi r22,lo8(100)
+ 177 00ea 70E0      		ldi r23,hi8(100)
+ 178 00ec 621B      		sub r22,r18
+ 179 00ee 7109      		sbc r23,__zero_reg__
+ 180 00f0 8827      		clr r24
+ 181 00f2 77FD      		sbrc r23,7
+ 182 00f4 8095      		com r24
+ 183 00f6 982F      		mov r25,r24
+ 184               	.LVL11:
+ 185               	.LM22:
+ 186 00f8 2581      		ldd r18,Z+5
+ 187 00fa 3681      		ldd r19,Z+6
+ 188 00fc 4781      		ldd r20,Z+7
+ 189 00fe 5085      		ldd r21,Z+8
+ 190 0100 0E94 0000 		call __mulsi3
+ 191               	.LVL12:
+ 192 0104 7B01      		movw r14,r22
+ 193 0106 8C01      		movw r16,r24
+ 194 0108 C301      		movw r24,r6
+ 195 010a B201      		movw r22,r4
+ 196 010c A501      		movw r20,r10
+ 197 010e 9401      		movw r18,r8
+ 198 0110 0E94 0000 		call __mulsi3
+ 199 0114 E60E      		add r14,r22
+ 200 0116 F71E      		adc r15,r23
+ 201 0118 081F      		adc r16,r24
+ 202 011a 191F      		adc r17,r25
+ 203 011c F601      		movw r30,r12
+ 204 011e E582      		std Z+5,r14
+ 205 0120 F682      		std Z+6,r15
+ 206 0122 0783      		std Z+7,r16
+ 207 0124 1087      		std Z+8,r17
+ 208               	.LM23:
+ 209 0126 B701      		movw r22,r14
+ 210 0128 C801      		movw r24,r16
+ 211               	/* epilogue start */
+ 212 012a 1F91      		pop r17
+ 213 012c 0F91      		pop r16
+ 214 012e FF90      		pop r15
+ 215 0130 EF90      		pop r14
+ 216 0132 DF90      		pop r13
+ 217 0134 CF90      		pop r12
+ 218 0136 BF90      		pop r11
+ 219 0138 AF90      		pop r10
+ 220               	.LVL13:
+ 221 013a 9F90      		pop r9
+ 222               	.LVL14:
+ 223 013c 8F90      		pop r8
+ 224               	.LVL15:
+ 225 013e 7F90      		pop r7
+ 226 0140 6F90      		pop r6
+ 227 0142 5F90      		pop r5
+ 228 0144 4F90      		pop r4
+ 229               	.LVL16:
+ 230 0146 0895      		ret
+ 231               	.LFE5:
+ 233               	.global	LPF_Init
+ 235               	LPF_Init:
+ 236               	.LFB6:
+ 237               	.LM24:
+ 238               	/* prologue: function */
+ 239               	/* frame size = 0 */
+ 240               	.LM25:
+ 241 0148 0E94 0000 		call LPF_Struct_Init
+ 242               	/* epilogue start */
+ 243               	.LM26:
+ 244 014c 0895      		ret
+ 245               	.LFE6:
+ 247               		.comm LPF,27,1
+ 304               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 lpf.c
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:2      *ABS*:0000003f __SREG__
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:3      *ABS*:0000003e __SP_H__
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:4      *ABS*:0000003d __SP_L__
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:5      *ABS*:00000034 __CCP__
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:18     .text:00000000 LPF_Struct_Init
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:2      *ABS*:0000003f __SREG__
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:3      *ABS*:0000003e __SP_H__
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:4      *ABS*:0000003d __SP_L__
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:5      *ABS*:00000034 __CCP__
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:18     .text:00000000 LPF_Struct_Init
                             *COM*:0000001b LPF
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:68     .text:0000006e LPF_Set_Alpha
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:95     .text:00000088 LPF_Get_Alpha
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:123    .text:000000a2 LPF_Filter
-C:\Users\farid\AppData\Local\Temp/ccXwShz6.s:224    .text:00000146 LPF_Init
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:68     .text:0000006e LPF_Set_Alpha
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:95     .text:00000088 LPF_Get_Alpha
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:123    .text:000000a2 LPF_Get_Filtered_Value
+C:\Users\EED-R&I\AppData\Local\Temp/ccEH02vA.s:235    .text:00000148 LPF_Init
 
 UNDEFINED SYMBOLS
 __mulsi3

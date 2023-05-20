@@ -8,6 +8,7 @@
 
 
 #include <avr/io.h>
+
 #define NUMBER_OF_LPF 3
 
 typedef struct lpf_t{
@@ -34,8 +35,12 @@ uint8_t LPF_Get_Alpha(uint8_t lpf_index){
   return LPF[lpf_index].Alpha;
 }
 
-int32_t LPF_Filter(uint8_t lpf_index, int32_t val){
-  return LPF[lpf_index].Output = (val * LPF_Get_Alpha(lpf_index)) + (LPF[lpf_index].Output * (100 - LPF_Get_Alpha(lpf_index)));
+int32_t LPF_Get_Filtered_Value(uint8_t lpf_index, int32_t val){
+  int32_t tmp1=LPF_Get_Alpha(lpf_index);
+  tmp1*=val;
+  int32_t tmp2=(100 - LPF_Get_Alpha(lpf_index));
+  tmp2*=LPF[lpf_index].Output ;
+  return LPF[lpf_index].Output = tmp1 + tmp2;
 }
 
 void LPF_Init(void){
