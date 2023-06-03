@@ -9,8 +9,8 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#define  TIMEBASE_UPCOUNTER    1
-#define  TIMEBASE_DOWNCOUNTER  1
+#define  TIMEBASE_UPCOUNTER        1
+#define  TIMEBASE_DOWNCOUNTER      1
 #define  TIMEBASE_TOKEN_FUNCTIONS
 
 
@@ -79,6 +79,7 @@ typedef struct timebase_t{
   #ifdef TIMEBASE_DOWNCOUNTER
   timebase_downcounter_t DownCounter[TIMEBASE_DOWNCOUNTER]  ;
   #endif
+  volatile uint8_t       FunctionUpdatesRequired            ;
   
 }timebase_t;
 
@@ -118,6 +119,7 @@ void Timebase_Struct_Init(void){
     Timebase->DownCounter[i].PeriodValue = 0;
   }
   #endif
+  Timebase->FunctionUpdatesRequired=0;
 }
 
 
@@ -597,18 +599,22 @@ void Timebase_Init(uint16_t UpdateRateHz){
 }
 
 void Timebase_Main_Loop_Executables(void){
-  #ifdef TIMEBASE_UPCOUNTER
-  Timebase_UpCounter_Update_All();
-  #endif
-  #ifdef TIMEBASE_DOWNCOUNTER
-  Timebase_DownCounter_Update_All();
-  #endif
+  if(Timebase->FunctionUpdatesRequired){
+    #ifdef TIMEBASE_UPCOUNTER
+    Timebase_UpCounter_Update_All();
+    #endif
+    #ifdef TIMEBASE_DOWNCOUNTER
+    Timebase_DownCounter_Update_All();
+    #endif
+	Timebase->FunctionUpdatesRequired=0;
+  }
 }
 
 void Timebase_ISR_Executables(void){
   Timebase->Time.SubSeconds++;
   if((Timebase->Time.SubSeconds % Timebase->Config.UpdateRate) == 0){
     Timebase->Time.Seconds++;
+	Timebase->FunctionUpdatesRequired=1;
 	#ifdef TIMEBASE_TOKEN_FUNCTIONS
     if(Timebase_Token_Executing() == 0){
       Timebase->Time.SubSeconds = 0;
