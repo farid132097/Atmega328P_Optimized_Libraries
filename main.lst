@@ -1,0 +1,77 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	main
+  18               	main:
+  19               	.LFB6:
+  20               	.LM1:
+  21 0000 CF93      		push r28
+  22 0002 DF93      		push r29
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25               	.LM2:
+  26 0004 0E94 0000 		call Debug_Init
+  27               	.LBB12:
+  28               	.LBB13:
+  29               	.LBB14:
+  30               	.LBB15:
+  31               	.LM3:
+  32 0008 CCE2      		ldi r28,lo8(300)
+  33 000a D1E0      		ldi r29,hi8(300)
+  34               	.LVL0:
+  35               	.L3:
+  36               	.LBE15:
+  37               	.LBE14:
+  38               	.LBE13:
+  39               	.LBE12:
+  40               	.LM4:
+  41 000c 8AEA      		ldi r24,lo8(-86)
+  42               	.LVL1:
+  43 000e 0E94 0000 		call Debug_Tx_Byte
+  44               	.LVL2:
+  45 0012 80E1      		ldi r24,lo8(10000)
+  46 0014 97E2      		ldi r25,hi8(10000)
+  47               	.LVL3:
+  48               	.L2:
+  49               	.LBB19:
+  50               	.LBB18:
+  51               	.LBB17:
+  52               	.LBB16:
+  53               	.LM5:
+  54 0016 FE01      		movw r30,r28
+  55               	.LVL4:
+  56               	/* #APP */
+  57               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  58 0018 3197      		1: sbiw r30,1
+  59 001a 01F4      		brne 1b
+  60               	 ;  0 "" 2
+  61               	/* #NOAPP */
+  62               	.LBE16:
+  63               	.LBE17:
+  64               	.LM6:
+  65 001c 0197      		sbiw r24,1
+  66               	.LM7:
+  67 001e 01F4      		brne .L2
+  68 0020 00C0      		rjmp .L3
+  69               	.LBE18:
+  70               	.LBE19:
+  71               	.LFE6:
+  97               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:2      *ABS*:0000003f __SREG__
+C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:3      *ABS*:0000003e __SP_H__
+C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:4      *ABS*:0000003d __SP_L__
+C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:5      *ABS*:00000034 __CCP__
+C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:18     .text:00000000 main
+
+UNDEFINED SYMBOLS
+Debug_Init
+Debug_Tx_Byte
