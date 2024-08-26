@@ -10,8 +10,8 @@ int main(void){
   
   while(1){
     
-	Debug_Tx_Byte(0xAA);
-	_delay_ms(1000);
+	Debug_Tx_Parameter_NL("ADC_VAL",125);
+	_delay_ms(100);
 	
   }
 }

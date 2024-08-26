@@ -1,13 +1,13 @@
 
 
 #define  DEBUG_ENABLE_TX
-#define  DEBUG_ENABLE_RX
-#define  DEBUG_ENABLE_DBG
+//#define  DEBUG_ENABLE_RX
+//#define  DEBUG_ENABLE_DBG
 
 #define  DEBUG_TX_DDR     DDRD
 #define  DEBUG_TX_PORT    PORTD
 #define  DEBUG_TX_PIN     PIND
-#define  DEBUG_TX_bp      6U
+#define  DEBUG_TX_bp      1U
 
 
 /*Must edit DEBUG_RX_XXXX definition*/
@@ -25,12 +25,12 @@
 #define  DEBUG_TEST_bp    1U
 
 
-#define  DEBUG_BAUD_RATE_38400
+#define  DEBUG_BAUD_RATE_9600
 
 
 //#define  DEBUG_USE_DELAY
-//#define  DEBUG_USE_TIMER0
-#define  DEBUG_USE_TIMER1
+#define  DEBUG_USE_TIMER0
+//#define  DEBUG_USE_TIMER1
 //#define  DEBUG_USE_TIMER2
 
 #define  DEBUG_RX_BUF_SIZE 32
@@ -48,54 +48,69 @@ uint8_t  Debug_Rx_Pin_Get_State(void);
 
 void     Debug_Delay(uint16_t val);
 void     Debug_Delay_Tx_Bits(void);
-void     Debug_Delay_Index_1(void);
-void     Debug_Delay_Index_2(void);
+void     Debug_Delay_Rx_Bits(void);
+void     Debug_Delay_Rx_Half_Bit(void);
 
 
 void     Debug_Tx_Byte(uint8_t val);
+uint8_t  Debug_Rx_Byte(void);
 
-/*uint8_t  debug_rx_byte(void);
+/*
 uint8_t  debug_rx_byte_get(void);
 void     debug_rx_byte_clear(void);
 void     debug_rx_byte_set(uint8_t val);
+*/
 
-void     debug_tx_hex(uint32_t val);
-void     debug_tx_bin(uint32_t val);
 
-void     debug_tx_nl(void);
-void     debug_tx_sp(void);
-void     debug_tx_cm(void);
+/////////For Text & Commons////////
+void     Debug_Tx_NL(void);
+void     Debug_Tx_SP(void);
+void     Debug_Tx_CM(void);
+void     Debug_Tx_Text(char *str);
+void     Debug_Tx_Text_NL(char *str);
+void     Debug_Tx_Text_SP(char *str);
+void     Debug_Tx_Text_CM(char *str);
 
-void     debug_tx_text(char *str);
-void     debug_tx_text_nl(char *str);
-void     debug_tx_text_sp(char *str);
-void     debug_tx_text_cm(char *str);
 
-void     debug_determine_digit_numbers(uint32_t num);
-void     debug_tx_number_digits(void);
+/////////For Decimal Numbers////////
 
-void     debug_tx_number(int32_t num);
-void     debug_tx_number_nl(int32_t num);
-void     debug_tx_number_sp(int32_t num);
-void     debug_tx_number_cm(int32_t num);
+void     Debug_Determine_Digit_Numbers(uint32_t num);
+void     Debug_Tx_Number_Digits(void);
+void     Debug_Tx_Number(int32_t num);
+void     Debug_Tx_Number_NL(int32_t num);
+void     Debug_Tx_Number_SP(int32_t num);
+void     Debug_Tx_Number_CM(int32_t num);
+void     Debug_Tx_Parameter_NL(char *name, int32_t num);
+void     Debug_Tx_Parameter_SP(char *name, int32_t num);
+void     Debug_Tx_Parameter_CM(char *name, int32_t num);
 
-void     debug_tx_number_hex_nl(int32_t num);
-void     debug_tx_number_hex_sp(int32_t num);
-void     debug_tx_number_hex_cm(int32_t num);
 
-void     debug_tx_parameter_nl(char *name, int32_t num);
-void     debug_tx_parameter_sp(char *name, int32_t num);
-void     debug_tx_parameter_cm(char *name, int32_t num);
+/////////For Hexadecimal Numbers/////
+void     Debug_Tx_Hex(uint32_t val);
+void     Debug_Tx_Number_Hex_NL(int32_t num);
+void     Debug_Tx_Number_Hex_SP(int32_t num);
+void     Debug_Tx_Number_Hex_CM(int32_t num);
+void     Debug_Tx_Parameter_Hex_NL(char *name, int32_t num);
+void     Debug_Tx_Parameter_Hex_SP(char *name, int32_t num);
+void     Debug_Tx_Parameter_Hex_CM(char *name, int32_t num);
 
-void     debug_tx_parameter_hex_nl(char *name, int32_t num);
-void     debug_tx_parameter_hex_sp(char *name, int32_t num);
-void     debug_tx_parameter_hex_cm(char *name, int32_t num);
 
+/////////For Binary Numbers///////
+void     Debug_Tx_Bin(uint32_t val);
+void     Debug_Tx_Number_Bin_NL(int32_t num);
+void     Debug_Tx_Number_Bin_SP(int32_t num);
+void     Debug_Tx_Number_Bin_CM(int32_t num);
+void     Debug_Tx_Parameter_Bin_NL(char *name, int32_t num);
+void     Debug_Tx_Parameter_Bin_SP(char *name, int32_t num);
+void     Debug_Tx_Parameter_Bin_CM(char *name, int32_t num);
+
+/*
 uint8_t  debug_buf_get(uint8_t index);
 uint8_t  debug_buf_index_get(void);
 void     debug_flush_buf(void);
 uint8_t  debug_databsy_get(void);
 uint8_t  debug_data_available_rx_buf(void);
-uint8_t  debug_available_bytes_rx_buf(void);*/
+uint8_t  debug_available_bytes_rx_buf(void);
+*/
 
 void     Debug_Init(void);

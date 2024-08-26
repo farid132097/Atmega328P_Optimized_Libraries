@@ -6,72 +6,83 @@
    6               	__tmp_reg__ = 0
    7               	__zero_reg__ = 1
   15               	.Ltext0:
-  16               	.global	main
-  18               	main:
-  19               	.LFB6:
-  20               	.LM1:
-  21 0000 CF93      		push r28
-  22 0002 DF93      		push r29
-  23               	/* prologue: function */
-  24               	/* frame size = 0 */
-  25               	.LM2:
-  26 0004 0E94 0000 		call Debug_Init
-  27               	.LBB12:
-  28               	.LBB13:
-  29               	.LBB14:
-  30               	.LBB15:
-  31               	.LM3:
-  32 0008 CCE2      		ldi r28,lo8(300)
-  33 000a D1E0      		ldi r29,hi8(300)
-  34               	.LVL0:
-  35               	.L3:
-  36               	.LBE15:
-  37               	.LBE14:
-  38               	.LBE13:
-  39               	.LBE12:
-  40               	.LM4:
-  41 000c 8AEA      		ldi r24,lo8(-86)
-  42               	.LVL1:
-  43 000e 0E94 0000 		call Debug_Tx_Byte
-  44               	.LVL2:
-  45 0012 80E1      		ldi r24,lo8(10000)
-  46 0014 97E2      		ldi r25,hi8(10000)
-  47               	.LVL3:
-  48               	.L2:
-  49               	.LBB19:
-  50               	.LBB18:
-  51               	.LBB17:
-  52               	.LBB16:
-  53               	.LM5:
-  54 0016 FE01      		movw r30,r28
-  55               	.LVL4:
-  56               	/* #APP */
-  57               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
-  58 0018 3197      		1: sbiw r30,1
-  59 001a 01F4      		brne 1b
-  60               	 ;  0 "" 2
-  61               	/* #NOAPP */
-  62               	.LBE16:
-  63               	.LBE17:
-  64               	.LM6:
-  65 001c 0197      		sbiw r24,1
-  66               	.LM7:
-  67 001e 01F4      		brne .L2
-  68 0020 00C0      		rjmp .L3
-  69               	.LBE18:
-  70               	.LBE19:
-  71               	.LFE6:
-  97               	.Letext0:
+  16               		.data
+  17               	.LC0:
+  18 0000 4144 435F 		.string	"ADC_VAL"
+  18      5641 4C00 
+  19               		.text
+  20               	.global	main
+  22               	main:
+  23               	.LFB6:
+  24               	.LM1:
+  25 0000 CF93      		push r28
+  26 0002 DF93      		push r29
+  27               	/* prologue: function */
+  28               	/* frame size = 0 */
+  29               	.LM2:
+  30 0004 0E94 0000 		call Debug_Init
+  31               	.LBB12:
+  32               	.LBB13:
+  33               	.LBB14:
+  34               	.LBB15:
+  35               	.LM3:
+  36 0008 C8EC      		ldi r28,lo8(200)
+  37 000a D0E0      		ldi r29,hi8(200)
+  38               	.LVL0:
+  39               	.L3:
+  40               	.LBE15:
+  41               	.LBE14:
+  42               	.LBE13:
+  43               	.LBE12:
+  44               	.LM4:
+  45 000c 80E0      		ldi r24,lo8(.LC0)
+  46 000e 90E0      		ldi r25,hi8(.LC0)
+  47               	.LVL1:
+  48 0010 4DE7      		ldi r20,lo8(125)
+  49 0012 50E0      		ldi r21,hi8(125)
+  50 0014 60E0      		ldi r22,hlo8(125)
+  51 0016 70E0      		ldi r23,hhi8(125)
+  52 0018 0E94 0000 		call Debug_Tx_Parameter_NL
+  53               	.LVL2:
+  54 001c 88EE      		ldi r24,lo8(1000)
+  55 001e 93E0      		ldi r25,hi8(1000)
+  56               	.LVL3:
+  57               	.L2:
+  58               	.LBB19:
+  59               	.LBB18:
+  60               	.LBB17:
+  61               	.LBB16:
+  62               	.LM5:
+  63 0020 FE01      		movw r30,r28
+  64               	.LVL4:
+  65               	/* #APP */
+  66               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  67 0022 3197      		1: sbiw r30,1
+  68 0024 01F4      		brne 1b
+  69               	 ;  0 "" 2
+  70               	/* #NOAPP */
+  71               	.LBE16:
+  72               	.LBE17:
+  73               	.LM6:
+  74 0026 0197      		sbiw r24,1
+  75               	.LM7:
+  76 0028 01F4      		brne .L2
+  77 002a 00C0      		rjmp .L3
+  78               	.LBE18:
+  79               	.LBE19:
+  80               	.LFE6:
+ 106               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:2      *ABS*:0000003f __SREG__
-C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:3      *ABS*:0000003e __SP_H__
-C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:4      *ABS*:0000003d __SP_L__
-C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:5      *ABS*:00000034 __CCP__
-C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\farid\AppData\Local\Temp/ccZCov8t.s:18     .text:00000000 main
+C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:2      *ABS*:0000003f __SREG__
+C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:3      *ABS*:0000003e __SP_H__
+C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:4      *ABS*:0000003d __SP_L__
+C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:5      *ABS*:00000034 __CCP__
+C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:22     .text:00000000 main
 
 UNDEFINED SYMBOLS
 Debug_Init
-Debug_Tx_Byte
+Debug_Tx_Parameter_NL
+__do_copy_data
