@@ -8,81 +8,109 @@
   15               	.Ltext0:
   16               		.data
   17               	.LC0:
-  18 0000 4144 435F 		.string	"ADC_VAL"
-  18      5641 4C00 
-  19               		.text
-  20               	.global	main
-  22               	main:
-  23               	.LFB6:
-  24               	.LM1:
-  25 0000 CF93      		push r28
-  26 0002 DF93      		push r29
-  27               	/* prologue: function */
-  28               	/* frame size = 0 */
-  29               	.LM2:
-  30 0004 0E94 0000 		call Debug_Init
-  31               	.LBB12:
-  32               	.LBB13:
-  33               	.LBB14:
-  34               	.LBB15:
-  35               	.LM3:
-  36 0008 C8EC      		ldi r28,lo8(200)
-  37 000a D0E0      		ldi r29,hi8(200)
-  38               	.LVL0:
-  39               	.L3:
-  40               	.LBE15:
-  41               	.LBE14:
-  42               	.LBE13:
-  43               	.LBE12:
-  44               	.LM4:
-  45 000c 80E0      		ldi r24,lo8(.LC0)
-  46 000e 90E0      		ldi r25,hi8(.LC0)
-  47               	.LVL1:
-  48 0010 4DE7      		ldi r20,lo8(125)
-  49 0012 50E0      		ldi r21,hi8(125)
-  50 0014 60E0      		ldi r22,hlo8(125)
-  51 0016 70E0      		ldi r23,hhi8(125)
-  52 0018 0E94 0000 		call Debug_Tx_Parameter_NL
-  53               	.LVL2:
-  54 001c 88EE      		ldi r24,lo8(1000)
-  55 001e 93E0      		ldi r25,hi8(1000)
-  56               	.LVL3:
-  57               	.L2:
-  58               	.LBB19:
-  59               	.LBB18:
-  60               	.LBB17:
-  61               	.LBB16:
-  62               	.LM5:
-  63 0020 FE01      		movw r30,r28
-  64               	.LVL4:
-  65               	/* #APP */
-  66               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
-  67 0022 3197      		1: sbiw r30,1
-  68 0024 01F4      		brne 1b
-  69               	 ;  0 "" 2
-  70               	/* #NOAPP */
-  71               	.LBE16:
-  72               	.LBE17:
-  73               	.LM6:
-  74 0026 0197      		sbiw r24,1
-  75               	.LM7:
-  76 0028 01F4      		brne .L2
-  77 002a 00C0      		rjmp .L3
-  78               	.LBE18:
-  79               	.LBE19:
-  80               	.LFE6:
- 106               	.Letext0:
+  18 0000 5469 6D65 		.string	"Timebase "
+  18      6261 7365 
+  18      2000 
+  19               	.LC1:
+  20 000a 2000      		.string	" "
+  21               		.text
+  22               	.global	main
+  24               	main:
+  25               	.LFB6:
+  26               	.LM1:
+  27 0000 CF93      		push r28
+  28 0002 DF93      		push r29
+  29               	/* prologue: function */
+  30               	/* frame size = 0 */
+  31               	.LM2:
+  32 0004 60E0      		ldi r22,lo8(19200)
+  33 0006 7BE4      		ldi r23,hi8(19200)
+  34 0008 80E0      		ldi r24,hlo8(19200)
+  35 000a 90E0      		ldi r25,hhi8(19200)
+  36 000c 0E94 0000 		call UART_Init
+  37               	.LM3:
+  38 0010 88EE      		ldi r24,lo8(1000)
+  39 0012 93E0      		ldi r25,hi8(1000)
+  40 0014 0E94 0000 		call Timebase_Init
+  41               	.LM4:
+  42 0018 559A      		sbi 42-32,5
+  43               	.LM5:
+  44 001a 5D98      		cbi 43-32,5
+  45               	.LBB12:
+  46               	.LBB13:
+  47               	.LBB14:
+  48               	.LBB15:
+  49               	.LM6:
+  50 001c C8EC      		ldi r28,lo8(200)
+  51 001e D0E0      		ldi r29,hi8(200)
+  52               	.LVL0:
+  53               	.L3:
+  54               	.LBE15:
+  55               	.LBE14:
+  56               	.LBE13:
+  57               	.LBE12:
+  58               	.LM7:
+  59 0020 80E0      		ldi r24,lo8(.LC0)
+  60 0022 90E0      		ldi r25,hi8(.LC0)
+  61               	.LVL1:
+  62 0024 0E94 0000 		call UART_Transmit_Text
+  63               	.LVL2:
+  64               	.LM8:
+  65 0028 0E94 0000 		call Timebase_Timer_Get_Seconds
+  66 002c 0E94 0000 		call UART_Transmit_Number
+  67               	.LM9:
+  68 0030 80E0      		ldi r24,lo8(.LC1)
+  69 0032 90E0      		ldi r25,hi8(.LC1)
+  70 0034 0E94 0000 		call UART_Transmit_Text
+  71               	.LM10:
+  72 0038 0E94 0000 		call Timebase_Timer_Get_SubSeconds
+  73 003c 0E94 0000 		call UART_Transmit_Number
+  74               	.LM11:
+  75 0040 0E94 0000 		call UART_Transmit_New_Line
+  76 0044 88EE      		ldi r24,lo8(1000)
+  77 0046 93E0      		ldi r25,hi8(1000)
+  78               	.LVL3:
+  79               	.L2:
+  80               	.LBB19:
+  81               	.LBB18:
+  82               	.LBB17:
+  83               	.LBB16:
+  84               	.LM12:
+  85 0048 FE01      		movw r30,r28
+  86               	.LVL4:
+  87               	/* #APP */
+  88               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  89 004a 3197      		1: sbiw r30,1
+  90 004c 01F4      		brne 1b
+  91               	 ;  0 "" 2
+  92               	/* #NOAPP */
+  93               	.LBE16:
+  94               	.LBE17:
+  95               	.LM13:
+  96 004e 0197      		sbiw r24,1
+  97               	.LM14:
+  98 0050 01F4      		brne .L2
+  99 0052 00C0      		rjmp .L3
+ 100               	.LBE18:
+ 101               	.LBE19:
+ 102               	.LFE6:
+ 128               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:2      *ABS*:0000003f __SREG__
-C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:3      *ABS*:0000003e __SP_H__
-C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:4      *ABS*:0000003d __SP_L__
-C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:5      *ABS*:00000034 __CCP__
-C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\farid\AppData\Local\Temp/cc2f9Dev.s:22     .text:00000000 main
+C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:2      *ABS*:0000003f __SREG__
+C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:3      *ABS*:0000003e __SP_H__
+C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:4      *ABS*:0000003d __SP_L__
+C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:5      *ABS*:00000034 __CCP__
+C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:24     .text:00000000 main
 
 UNDEFINED SYMBOLS
-Debug_Init
-Debug_Tx_Parameter_NL
+UART_Init
+Timebase_Init
+UART_Transmit_Text
+Timebase_Timer_Get_Seconds
+UART_Transmit_Number
+Timebase_Timer_Get_SubSeconds
+UART_Transmit_New_Line
 __do_copy_data
