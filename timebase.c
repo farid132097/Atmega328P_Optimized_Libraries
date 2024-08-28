@@ -30,7 +30,7 @@ typedef struct timebase_time_t{
   volatile uint8_t         OVFUpdateValue   ;
   volatile int32_t         LastSample       ;
   volatile uint16_t        SubSeconds       ;
-  volatile uint32_t        Seconds          ;
+  volatile int32_t         Seconds          ;
   #ifdef TIMEBASE_TIME_WINDOW_CALCULATION
   int32_t                  StartTimeSeconds   ;
   int32_t                  StartTimeSubSeconds;
@@ -90,6 +90,16 @@ typedef struct timebase_t{
   
 }timebase_t;
 
+enum{
+  COUNTER_STATE_RESET = 0,
+  COUNTER_STATE_START = 1,
+  COUNTER_STATE_STARTED = 1,
+  COUNTER_STATE_STOP = 2,
+  COUNTER_STATE_STOPPED = 2,
+  COUNTER_STATE_EXPIRED = 4
+};
+  
+
 timebase_t Timebase_type;
 timebase_t *Timebase;
 
@@ -105,9 +115,9 @@ void Timebase_Struct_Init(void){
   Timebase->Time.LastSample = 0;
   
   #ifdef TIMEBASE_TIME_WINDOW_CALCULATION
-    Timebase->Time.StartTimeSeconds=0;
-	Timebase->Time.StartTimeSubSeconds=0;
-	Timebase->Time.Status=0;
+    Timebase->Time.StartTimeSeconds = 0;
+	Timebase->Time.StartTimeSubSeconds = 0;
+	Timebase->Time.Status = 0;
   #endif
   
   #ifdef TIMEBASE_TOKEN_FUNCTIONS
@@ -138,23 +148,23 @@ void Timebase_Struct_Init(void){
 
 void Timebase_Timer_Config(uint16_t UpdateRateHz){
   if(Timebase->Config.TimerType.WatchDogTimer == 1){
-    uint8_t Prescaler_val=0;
-    if(UpdateRateHz==1){
-      Prescaler_val=0x06;
-    }else if(UpdateRateHz==2){
-      Prescaler_val=0x05;
-    }else if(UpdateRateHz==4){
-      Prescaler_val=0x04;
-    }else if(UpdateRateHz==8){
-      Prescaler_val=0x03;
-    }else if(UpdateRateHz==16){
-      Prescaler_val=0x02;
-    }else if(UpdateRateHz==32){
-      Prescaler_val=0x01;
-    }else if(UpdateRateHz==64){
-      Prescaler_val=0x00;
+    uint8_t Prescaler_val = 0;
+    if(UpdateRateHz == 1){
+      Prescaler_val = 0x06;
+    }else if(UpdateRateHz ==2 ){
+      Prescaler_val = 0x05;
+    }else if(UpdateRateHz == 4){
+      Prescaler_val = 0x04;
+    }else if(UpdateRateHz == 8){
+      Prescaler_val = 0x03;
+    }else if(UpdateRateHz == 16){
+      Prescaler_val = 0x02;
+    }else if(UpdateRateHz == 32){
+      Prescaler_val = 0x01;
+    }else if(UpdateRateHz == 64){
+      Prescaler_val = 0x00;
     }else{
-      Prescaler_val=0x00;
+      Prescaler_val = 0x00;
     }
     cli();
     MCUSR  &=~(1<<WDRF);
@@ -166,24 +176,24 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
     //add rtc functions
   }else if(Timebase->Config.TimerType.GeneralTimer == 1){
     
-	int32_t temp=F_CPU;
-	uint16_t clock_div_factor[5]={1,8,64,256,1024};
+	int32_t temp = F_CPU;
+	uint16_t clock_div_factor[5] = {1, 8, 64, 256, 1024};
 	
-	temp/=UpdateRateHz;
+	temp /= UpdateRateHz;
 	
-	uint8_t  clock_div_index=0;
-	int32_t curr_freq=temp;
+	uint8_t  clock_div_index = 0;
+	int32_t  curr_freq = temp;
 	
 	while( curr_freq > 0xFF ){
-	  curr_freq=temp;
-	  curr_freq/=clock_div_factor[clock_div_index];
+	  curr_freq  = temp;
+	  curr_freq /= clock_div_factor[clock_div_index];
 	  clock_div_index++;
 	  if(clock_div_index == 5){
 	    break;
 	  }
 	}
 	
-	clock_div_index-=1;
+	clock_div_index -= 1;
 	
 	TCCR0A = 0x00;
     TCCR0B = 0x00;
@@ -206,12 +216,12 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
 	  TCCR0B = (1<<CS00)|(1<<CS02);
 	}
 	
-	Timebase->Time.OVFUpdateValue = 0xFF-curr_freq;
+	Timebase->Time.OVFUpdateValue = (0xFF-curr_freq);
 	TCNT0  = Timebase->Time.OVFUpdateValue;
 	TIMSK0 = (1<<TOIE0);
     sei();
   }
-  Timebase->Config.UpdateRate=UpdateRateHz;
+  Timebase->Config.UpdateRate = UpdateRateHz;
 }
 
 
@@ -223,24 +233,24 @@ uint8_t Timebase_Token_Executing(void){
 
 void Timebase_Token_Add(void){ 
   if( Timebase_Token_Executing() < 63){
-    Timebase->ActiveTokens+=1;
+    Timebase->ActiveTokens += 1;
   }
 }
 
 void Timebase_Token_Remove(void){
   if( Timebase_Token_Executing() > 0){
-    Timebase->ActiveTokens-=1;
+    Timebase->ActiveTokens -= 1;
   }
 }
 
 void Timebase_Token_Remove_All(void){
-  Timebase->ActiveTokens=0;
+  Timebase->ActiveTokens = 0;
 }
 #endif
 
 
 //Timer Functions
-int32_t Timebase_Timer_Get_SubSeconds(void){
+uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
 }
 
@@ -249,11 +259,11 @@ int32_t Timebase_Timer_Get_Seconds(void){
 }
 
 void Timebase_Timer_Set_SubSeconds(uint16_t value){
-  Timebase->Time.SubSeconds=value;
+  Timebase->Time.SubSeconds = value;
 }
 
-void Timebase_Timer_Set_Seconds(uint32_t value){
-  Timebase->Time.Seconds=value;
+void Timebase_Timer_Set_Seconds(int32_t value){
+  Timebase->Time.Seconds = value;
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
@@ -261,7 +271,8 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
   Timebase_Token_Add();
   #endif
   
-  int32_t temp = Timebase_Timer_Get_SubSeconds() + value;
+  int32_t temp = Timebase_Timer_Get_SubSeconds();
+  temp += value;
   while(temp > Timebase_Timer_Get_SubSeconds());
   
   #ifdef TIMEBASE_TOKEN_FUNCTIONS
@@ -271,9 +282,9 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
 
 
 void Timebase_Timer_Await_SubSeconds(uint16_t value){
-  while(Timebase_Timer_Get_SubSeconds()!=Timebase->Time.LastSample);
+  while(Timebase_Timer_Get_SubSeconds() != Timebase->Time.LastSample);
   
-  Timebase->Time.LastSample = Timebase_Timer_Get_SubSeconds()+value;
+  Timebase->Time.LastSample = Timebase_Timer_Get_SubSeconds() + value;
   if(Timebase->Time.LastSample >= Timebase->Config.UpdateRate){
     Timebase->Time.LastSample -= Timebase->Config.UpdateRate;
   }
@@ -287,28 +298,28 @@ void Timebase_Timer_Delay_Seconds(uint16_t value){
 
 
 void Timebase_Window_Timer_Reset(void){
-  Timebase->Time.StartTimeSeconds=0;
-  Timebase->Time.StartTimeSubSeconds=0;
-  Timebase->Time.Status=0;
+  Timebase->Time.StartTimeSeconds = 0;
+  Timebase->Time.StartTimeSubSeconds = 0;
+  Timebase->Time.Status = COUNTER_STATE_RESET;
 }
 
 void Timebase_Window_Timer_Start(void){
-  if(Timebase->Time.Status==0){
-    Timebase->Time.StartTimeSeconds=Timebase_Timer_Get_Seconds();
-    Timebase->Time.StartTimeSubSeconds=Timebase_Timer_Get_SubSeconds();
-    Timebase->Time.Status=1;
+  if(Timebase->Time.Status == COUNTER_STATE_RESET){
+    Timebase->Time.StartTimeSeconds = Timebase_Timer_Get_Seconds();
+    Timebase->Time.StartTimeSubSeconds = Timebase_Timer_Get_SubSeconds();
+    Timebase->Time.Status = COUNTER_STATE_STARTED;
   }
 }
 
 //Unit in subseconds -> 20mS
 int32_t Timebase_Window_Timer_Get_Interval(void){
-  if(Timebase->Time.Status){
-    int32_t curr_s =Timebase_Timer_Get_Seconds();
-    int32_t curr_ss=Timebase_Timer_Get_SubSeconds();
-	curr_s-=Timebase->Time.StartTimeSeconds;
-	curr_ss-=Timebase->Time.StartTimeSubSeconds;
-	curr_s*=Timebase->Config.UpdateRate;
-	curr_s+=curr_ss;
+  if(Timebase->Time.Status == COUNTER_STATE_STARTED){
+    int32_t curr_s = Timebase_Timer_Get_Seconds();
+    int32_t curr_ss = Timebase_Timer_Get_SubSeconds();
+	curr_s -= Timebase->Time.StartTimeSeconds;
+	curr_ss -= Timebase->Time.StartTimeSubSeconds;
+	curr_s *= Timebase->Config.UpdateRate;
+	curr_s += curr_ss;
 	return curr_s;
   }else{
     return 0;
@@ -317,7 +328,7 @@ int32_t Timebase_Window_Timer_Get_Interval(void){
 
 int32_t Timebase_Window_Timer_Get_Interval_Reset(void){
   int32_t val=Timebase_Window_Timer_Get_Interval();
-  if(Timebase->Time.Status){
+  if(Timebase->Time.Status == COUNTER_STATE_STARTED){
     Timebase_Window_Timer_Reset();
   }
   return val;
@@ -336,7 +347,7 @@ void Timebase_UpCounter_Set_Status(uint8_t window, uint8_t value){
 }
 
 int32_t Timebase_UpCounter_Get_Value(uint8_t window){
-  return (int32_t)Timebase->UpCounter[window].Value;
+  return Timebase->UpCounter[window].Value;
 }
 
 void Timebase_UpCounter_Set_Value(uint8_t window, int32_t value){
@@ -344,7 +355,7 @@ void Timebase_UpCounter_Set_Value(uint8_t window, int32_t value){
 }
 
 int32_t Timebase_UpCounter_Get_EndValue(uint8_t window){
-  return (int32_t)Timebase->UpCounter[window].EndValue;
+  return Timebase->UpCounter[window].EndValue;
 }
 
 void Timebase_UpCounter_Set_EndValue(uint8_t window, int32_t value){
@@ -352,7 +363,7 @@ void Timebase_UpCounter_Set_EndValue(uint8_t window, int32_t value){
 }
 
 int32_t Timebase_UpCounter_Get_TargetValue(uint8_t window){
-  return (int32_t)Timebase->UpCounter[window].Target;
+  return Timebase->UpCounter[window].Target;
 }
 
 void Timebase_UpCounter_Set_TargetValue(uint8_t window, int32_t value){
@@ -360,7 +371,7 @@ void Timebase_UpCounter_Set_TargetValue(uint8_t window, int32_t value){
 }
 
 int32_t Timebase_UpCounter_Get_TemporaryValue(uint8_t window){
-  return (int32_t)Timebase->UpCounter[window].Temporary;
+  return Timebase->UpCounter[window].Temporary;
 }
 
 void Timebase_UpCounter_Set_TemporaryValue(uint8_t window, int32_t value){
@@ -368,7 +379,7 @@ void Timebase_UpCounter_Set_TemporaryValue(uint8_t window, int32_t value){
 }
 
 int32_t Timebase_UpCounter_Get_PeriodValue(uint8_t window){
-  return (int32_t)Timebase->UpCounter[window].PeriodValue;
+  return Timebase->UpCounter[window].PeriodValue;
 }
 
 void Timebase_UpCounter_Set_PeriodValue(uint8_t window, int32_t value){
@@ -388,7 +399,7 @@ void Timebase_UpCounter_Clear_Period_Flag(uint8_t window){
 }
 
 void Timebase_UpCounter_Reset(uint8_t window){
-  Timebase_UpCounter_Set_Status(window, 0);
+  Timebase_UpCounter_Set_Status(window, COUNTER_STATE_RESET);
   Timebase_UpCounter_Set_Value(window, 0);
   Timebase_UpCounter_Set_EndValue(window, 0);
   Timebase_UpCounter_Set_TargetValue(window, 0);
@@ -402,20 +413,20 @@ void Timebase_UpCounter_Clear_All_Flags(uint8_t window){
 }
 
 void Timebase_UpCounter_Start(uint8_t window){
-  if(Timebase_UpCounter_Get_Status(window) != 1){
-    Timebase_UpCounter_Set_Status(window , 1);    
+  if(Timebase_UpCounter_Get_Status(window) != COUNTER_STATE_STARTED){
+    Timebase_UpCounter_Set_Status(window , COUNTER_STATE_START);    
   }
 }
 
 void Timebase_UpCounter_Stop(uint8_t window){
-  if(Timebase_UpCounter_Get_Status(window) != 2){
-    Timebase_UpCounter_Set_Status(window , 2);
+  if(Timebase_UpCounter_Get_Status(window) != COUNTER_STATE_STOPPED){
+    Timebase_UpCounter_Set_Status(window , COUNTER_STATE_STOP);
   }
 }
 
 
 void Timebase_UpCounter_Set_Securely(uint8_t window, int32_t value){
-  if( Timebase_UpCounter_Get_Status( window ) == 0 ){
+  if( Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_RESET ){
     Timebase_UpCounter_Set_Value(window, 0);
     Timebase_UpCounter_Set_TemporaryValue(window, 0);
     Timebase_UpCounter_Set_TargetValue(window, value);
@@ -430,16 +441,16 @@ void Timebase_UpCounter_Set_Forcefully(uint8_t window, int32_t value){
 } 
 
 void Timebase_UpCounter_Update(uint8_t window){
-  if( Timebase_UpCounter_Get_Status( window ) == 1 ){ 
+  if( Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STARTED ){ 
     Timebase_UpCounter_Set_TemporaryValue(window, Timebase_UpCounter_Get_EndValue(window) - Timebase_Timer_Get_Seconds() );
     Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window) - Timebase_UpCounter_Get_TemporaryValue(window) );
     if(Timebase_UpCounter_Get_TemporaryValue(window) <= 0){
       Timebase_UpCounter_Set_EndValue(window, 0);
       Timebase_UpCounter_Set_TemporaryValue(window, 0);
       Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window));
-      Timebase_UpCounter_Set_Status(window, 4);
+      Timebase_UpCounter_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
-  } else if (Timebase_UpCounter_Get_Status( window ) == 2){
+  } else if (Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STOPPED){
     Timebase_UpCounter_Set_EndValue(window, Timebase_UpCounter_Get_TemporaryValue(window) + Timebase_Timer_Get_Seconds());
     Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window) - Timebase_UpCounter_Get_TemporaryValue(window));
   }
@@ -447,7 +458,7 @@ void Timebase_UpCounter_Update(uint8_t window){
 
 
 uint8_t Timebase_UpCounter_Expired(uint8_t window){
-  if(Timebase_UpCounter_Get_Status( window ) == 4){
+  if(Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_EXPIRED){
     return 1;
   }else{
     return 0;
@@ -455,7 +466,7 @@ uint8_t Timebase_UpCounter_Expired(uint8_t window){
 }
 
 uint8_t Timebase_UpCounter_Expired_Event(uint8_t window){
-  if(Timebase_UpCounter_Get_Status( window ) == 4){
+  if(Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_EXPIRED){
     Timebase_UpCounter_Clear_All_Flags( window );
     return 1;
   }else{
@@ -520,7 +531,7 @@ void Timebase_DownCounter_Set_Status(uint8_t window, uint8_t value){
 }
 
 int32_t Timebase_DownCounter_Get_Value(uint8_t window){
-  return (int32_t)Timebase->DownCounter[window].Value;
+  return Timebase->DownCounter[window].Value;
 }
 
 void Timebase_DownCounter_Set_Value(uint8_t window, int32_t value){
@@ -528,7 +539,7 @@ void Timebase_DownCounter_Set_Value(uint8_t window, int32_t value){
 }
 
 int32_t Timebase_DownCounter_Get_EndValue(uint8_t window){
-  return (int32_t)Timebase->DownCounter[window].EndValue;
+  return Timebase->DownCounter[window].EndValue;
 }
 
 void Timebase_DownCounter_Set_EndValue(uint8_t window, int32_t value){
@@ -537,7 +548,7 @@ void Timebase_DownCounter_Set_EndValue(uint8_t window, int32_t value){
 
 
 int32_t Timebase_DownCounter_Get_PeriodValue(uint8_t window){
-  return (int32_t)Timebase->DownCounter[window].PeriodValue;
+  return Timebase->DownCounter[window].PeriodValue;
 }
 
 void Timebase_DownCounter_Set_PeriodValue(uint8_t window, int32_t value){
@@ -550,7 +561,7 @@ void Timebase_DownCounter_Set_PeriodValue(uint8_t window, int32_t value){
 }
 
 uint8_t Timebase_DownCounter_Get_Period_Flag(uint8_t window){
-  return (uint8_t)Timebase->DownCounter[window].Status.PeriodFlag;
+  return Timebase->DownCounter[window].Status.PeriodFlag;
 }
 
 void Timebase_DownCounter_Set_Period_Flag(uint8_t window){
@@ -565,7 +576,7 @@ void Timebase_DownCounter_Clear_Period_Flag(uint8_t window){
 void Timebase_DownCounter_Reset(uint8_t window){
   Timebase_DownCounter_Set_EndValue(window, 0);
   Timebase_DownCounter_Set_Value(window, 0);
-  Timebase_DownCounter_Set_Status(window, 0);
+  Timebase_DownCounter_Set_Status(window, COUNTER_STATE_RESET);
   Timebase_DownCounter_Clear_Period_Flag(window);
 } 
 
@@ -574,20 +585,20 @@ void Timebase_DownCounter_Clear_All_Flags(uint8_t window){
 }
 
 void Timebase_DownCounter_Start(uint8_t window){
-  if(Timebase_DownCounter_Get_Status(window) != 1){
-    Timebase_DownCounter_Set_Status(window, 1); 
+  if(Timebase_DownCounter_Get_Status(window) != COUNTER_STATE_STARTED){
+    Timebase_DownCounter_Set_Status(window, COUNTER_STATE_START); 
   }
 }
 
 void Timebase_DownCounter_Stop(uint8_t window){
-  if(Timebase_DownCounter_Get_Status(window) != 2){
-    Timebase_DownCounter_Set_Status(window, 2);    
+  if(Timebase_DownCounter_Get_Status(window) != COUNTER_STATE_STOPPED){
+    Timebase_DownCounter_Set_Status(window, COUNTER_STATE_STOP);    
   }
 }
 
 
 void Timebase_DownCounter_Set_Securely(uint8_t window, int32_t value){
-  if( Timebase_DownCounter_Get_Status( window ) == 0 ){
+  if( Timebase_DownCounter_Get_Status( window ) == COUNTER_STATE_RESET ){
     Timebase_DownCounter_Set_Value(window, value);
     Timebase_DownCounter_Set_EndValue(window, Timebase_Timer_Get_Seconds() + value);
     Timebase_DownCounter_Start(window);
@@ -600,19 +611,19 @@ void Timebase_DownCounter_Set_Forcefully(uint8_t window, int32_t value){
 } 
 
 void Timebase_DownCounter_Update(uint8_t window){
-  if( Timebase_DownCounter_Get_Status( window ) == 1 ){ 
+  if( Timebase_DownCounter_Get_Status( window ) == COUNTER_STATE_STARTED ){ 
     Timebase_DownCounter_Set_Value(window, Timebase_DownCounter_Get_EndValue(window) - Timebase_Timer_Get_Seconds());
     if(Timebase_DownCounter_Get_Value(window) <= 0){
       Timebase_DownCounter_Reset(window);
-      Timebase_DownCounter_Set_Status(window, 4);
+      Timebase_DownCounter_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
-  } else if (Timebase_DownCounter_Get_Status( window ) == 2){ 
+  } else if (Timebase_DownCounter_Get_Status( window ) == COUNTER_STATE_STOPPED){ 
     Timebase_DownCounter_Set_EndValue(window, Timebase_DownCounter_Get_Value(window) + Timebase_Timer_Get_Seconds());
   }
 }
 
 uint8_t Timebase_DownCounter_Expired(uint8_t window){
-  if(Timebase_DownCounter_Get_Status( window ) == 4){
+  if(Timebase_DownCounter_Get_Status( window ) == COUNTER_STATE_EXPIRED){
     return 1;
   }else{
     return 0;
@@ -620,7 +631,7 @@ uint8_t Timebase_DownCounter_Expired(uint8_t window){
 }
 
 uint8_t Timebase_DownCounter_Expired_Event(uint8_t window){
-  if(Timebase_DownCounter_Get_Status( window ) == 4){
+  if(Timebase_DownCounter_Get_Status( window ) == COUNTER_STATE_EXPIRED){
     Timebase_DownCounter_Clear_All_Flags( window );
     return 1;
   }else{

@@ -64,46 +64,50 @@
   70 0034 0E94 0000 		call UART_Transmit_Text
   71               	.LM10:
   72 0038 0E94 0000 		call Timebase_Timer_Get_SubSeconds
-  73 003c 0E94 0000 		call UART_Transmit_Number
-  74               	.LM11:
-  75 0040 0E94 0000 		call UART_Transmit_New_Line
-  76 0044 88EE      		ldi r24,lo8(1000)
-  77 0046 93E0      		ldi r25,hi8(1000)
-  78               	.LVL3:
-  79               	.L2:
-  80               	.LBB19:
-  81               	.LBB18:
-  82               	.LBB17:
-  83               	.LBB16:
-  84               	.LM12:
-  85 0048 FE01      		movw r30,r28
-  86               	.LVL4:
-  87               	/* #APP */
-  88               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
-  89 004a 3197      		1: sbiw r30,1
-  90 004c 01F4      		brne 1b
-  91               	 ;  0 "" 2
-  92               	/* #NOAPP */
-  93               	.LBE16:
-  94               	.LBE17:
-  95               	.LM13:
-  96 004e 0197      		sbiw r24,1
-  97               	.LM14:
-  98 0050 01F4      		brne .L2
-  99 0052 00C0      		rjmp .L3
- 100               	.LBE18:
- 101               	.LBE19:
- 102               	.LFE6:
- 128               	.Letext0:
+  73 003c A0E0      		ldi r26,lo8(0)
+  74 003e B0E0      		ldi r27,hi8(0)
+  75 0040 BC01      		movw r22,r24
+  76 0042 CD01      		movw r24,r26
+  77 0044 0E94 0000 		call UART_Transmit_Number
+  78               	.LM11:
+  79 0048 0E94 0000 		call UART_Transmit_New_Line
+  80 004c 88EE      		ldi r24,lo8(1000)
+  81 004e 93E0      		ldi r25,hi8(1000)
+  82               	.LVL3:
+  83               	.L2:
+  84               	.LBB19:
+  85               	.LBB18:
+  86               	.LBB17:
+  87               	.LBB16:
+  88               	.LM12:
+  89 0050 FE01      		movw r30,r28
+  90               	.LVL4:
+  91               	/* #APP */
+  92               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  93 0052 3197      		1: sbiw r30,1
+  94 0054 01F4      		brne 1b
+  95               	 ;  0 "" 2
+  96               	/* #NOAPP */
+  97               	.LBE16:
+  98               	.LBE17:
+  99               	.LM13:
+ 100 0056 0197      		sbiw r24,1
+ 101               	.LM14:
+ 102 0058 01F4      		brne .L2
+ 103 005a 00C0      		rjmp .L3
+ 104               	.LBE18:
+ 105               	.LBE19:
+ 106               	.LFE6:
+ 132               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:2      *ABS*:0000003f __SREG__
-C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:3      *ABS*:0000003e __SP_H__
-C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:4      *ABS*:0000003d __SP_L__
-C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:5      *ABS*:00000034 __CCP__
-C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\farid\AppData\Local\Temp/ccfpy41d.s:24     .text:00000000 main
+C:\Users\FARIDU~1\AppData\Local\Temp/ccXqZT4h.s:2      *ABS*:0000003f __SREG__
+C:\Users\FARIDU~1\AppData\Local\Temp/ccXqZT4h.s:3      *ABS*:0000003e __SP_H__
+C:\Users\FARIDU~1\AppData\Local\Temp/ccXqZT4h.s:4      *ABS*:0000003d __SP_L__
+C:\Users\FARIDU~1\AppData\Local\Temp/ccXqZT4h.s:5      *ABS*:00000034 __CCP__
+C:\Users\FARIDU~1\AppData\Local\Temp/ccXqZT4h.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\FARIDU~1\AppData\Local\Temp/ccXqZT4h.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\FARIDU~1\AppData\Local\Temp/ccXqZT4h.s:24     .text:00000000 main
 
 UNDEFINED SYMBOLS
 UART_Init
