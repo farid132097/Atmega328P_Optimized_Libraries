@@ -808,6 +808,183 @@ void Timebase_DownCounter_Reset_All(void){
 
 
 
+/***************************DownCounter SS Functions Start**************************/
+
+#ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
+uint8_t Timebase_DownCounter_SS_Get_Status(uint8_t window){
+  return Timebase->DownCounter[window].SS.Status.Value;
+}
+
+void Timebase_DownCounter_SS_Set_Status(uint8_t window, uint8_t value){
+  Timebase->DownCounter[window].SS.Status.Value = value;
+}
+
+int32_t Timebase_DownCounter_SS_Get_Value(uint8_t window){
+  return Timebase->DownCounter[window].SS.Value;
+}
+
+void Timebase_DownCounter_SS_Set_Value(uint8_t window, int32_t value){
+  Timebase->DownCounter[window].SS.Value = value;
+}
+
+int32_t Timebase_DownCounter_SS_Get_EndValue(uint8_t window){
+  return Timebase->DownCounter[window].SS.EndValue;
+}
+
+void Timebase_DownCounter_SS_Set_EndValue(uint8_t window, int32_t value){
+  Timebase->DownCounter[window].SS.EndValue = value;
+}
+
+
+int32_t Timebase_DownCounter_SS_Get_PeriodValue(uint8_t window){
+  return Timebase->DownCounter[window].SS.PeriodValue;
+}
+
+void Timebase_DownCounter_SS_Set_PeriodValue(uint8_t window, int32_t value){
+  if(value < 0){
+    Timebase->DownCounter[window].SS.PeriodValue = 0;
+  }else{
+    Timebase->DownCounter[window].SS.PeriodValue = value;
+  }
+  
+}
+
+uint8_t Timebase_DownCounter_SS_Get_Period_Flag(uint8_t window){
+  return Timebase->DownCounter[window].SS.Status.PeriodFlag;
+}
+
+void Timebase_DownCounter_SS_Set_Period_Flag(uint8_t window){
+  Timebase->DownCounter[window].SS.Status.PeriodFlag = 1;
+}
+
+void Timebase_DownCounter_SS_Clear_Period_Flag(uint8_t window){
+  Timebase->DownCounter[window].SS.Status.PeriodFlag = 0;
+}
+
+
+void Timebase_DownCounter_SS_Reset(uint8_t window){
+  Timebase_DownCounter_SS_Set_EndValue(window, 0);
+  Timebase_DownCounter_SS_Set_Value(window, 0);
+  Timebase_DownCounter_SS_Set_Status(window, COUNTER_STATE_RESET);
+  Timebase_DownCounter_SS_Clear_Period_Flag(window);
+} 
+
+void Timebase_DownCounter_SS_Clear_All_Flags(uint8_t window){
+  Timebase_DownCounter_SS_Reset( window );
+}
+
+void Timebase_DownCounter_SS_Start(uint8_t window){
+  if(Timebase_DownCounter_SS_Get_Status(window) != COUNTER_STATE_STARTED){
+    Timebase_DownCounter_SS_Set_Status(window, COUNTER_STATE_START); 
+  }
+}
+
+void Timebase_DownCounter_SS_Stop(uint8_t window){
+  if(Timebase_DownCounter_SS_Get_Status(window) != COUNTER_STATE_STOPPED){
+    Timebase_DownCounter_SS_Set_Status(window, COUNTER_STATE_STOP);    
+  }
+}
+
+
+void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
+  if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_RESET ){
+    Timebase_DownCounter_SS_Set_Value(window, value);
+    Timebase_DownCounter_SS_Set_EndValue(window, Timebase_Timer_Get_Seconds() + value);
+    Timebase_DownCounter_SS_Start(window);
+  }
+}
+
+void Timebase_DownCounter_SS_Set_Forcefully(uint8_t window, int32_t value){
+  Timebase_DownCounter_SS_Reset( window );
+  Timebase_DownCounter_SS_Set_Securely( window, value );
+} 
+
+void Timebase_DownCounter_SS_Update(uint8_t window){
+  if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){ 
+    Timebase_DownCounter_SS_Set_Value(window, Timebase_DownCounter_SS_Get_EndValue(window) - Timebase_Timer_Get_Seconds());
+    if(Timebase_DownCounter_SS_Get_Value(window) <= 0){
+      Timebase_DownCounter_SS_Reset(window);
+      Timebase_DownCounter_SS_Set_Status(window, COUNTER_STATE_EXPIRED);
+    }
+  } else if (Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_STOPPED){ 
+    Timebase_DownCounter_SS_Set_EndValue(window, Timebase_DownCounter_SS_Get_Value(window) + Timebase_Timer_Get_Seconds());
+  }
+}
+
+uint8_t Timebase_DownCounter_SS_Expired(uint8_t window){
+  if(Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_EXPIRED){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+uint8_t Timebase_DownCounter_SS_Expired_Event(uint8_t window){
+  if(Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_EXPIRED){
+    Timebase_DownCounter_SS_Clear_All_Flags( window );
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+
+void Timebase_DownCounter_SS_Set_Period_Value_Securely(uint8_t window, int32_t value){
+  if(Timebase_DownCounter_SS_Get_Period_Flag( window ) == 0){
+    Timebase_DownCounter_SS_Set_PeriodValue(window, Timebase_DownCounter_SS_Get_Value(window) - value);
+    Timebase_DownCounter_SS_Set_Period_Flag(window);
+  }
+}
+
+int32_t Timebase_DownCounter_SS_Get_Remaining_Period_Value(uint8_t window){
+  int32_t temp = Timebase_DownCounter_SS_Get_Value(window) - Timebase_DownCounter_SS_Get_PeriodValue(window) ;
+  if(temp < 0){
+    temp = 0;
+  }
+  return temp;
+}
+
+uint8_t Timebase_DownCounter_SS_Period_Value_Expired(uint8_t window){
+  if( (Timebase_DownCounter_SS_Get_Remaining_Period_Value( window ) == 0) && Timebase_DownCounter_SS_Get_Period_Flag( window )){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+uint8_t Timebase_DownCounter_SS_Period_Value_Expired_Event(uint8_t window){
+  if(Timebase_DownCounter_SS_Period_Value_Expired( window ) == 1){
+    Timebase_DownCounter_SS_Clear_Period_Flag( window );
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+
+void Timebase_DownCounter_SS_Update_All(void){
+  for(uint8_t i=0; i<TIMEBASE_DOWNCOUNTER; i++){
+    Timebase_DownCounter_SS_Update(i);
+  }
+}
+
+void Timebase_DownCounter_SS_Reset_All(void){
+  for(uint8_t i=0; i<TIMEBASE_DOWNCOUNTER; i++){
+    Timebase_DownCounter_SS_Reset(i);
+  }
+}
+#endif
+
+/****************************DownCounter SS Functions End***************************/
+
+
+
+
+
+
+
+
+
 /*******************************Common Functions Start******************************/
 
 void Timebase_Reset(void){

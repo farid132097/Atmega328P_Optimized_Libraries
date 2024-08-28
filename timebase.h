@@ -90,6 +90,34 @@ uint8_t  Timebase_DownCounter_Period_Value_Expired_Event(uint8_t window);
 void     Timebase_DownCounter_Update_All(void);
 void     Timebase_DownCounter_Reset_All(void);
 
+//DownCounter SubSeconds Functions
+uint8_t  Timebase_DownCounter_SS_Get_Status(uint8_t window);
+void     Timebase_DownCounter_SS_Set_Status(uint8_t window, uint8_t value);
+int32_t  Timebase_DownCounter_SS_Get_Value(uint8_t window);
+void     Timebase_DownCounter_SS_Set_Value(uint8_t window, int32_t value);
+int32_t  Timebase_DownCounter_SS_Get_EndValue(uint8_t window);
+void     Timebase_DownCounter_SS_Set_EndValue(uint8_t window, int32_t value);
+int32_t  Timebase_DownCounter_SS_Get_PeriodValue(uint8_t window);
+void     Timebase_DownCounter_SS_Set_PeriodValue(uint8_t window, int32_t value);
+uint8_t  Timebase_DownCounter_SS_Get_Period_Flag(uint8_t window);
+void     Timebase_DownCounter_SS_Set_Period_Flag(uint8_t window);
+void     Timebase_DownCounter_SS_Clear_Period_Flag(uint8_t window);
+void     Timebase_DownCounter_SS_Reset(uint8_t window);
+void     Timebase_DownCounter_SS_Clear_All_Flags(uint8_t window);
+void     Timebase_DownCounter_SS_Start(uint8_t window);
+void     Timebase_DownCounter_SS_Stop(uint8_t window);
+void     Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value);
+void     Timebase_DownCounter_SS_Set_Forcefully(uint8_t window, int32_t value);
+void     Timebase_DownCounter_SS_Update(uint8_t window);
+uint8_t  Timebase_DownCounter_SS_Expired(uint8_t window);
+uint8_t  Timebase_DownCounter_SS_Expired_Event(uint8_t window);
+void     Timebase_DownCounter_SS_Set_Period_Value_Securely(uint8_t window, int32_t value);
+int32_t  Timebase_DownCounter_SS_Get_Remaining_Period_Value(uint8_t window);
+uint8_t  Timebase_DownCounter_SS_Period_Value_Expired(uint8_t window);
+uint8_t  Timebase_DownCounter_SS_Period_Value_Expired_Event(uint8_t window);
+void     Timebase_DownCounter_SS_Update_All(void);
+void     Timebase_DownCounter_SS_Reset_All(void);
+
 //Common Functions
 void     Timebase_Reset(void);
 void     Timebase_Init(uint16_t UpdateRateHz);
