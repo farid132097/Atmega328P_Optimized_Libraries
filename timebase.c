@@ -9,10 +9,11 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-//#include "uart.h"
 
-#define  TIMEBASE_UPCOUNTER     1
-#define  TIMEBASE_DOWNCOUNTER   1
+#define  TIMEBASE_UPCOUNTER                1
+#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
+#define  TIMEBASE_DOWNCOUNTER              1
+#define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   1
 #define  TIMEBASE_TOKEN_FUNCTIONS
 #define  TIMEBASE_TIME_WINDOW_CALCULATION
 
@@ -47,6 +48,18 @@ typedef union {
 } timebase_status_t;
 
 
+#ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
+typedef struct timebase_upcounter_ss_t{
+  timebase_status_t       Status           ;
+  int32_t                 EndValue         ;
+  int32_t                 Target           ;
+  int32_t                 Temporary        ;
+  int32_t                 Value            ;
+  int32_t                 PeriodValue      ;
+}timebase_upcounter_ss_t;
+#endif
+
+
 #ifdef TIMEBASE_UPCOUNTER
 typedef struct timebase_upcounter_t{
   timebase_status_t       Status           ;
@@ -55,15 +68,33 @@ typedef struct timebase_upcounter_t{
   int32_t                 Temporary        ;
   int32_t                 Value            ;
   int32_t                 PeriodValue      ;
+  #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
+  timebase_upcounter_ss_t SS               ;
+  #endif
 }timebase_upcounter_t;
 #endif
 
-#ifdef TIMEBASE_DOWNCOUNTER
-typedef struct timebase_downcounter_t{
+
+
+#ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
+typedef struct timebase_downcounter_ss_t{
   timebase_status_t       Status           ;
   int32_t                 EndValue         ;
   int32_t                 Value            ;
   int32_t                 PeriodValue      ;
+}timebase_downcounter_ss_t;
+#endif
+
+
+#ifdef TIMEBASE_DOWNCOUNTER
+typedef struct timebase_downcounter_t{
+  timebase_status_t         Status           ;
+  int32_t                   EndValue         ;
+  int32_t                   Value            ;
+  int32_t                   PeriodValue      ;
+  #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
+  timebase_downcounter_ss_t SS               ;
+  #endif
 }timebase_downcounter_t;
 #endif
 
@@ -134,6 +165,17 @@ void Timebase_Struct_Init(void){
     Timebase->UpCounter[i].PeriodValue = 0;
   }
   #endif
+  
+  #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
+  for(uint8_t i=0; i < TIMEBASE_UPCOUNTER_SUBSECONDS; i++){
+    Timebase->UpCounter[i].SS.Status.StatusByte = 0;  
+    Timebase->UpCounter[i].SS.EndValue = 0;
+    Timebase->UpCounter[i].SS.Target = 0;
+    Timebase->UpCounter[i].SS.Temporary = 0;    
+    Timebase->UpCounter[i].SS.Value = 0;
+    Timebase->UpCounter[i].SS.PeriodValue = 0;
+  }
+  #endif
 
   #ifdef TIMEBASE_DOWNCOUNTER
   for(uint8_t i=0; i < TIMEBASE_DOWNCOUNTER; i++){
@@ -143,6 +185,16 @@ void Timebase_Struct_Init(void){
     Timebase->DownCounter[i].PeriodValue = 0;
   }
   #endif
+  
+  #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
+  for(uint8_t i=0; i < TIMEBASE_DOWNCOUNTER_SUBSECONDS; i++){
+    Timebase->DownCounter[i].SS.Status.StatusByte = 0; 
+    Timebase->DownCounter[i].SS.EndValue = 0;
+    Timebase->DownCounter[i].SS.Value = 0;
+    Timebase->DownCounter[i].SS.PeriodValue = 0;
+  }
+  #endif
+  
 }
 
 
