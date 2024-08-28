@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   4 .debug_pubnames 00000dcd  00000000  00000000  00001c3a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000028c4  00000000  00000000  00002a07  2**0
+  5 .debug_info   000028c6  00000000  00000000  00002a07  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000005e7  00000000  00000000  000052cb  2**0
+  6 .debug_abbrev 000005e7  00000000  00000000  000052cd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00001609  00000000  00000000  000058b2  2**0
+  7 .debug_line   00001609  00000000  00000000  000058b4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000006b0  00000000  00000000  00006ebc  2**2
+  8 .debug_frame  000006b0  00000000  00000000  00006ec0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000100d  00000000  00000000  0000756c  2**0
+  9 .debug_str    0000100d  00000000  00000000  00007570  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000e05  00000000  00000000  00008579  2**0
+ 10 .debug_loc    00000e05  00000000  00000000  0000857d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000090  00000000  00000000  0000937e  2**0
+ 11 .debug_ranges 00000090  00000000  00000000  00009382  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -772,8 +772,8 @@ _delay_loop_2(uint16_t __count)
 
 000005d0 <Timebase_Struct_Init>:
 
-timebase_t Timebase_type;
-timebase_t *Timebase;
+
+/************************************Basic Functions Start*******************************/
 
 void Timebase_Struct_Init(void){
   Timebase=&Timebase_type;
@@ -1223,8 +1223,8 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
 
 00000900 <Timebase_Token_Executing>:
 
+/*********************************Token Functions Start*******************************/
 
-//Token Functions
 #ifdef TIMEBASE_TOKEN_FUNCTIONS
 uint8_t Timebase_Token_Executing(void){
   return Timebase->ActiveTokens;
@@ -1236,8 +1236,8 @@ uint8_t Timebase_Token_Executing(void){
 
 0000090c <Timebase_Token_Add>:
 
+/*********************************Token Functions Start*******************************/
 
-//Token Functions
 #ifdef TIMEBASE_TOKEN_FUNCTIONS
 uint8_t Timebase_Token_Executing(void){
   return Timebase->ActiveTokens;
@@ -1258,8 +1258,8 @@ void Timebase_Token_Add(void){
 
 00000922 <Timebase_Token_Remove>:
 
+/*********************************Token Functions Start*******************************/
 
-//Token Functions
 #ifdef TIMEBASE_TOKEN_FUNCTIONS
 uint8_t Timebase_Token_Executing(void){
   return Timebase->ActiveTokens;
@@ -1293,10 +1293,10 @@ void Timebase_Token_Remove_All(void){
      942:	08 95       	ret
 
 00000944 <Timebase_Timer_Get_SubSeconds>:
-#endif
 
 
-//Timer Functions
+/*****************************Base Timer Functions Start*****************************/
+
 uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
      944:	e0 91 4b 01 	lds	r30, 0x014B
@@ -1351,8 +1351,8 @@ void Timebase_Timer_Set_Seconds(int32_t value){
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
      98a:	9c 01       	movw	r18, r24
 
+/*********************************Token Functions Start*******************************/
 
-//Token Functions
 #ifdef TIMEBASE_TOKEN_FUNCTIONS
 uint8_t Timebase_Token_Executing(void){
   return Timebase->ActiveTokens;
@@ -1369,10 +1369,10 @@ void Timebase_Token_Add(void){
      99a:	87 89       	ldd	r24, Z+23	; 0x17
      99c:	8f 5f       	subi	r24, 0xFF	; 255
      99e:	87 8b       	std	Z+23, r24	; 0x17
-#endif
 
 
-//Timer Functions
+/*****************************Base Timer Functions Start*****************************/
+
 uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
      9a0:	80 85       	ldd	r24, Z+8	; 0x08
@@ -1392,10 +1392,10 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
      9ae:	39 1f       	adc	r19, r25
      9b0:	4a 1f       	adc	r20, r26
      9b2:	5b 1f       	adc	r21, r27
-#endif
 
 
-//Timer Functions
+/*****************************Base Timer Functions Start*****************************/
+
 uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
      9b4:	80 85       	ldd	r24, Z+8	; 0x08
@@ -1414,8 +1414,8 @@ uint16_t Timebase_Timer_Get_SubSeconds(void){
      9c2:	b5 07       	cpc	r27, r21
      9c4:	bc f3       	brlt	.-18     	; 0x9b4 <Timebase_Timer_Delay_SubSeconds+0x2a>
 
+/*********************************Token Functions Start*******************************/
 
-//Token Functions
 #ifdef TIMEBASE_TOKEN_FUNCTIONS
 uint8_t Timebase_Token_Executing(void){
   return Timebase->ActiveTokens;
@@ -1442,10 +1442,10 @@ void Timebase_Token_Remove(void){
 
 void Timebase_Timer_Await_SubSeconds(uint16_t value){
      9d4:	bc 01       	movw	r22, r24
-#endif
 
 
-//Timer Functions
+/*****************************Base Timer Functions Start*****************************/
+
 uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
      9d6:	e0 91 4b 01 	lds	r30, 0x014B
@@ -1469,10 +1469,10 @@ void Timebase_Timer_Await_SubSeconds(uint16_t value){
      9f2:	a4 07       	cpc	r26, r20
      9f4:	b5 07       	cpc	r27, r21
      9f6:	99 f7       	brne	.-26     	; 0x9de <Timebase_Timer_Await_SubSeconds+0xa>
-#endif
 
 
-//Timer Functions
+/*****************************Base Timer Functions Start*****************************/
+
 uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
      9f8:	80 85       	ldd	r24, Z+8	; 0x08
@@ -1637,10 +1637,10 @@ void Timebase_Window_Timer_Start(void){
      abe:	97 87       	std	Z+15, r25	; 0x0f
      ac0:	a0 8b       	std	Z+16, r26	; 0x10
      ac2:	b1 8b       	std	Z+17, r27	; 0x11
-#endif
 
 
-//Timer Functions
+/*****************************Base Timer Functions Start*****************************/
+
 uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
      ac4:	80 85       	ldd	r24, Z+8	; 0x08
@@ -1666,7 +1666,7 @@ void Timebase_Window_Timer_Start(void){
   }
 }
 
-//Unit in subseconds -> 20mS
+
 int32_t Timebase_Window_Timer_Get_Interval(void){
      ada:	ef 92       	push	r14
      adc:	ff 92       	push	r15
@@ -1694,16 +1694,16 @@ int32_t Timebase_Timer_Get_Seconds(void){
      afe:	3b 85       	ldd	r19, Y+11	; 0x0b
      b00:	4c 85       	ldd	r20, Y+12	; 0x0c
      b02:	5d 85       	ldd	r21, Y+13	; 0x0d
-#endif
 
 
-//Timer Functions
+/*****************************Base Timer Functions Start*****************************/
+
 uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
      b04:	88 85       	ldd	r24, Y+8	; 0x08
      b06:	99 85       	ldd	r25, Y+9	; 0x09
 
-//Unit in subseconds -> 20mS
+
 int32_t Timebase_Window_Timer_Get_Interval(void){
   if(Timebase->Time.Status == COUNTER_STATE_STARTED){
     int32_t curr_s = Timebase_Timer_Get_Seconds();
@@ -1796,8 +1796,8 @@ void Timebase_Window_Timer_Reset(void){
 00000b7e <Timebase_UpCounter_Get_Status>:
 
 
+/******************************UpCounter Functions Start*****************************/
 
-//UpCounter Functions
 #ifdef TIMEBASE_UPCOUNTER
 uint8_t Timebase_UpCounter_Get_Status(uint8_t window){
      b7e:	e0 91 4b 01 	lds	r30, 0x014B
@@ -2318,8 +2318,8 @@ void Timebase_UpCounter_Clear_All_Flags(uint8_t window){
 
 00000eaa <Timebase_UpCounter_Start>:
 
+/******************************UpCounter Functions Start*****************************/
 
-//UpCounter Functions
 #ifdef TIMEBASE_UPCOUNTER
 uint8_t Timebase_UpCounter_Get_Status(uint8_t window){
   return Timebase->UpCounter[window].Status.Value;
@@ -2363,8 +2363,8 @@ void Timebase_UpCounter_Set_Status(uint8_t window, uint8_t value){
 
 00000ee0 <Timebase_UpCounter_Stop>:
 
+/******************************UpCounter Functions Start*****************************/
 
-//UpCounter Functions
 #ifdef TIMEBASE_UPCOUNTER
 uint8_t Timebase_UpCounter_Get_Status(uint8_t window){
   return Timebase->UpCounter[window].Status.Value;
@@ -2408,8 +2408,8 @@ void Timebase_UpCounter_Set_Status(uint8_t window, uint8_t value){
 
 00000f16 <Timebase_UpCounter_Set_Securely>:
 
+/******************************UpCounter Functions Start*****************************/
 
-//UpCounter Functions
 #ifdef TIMEBASE_UPCOUNTER
 uint8_t Timebase_UpCounter_Get_Status(uint8_t window){
   return Timebase->UpCounter[window].Status.Value;
@@ -2554,8 +2554,8 @@ void Timebase_UpCounter_Update(uint8_t window){
      fb4:	0f 93       	push	r16
      fb6:	1f 93       	push	r17
 
+/******************************UpCounter Functions Start*****************************/
 
-//UpCounter Functions
 #ifdef TIMEBASE_UPCOUNTER
 uint8_t Timebase_UpCounter_Get_Status(uint8_t window){
   return Timebase->UpCounter[window].Status.Value;
@@ -3112,9 +3112,9 @@ void Timebase_UpCounter_Reset_All(void){
     1268:	08 95       	ret
 
 0000126a <Timebase_DownCounter_Get_Status>:
-#endif
 
 
+/*****************************DownCounter Functions Start****************************/
 
 #ifdef TIMEBASE_DOWNCOUNTER
 uint8_t Timebase_DownCounter_Get_Status(uint8_t window){
@@ -3574,7 +3574,7 @@ void Timebase_DownCounter_Clear_All_Flags(uint8_t window){
 
 00001520 <Timebase_DownCounter_Start>:
 
-
+/*****************************DownCounter Functions Start****************************/
 
 #ifdef TIMEBASE_DOWNCOUNTER
 uint8_t Timebase_DownCounter_Get_Status(uint8_t window){
@@ -3621,7 +3621,7 @@ void Timebase_DownCounter_Set_Status(uint8_t window, uint8_t value){
 
 0000155a <Timebase_DownCounter_Stop>:
 
-
+/*****************************DownCounter Functions Start****************************/
 
 #ifdef TIMEBASE_DOWNCOUNTER
 uint8_t Timebase_DownCounter_Get_Status(uint8_t window){
@@ -3676,7 +3676,7 @@ void Timebase_DownCounter_Set_Securely(uint8_t window, int32_t value){
     1594:	cf 93       	push	r28
     1596:	df 93       	push	r29
 
-
+/*****************************DownCounter Functions Start****************************/
 
 #ifdef TIMEBASE_DOWNCOUNTER
 uint8_t Timebase_DownCounter_Get_Status(uint8_t window){
@@ -3856,7 +3856,7 @@ void Timebase_DownCounter_Update(uint8_t window){
     1658:	cf 93       	push	r28
     165a:	df 93       	push	r29
 
-
+/*****************************DownCounter Functions Start****************************/
 
 #ifdef TIMEBASE_DOWNCOUNTER
 uint8_t Timebase_DownCounter_Get_Status(uint8_t window){
@@ -4073,7 +4073,7 @@ uint8_t Timebase_DownCounter_Expired(uint8_t window){
 
 00001756 <Timebase_DownCounter_Expired_Event>:
 
-
+/*****************************DownCounter Functions Start****************************/
 
 #ifdef TIMEBASE_DOWNCOUNTER
 uint8_t Timebase_DownCounter_Get_Status(uint8_t window){
@@ -4526,7 +4526,7 @@ void Timebase_DownCounter_Reset_All(void){
 
 00001984 <Timebase_Reset>:
 
-
+/*******************************Common Functions Start******************************/
 
 void Timebase_Reset(void){
   #ifdef TIMEBASE_UPCOUNTER
@@ -4607,8 +4607,8 @@ void Timebase_ISR_Executables(void){
     19ea:	a4 87       	std	Z+12, r26	; 0x0c
     19ec:	b5 87       	std	Z+13, r27	; 0x0d
 
+/*********************************Token Functions Start*******************************/
 
-//Token Functions
 #ifdef TIMEBASE_TOKEN_FUNCTIONS
 uint8_t Timebase_Token_Executing(void){
   return Timebase->ActiveTokens;
@@ -4627,10 +4627,10 @@ uint8_t Timebase_Token_Executing(void){
     19f8:	08 95       	ret
 
 000019fa <__vector_16>:
-    }
-	#endif
-  }
-}
+
+
+
+/*************************************ISR Start************************************/
 
 ISR(TIMER0_OVF_vect){
     19fa:	1f 92       	push	r1

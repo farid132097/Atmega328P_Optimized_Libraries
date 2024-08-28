@@ -17,6 +17,12 @@
 #define  TIMEBASE_TOKEN_FUNCTIONS
 #define  TIMEBASE_TIME_WINDOW_CALCULATION
 
+
+
+
+
+/********************************Structure & Enumeration Start******************************/
+
 typedef union {
   struct {
     volatile uint8_t       WatchDogTimer  :1;
@@ -129,10 +135,24 @@ enum{
   COUNTER_STATE_STOPPED = 2,
   COUNTER_STATE_EXPIRED = 4
 };
+
+
   
 
 timebase_t Timebase_type;
 timebase_t *Timebase;
+
+/********************************Structure & Enumeration End******************************/
+
+
+
+
+
+
+
+
+
+/************************************Basic Functions Start*******************************/
 
 void Timebase_Struct_Init(void){
   Timebase=&Timebase_type;
@@ -277,7 +297,18 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
 }
 
 
-//Token Functions
+/**********************************Basic Functions End********************************/
+
+
+
+
+
+
+
+
+
+/*********************************Token Functions Start*******************************/
+
 #ifdef TIMEBASE_TOKEN_FUNCTIONS
 uint8_t Timebase_Token_Executing(void){
   return Timebase->ActiveTokens;
@@ -300,8 +331,18 @@ void Timebase_Token_Remove_All(void){
 }
 #endif
 
+/*********************************Token Functions End********************************/
 
-//Timer Functions
+
+
+
+
+
+
+
+
+/*****************************Base Timer Functions Start*****************************/
+
 uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
 }
@@ -363,7 +404,7 @@ void Timebase_Window_Timer_Start(void){
   }
 }
 
-//Unit in subseconds -> 20mS
+
 int32_t Timebase_Window_Timer_Get_Interval(void){
   if(Timebase->Time.Status == COUNTER_STATE_STARTED){
     int32_t curr_s = Timebase_Timer_Get_Seconds();
@@ -386,9 +427,18 @@ int32_t Timebase_Window_Timer_Get_Interval_Reset(void){
   return val;
 }
 
+/******************************Base Timer Functions End******************************/
 
 
-//UpCounter Functions
+
+
+
+
+
+
+
+/******************************UpCounter Functions Start*****************************/
+
 #ifdef TIMEBASE_UPCOUNTER
 uint8_t Timebase_UpCounter_Get_Status(uint8_t window){
   return Timebase->UpCounter[window].Status.Value;
@@ -571,7 +621,17 @@ void Timebase_UpCounter_Reset_All(void){
 }
 #endif
 
+/*******************************UpCounter Functions End******************************/
 
+
+
+
+
+
+
+
+
+/*****************************DownCounter Functions Start****************************/
 
 #ifdef TIMEBASE_DOWNCOUNTER
 uint8_t Timebase_DownCounter_Get_Status(uint8_t window){
@@ -738,7 +798,17 @@ void Timebase_DownCounter_Reset_All(void){
 }
 #endif
 
+/******************************DownCounter Functions End*****************************/
 
+
+
+
+
+
+
+
+
+/*******************************Common Functions Start******************************/
 
 void Timebase_Reset(void){
   #ifdef TIMEBASE_UPCOUNTER
@@ -777,13 +847,25 @@ void Timebase_ISR_Executables(void){
   }
 }
 
+/********************************Common Functions End*******************************/
+
+
+
+
+
+
+
+
+
+/*************************************ISR Start************************************/
+
 ISR(TIMER0_OVF_vect){
   PORTD|=(1<<5);
   Timebase_ISR_Executables();
   PORTD&=~(1<<5);
 }
 
-
+/**************************************ISR End*************************************/
 
 
 

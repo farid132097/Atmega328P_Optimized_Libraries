@@ -489,11 +489,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_pubnames
                 0x000002b3      0xb1a timebase.o
 
-.debug_info     0x00000000     0x28c4
+.debug_info     0x00000000     0x28c6
  *(.debug_info)
  .debug_info    0x00000000      0x10d main.o
  .debug_info    0x0000010d      0x68c uart.o
- .debug_info    0x00000799     0x212b timebase.o
+ .debug_info    0x00000799     0x212d timebase.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000      0x5e7
