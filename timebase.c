@@ -57,7 +57,8 @@ typedef union {
 #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
 typedef struct timebase_upcounter_ss_t{
   timebase_status_t       Status           ;
-  int32_t                 EndValue         ;
+  int32_t                 EndValueSec      ;
+  int32_t                 EndValueSubSec   ;
   int32_t                 Target           ;
   int32_t                 Temporary        ;
   int32_t                 Value            ;
@@ -85,7 +86,8 @@ typedef struct timebase_upcounter_t{
 #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
 typedef struct timebase_downcounter_ss_t{
   timebase_status_t       Status           ;
-  int32_t                 EndValue         ;
+  int32_t                 EndValueSec      ;
+  int32_t                 EndValueSubSec   ;
   int32_t                 Value            ;
   int32_t                 PeriodValue      ;
 }timebase_downcounter_ss_t;
@@ -189,7 +191,8 @@ void Timebase_Struct_Init(void){
   #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
   for(uint8_t i=0; i < TIMEBASE_UPCOUNTER_SUBSECONDS; i++){
     Timebase->UpCounter[i].SS.Status.StatusByte = 0;  
-    Timebase->UpCounter[i].SS.EndValue = 0;
+    Timebase->UpCounter[i].SS.EndValueSec = 0;
+	Timebase->UpCounter[i].SS.EndValueSubSec = 0;
     Timebase->UpCounter[i].SS.Target = 0;
     Timebase->UpCounter[i].SS.Temporary = 0;    
     Timebase->UpCounter[i].SS.Value = 0;
@@ -209,7 +212,8 @@ void Timebase_Struct_Init(void){
   #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
   for(uint8_t i=0; i < TIMEBASE_DOWNCOUNTER_SUBSECONDS; i++){
     Timebase->DownCounter[i].SS.Status.StatusByte = 0; 
-    Timebase->DownCounter[i].SS.EndValue = 0;
+    Timebase->DownCounter[i].SS.EndValueSec = 0;
+	Timebase->DownCounter[i].SS.EndValueSubSec = 0;
     Timebase->DownCounter[i].SS.Value = 0;
     Timebase->DownCounter[i].SS.PeriodValue = 0;
   }
@@ -827,12 +831,20 @@ void Timebase_DownCounter_SS_Set_Value(uint8_t window, int32_t value){
   Timebase->DownCounter[window].SS.Value = value;
 }
 
-int32_t Timebase_DownCounter_SS_Get_EndValue(uint8_t window){
-  return Timebase->DownCounter[window].SS.EndValue;
+int32_t Timebase_DownCounter_SS_Get_EndValueSec(uint8_t window){
+  return Timebase->DownCounter[window].SS.EndValueSec;
 }
 
-void Timebase_DownCounter_SS_Set_EndValue(uint8_t window, int32_t value){
-  Timebase->DownCounter[window].SS.EndValue = value;
+int32_t Timebase_DownCounter_SS_Get_EndValueSubSec(uint8_t window){
+  return Timebase->DownCounter[window].SS.EndValueSubSec;
+}
+
+void Timebase_DownCounter_SS_Set_EndValueSec(uint8_t window, int32_t value){
+  Timebase->DownCounter[window].SS.EndValueSec = value;
+}
+
+void Timebase_DownCounter_SS_Set_EndValueSubSec(uint8_t window, int32_t value){
+  Timebase->DownCounter[window].SS.EndValueSubSec = value;
 }
 
 
@@ -863,7 +875,8 @@ void Timebase_DownCounter_SS_Clear_Period_Flag(uint8_t window){
 
 
 void Timebase_DownCounter_SS_Reset(uint8_t window){
-  Timebase_DownCounter_SS_Set_EndValue(window, 0);
+  Timebase_DownCounter_SS_Set_EndValueSubSec(window, 0);
+  Timebase_DownCounter_SS_Set_EndValueSec(window, 0);
   Timebase_DownCounter_SS_Set_Value(window, 0);
   Timebase_DownCounter_SS_Set_Status(window, COUNTER_STATE_RESET);
   Timebase_DownCounter_SS_Clear_Period_Flag(window);
@@ -889,7 +902,15 @@ void Timebase_DownCounter_SS_Stop(uint8_t window){
 void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_RESET ){
     Timebase_DownCounter_SS_Set_Value(window, value);
-    Timebase_DownCounter_SS_Set_EndValue(window, Timebase_Timer_Get_Seconds() + value);
+	int32_t sec_val = value / Timebase->Config.UpdateRate;
+	int32_t subsec_val = value % Timebase->Config.UpdateRate;
+	subsec_val += Timebase_Timer_Get_SubSeconds();
+	if(subsec_val >= Timebase->Config.UpdateRate){
+	  sec_val += 1;
+	  subsec_val = subsec_val % Timebase->Config.UpdateRate;
+	}
+    Timebase_DownCounter_SS_Set_EndValueSec(window, Timebase_Timer_Get_Seconds() + sec_val);
+	Timebase_DownCounter_SS_Set_EndValueSubSec(window, Timebase_Timer_Get_SubSeconds() + subsec_val);
     Timebase_DownCounter_SS_Start(window);
   }
 }
