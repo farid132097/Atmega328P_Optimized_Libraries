@@ -6,124 +6,136 @@
    6               	__tmp_reg__ = 0
    7               	__zero_reg__ = 1
   15               	.Ltext0:
-  16               		.data
-  17               	.LC0:
-  18 0000 5469 6D65 		.string	"Timebase "
-  18      6261 7365 
-  18      2000 
-  19               	.LC1:
-  20 000a 2000      		.string	" "
-  21               		.text
-  22               	.global	main
-  24               	main:
-  25               	.LFB6:
-  26               	.LM1:
-  27 0000 CF93      		push r28
-  28 0002 DF93      		push r29
-  29               	/* prologue: function */
-  30               	/* frame size = 0 */
-  31               	.LM2:
-  32 0004 60E0      		ldi r22,lo8(19200)
-  33 0006 7BE4      		ldi r23,hi8(19200)
-  34 0008 80E0      		ldi r24,hlo8(19200)
-  35 000a 90E0      		ldi r25,hhi8(19200)
-  36 000c 0E94 0000 		call UART_Init
-  37               	.LM3:
-  38 0010 88EE      		ldi r24,lo8(1000)
-  39 0012 93E0      		ldi r25,hi8(1000)
-  40 0014 0E94 0000 		call Timebase_Init
-  41               	.LM4:
-  42 0018 8AB1      		in r24,42-32
-  43 001a 8066      		ori r24,lo8(96)
-  44 001c 8AB9      		out 42-32,r24
-  45               	.LM5:
-  46 001e 8BB1      		in r24,43-32
-  47 0020 8F79      		andi r24,lo8(-97)
-  48 0022 8BB9      		out 43-32,r24
-  49               	.LBB12:
-  50               	.LBB13:
-  51               	.LBB14:
-  52               	.LBB15:
-  53               	.LM6:
-  54 0024 CCE2      		ldi r28,lo8(300)
-  55 0026 D1E0      		ldi r29,hi8(300)
-  56               	.L3:
-  57               	.LBE15:
-  58               	.LBE14:
-  59               	.LBE13:
-  60               	.LBE12:
-  61               	.LM7:
-  62 0028 80E0      		ldi r24,lo8(.LC0)
-  63 002a 90E0      		ldi r25,hi8(.LC0)
-  64 002c 0E94 0000 		call UART_Transmit_Text
-  65               	.LM8:
-  66 0030 0E94 0000 		call Timebase_Timer_Get_Seconds
-  67 0034 0E94 0000 		call UART_Transmit_Number
-  68               	.LM9:
-  69 0038 80E0      		ldi r24,lo8(.LC1)
-  70 003a 90E0      		ldi r25,hi8(.LC1)
-  71 003c 0E94 0000 		call UART_Transmit_Text
-  72               	.LM10:
-  73 0040 0E94 0000 		call Timebase_Timer_Get_SubSeconds
-  74 0044 A0E0      		ldi r26,lo8(0)
-  75 0046 B0E0      		ldi r27,hi8(0)
-  76 0048 BC01      		movw r22,r24
-  77 004a CD01      		movw r24,r26
-  78 004c 0E94 0000 		call UART_Transmit_Number
-  79               	.LM11:
-  80 0050 0E94 0000 		call UART_Transmit_New_Line
-  81 0054 88EE      		ldi r24,lo8(1000)
-  82 0056 93E0      		ldi r25,hi8(1000)
-  83               	.LVL0:
-  84               	.L2:
-  85               	.LBB19:
-  86               	.LBB18:
-  87               	.LBB17:
-  88               	.LBB16:
-  89               	.LM12:
-  90 0058 FE01      		movw r30,r28
-  91               	.LVL1:
-  92               	/* #APP */
-  93               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
-  94 005a 3197      		1: sbiw r30,1
-  95 005c 01F4      		brne 1b
-  96               	 ;  0 "" 2
-  97               	/* #NOAPP */
-  98               	.LBE16:
-  99               	.LBE17:
- 100               	.LM13:
- 101 005e 0197      		sbiw r24,1
- 102               	.LM14:
- 103 0060 01F4      		brne .L2
- 104               	.LBE18:
- 105               	.LBE19:
- 106               	.LM15:
- 107 0062 5E9A      		sbi 43-32,6
- 108               	.LM16:
- 109 0064 0E94 0000 		call Timebase_Main_Loop_Executables
- 110               	.LVL2:
- 111               	.LM17:
- 112 0068 5E98      		cbi 43-32,6
- 113 006a 00C0      		rjmp .L3
- 114               	.LFE6:
- 140               	.Letext0:
+  16               	.global	main
+  18               	main:
+  19               	.LFB6:
+  20               	.LM1:
+  21 0000 CF93      		push r28
+  22 0002 DF93      		push r29
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25               	.LM2:
+  26 0004 60E0      		ldi r22,lo8(38400)
+  27 0006 76E9      		ldi r23,hi8(38400)
+  28 0008 80E0      		ldi r24,hlo8(38400)
+  29 000a 90E0      		ldi r25,hhi8(38400)
+  30 000c 0E94 0000 		call UART_Init
+  31               	.LM3:
+  32 0010 88EE      		ldi r24,lo8(1000)
+  33 0012 93E0      		ldi r25,hi8(1000)
+  34 0014 0E94 0000 		call Timebase_Init
+  35               	.LM4:
+  36 0018 8AB1      		in r24,42-32
+  37 001a 8066      		ori r24,lo8(96)
+  38 001c 8AB9      		out 42-32,r24
+  39               	.LM5:
+  40 001e 8BB1      		in r24,43-32
+  41 0020 8F79      		andi r24,lo8(-97)
+  42 0022 8BB9      		out 43-32,r24
+  43 0024 88E8      		ldi r24,lo8(5000)
+  44 0026 93E1      		ldi r25,hi8(5000)
+  45               	.LVL0:
+  46               	.LBB18:
+  47               	.LBB19:
+  48               	.LBB20:
+  49               	.LBB21:
+  50               	.LM6:
+  51 0028 2CE2      		ldi r18,lo8(300)
+  52 002a 31E0      		ldi r19,hi8(300)
+  53               	.L2:
+  54 002c F901      		movw r30,r18
+  55               	.LVL1:
+  56               	/* #APP */
+  57               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  58 002e 3197      		1: sbiw r30,1
+  59 0030 01F4      		brne 1b
+  60               	 ;  0 "" 2
+  61               	/* #NOAPP */
+  62               	.LBE21:
+  63               	.LBE20:
+  64               	.LM7:
+  65 0032 0197      		sbiw r24,1
+  66               	.LM8:
+  67 0034 01F4      		brne .L2
+  68               	.LBE19:
+  69               	.LBE18:
+  70               	.LM9:
+  71 0036 80E0      		ldi r24,lo8(0)
+  72               	.LVL2:
+  73 0038 40E1      		ldi r20,lo8(10000)
+  74 003a 57E2      		ldi r21,hi8(10000)
+  75 003c 60E0      		ldi r22,hlo8(10000)
+  76 003e 70E0      		ldi r23,hhi8(10000)
+  77 0040 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
+  78               	.LVL3:
+  79               	.LBB22:
+  80               	.LBB23:
+  81               	.LBB24:
+  82               	.LBB25:
+  83               	.LM10:
+  84 0044 CCE2      		ldi r28,lo8(300)
+  85 0046 D1E0      		ldi r29,hi8(300)
+  86               	.L4:
+  87               	.LBE25:
+  88               	.LBE24:
+  89               	.LBE23:
+  90               	.LBE22:
+  91               	.LM11:
+  92 0048 80E0      		ldi r24,lo8(0)
+  93 004a 0E94 0000 		call Timebase_DownCounter_SS_Get_Value
+  94 004e 0E94 0000 		call UART_Transmit_Number
+  95               	.LM12:
+  96 0052 0E94 0000 		call UART_Transmit_New_Line
+  97 0056 88EE      		ldi r24,lo8(1000)
+  98 0058 93E0      		ldi r25,hi8(1000)
+  99               	.LVL4:
+ 100               	.L3:
+ 101               	.LBB29:
+ 102               	.LBB28:
+ 103               	.LBB27:
+ 104               	.LBB26:
+ 105               	.LM13:
+ 106 005a FE01      		movw r30,r28
+ 107               	.LVL5:
+ 108               	/* #APP */
+ 109               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 110 005c 3197      		1: sbiw r30,1
+ 111 005e 01F4      		brne 1b
+ 112               	 ;  0 "" 2
+ 113               	/* #NOAPP */
+ 114               	.LBE26:
+ 115               	.LBE27:
+ 116               	.LM14:
+ 117 0060 0197      		sbiw r24,1
+ 118               	.LM15:
+ 119 0062 01F4      		brne .L3
+ 120               	.LBE28:
+ 121               	.LBE29:
+ 122               	.LM16:
+ 123 0064 5E9A      		sbi 43-32,6
+ 124               	.LM17:
+ 125 0066 0E94 0000 		call Timebase_Main_Loop_Executables
+ 126               	.LVL6:
+ 127               	.LM18:
+ 128 006a 5E98      		cbi 43-32,6
+ 129 006c 00C0      		rjmp .L4
+ 130               	.LFE6:
+ 156               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\WALTON\AppData\Local\Temp/ccgMs2Fc.s:2      *ABS*:0000003f __SREG__
-C:\Users\WALTON\AppData\Local\Temp/ccgMs2Fc.s:3      *ABS*:0000003e __SP_H__
-C:\Users\WALTON\AppData\Local\Temp/ccgMs2Fc.s:4      *ABS*:0000003d __SP_L__
-C:\Users\WALTON\AppData\Local\Temp/ccgMs2Fc.s:5      *ABS*:00000034 __CCP__
-C:\Users\WALTON\AppData\Local\Temp/ccgMs2Fc.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccgMs2Fc.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccgMs2Fc.s:24     .text:00000000 main
+C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:18     .text:00000000 main
 
 UNDEFINED SYMBOLS
 UART_Init
 Timebase_Init
-UART_Transmit_Text
-Timebase_Timer_Get_Seconds
+Timebase_DownCounter_SS_Set_Securely
+Timebase_DownCounter_SS_Get_Value
 UART_Transmit_Number
-Timebase_Timer_Get_SubSeconds
 UART_Transmit_New_Line
 Timebase_Main_Loop_Executables
-__do_copy_data

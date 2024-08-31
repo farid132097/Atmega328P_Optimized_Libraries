@@ -9,21 +9,29 @@ int main(void){
   
   
   
-  UART_Init(19200);
+  UART_Init(38400);
   Timebase_Init(1000);
   
   //For test, also added inside ISR
   DDRD  |=  (1<<5)|(1<<6);
   PORTD &=~ ((1<<5)|(1<<6));
+  _delay_ms(500);
+  Timebase_DownCounter_SS_Set_Securely(0, 10000);
   
   while(1){
     
-    UART_Transmit_Text("Timebase ");
+    /*UART_Transmit_Text("Timebase ");
 	UART_Transmit_Number(Timebase_Timer_Get_Seconds());
 	UART_Transmit_Text(" ");
 	UART_Transmit_Number(Timebase_Timer_Get_SubSeconds());
-	UART_Transmit_New_Line();
+	UART_Transmit_New_Line();*/
 	
+	/*UART_Transmit_Number(Timebase_DownCounter_SS_Get_EndValueSec(0));
+	UART_Transmit_Space();
+	UART_Transmit_Number(Timebase_DownCounter_SS_Get_EndValueSubSec(0));
+	UART_Transmit_Space();*/
+	UART_Transmit_Number(Timebase_DownCounter_SS_Get_Value(0));
+	UART_Transmit_New_Line();
 	_delay_ms(100);
 	
 	//Add update req flag

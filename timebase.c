@@ -915,7 +915,7 @@ void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
 	}
 	sec_val += temp_s;
     Timebase_DownCounter_SS_Set_EndValueSec(window, sec_val);
-	Timebase_DownCounter_SS_Set_EndValueSubSec(window, Timebase_Timer_Get_SubSeconds() + subsec_val);
+	Timebase_DownCounter_SS_Set_EndValueSubSec(window, subsec_val);
     Timebase_DownCounter_SS_Start(window);
   }
 }
@@ -929,11 +929,8 @@ void Timebase_DownCounter_SS_Update(uint8_t window){
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
     int32_t temp_ss = Timebase_Timer_Get_SubSeconds();
 	int32_t temp_s  = Timebase_Timer_Get_Seconds();
-	temp_ss -= Timebase_DownCounter_SS_Get_EndValueSubSec(window);
-	if(temp_ss < 0){
-	  temp_ss = 0;
-	}
-	temp_s -= Timebase_DownCounter_SS_Get_EndValueSec(window);
+	temp_ss = Timebase_DownCounter_SS_Get_EndValueSubSec(window) - temp_ss;
+	temp_s = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
 	if(temp_s < 0){
 	  temp_s = 0;
 	}
@@ -1069,11 +1066,7 @@ void Timebase_ISR_Executables(void){
   TCNT0  = Timebase->Time.OVFUpdateValue;
   if((Timebase->Time.SubSeconds % Timebase->Config.UpdateRate) == 0){
     Timebase->Time.Seconds++;
-	#ifdef TIMEBASE_TOKEN_FUNCTIONS
-    if(Timebase_Token_Executing() == 0){
-      Timebase->Time.SubSeconds = 0;
-    }
-	#endif
+    Timebase->Time.SubSeconds = 0;
   }
 }
 
