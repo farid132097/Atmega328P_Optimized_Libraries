@@ -366,17 +366,22 @@ void Timebase_Timer_Set_Seconds(int32_t value){
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
-  #ifdef TIMEBASE_TOKEN_FUNCTIONS
-  Timebase_Token_Add();
-  #endif
+  int32_t temp_ss = Timebase_Timer_Get_SubSeconds();
+  int32_t temp_s  = Timebase_Timer_Get_Seconds();
+  int32_t subsec_val = value % Timebase->Config.UpdateRate;
+  int32_t sec_val    = value / Timebase->Config.UpdateRate;
+  subsec_val += temp_ss;
+  if(subsec_val >= Timebase->Config.UpdateRate){
+	sec_val += 1;
+	subsec_val = subsec_val % Timebase->Config.UpdateRate;
+  }
+  sec_val += temp_s;
   
-  int32_t temp = Timebase_Timer_Get_SubSeconds();
-  temp += value;
-  while(temp > Timebase_Timer_Get_SubSeconds());
-  
-  #ifdef TIMEBASE_TOKEN_FUNCTIONS
-  Timebase_Token_Remove();
-  #endif
+  while(temp_s <= sec_val){
+    if(temp_ss >= subsec_val){
+	  break;
+	}
+  }
 }
 
 
