@@ -10,126 +10,91 @@
   18               	main:
   19               	.LFB6:
   20               	.LM1:
-  21 0000 CF93      		push r28
-  22 0002 DF93      		push r29
-  23               	/* prologue: function */
-  24               	/* frame size = 0 */
-  25               	.LM2:
-  26 0004 60E0      		ldi r22,lo8(38400)
-  27 0006 76E9      		ldi r23,hi8(38400)
-  28 0008 80E0      		ldi r24,hlo8(38400)
-  29 000a 90E0      		ldi r25,hhi8(38400)
-  30 000c 0E94 0000 		call UART_Init
-  31               	.LM3:
-  32 0010 88EE      		ldi r24,lo8(1000)
-  33 0012 93E0      		ldi r25,hi8(1000)
-  34 0014 0E94 0000 		call Timebase_Init
-  35               	.LM4:
-  36 0018 8AB1      		in r24,42-32
-  37 001a 8066      		ori r24,lo8(96)
-  38 001c 8AB9      		out 42-32,r24
-  39               	.LM5:
-  40 001e 8BB1      		in r24,43-32
-  41 0020 8F79      		andi r24,lo8(-97)
-  42 0022 8BB9      		out 43-32,r24
-  43 0024 88E8      		ldi r24,lo8(5000)
-  44 0026 93E1      		ldi r25,hi8(5000)
-  45               	.LVL0:
-  46               	.LBB18:
-  47               	.LBB19:
-  48               	.LBB20:
-  49               	.LBB21:
-  50               	.LM6:
-  51 0028 2CE2      		ldi r18,lo8(300)
-  52 002a 31E0      		ldi r19,hi8(300)
-  53               	.L2:
-  54 002c F901      		movw r30,r18
-  55               	.LVL1:
-  56               	/* #APP */
-  57               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
-  58 002e 3197      		1: sbiw r30,1
-  59 0030 01F4      		brne 1b
-  60               	 ;  0 "" 2
-  61               	/* #NOAPP */
-  62               	.LBE21:
-  63               	.LBE20:
-  64               	.LM7:
-  65 0032 0197      		sbiw r24,1
-  66               	.LM8:
-  67 0034 01F4      		brne .L2
-  68               	.LBE19:
-  69               	.LBE18:
-  70               	.LM9:
-  71 0036 80E0      		ldi r24,lo8(0)
-  72               	.LVL2:
-  73 0038 40E1      		ldi r20,lo8(10000)
-  74 003a 57E2      		ldi r21,hi8(10000)
-  75 003c 60E0      		ldi r22,hlo8(10000)
-  76 003e 70E0      		ldi r23,hhi8(10000)
-  77 0040 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
-  78               	.LVL3:
-  79               	.LBB22:
-  80               	.LBB23:
-  81               	.LBB24:
-  82               	.LBB25:
-  83               	.LM10:
-  84 0044 CCE2      		ldi r28,lo8(300)
-  85 0046 D1E0      		ldi r29,hi8(300)
-  86               	.L4:
-  87               	.LBE25:
-  88               	.LBE24:
-  89               	.LBE23:
-  90               	.LBE22:
-  91               	.LM11:
-  92 0048 80E0      		ldi r24,lo8(0)
-  93 004a 0E94 0000 		call Timebase_DownCounter_SS_Get_Value
-  94 004e 0E94 0000 		call UART_Transmit_Number
-  95               	.LM12:
-  96 0052 0E94 0000 		call UART_Transmit_New_Line
-  97 0056 88EE      		ldi r24,lo8(1000)
-  98 0058 93E0      		ldi r25,hi8(1000)
-  99               	.LVL4:
- 100               	.L3:
- 101               	.LBB29:
- 102               	.LBB28:
- 103               	.LBB27:
- 104               	.LBB26:
- 105               	.LM13:
- 106 005a FE01      		movw r30,r28
- 107               	.LVL5:
- 108               	/* #APP */
- 109               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
- 110 005c 3197      		1: sbiw r30,1
- 111 005e 01F4      		brne 1b
- 112               	 ;  0 "" 2
- 113               	/* #NOAPP */
- 114               	.LBE26:
- 115               	.LBE27:
- 116               	.LM14:
- 117 0060 0197      		sbiw r24,1
- 118               	.LM15:
- 119 0062 01F4      		brne .L3
- 120               	.LBE28:
- 121               	.LBE29:
- 122               	.LM16:
- 123 0064 5E9A      		sbi 43-32,6
- 124               	.LM17:
- 125 0066 0E94 0000 		call Timebase_Main_Loop_Executables
- 126               	.LVL6:
- 127               	.LM18:
- 128 006a 5E98      		cbi 43-32,6
- 129 006c 00C0      		rjmp .L4
- 130               	.LFE6:
- 156               	.Letext0:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 60E0      		ldi r22,lo8(57600)
+  25 0002 71EE      		ldi r23,hi8(57600)
+  26 0004 80E0      		ldi r24,hlo8(57600)
+  27 0006 90E0      		ldi r25,hhi8(57600)
+  28 0008 0E94 0000 		call UART_Init
+  29               	.LM3:
+  30 000c 88EE      		ldi r24,lo8(1000)
+  31 000e 93E0      		ldi r25,hi8(1000)
+  32 0010 0E94 0000 		call Timebase_Init
+  33               	.LM4:
+  34 0014 8AB1      		in r24,42-32
+  35 0016 8066      		ori r24,lo8(96)
+  36 0018 8AB9      		out 42-32,r24
+  37               	.LM5:
+  38 001a 8BB1      		in r24,43-32
+  39 001c 8F79      		andi r24,lo8(-97)
+  40 001e 8BB9      		out 43-32,r24
+  41 0020 88E8      		ldi r24,lo8(5000)
+  42 0022 93E1      		ldi r25,hi8(5000)
+  43               	.LVL0:
+  44               	.LBB12:
+  45               	.LBB13:
+  46               	.LBB14:
+  47               	.LBB15:
+  48               	.LM6:
+  49 0024 2CE2      		ldi r18,lo8(300)
+  50 0026 31E0      		ldi r19,hi8(300)
+  51               	.L2:
+  52 0028 F901      		movw r30,r18
+  53               	.LVL1:
+  54               	/* #APP */
+  55               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  56 002a 3197      		1: sbiw r30,1
+  57 002c 01F4      		brne 1b
+  58               	 ;  0 "" 2
+  59               	/* #NOAPP */
+  60               	.LBE15:
+  61               	.LBE14:
+  62               	.LM7:
+  63 002e 0197      		sbiw r24,1
+  64               	.LM8:
+  65 0030 01F4      		brne .L2
+  66               	.LBE13:
+  67               	.LBE12:
+  68               	.LM9:
+  69 0032 80E0      		ldi r24,lo8(0)
+  70               	.LVL2:
+  71 0034 40E1      		ldi r20,lo8(10000)
+  72 0036 57E2      		ldi r21,hi8(10000)
+  73 0038 60E0      		ldi r22,hlo8(10000)
+  74 003a 70E0      		ldi r23,hhi8(10000)
+  75 003c 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
+  76               	.LVL3:
+  77               	.L3:
+  78               	.LM10:
+  79 0040 80E0      		ldi r24,lo8(0)
+  80 0042 0E94 0000 		call Timebase_DownCounter_SS_Get_Value
+  81 0046 0E94 0000 		call UART_Transmit_Number
+  82               	.LM11:
+  83 004a 0E94 0000 		call UART_Transmit_New_Line
+  84               	.LM12:
+  85 004e 84E6      		ldi r24,lo8(100)
+  86 0050 90E0      		ldi r25,hi8(100)
+  87 0052 0E94 0000 		call Timebase_Timer_Delay_SubSeconds
+  88               	.LM13:
+  89 0056 5E9A      		sbi 43-32,6
+  90               	.LM14:
+  91 0058 0E94 0000 		call Timebase_Main_Loop_Executables
+  92               	.LM15:
+  93 005c 5E98      		cbi 43-32,6
+  94 005e 00C0      		rjmp .L3
+  95               	.LFE6:
+ 121               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:2      *ABS*:0000003f __SREG__
-C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:3      *ABS*:0000003e __SP_H__
-C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:4      *ABS*:0000003d __SP_L__
-C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:5      *ABS*:00000034 __CCP__
-C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccgWSu6T.s:18     .text:00000000 main
+C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:18     .text:00000000 main
 
 UNDEFINED SYMBOLS
 UART_Init
@@ -138,4 +103,5 @@ Timebase_DownCounter_SS_Set_Securely
 Timebase_DownCounter_SS_Get_Value
 UART_Transmit_Number
 UART_Transmit_New_Line
+Timebase_Timer_Delay_SubSeconds
 Timebase_Main_Loop_Executables

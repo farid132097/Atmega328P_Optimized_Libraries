@@ -9,7 +9,7 @@ int main(void){
   
   
   
-  UART_Init(38400);
+  UART_Init(57600);
   Timebase_Init(1000);
   
   //For test, also added inside ISR
@@ -32,7 +32,7 @@ int main(void){
 	UART_Transmit_Space();*/
 	UART_Transmit_Number(Timebase_DownCounter_SS_Get_Value(0));
 	UART_Transmit_New_Line();
-	_delay_ms(100);
+	Timebase_Timer_Delay_SubSeconds(100);
 	
 	//Add update req flag
 	PORTD |= (1<<6);

@@ -9,6 +9,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+#include "uart.h"
 
 //#define  TIMEBASE_UPCOUNTER                1
 //#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
@@ -366,21 +367,39 @@ void Timebase_Timer_Set_Seconds(int32_t value){
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
-  int32_t temp_ss = Timebase_Timer_Get_SubSeconds();
-  int32_t temp_s  = Timebase_Timer_Get_Seconds();
-  int32_t subsec_val = value % Timebase->Config.UpdateRate;
-  int32_t sec_val    = value / Timebase->Config.UpdateRate;
-  subsec_val += temp_ss;
-  if(subsec_val >= Timebase->Config.UpdateRate){
-	sec_val += 1;
-	subsec_val = subsec_val % Timebase->Config.UpdateRate;
+  int32_t curr_ss = Timebase_Timer_Get_SubSeconds();
+  int32_t curr_s  = Timebase_Timer_Get_Seconds();
+  int32_t end_val_ss = value % Timebase->Config.UpdateRate;
+  int32_t end_val_s  = value / Timebase->Config.UpdateRate;
+  end_val_ss += curr_ss;
+  if(end_val_ss >= Timebase->Config.UpdateRate){
+	end_val_s += 1;
+	end_val_ss = end_val_ss % Timebase->Config.UpdateRate;
   }
-  sec_val += temp_s;
+  end_val_s += curr_s;
   
-  while(temp_s <= sec_val){
-    if(temp_ss >= subsec_val){
+  
+  #warning "Uart debug is enabled in Timebase_Timer_Delay_SubSeconds"
+  
+  UART_Transmit_Text("TS_S ");
+  UART_Transmit_Number(curr_s);
+  UART_Transmit_Text(",");
+  UART_Transmit_Text("TS_SS ");
+  UART_Transmit_Number(curr_ss);
+  UART_Transmit_Text(",");
+  UART_Transmit_Text("TS_ES ");
+  UART_Transmit_Number(end_val_s);
+  UART_Transmit_Text(",");
+  UART_Transmit_Text("TS_ESS ");
+  UART_Transmit_Number(end_val_ss);
+  UART_Transmit_New_Line();
+  
+  while(curr_s <= end_val_s){
+    if(curr_ss >= end_val_ss){
 	  break;
 	}
+	curr_ss = Timebase_Timer_Get_SubSeconds();
+	curr_s  = Timebase_Timer_Get_Seconds();
   }
 }
 
