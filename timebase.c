@@ -370,7 +370,7 @@ void Timebase_Timer_Set_Seconds(int32_t value){
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
-  int32_t curr_ss = Timebase_Timer_Get_SubSeconds();
+  /*int32_t curr_ss = Timebase_Timer_Get_SubSeconds();
   int32_t curr_s  = Timebase_Timer_Get_Seconds();
   int32_t end_val_ss = value % Timebase->Config.UpdateRate;
   int32_t end_val_s  = value / Timebase->Config.UpdateRate;
@@ -386,10 +386,10 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
   //UART_Transmit_Number(Timebase_DownCounter_SS_Get_Value(0));
   //UART_Transmit_Text(", ");
   UART_Transmit_Text("S ");
-  UART_Transmit_Number(curr_s);
+  UART_Transmit_Number(Timebase_Timer_Get_Seconds());
   UART_Transmit_Text(", ");
   UART_Transmit_Text("SS ");
-  UART_Transmit_Number(curr_ss);
+  UART_Transmit_Number(Timebase_Timer_Get_SubSeconds());
   UART_Transmit_Text(", ");
   UART_Transmit_Text("TS ");
   UART_Transmit_Number(end_val_s);
@@ -405,6 +405,40 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
   if(Timebase_Timer_Get_Seconds() == end_val_s){
     while(Timebase_Timer_Get_SubSeconds() <= end_val_ss){
 	}
+  }*/
+  
+  UART_Transmit_Text("S ");
+  UART_Transmit_Number(Timebase_Timer_Get_Seconds());
+  UART_Transmit_Text(", ");
+  UART_Transmit_Text("SS ");
+  UART_Transmit_Number(Timebase_Timer_Get_SubSeconds());
+  /*UART_Transmit_Text(", ");
+  UART_Transmit_Text("TS ");
+  UART_Transmit_Number(end_val_s);
+  UART_Transmit_Text(", ");
+  UART_Transmit_Text("TSS ");
+  UART_Transmit_Number(end_val_ss);*/
+  UART_Transmit_New_Line();
+  
+  int32_t smpl_val = 0, curr_val = 0;
+  int32_t smpl_ss  = Timebase_Timer_Get_SubSeconds();
+  int32_t smpl_s   = Timebase_Timer_Get_Seconds();
+  
+  smpl_val  = smpl_s;
+  smpl_val *= Timebase->Config.UpdateRate;
+  smpl_val += smpl_ss;
+  smpl_val += value;
+  
+  
+  int32_t curr_ss  = 0; 
+  int32_t curr_s   = 0; 
+  
+  while(curr_val<smpl_val){
+    curr_ss   = Timebase_Timer_Get_SubSeconds();
+	curr_s    = Timebase_Timer_Get_Seconds();
+    curr_val  = curr_s;
+	curr_val *= Timebase->Config.UpdateRate;
+	curr_val += curr_ss;
   }
   
 }
