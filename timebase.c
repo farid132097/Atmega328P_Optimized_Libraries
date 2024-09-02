@@ -8,7 +8,10 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+#include "timebase.h"
 
+
+#warning uart header is enabled in Timebase
 #include "uart.h"
 
 //#define  TIMEBASE_UPCOUNTER                1
@@ -380,27 +383,30 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
   
   
   #warning "Uart debug is enabled in Timebase_Timer_Delay_SubSeconds"
-  
-  UART_Transmit_Text("TS_S ");
+  //UART_Transmit_Number(Timebase_DownCounter_SS_Get_Value(0));
+  //UART_Transmit_Text(", ");
+  UART_Transmit_Text("S ");
   UART_Transmit_Number(curr_s);
-  UART_Transmit_Text(",");
-  UART_Transmit_Text("TS_SS ");
+  UART_Transmit_Text(", ");
+  UART_Transmit_Text("SS ");
   UART_Transmit_Number(curr_ss);
-  UART_Transmit_Text(",");
-  UART_Transmit_Text("TS_ES ");
+  UART_Transmit_Text(", ");
+  UART_Transmit_Text("TS ");
   UART_Transmit_Number(end_val_s);
-  UART_Transmit_Text(",");
-  UART_Transmit_Text("TS_ESS ");
+  UART_Transmit_Text(", ");
+  UART_Transmit_Text("TSS ");
   UART_Transmit_Number(end_val_ss);
   UART_Transmit_New_Line();
   
-  while(curr_s <= end_val_s){
-    if(curr_ss >= end_val_ss){
-	  break;
+  if(Timebase_Timer_Get_Seconds() < end_val_s){
+    while(Timebase_Timer_Get_Seconds() < end_val_s){
 	}
-	curr_ss = Timebase_Timer_Get_SubSeconds();
-	curr_s  = Timebase_Timer_Get_Seconds();
   }
+  if(Timebase_Timer_Get_Seconds() == end_val_s){
+    while(Timebase_Timer_Get_SubSeconds() <= end_val_ss){
+	}
+  }
+  
 }
 
 

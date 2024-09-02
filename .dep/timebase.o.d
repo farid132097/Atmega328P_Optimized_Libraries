@@ -1,3 +1,5 @@
-timebase.o: timebase.c uart.h
+timebase.o: timebase.c timebase.h uart.h
+
+timebase.h:
 
 uart.h:

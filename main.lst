@@ -68,40 +68,31 @@
   76               	.LVL3:
   77               	.L3:
   78               	.LM10:
-  79 0040 80E0      		ldi r24,lo8(0)
-  80 0042 0E94 0000 		call Timebase_DownCounter_SS_Get_Value
-  81 0046 0E94 0000 		call UART_Transmit_Number
+  79 0040 84E6      		ldi r24,lo8(100)
+  80 0042 90E0      		ldi r25,hi8(100)
+  81 0044 0E94 0000 		call Timebase_Timer_Delay_SubSeconds
   82               	.LM11:
-  83 004a 0E94 0000 		call UART_Transmit_New_Line
+  83 0048 5E9A      		sbi 43-32,6
   84               	.LM12:
-  85 004e 84E6      		ldi r24,lo8(100)
-  86 0050 90E0      		ldi r25,hi8(100)
-  87 0052 0E94 0000 		call Timebase_Timer_Delay_SubSeconds
-  88               	.LM13:
-  89 0056 5E9A      		sbi 43-32,6
-  90               	.LM14:
-  91 0058 0E94 0000 		call Timebase_Main_Loop_Executables
-  92               	.LM15:
-  93 005c 5E98      		cbi 43-32,6
-  94 005e 00C0      		rjmp .L3
-  95               	.LFE6:
- 121               	.Letext0:
+  85 004a 0E94 0000 		call Timebase_Main_Loop_Executables
+  86               	.LM13:
+  87 004e 5E98      		cbi 43-32,6
+  88 0050 00C0      		rjmp .L3
+  89               	.LFE6:
+ 115               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:2      *ABS*:0000003f __SREG__
-C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:3      *ABS*:0000003e __SP_H__
-C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:4      *ABS*:0000003d __SP_L__
-C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:5      *ABS*:00000034 __CCP__
-C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccqBlChE.s:18     .text:00000000 main
+C:\Users\WALTON\AppData\Local\Temp/ccboBoTQ.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccboBoTQ.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccboBoTQ.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccboBoTQ.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccboBoTQ.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccboBoTQ.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccboBoTQ.s:18     .text:00000000 main
 
 UNDEFINED SYMBOLS
 UART_Init
 Timebase_Init
 Timebase_DownCounter_SS_Set_Securely
-Timebase_DownCounter_SS_Get_Value
-UART_Transmit_Number
-UART_Transmit_New_Line
 Timebase_Timer_Delay_SubSeconds
 Timebase_Main_Loop_Executables

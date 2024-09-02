@@ -30,8 +30,8 @@ int main(void){
 	UART_Transmit_Space();
 	UART_Transmit_Number(Timebase_DownCounter_SS_Get_EndValueSubSec(0));
 	UART_Transmit_Space();*/
-	UART_Transmit_Number(Timebase_DownCounter_SS_Get_Value(0));
-	UART_Transmit_New_Line();
+	//UART_Transmit_Number(Timebase_DownCounter_SS_Get_Value(0));
+	//UART_Transmit_New_Line();
 	Timebase_Timer_Delay_SubSeconds(100);
 	
 	//Add update req flag
