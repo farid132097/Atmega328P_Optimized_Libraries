@@ -17,6 +17,9 @@ int main(void){
   PORTD &=~ ((1<<5)|(1<<6));
   _delay_ms(500);
   Timebase_DownCounter_SS_Set_Securely(0, 10000);
+  Timebase_DownCounter_SS_Set_Securely(1, 8000);
+  Timebase_DownCounter_SS_Set_Securely(2, 6000);
+  Timebase_DownCounter_SS_Set_Securely(3, 4000);
   
   while(1){
     

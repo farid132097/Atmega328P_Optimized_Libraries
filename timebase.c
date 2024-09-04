@@ -327,6 +327,28 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
 
 
 
+/********************************Atomic Functions Start*******************************/
+
+
+void Timebase_Atomic_Operation_Start(void){
+  cli();
+}
+
+void Timebase_Atomic_Operation_End(void){
+  sei();
+}
+
+
+/*********************************Atomic Functions End********************************/
+
+
+
+
+
+
+
+
+
 /*********************************Token Functions Start*******************************/
 
 #ifdef TIMEBASE_TOKEN_FUNCTIONS
@@ -367,8 +389,25 @@ uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
 }
 
+
 int32_t Timebase_Timer_Get_Seconds(void){
   return Timebase->Time.Seconds;
+}
+
+uint16_t Timebase_Timer_Get_SubSeconds_Atomic(void){
+  uint16_t curr_ss = 0;
+  Timebase_Atomic_Operation_Start();
+  curr_ss = Timebase->Time.SubSeconds;
+  Timebase_Atomic_Operation_End();
+  return curr_ss;
+}
+
+int32_t Timebase_Timer_Get_Seconds_Atomic(void){
+  int32_t curr_s = 0;
+  Timebase_Atomic_Operation_Start();
+  curr_s = Timebase->Time.Seconds;
+  Timebase_Atomic_Operation_End();
+  return curr_s;
 }
 
 void Timebase_Timer_Set_SubSeconds(uint16_t value){
@@ -380,72 +419,22 @@ void Timebase_Timer_Set_Seconds(int32_t value){
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
-  /*int32_t curr_ss = Timebase_Timer_Get_SubSeconds();
-  int32_t curr_s  = Timebase_Timer_Get_Seconds();
-  int32_t end_val_ss = value % Timebase->Config.UpdateRate;
-  int32_t end_val_s  = value / Timebase->Config.UpdateRate;
-  end_val_ss += curr_ss;
-  if(end_val_ss >= Timebase->Config.UpdateRate){
-	end_val_s += 1;
-	end_val_ss = end_val_ss % Timebase->Config.UpdateRate;
-  }
-  end_val_s += curr_s;
-  
-  
-  #warning "Uart debug is enabled in Timebase_Timer_Delay_SubSeconds"
-  //UART_Transmit_Number(Timebase_DownCounter_SS_Get_Value(0));
-  //UART_Transmit_Text(", ");
-  UART_Transmit_Text("S ");
-  UART_Transmit_Number(Timebase_Timer_Get_Seconds());
-  UART_Transmit_Text(", ");
-  UART_Transmit_Text("SS ");
-  UART_Transmit_Number(Timebase_Timer_Get_SubSeconds());
-  UART_Transmit_Text(", ");
-  UART_Transmit_Text("TS ");
-  UART_Transmit_Number(end_val_s);
-  UART_Transmit_Text(", ");
-  UART_Transmit_Text("TSS ");
-  UART_Transmit_Number(end_val_ss);
-  UART_Transmit_New_Line();
-  
-  if(Timebase_Timer_Get_Seconds() < end_val_s){
-    while(Timebase_Timer_Get_Seconds() < end_val_s){
-	}
-  }
-  if(Timebase_Timer_Get_Seconds() == end_val_s){
-    while(Timebase_Timer_Get_SubSeconds() <= end_val_ss){
-	}
-  }*/
-  
-  UART_Transmit_Text("S ");
-  UART_Transmit_Number(Timebase_Timer_Get_Seconds());
-  UART_Transmit_Text(", ");
-  UART_Transmit_Text("SS ");
-  UART_Transmit_Number(Timebase_Timer_Get_SubSeconds());
-  /*UART_Transmit_Text(", ");
-  UART_Transmit_Text("TS ");
-  UART_Transmit_Number(end_val_s);
-  UART_Transmit_Text(", ");
-  UART_Transmit_Text("TSS ");
-  UART_Transmit_Number(end_val_ss);*/
-  UART_Transmit_New_Line();
   
   int32_t smpl_val = 0, curr_val = 0;
-  int32_t smpl_ss  = Timebase_Timer_Get_SubSeconds();
-  int32_t smpl_s   = Timebase_Timer_Get_Seconds();
+  int32_t smpl_ss  = 0, smpl_s   = 0;
+  int32_t curr_ss  = 0, curr_s   = 0;
+  
+  smpl_ss  = Timebase_Timer_Get_SubSeconds_Atomic();
+  smpl_s   = Timebase_Timer_Get_Seconds_Atomic();
   
   smpl_val  = smpl_s;
   smpl_val *= Timebase->Config.UpdateRate;
   smpl_val += smpl_ss;
   smpl_val += value;
   
-  
-  int32_t curr_ss  = 0; 
-  int32_t curr_s   = 0; 
-  
   while(curr_val<smpl_val){
-    curr_ss   = Timebase_Timer_Get_SubSeconds();
-	curr_s    = Timebase_Timer_Get_Seconds();
+    curr_ss   = Timebase_Timer_Get_SubSeconds_Atomic();
+	curr_s    = Timebase_Timer_Get_Seconds_Atomic();
     curr_val  = curr_s;
 	curr_val *= Timebase->Config.UpdateRate;
 	curr_val += curr_ss;
@@ -455,9 +444,9 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
 
 
 void Timebase_Timer_Await_SubSeconds(uint16_t value){
-  while(Timebase_Timer_Get_SubSeconds() != Timebase->Time.LastSample);
+  while(Timebase_Timer_Get_SubSeconds_Atomic() != Timebase->Time.LastSample);
   
-  Timebase->Time.LastSample = Timebase_Timer_Get_SubSeconds() + value;
+  Timebase->Time.LastSample = Timebase_Timer_Get_SubSeconds_Atomic() + value;
   if(Timebase->Time.LastSample >= Timebase->Config.UpdateRate){
     Timebase->Time.LastSample -= Timebase->Config.UpdateRate;
   }
@@ -465,8 +454,12 @@ void Timebase_Timer_Await_SubSeconds(uint16_t value){
 
 
 void Timebase_Timer_Delay_Seconds(uint16_t value){
-  int32_t temp = Timebase_Timer_Get_Seconds() + value;
-  while(temp > Timebase_Timer_Get_Seconds());
+  int32_t curr_s = 0, target_s = 0;
+  target_s = Timebase_Timer_Get_Seconds_Atomic();
+  target_s += value;
+  while(target_s > curr_s){
+    curr_s = Timebase_Timer_Get_Seconds_Atomic();
+  }
 }
 
 
@@ -478,17 +471,18 @@ void Timebase_Window_Timer_Reset(void){
 
 void Timebase_Window_Timer_Start(void){
   if(Timebase->Time.Status == COUNTER_STATE_RESET){
-    Timebase->Time.StartTimeSeconds = Timebase_Timer_Get_Seconds();
-    Timebase->Time.StartTimeSubSeconds = Timebase_Timer_Get_SubSeconds();
+    Timebase->Time.StartTimeSeconds = Timebase_Timer_Get_Seconds_Atomic();
+    Timebase->Time.StartTimeSubSeconds = Timebase_Timer_Get_SubSeconds_Atomic();
     Timebase->Time.Status = COUNTER_STATE_STARTED;
   }
 }
 
 
 int32_t Timebase_Window_Timer_Get_Interval(void){
+  int32_t curr_ss = 0, curr_s = 0;
   if(Timebase->Time.Status == COUNTER_STATE_STARTED){
-    int32_t curr_s = Timebase_Timer_Get_Seconds();
-    int32_t curr_ss = Timebase_Timer_Get_SubSeconds();
+    curr_s = Timebase_Timer_Get_Seconds_Atomic();
+    curr_ss = Timebase_Timer_Get_SubSeconds_Atomic();
 	curr_s -= Timebase->Time.StartTimeSeconds;
 	curr_ss -= Timebase->Time.StartTimeSubSeconds;
 	curr_s *= Timebase->Config.UpdateRate;
@@ -608,11 +602,13 @@ void Timebase_UpCounter_Stop(uint8_t window){
 
 
 void Timebase_UpCounter_Set_Securely(uint8_t window, int32_t value){
+  int32_t curr_s = 0;
   if( Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_RESET ){
     Timebase_UpCounter_Set_Value(window, 0);
     Timebase_UpCounter_Set_TemporaryValue(window, 0);
     Timebase_UpCounter_Set_TargetValue(window, value);
-    Timebase_UpCounter_Set_EndValue(window, Timebase_Timer_Get_Seconds() + value);  
+	curr_s = Timebase_Timer_Get_Seconds_Atomic();
+    Timebase_UpCounter_Set_EndValue(window, curr_s + value);  
     Timebase_UpCounter_Start(window);
   }
 }
@@ -623,8 +619,10 @@ void Timebase_UpCounter_Set_Forcefully(uint8_t window, int32_t value){
 } 
 
 void Timebase_UpCounter_Update(uint8_t window){
-  if( Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STARTED ){ 
-    Timebase_UpCounter_Set_TemporaryValue(window, Timebase_UpCounter_Get_EndValue(window) - Timebase_Timer_Get_Seconds() );
+  int32_t curr_s = 0;
+  if( Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STARTED ){
+	curr_s = Timebase_Timer_Get_Seconds_Atomic();
+    Timebase_UpCounter_Set_TemporaryValue(window, Timebase_UpCounter_Get_EndValue(window) - curr_s );
     Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window) - Timebase_UpCounter_Get_TemporaryValue(window) );
     if(Timebase_UpCounter_Get_TemporaryValue(window) <= 0){
       Timebase_UpCounter_Set_EndValue(window, 0);
@@ -633,7 +631,8 @@ void Timebase_UpCounter_Update(uint8_t window){
       Timebase_UpCounter_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
   } else if (Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STOPPED){
-    Timebase_UpCounter_Set_EndValue(window, Timebase_UpCounter_Get_TemporaryValue(window) + Timebase_Timer_Get_Seconds());
+    curr_s = Timebase_Timer_Get_Seconds_Atomic();
+    Timebase_UpCounter_Set_EndValue(window, Timebase_UpCounter_Get_TemporaryValue(window) + curr_s);
     Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window) - Timebase_UpCounter_Get_TemporaryValue(window));
   }
 }
@@ -1195,9 +1194,9 @@ void Timebase_ISR_Executables(void){
 /*************************************ISR Start************************************/
 
 ISR(TIMER0_OVF_vect){
-  //PORTD|=(1<<5);
+  PORTD|=(1<<5);
   Timebase_ISR_Executables();
-  //PORTD&=~(1<<5);
+  PORTD&=~(1<<5);
 }
 
 /**************************************ISR End*************************************/

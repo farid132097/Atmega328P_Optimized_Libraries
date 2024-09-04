@@ -66,29 +66,50 @@
   74 003a 70E0      		ldi r23,hhi8(10000)
   75 003c 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
   76               	.LVL3:
-  77               	.L3:
-  78               	.LM10:
-  79 0040 84E6      		ldi r24,lo8(100)
-  80 0042 90E0      		ldi r25,hi8(100)
-  81 0044 0E94 0000 		call Timebase_Timer_Delay_SubSeconds
-  82               	.LM11:
-  83 0048 5E9A      		sbi 43-32,6
-  84               	.LM12:
-  85 004a 0E94 0000 		call Timebase_Main_Loop_Executables
-  86               	.LM13:
-  87 004e 5E98      		cbi 43-32,6
-  88 0050 00C0      		rjmp .L3
-  89               	.LFE6:
- 115               	.Letext0:
+  77               	.LM10:
+  78 0040 81E0      		ldi r24,lo8(1)
+  79 0042 40E4      		ldi r20,lo8(8000)
+  80 0044 5FE1      		ldi r21,hi8(8000)
+  81 0046 60E0      		ldi r22,hlo8(8000)
+  82 0048 70E0      		ldi r23,hhi8(8000)
+  83 004a 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
+  84               	.LM11:
+  85 004e 82E0      		ldi r24,lo8(2)
+  86 0050 40E7      		ldi r20,lo8(6000)
+  87 0052 57E1      		ldi r21,hi8(6000)
+  88 0054 60E0      		ldi r22,hlo8(6000)
+  89 0056 70E0      		ldi r23,hhi8(6000)
+  90 0058 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
+  91               	.LM12:
+  92 005c 83E0      		ldi r24,lo8(3)
+  93 005e 40EA      		ldi r20,lo8(4000)
+  94 0060 5FE0      		ldi r21,hi8(4000)
+  95 0062 60E0      		ldi r22,hlo8(4000)
+  96 0064 70E0      		ldi r23,hhi8(4000)
+  97 0066 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
+  98               	.L3:
+  99               	.LM13:
+ 100 006a 84E6      		ldi r24,lo8(100)
+ 101 006c 90E0      		ldi r25,hi8(100)
+ 102 006e 0E94 0000 		call Timebase_Timer_Delay_SubSeconds
+ 103               	.LM14:
+ 104 0072 5E9A      		sbi 43-32,6
+ 105               	.LM15:
+ 106 0074 0E94 0000 		call Timebase_Main_Loop_Executables
+ 107               	.LM16:
+ 108 0078 5E98      		cbi 43-32,6
+ 109 007a 00C0      		rjmp .L3
+ 110               	.LFE6:
+ 136               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:2      *ABS*:0000003f __SREG__
-C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:3      *ABS*:0000003e __SP_H__
-C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:4      *ABS*:0000003d __SP_L__
-C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:5      *ABS*:00000034 __CCP__
-C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:18     .text:00000000 main
+C:\Users\WALTON\AppData\Local\Temp/ccJUspsZ.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccJUspsZ.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccJUspsZ.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccJUspsZ.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccJUspsZ.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccJUspsZ.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccJUspsZ.s:18     .text:00000000 main
 
 UNDEFINED SYMBOLS
 UART_Init

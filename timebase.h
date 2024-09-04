@@ -10,6 +10,9 @@
 void     Timebase_Struct_Init(void);
 void     Timebase_Timer_Config(uint16_t UpdateRateHz);
 
+//Atomic Operations
+void     Timebase_Atomic_Operation_Start(void);
+void     Timebase_Atomic_Operation_End(void);
 
 //Token Functions
 uint8_t  Timebase_Token_Executing(void);
@@ -20,6 +23,8 @@ void     Timebase_Token_Remove_All(void);
 //Timer Functions
 uint16_t Timebase_Timer_Get_SubSeconds(void);
 int32_t  Timebase_Timer_Get_Seconds(void);
+uint16_t Timebase_Timer_Get_SubSeconds_Atomic(void);
+int32_t  Timebase_Timer_Get_Seconds_Atomic(void);
 void     Timebase_Timer_Set_SubSeconds(uint16_t value);
 void     Timebase_Timer_Set_Seconds(int32_t value);
 void     Timebase_Timer_Delay_SubSeconds(uint16_t value);
