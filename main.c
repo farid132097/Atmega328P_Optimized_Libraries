@@ -9,7 +9,7 @@ int main(void){
   
   
   
-  UART_Init(1000000);
+  UART_Init(57600);
   Timebase_Init(1000);
   
   //For test, also added inside ISR

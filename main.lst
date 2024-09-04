@@ -13,10 +13,10 @@
   21               	/* prologue: function */
   22               	/* frame size = 0 */
   23               	.LM2:
-  24 0000 60E4      		ldi r22,lo8(1000000)
-  25 0002 72E4      		ldi r23,hi8(1000000)
-  26 0004 8FE0      		ldi r24,hlo8(1000000)
-  27 0006 90E0      		ldi r25,hhi8(1000000)
+  24 0000 60E0      		ldi r22,lo8(57600)
+  25 0002 71EE      		ldi r23,hi8(57600)
+  26 0004 80E0      		ldi r24,hlo8(57600)
+  27 0006 90E0      		ldi r25,hhi8(57600)
   28 0008 0E94 0000 		call UART_Init
   29               	.LM3:
   30 000c 88EE      		ldi r24,lo8(1000)
@@ -82,13 +82,13 @@
  115               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\WALTON\AppData\Local\Temp/cchtXEJO.s:2      *ABS*:0000003f __SREG__
-C:\Users\WALTON\AppData\Local\Temp/cchtXEJO.s:3      *ABS*:0000003e __SP_H__
-C:\Users\WALTON\AppData\Local\Temp/cchtXEJO.s:4      *ABS*:0000003d __SP_L__
-C:\Users\WALTON\AppData\Local\Temp/cchtXEJO.s:5      *ABS*:00000034 __CCP__
-C:\Users\WALTON\AppData\Local\Temp/cchtXEJO.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\WALTON\AppData\Local\Temp/cchtXEJO.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\WALTON\AppData\Local\Temp/cchtXEJO.s:18     .text:00000000 main
+C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccMajxYO.s:18     .text:00000000 main
 
 UNDEFINED SYMBOLS
 UART_Init

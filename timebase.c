@@ -112,6 +112,7 @@ typedef struct timebase_config_t{
 typedef struct timebase_t{
   timebase_config_t      Config                             ;
   timebase_time_t        Time                               ;
+  volatile uint8_t       UpdateRequest                      ;
   
   #ifdef TIMEBASE_TOKEN_FUNCTIONS
   volatile uint8_t       ActiveTokens                       ;
@@ -136,14 +137,21 @@ typedef struct timebase_t{
 }timebase_t;
 
 enum{
-  COUNTER_STATE_RESET = 0,
-  COUNTER_STATE_START = 1,
-  COUNTER_STATE_STARTED = 1,
-  COUNTER_STATE_STOP = 2,
-  COUNTER_STATE_STOPPED = 2,
-  COUNTER_STATE_EXPIRED = 4
+  COUNTER_STATE_RESET      = 0,
+  COUNTER_STATE_START      = 1,
+  COUNTER_STATE_STARTED    = 1,
+  COUNTER_STATE_STOP       = 2,
+  COUNTER_STATE_STOPPED    = 2,
+  COUNTER_STATE_EXPIRED    = 4
 };
 
+enum{
+  UPCOUNTER_UPDATE_REQ     = 1,
+  DOWNCOUNTER_UPDATE_REQ   = 2,
+  UPCOUNTERSS_UPDATE_REQ   = 4,
+  DOWNCOUNTERSS_UPDATE_REQ = 8
+};
+  
 
   
 
@@ -178,6 +186,8 @@ void Timebase_Struct_Init(void){
 	Timebase->Time.StartTimeSubSeconds = 0;
 	Timebase->Time.Status = 0;
   #endif
+  
+  Timebase->UpdateRequest = 0;
   
   #ifdef TIMEBASE_TOKEN_FUNCTIONS
   Timebase->ActiveTokens = 0;
@@ -1112,25 +1122,63 @@ void Timebase_Init(uint16_t UpdateRateHz){
 }
 
 void Timebase_Main_Loop_Executables(void){
+  
+  #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
+  if(Timebase->UpdateRequest & UPCOUNTERSS_UPDATE_REQ){
+    //add upcounter ss function
+  }
+  #endif
+
   #ifdef TIMEBASE_UPCOUNTER
-  Timebase_UpCounter_Update_All();
+  if(Timebase->UpdateRequest & UPCOUNTER_UPDATE_REQ){
+    Timebase_UpCounter_Update_All();
+	Timebase->UpdateRequest &=~ UPCOUNTER_UPDATE_REQ;
+  }
   #endif
   
+  
+  
   #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
-  Timebase_DownCounter_SS_Update_All();
+  if(Timebase->UpdateRequest & DOWNCOUNTERSS_UPDATE_REQ){
+    Timebase_DownCounter_SS_Update_All();
+	Timebase->UpdateRequest &=~ DOWNCOUNTERSS_UPDATE_REQ;
+  }
   #endif
   
   #ifdef TIMEBASE_DOWNCOUNTER
-  Timebase_DownCounter_Update_All();
+  if(Timebase->UpdateRequest & DOWNCOUNTER_UPDATE_REQ){
+    Timebase_DownCounter_Update_All();
+	Timebase->UpdateRequest &=~ DOWNCOUNTER_UPDATE_REQ;
+  }
   #endif
 }
 
 void Timebase_ISR_Executables(void){
   Timebase->Time.SubSeconds++;
   TCNT0  = Timebase->Time.OVFUpdateValue;
+  
+  
+  #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
+  Timebase->UpdateRequest |= UPCOUNTERSS_UPDATE_REQ;
+  #endif
+  
+  #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
+  Timebase->UpdateRequest |= DOWNCOUNTERSS_UPDATE_REQ;
+  #endif
+  
+  
+  
   if((Timebase->Time.SubSeconds % Timebase->Config.UpdateRate) == 0){
     Timebase->Time.Seconds++;
     Timebase->Time.SubSeconds = 0;
+	
+	#ifdef TIMEBASE_UPCOUNTER
+    Timebase->UpdateRequest |= UPCOUNTER_UPDATE_REQ;
+    #endif
+	
+	#ifdef TIMEBASE_DOWNCOUNTER
+    Timebase->UpdateRequest |= DOWNCOUNTER_UPDATE_REQ;
+    #endif
   }
 }
 
@@ -1147,9 +1195,9 @@ void Timebase_ISR_Executables(void){
 /*************************************ISR Start************************************/
 
 ISR(TIMER0_OVF_vect){
-  PORTD|=(1<<5);
+  //PORTD|=(1<<5);
   Timebase_ISR_Executables();
-  PORTD&=~(1<<5);
+  //PORTD&=~(1<<5);
 }
 
 /**************************************ISR End*************************************/
