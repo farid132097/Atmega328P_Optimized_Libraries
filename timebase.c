@@ -1162,8 +1162,6 @@ void Timebase_Main_Loop_Executables(void){
 
 void Timebase_ISR_Executables(void){
   Timebase->Time.SubSeconds++;
-  TCNT0  = Timebase->Time.OVFUpdateValue;
-  
   
   #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
   Timebase->UpdateRequest |= UPCOUNTER_SS_UPDATE_REQ;
@@ -1172,8 +1170,6 @@ void Timebase_ISR_Executables(void){
   #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
   Timebase->UpdateRequest |= DOWNCOUNTER_SS_UPDATE_REQ;
   #endif
-  
-  
   
   if((Timebase->Time.SubSeconds % Timebase->Config.UpdateRate) == 0){
     Timebase->Time.Seconds++;
@@ -1202,6 +1198,7 @@ void Timebase_ISR_Executables(void){
 /*************************************ISR Start************************************/
 
 ISR(TIMER0_OVF_vect){
+  TCNT0  = Timebase->Time.OVFUpdateValue;
   Timebase_ISR_Executables();
 }
 
