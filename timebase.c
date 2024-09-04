@@ -131,6 +131,8 @@ typedef struct timebase_t{
   
 }timebase_t;
 
+
+
 enum{
   COUNTER_STATE_RESET       = 0,
   COUNTER_STATE_START       = 1,
@@ -138,6 +140,16 @@ enum{
   COUNTER_STATE_STOP        = 2,
   COUNTER_STATE_STOPPED     = 2,
   COUNTER_STATE_EXPIRED     = 4
+};
+
+enum{
+  FLAG_STATE_RESET          = 0,
+  FLAG_STATE_SET            = 1,
+};
+
+enum{
+  TIMEBASE_FALSE            = 0,
+  TIMEBASE_TRUE             = 1,
 };
 
 enum{
@@ -574,11 +586,11 @@ uint8_t Timebase_UpCounter_Get_Period_Flag(uint8_t window){
 }
 
 void Timebase_UpCounter_Set_Period_Flag(uint8_t window){
-  Timebase->UpCounter[window].Status.PeriodFlag = 1;
+  Timebase->UpCounter[window].Status.PeriodFlag = FLAG_STATE_SET;
 }
 
 void Timebase_UpCounter_Clear_Period_Flag(uint8_t window){
-  Timebase->UpCounter[window].Status.PeriodFlag = 0;
+  Timebase->UpCounter[window].Status.PeriodFlag = FLAG_STATE_RESET;
 }
 
 void Timebase_UpCounter_Reset(uint8_t window){
@@ -647,23 +659,23 @@ void Timebase_UpCounter_Update(uint8_t window){
 
 uint8_t Timebase_UpCounter_Expired(uint8_t window){
   if(Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_EXPIRED){
-    return 1;
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
 uint8_t Timebase_UpCounter_Expired_Event(uint8_t window){
   if(Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_EXPIRED){
     Timebase_UpCounter_Clear_All_Flags( window );
-    return 1;
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
 void Timebase_UpCounter_Set_Period_Value_Securely(uint8_t window, int32_t value){
-  if(Timebase_UpCounter_Get_Period_Flag( window ) == 0){
+  if(Timebase_UpCounter_Get_Period_Flag( window ) == FLAG_STATE_RESET){
     Timebase_UpCounter_Set_PeriodValue( window, Timebase_UpCounter_Get_Value( window ) + value);
     Timebase_UpCounter_Set_Period_Flag( window);
   }
@@ -678,19 +690,19 @@ int32_t Timebase_UpCounter_Get_Remaining_Period_Value(uint8_t window){
 }
 
 uint8_t Timebase_UpCounter_Period_Value_Expired(uint8_t window){
-  if( (Timebase_UpCounter_Get_Remaining_Period_Value( window ) == 0) && Timebase_UpCounter_Get_Period_Flag( window )){
-    return 1;
+  if( (Timebase_UpCounter_Get_Remaining_Period_Value( window ) == 0) && (Timebase_UpCounter_Get_Period_Flag( window ) == FLAG_STATE_SET) ){
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
 uint8_t Timebase_UpCounter_Period_Value_Expired_Event(uint8_t window){
-  if(Timebase_UpCounter_Period_Value_Expired( window ) == 1){
+  if(Timebase_UpCounter_Period_Value_Expired( window ) == TIMEBASE_TRUE){
     Timebase_UpCounter_Clear_Period_Flag( window );
-    return 1;
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
@@ -763,11 +775,11 @@ uint8_t Timebase_DownCounter_Get_Period_Flag(uint8_t window){
 }
 
 void Timebase_DownCounter_Set_Period_Flag(uint8_t window){
-  Timebase->DownCounter[window].Status.PeriodFlag = 1;
+  Timebase->DownCounter[window].Status.PeriodFlag = FLAG_STATE_SET;
 }
 
 void Timebase_DownCounter_Clear_Period_Flag(uint8_t window){
-  Timebase->DownCounter[window].Status.PeriodFlag = 0;
+  Timebase->DownCounter[window].Status.PeriodFlag = FLAG_STATE_RESET;
 }
 
 
@@ -822,24 +834,24 @@ void Timebase_DownCounter_Update(uint8_t window){
 
 uint8_t Timebase_DownCounter_Expired(uint8_t window){
   if(Timebase_DownCounter_Get_Status( window ) == COUNTER_STATE_EXPIRED){
-    return 1;
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
 uint8_t Timebase_DownCounter_Expired_Event(uint8_t window){
   if(Timebase_DownCounter_Get_Status( window ) == COUNTER_STATE_EXPIRED){
     Timebase_DownCounter_Clear_All_Flags( window );
-    return 1;
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
 
 void Timebase_DownCounter_Set_Period_Value_Securely(uint8_t window, int32_t value){
-  if(Timebase_DownCounter_Get_Period_Flag( window ) == 0){
+  if(Timebase_DownCounter_Get_Period_Flag( window ) == FLAG_STATE_RESET){
     Timebase_DownCounter_Set_PeriodValue(window, Timebase_DownCounter_Get_Value(window) - value);
     Timebase_DownCounter_Set_Period_Flag(window);
   }
@@ -854,19 +866,19 @@ int32_t Timebase_DownCounter_Get_Remaining_Period_Value(uint8_t window){
 }
 
 uint8_t Timebase_DownCounter_Period_Value_Expired(uint8_t window){
-  if( (Timebase_DownCounter_Get_Remaining_Period_Value( window ) == 0) && Timebase_DownCounter_Get_Period_Flag( window )){
-    return 1;
+  if( (Timebase_DownCounter_Get_Remaining_Period_Value( window ) == 0) && (Timebase_DownCounter_Get_Period_Flag( window ) == FLAG_STATE_SET) ){
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
 uint8_t Timebase_DownCounter_Period_Value_Expired_Event(uint8_t window){
-  if(Timebase_DownCounter_Period_Value_Expired( window ) == 1){
+  if(Timebase_DownCounter_Period_Value_Expired( window ) == TIMEBASE_TRUE){
     Timebase_DownCounter_Clear_Period_Flag( window );
-    return 1;
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
@@ -948,11 +960,11 @@ uint8_t Timebase_DownCounter_SS_Get_Period_Flag(uint8_t window){
 }
 
 void Timebase_DownCounter_SS_Set_Period_Flag(uint8_t window){
-  Timebase->DownCounterSS[window].Status.PeriodFlag = 1;
+  Timebase->DownCounterSS[window].Status.PeriodFlag = FLAG_STATE_SET;
 }
 
 void Timebase_DownCounter_SS_Clear_Period_Flag(uint8_t window){
-  Timebase->DownCounterSS[window].Status.PeriodFlag = 0;
+  Timebase->DownCounterSS[window].Status.PeriodFlag = FLAG_STATE_RESET;
 }
 
 
@@ -1034,24 +1046,24 @@ void Timebase_DownCounter_SS_Update(uint8_t window){
 
 uint8_t Timebase_DownCounter_SS_Expired(uint8_t window){
   if(Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_EXPIRED){
-    return 1;
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
 uint8_t Timebase_DownCounter_SS_Expired_Event(uint8_t window){
   if(Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_EXPIRED){
     Timebase_DownCounter_SS_Clear_All_Flags( window );
-    return 1;
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
 
 void Timebase_DownCounter_SS_Set_Period_Value_Securely(uint8_t window, int32_t value){
-  if(Timebase_DownCounter_SS_Get_Period_Flag( window ) == 0){
+  if(Timebase_DownCounter_SS_Get_Period_Flag( window ) == FLAG_STATE_RESET){
     Timebase_DownCounter_SS_Set_PeriodValue(window, Timebase_DownCounter_SS_Get_Value(window) - value);
     Timebase_DownCounter_SS_Set_Period_Flag(window);
   }
@@ -1066,19 +1078,19 @@ int32_t Timebase_DownCounter_SS_Get_Remaining_Period_Value(uint8_t window){
 }
 
 uint8_t Timebase_DownCounter_SS_Period_Value_Expired(uint8_t window){
-  if( (Timebase_DownCounter_SS_Get_Remaining_Period_Value( window ) == 0) && Timebase_DownCounter_SS_Get_Period_Flag( window )){
-    return 1;
+  if( (Timebase_DownCounter_SS_Get_Remaining_Period_Value( window ) == 0) && (Timebase_DownCounter_SS_Get_Period_Flag( window ) == FLAG_STATE_SET) ){
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
 uint8_t Timebase_DownCounter_SS_Period_Value_Expired_Event(uint8_t window){
-  if(Timebase_DownCounter_SS_Period_Value_Expired( window ) == 1){
+  if(Timebase_DownCounter_SS_Period_Value_Expired( window ) == TIMEBASE_TRUE){
     Timebase_DownCounter_SS_Clear_Period_Flag( window );
-    return 1;
+    return TIMEBASE_TRUE;
   }else{
-    return 0;
+    return TIMEBASE_FALSE;
   }
 }
 
