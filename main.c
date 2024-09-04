@@ -23,6 +23,7 @@ int main(void){
   
   while(1){
     
+	UART_Transmit_Text("Timebase ");
     /*UART_Transmit_Text("Timebase ");
 	UART_Transmit_Number(Timebase_Timer_Get_Seconds());
 	UART_Transmit_Text(" ");

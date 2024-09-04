@@ -14,8 +14,11 @@
 #warning uart header is enabled in Timebase
 #include "uart.h"
 
-//#define  TIMEBASE_UPCOUNTER                1
-//#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
+#define  TIMEBASE_SEC_COUNT_ATOMIC_OPERATION
+#define  TIMEBASE_SUBSEC_COUNT_ATOMIC_OPERATION
+
+#define  TIMEBASE_UPCOUNTER                1
+#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
 #define  TIMEBASE_DOWNCOUNTER              5
 #define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   5
 #define  TIMEBASE_TOKEN_FUNCTIONS
@@ -137,19 +140,19 @@ typedef struct timebase_t{
 }timebase_t;
 
 enum{
-  COUNTER_STATE_RESET      = 0,
-  COUNTER_STATE_START      = 1,
-  COUNTER_STATE_STARTED    = 1,
-  COUNTER_STATE_STOP       = 2,
-  COUNTER_STATE_STOPPED    = 2,
-  COUNTER_STATE_EXPIRED    = 4
+  COUNTER_STATE_RESET       = 0,
+  COUNTER_STATE_START       = 1,
+  COUNTER_STATE_STARTED     = 1,
+  COUNTER_STATE_STOP        = 2,
+  COUNTER_STATE_STOPPED     = 2,
+  COUNTER_STATE_EXPIRED     = 4
 };
 
 enum{
-  UPCOUNTER_UPDATE_REQ     = 1,
-  DOWNCOUNTER_UPDATE_REQ   = 2,
-  UPCOUNTERSS_UPDATE_REQ   = 4,
-  DOWNCOUNTERSS_UPDATE_REQ = 8
+  UPCOUNTER_UPDATE_REQ      = 1,
+  DOWNCOUNTER_UPDATE_REQ    = 2,
+  UPCOUNTER_SS_UPDATE_REQ   = 4,
+  DOWNCOUNTER_SS_UPDATE_REQ = 8
 };
   
 
@@ -386,28 +389,28 @@ void Timebase_Token_Remove_All(void){
 /*****************************Base Timer Functions Start*****************************/
 
 uint16_t Timebase_Timer_Get_SubSeconds(void){
-  return Timebase->Time.SubSeconds;
-}
-
-
-int32_t Timebase_Timer_Get_Seconds(void){
-  return Timebase->Time.Seconds;
-}
-
-uint16_t Timebase_Timer_Get_SubSeconds_Atomic(void){
+  #ifdef TIMEBASE_SUBSEC_COUNT_ATOMIC_OPERATION
   uint16_t curr_ss = 0;
   Timebase_Atomic_Operation_Start();
   curr_ss = Timebase->Time.SubSeconds;
   Timebase_Atomic_Operation_End();
   return curr_ss;
+  #else
+  return Timebase->Time.SubSeconds;
+  #endif
 }
 
-int32_t Timebase_Timer_Get_Seconds_Atomic(void){
+
+int32_t Timebase_Timer_Get_Seconds(void){
+  #ifdef TIMEBASE_SEC_COUNT_ATOMIC_OPERATION
   int32_t curr_s = 0;
   Timebase_Atomic_Operation_Start();
   curr_s = Timebase->Time.Seconds;
   Timebase_Atomic_Operation_End();
   return curr_s;
+  #else
+  Timebase->Time.Seconds;
+  #endif
 }
 
 void Timebase_Timer_Set_SubSeconds(uint16_t value){
@@ -424,8 +427,8 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
   int32_t smpl_ss  = 0, smpl_s   = 0;
   int32_t curr_ss  = 0, curr_s   = 0;
   
-  smpl_ss  = Timebase_Timer_Get_SubSeconds_Atomic();
-  smpl_s   = Timebase_Timer_Get_Seconds_Atomic();
+  smpl_ss  = Timebase_Timer_Get_SubSeconds();
+  smpl_s   = Timebase_Timer_Get_Seconds();
   
   smpl_val  = smpl_s;
   smpl_val *= Timebase->Config.UpdateRate;
@@ -433,8 +436,8 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
   smpl_val += value;
   
   while(curr_val<smpl_val){
-    curr_ss   = Timebase_Timer_Get_SubSeconds_Atomic();
-	curr_s    = Timebase_Timer_Get_Seconds_Atomic();
+    curr_ss   = Timebase_Timer_Get_SubSeconds();
+	curr_s    = Timebase_Timer_Get_Seconds();
     curr_val  = curr_s;
 	curr_val *= Timebase->Config.UpdateRate;
 	curr_val += curr_ss;
@@ -444,9 +447,9 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
 
 
 void Timebase_Timer_Await_SubSeconds(uint16_t value){
-  while(Timebase_Timer_Get_SubSeconds_Atomic() != Timebase->Time.LastSample);
+  while(Timebase_Timer_Get_SubSeconds() != Timebase->Time.LastSample);
   
-  Timebase->Time.LastSample = Timebase_Timer_Get_SubSeconds_Atomic() + value;
+  Timebase->Time.LastSample = Timebase_Timer_Get_SubSeconds() + value;
   if(Timebase->Time.LastSample >= Timebase->Config.UpdateRate){
     Timebase->Time.LastSample -= Timebase->Config.UpdateRate;
   }
@@ -455,10 +458,10 @@ void Timebase_Timer_Await_SubSeconds(uint16_t value){
 
 void Timebase_Timer_Delay_Seconds(uint16_t value){
   int32_t curr_s = 0, target_s = 0;
-  target_s = Timebase_Timer_Get_Seconds_Atomic();
+  target_s = Timebase_Timer_Get_Seconds();
   target_s += value;
   while(target_s > curr_s){
-    curr_s = Timebase_Timer_Get_Seconds_Atomic();
+    curr_s = Timebase_Timer_Get_Seconds();
   }
 }
 
@@ -471,8 +474,8 @@ void Timebase_Window_Timer_Reset(void){
 
 void Timebase_Window_Timer_Start(void){
   if(Timebase->Time.Status == COUNTER_STATE_RESET){
-    Timebase->Time.StartTimeSeconds = Timebase_Timer_Get_Seconds_Atomic();
-    Timebase->Time.StartTimeSubSeconds = Timebase_Timer_Get_SubSeconds_Atomic();
+    Timebase->Time.StartTimeSeconds = Timebase_Timer_Get_Seconds();
+    Timebase->Time.StartTimeSubSeconds = Timebase_Timer_Get_SubSeconds();
     Timebase->Time.Status = COUNTER_STATE_STARTED;
   }
 }
@@ -481,8 +484,8 @@ void Timebase_Window_Timer_Start(void){
 int32_t Timebase_Window_Timer_Get_Interval(void){
   int32_t curr_ss = 0, curr_s = 0;
   if(Timebase->Time.Status == COUNTER_STATE_STARTED){
-    curr_s = Timebase_Timer_Get_Seconds_Atomic();
-    curr_ss = Timebase_Timer_Get_SubSeconds_Atomic();
+    curr_s = Timebase_Timer_Get_Seconds();
+    curr_ss = Timebase_Timer_Get_SubSeconds();
 	curr_s -= Timebase->Time.StartTimeSeconds;
 	curr_ss -= Timebase->Time.StartTimeSubSeconds;
 	curr_s *= Timebase->Config.UpdateRate;
@@ -607,7 +610,7 @@ void Timebase_UpCounter_Set_Securely(uint8_t window, int32_t value){
     Timebase_UpCounter_Set_Value(window, 0);
     Timebase_UpCounter_Set_TemporaryValue(window, 0);
     Timebase_UpCounter_Set_TargetValue(window, value);
-	curr_s = Timebase_Timer_Get_Seconds_Atomic();
+	curr_s = Timebase_Timer_Get_Seconds();
     Timebase_UpCounter_Set_EndValue(window, curr_s + value);  
     Timebase_UpCounter_Start(window);
   }
@@ -621,7 +624,7 @@ void Timebase_UpCounter_Set_Forcefully(uint8_t window, int32_t value){
 void Timebase_UpCounter_Update(uint8_t window){
   int32_t curr_s = 0;
   if( Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STARTED ){
-	curr_s = Timebase_Timer_Get_Seconds_Atomic();
+	curr_s = Timebase_Timer_Get_Seconds();
     Timebase_UpCounter_Set_TemporaryValue(window, Timebase_UpCounter_Get_EndValue(window) - curr_s );
     Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window) - Timebase_UpCounter_Get_TemporaryValue(window) );
     if(Timebase_UpCounter_Get_TemporaryValue(window) <= 0){
@@ -631,7 +634,7 @@ void Timebase_UpCounter_Update(uint8_t window){
       Timebase_UpCounter_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
   } else if (Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STOPPED){
-    curr_s = Timebase_Timer_Get_Seconds_Atomic();
+    curr_s = Timebase_Timer_Get_Seconds();
     Timebase_UpCounter_Set_EndValue(window, Timebase_UpCounter_Get_TemporaryValue(window) + curr_s);
     Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window) - Timebase_UpCounter_Get_TemporaryValue(window));
   }
@@ -1123,8 +1126,9 @@ void Timebase_Init(uint16_t UpdateRateHz){
 void Timebase_Main_Loop_Executables(void){
   
   #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
-  if(Timebase->UpdateRequest & UPCOUNTERSS_UPDATE_REQ){
+  if(Timebase->UpdateRequest & UPCOUNTER_SS_UPDATE_REQ){
     //add upcounter ss function
+	Timebase->UpdateRequest &=~ UPCOUNTER_SS_UPDATE_REQ;
   }
   #endif
 
@@ -1138,9 +1142,9 @@ void Timebase_Main_Loop_Executables(void){
   
   
   #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
-  if(Timebase->UpdateRequest & DOWNCOUNTERSS_UPDATE_REQ){
+  if(Timebase->UpdateRequest & DOWNCOUNTER_SS_UPDATE_REQ){
     Timebase_DownCounter_SS_Update_All();
-	Timebase->UpdateRequest &=~ DOWNCOUNTERSS_UPDATE_REQ;
+	Timebase->UpdateRequest &=~ DOWNCOUNTER_SS_UPDATE_REQ;
   }
   #endif
   
@@ -1158,11 +1162,11 @@ void Timebase_ISR_Executables(void){
   
   
   #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
-  Timebase->UpdateRequest |= UPCOUNTERSS_UPDATE_REQ;
+  Timebase->UpdateRequest |= UPCOUNTER_SS_UPDATE_REQ;
   #endif
   
   #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
-  Timebase->UpdateRequest |= DOWNCOUNTERSS_UPDATE_REQ;
+  Timebase->UpdateRequest |= DOWNCOUNTER_SS_UPDATE_REQ;
   #endif
   
   
@@ -1194,9 +1198,7 @@ void Timebase_ISR_Executables(void){
 /*************************************ISR Start************************************/
 
 ISR(TIMER0_OVF_vect){
-  PORTD|=(1<<5);
   Timebase_ISR_Executables();
-  PORTD&=~(1<<5);
 }
 
 /**************************************ISR End*************************************/
