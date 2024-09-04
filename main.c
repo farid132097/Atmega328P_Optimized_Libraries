@@ -23,7 +23,8 @@ int main(void){
   
   while(1){
     
-	UART_Transmit_Text("Timebase ");
+	Timebase_Timer_Await_SubSeconds(100);
+	UART_Transmit_Text("Timebase\r\n");
     /*UART_Transmit_Text("Timebase ");
 	UART_Transmit_Number(Timebase_Timer_Get_Seconds());
 	UART_Transmit_Text(" ");
@@ -36,7 +37,7 @@ int main(void){
 	UART_Transmit_Space();*/
 	//UART_Transmit_Number(Timebase_DownCounter_SS_Get_Value(0));
 	//UART_Transmit_New_Line();
-	Timebase_Timer_Delay_SubSeconds(100);
+	//Timebase_Timer_Delay_SubSeconds(100);
 	
 	//Add update req flag
 	PORTD |= (1<<6);

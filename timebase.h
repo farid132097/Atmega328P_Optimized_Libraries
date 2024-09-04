@@ -6,6 +6,11 @@
  */
 
 
+//#define  TIMEBASE_UPCOUNTER                1
+//#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
+#define  TIMEBASE_DOWNCOUNTER              1
+#define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   1
+
 //Config Functions
 void     Timebase_Struct_Init(void);
 void     Timebase_Timer_Config(uint16_t UpdateRateHz);

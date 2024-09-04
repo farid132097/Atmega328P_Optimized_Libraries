@@ -10,17 +10,9 @@
 #include <avr/interrupt.h>
 #include "timebase.h"
 
-
-#warning uart header is enabled in Timebase
-#include "uart.h"
-
 #define  TIMEBASE_SEC_COUNT_ATOMIC_OPERATION
 #define  TIMEBASE_SUBSEC_COUNT_ATOMIC_OPERATION
 
-#define  TIMEBASE_UPCOUNTER                1
-#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
-#define  TIMEBASE_DOWNCOUNTER              5
-#define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   5
 #define  TIMEBASE_TOKEN_FUNCTIONS
 #define  TIMEBASE_TIME_WINDOW_CALCULATION
 
@@ -414,11 +406,23 @@ int32_t Timebase_Timer_Get_Seconds(void){
 }
 
 void Timebase_Timer_Set_SubSeconds(uint16_t value){
+  #ifdef TIMEBASE_SUBSEC_COUNT_ATOMIC_OPERATION
+  Timebase_Atomic_Operation_Start();
   Timebase->Time.SubSeconds = value;
+  Timebase_Atomic_Operation_End();
+  #else
+  Timebase->Time.SubSeconds = value;
+  #endif
 }
 
 void Timebase_Timer_Set_Seconds(int32_t value){
+  #ifdef TIMEBASE_SEC_COUNT_ATOMIC_OPERATION
+  Timebase_Atomic_Operation_Start();
   Timebase->Time.Seconds = value;
+  Timebase_Atomic_Operation_End();
+  #else
+  Timebase->Time.Seconds = value;
+  #endif
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
