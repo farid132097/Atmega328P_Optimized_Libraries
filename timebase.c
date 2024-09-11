@@ -10,9 +10,7 @@
 #include <avr/interrupt.h>
 #include "timebase.h"
 
-#define  TIMEBASE_SEC_COUNT_ATOMIC_OPERATION
-#define  TIMEBASE_SUBSEC_COUNT_ATOMIC_OPERATION
-
+#define  TIMEBASE_COUNT_ATOMIC_OPERATION
 #define  TIMEBASE_TOKEN_FUNCTIONS
 #define  TIMEBASE_TIME_WINDOW_CALCULATION
 
@@ -187,6 +185,8 @@ void Timebase_Struct_Init(void){
   Timebase->Config.TimerType.TimerIndex = 0;
   Timebase->Config.UpdateRate = 1;
   Timebase->Time.OVFUpdateValue=0;
+  Timebase->Time.SubSecondsShadow = 0;
+  Timebase->Time.SecondsShadow = 0;
   Timebase->Time.SubSeconds = 0;
   Timebase->Time.Seconds = 0;
   Timebase->Time.LastSample = 0;
@@ -395,49 +395,30 @@ void Timebase_Token_Remove_All(void){
 
 /*****************************Base Timer Functions Start*****************************/
 
+uint16_t Timebase_Timer_Get_SubSecondsShadow(void){
+  return Timebase->Time.SubSecondsShadow;
+}
+
+int32_t Timebase_Timer_Get_SecondsShadow(void){
+  return Timebase->Time.SecondsShadow;
+}
+
+
 uint16_t Timebase_Timer_Get_SubSeconds(void){
-  #ifdef TIMEBASE_SUBSEC_COUNT_ATOMIC_OPERATION
-  uint16_t curr_ss = 0;
-  Timebase_Atomic_Operation_Start();
-  curr_ss = Timebase->Time.SubSeconds;
-  Timebase_Atomic_Operation_End();
-  return curr_ss;
-  #else
   return Timebase->Time.SubSeconds;
-  #endif
 }
 
 
 int32_t Timebase_Timer_Get_Seconds(void){
-  #ifdef TIMEBASE_SEC_COUNT_ATOMIC_OPERATION
-  int32_t curr_s = 0;
-  Timebase_Atomic_Operation_Start();
-  curr_s = Timebase->Time.Seconds;
-  Timebase_Atomic_Operation_End();
-  return curr_s;
-  #else
-  Timebase->Time.Seconds;
-  #endif
+  return Timebase->Time.Seconds;
 }
 
 void Timebase_Timer_Set_SubSeconds(uint16_t value){
-  #ifdef TIMEBASE_SUBSEC_COUNT_ATOMIC_OPERATION
-  Timebase_Atomic_Operation_Start();
   Timebase->Time.SubSeconds = value;
-  Timebase_Atomic_Operation_End();
-  #else
-  Timebase->Time.SubSeconds = value;
-  #endif
 }
 
 void Timebase_Timer_Set_Seconds(int32_t value){
-  #ifdef TIMEBASE_SEC_COUNT_ATOMIC_OPERATION
-  Timebase_Atomic_Operation_Start();
   Timebase->Time.Seconds = value;
-  Timebase_Atomic_Operation_End();
-  #else
-  Timebase->Time.Seconds = value;
-  #endif
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
@@ -1363,6 +1344,17 @@ void Timebase_Init(uint16_t UpdateRateHz){
 
 void Timebase_Main_Loop_Executables(void){
   
+  #ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
+  Timebase_Atomic_Operation_Start();
+  Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
+  Timebase->Time.Seconds    = Timebase->Time.SecondsShadow;
+  Timebase_Atomic_Operation_End();
+  #else 
+  Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
+  Timebase->Time.Seconds    = Timebase->Time.SecondsShadow;
+  #endif
+  
+  
   #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
   if(Timebase->UpdateRequest & UPCOUNTER_SS_UPDATE_REQ){
     //add upcounter ss function
@@ -1395,7 +1387,7 @@ void Timebase_Main_Loop_Executables(void){
 }
 
 void Timebase_ISR_Executables(void){
-  Timebase->Time.SubSeconds++;
+  Timebase->Time.SubSecondsShadow++;
   
   #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
   Timebase->UpdateRequest |= UPCOUNTER_SS_UPDATE_REQ;
@@ -1405,9 +1397,9 @@ void Timebase_ISR_Executables(void){
   Timebase->UpdateRequest |= DOWNCOUNTER_SS_UPDATE_REQ;
   #endif
   
-  if((Timebase->Time.SubSeconds % Timebase->Config.UpdateRate) == 0){
-    Timebase->Time.Seconds++;
-    Timebase->Time.SubSeconds = 0;
+  if((Timebase->Time.SubSecondsShadow % Timebase->Config.UpdateRate) == 0){
+    Timebase->Time.SecondsShadow++;
+    Timebase->Time.SubSecondsShadow = 0;
 	
 	#ifdef TIMEBASE_UPCOUNTER
     Timebase->UpdateRequest |= UPCOUNTER_UPDATE_REQ;

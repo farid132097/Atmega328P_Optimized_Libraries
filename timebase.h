@@ -30,6 +30,8 @@ void     Timebase_Token_Remove_All(void);
 
 
 //Timer Functions
+uint16_t Timebase_Timer_Get_SubSecondsShadow(void);
+int32_t  Timebase_Timer_Get_SecondsShadow(void);
 uint16_t Timebase_Timer_Get_SubSeconds(void);
 int32_t  Timebase_Timer_Get_Seconds(void);
 void     Timebase_Timer_Set_SubSeconds(uint16_t value);
