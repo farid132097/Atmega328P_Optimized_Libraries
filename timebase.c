@@ -37,6 +37,9 @@ typedef struct timebase_time_t{
   volatile int32_t         LastSample       ;
   volatile uint16_t        SubSeconds       ;
   volatile int32_t         Seconds          ;
+  volatile uint16_t        SubSecondsShadow ;
+  volatile int32_t         SecondsShadow    ;
+  
   #ifdef TIMEBASE_TIME_WINDOW_CALCULATION
   int32_t                  StartTimeSeconds   ;
   int32_t                  StartTimeSubSeconds;
