@@ -413,12 +413,19 @@ int32_t Timebase_Timer_Get_Seconds(void){
   return Timebase->Time.Seconds;
 }
 
+
+
 void Timebase_Timer_Set_SubSeconds(uint16_t value){
   Timebase->Time.SubSeconds = value;
 }
 
 void Timebase_Timer_Set_Seconds(int32_t value){
   Timebase->Time.Seconds = value;
+}
+
+void Timebase_Timer_Sync_With_Shadow_Variables(void){
+  Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
+  Timebase->Time.Seconds    = Timebase->Time.SecondsShadow;
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
@@ -1346,12 +1353,11 @@ void Timebase_Main_Loop_Executables(void){
   
   #ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
   Timebase_Atomic_Operation_Start();
-  Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
-  Timebase->Time.Seconds    = Timebase->Time.SecondsShadow;
+  Timebase_Timer_Sync_With_Shadow_Variables();
   Timebase_Atomic_Operation_End();
-  #else 
-  Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
-  Timebase->Time.Seconds    = Timebase->Time.SecondsShadow;
+  #else
+  #warning Shadow Variables Atomic Sync Turned Off
+  Timebase_Timer_Sync_With_Shadow_Variables();
   #endif
   
   

@@ -36,6 +36,7 @@ uint16_t Timebase_Timer_Get_SubSeconds(void);
 int32_t  Timebase_Timer_Get_Seconds(void);
 void     Timebase_Timer_Set_SubSeconds(uint16_t value);
 void     Timebase_Timer_Set_Seconds(int32_t value);
+void     Timebase_Timer_Sync_With_Shadow_Variables(void);
 void     Timebase_Timer_Delay_SubSeconds(uint16_t value);
 void     Timebase_Timer_Await_SubSeconds(uint16_t value);
 void     Timebase_Timer_Delay_Seconds(uint16_t value);
