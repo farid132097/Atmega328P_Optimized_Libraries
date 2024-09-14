@@ -575,6 +575,9 @@ int32_t Timebase_UpCounter_SS_Get_Value(uint8_t window){
 }
 
 void Timebase_UpCounter_SS_Set_Value(uint8_t window, int32_t value){
+  if(value < 0){
+    value = 0;
+  }
   Timebase->UpCounterSS[window].Value = value;
 }
 
@@ -607,6 +610,9 @@ int32_t Timebase_UpCounter_SS_Get_TemporaryValue(uint8_t window){
 }
 
 void Timebase_UpCounter_SS_Set_TemporaryValue(uint8_t window, int32_t value){
+  if(value<0){
+    value = 0;
+  }
   Timebase->UpCounterSS[window].Temporary = value;
 }
 
@@ -688,18 +694,41 @@ void Timebase_UpCounter_SS_Set_Forcefully(uint8_t window, int32_t value){
 void Timebase_UpCounter_SS_Update(uint8_t window){
   int32_t curr_s, curr_ss;
   if( Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
-	curr_s = Timebase_Timer_Get_Seconds();
-    //Timebase_UpCounter_SS_Set_TemporaryValue(window, Timebase_UpCounter_SS_Get_EndValue(window) - curr_s );
+	curr_s  = Timebase_Timer_Get_Seconds();
+	curr_ss = Timebase_Timer_Get_SubSeconds();
+	curr_s  = Timebase_UpCounter_SS_Get_EndValueSec(window) - curr_s;
+	if(curr_s < 0){
+	  curr_s = 0;
+	}
+	curr_s *= Timebase->Config.UpdateRate;
+	curr_ss = Timebase_UpCounter_SS_Get_EndValueSubSec(window) - curr_ss;
+	if(curr_ss < 0){
+	  curr_ss = 0;
+	}
+	curr_ss += curr_s;
+    Timebase_UpCounter_SS_Set_TemporaryValue(window, curr_ss );
     Timebase_UpCounter_SS_Set_Value(window, Timebase_UpCounter_SS_Get_TargetValue(window) - Timebase_UpCounter_SS_Get_TemporaryValue(window) );
     if(Timebase_UpCounter_SS_Get_TemporaryValue(window) <= 0){
-      //Timebase_UpCounter_SS_Set_EndValue(window, 0);
+      Timebase_UpCounter_SS_Set_EndValueSec(window, 0);
+	  Timebase_UpCounter_SS_Set_EndValueSubSec(window, 0);
       Timebase_UpCounter_SS_Set_TemporaryValue(window, 0);
       Timebase_UpCounter_SS_Set_Value(window, Timebase_UpCounter_SS_Get_TargetValue(window));
       Timebase_UpCounter_SS_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
   } else if (Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_STOPPED){
-    curr_s = Timebase_Timer_Get_Seconds();
-    //Timebase_UpCounter_SS_Set_EndValue(window, Timebase_UpCounter_SS_Get_TemporaryValue(window) + curr_s);
+    curr_s  = Timebase_Timer_Get_Seconds();
+	curr_ss = Timebase_Timer_Get_SubSeconds();
+	int32_t value = Timebase_UpCounter_SS_Get_TemporaryValue(window);
+	int32_t subsec_val = value % Timebase->Config.UpdateRate;
+	int32_t sec_val    = value / Timebase->Config.UpdateRate;
+	subsec_val += curr_ss;
+	if(subsec_val >= Timebase->Config.UpdateRate){
+	  sec_val += 1;
+	  subsec_val %= Timebase->Config.UpdateRate;
+	}
+	sec_val += curr_s;
+	Timebase_UpCounter_SS_Set_EndValueSec(window, sec_val);
+	Timebase_UpCounter_SS_Set_EndValueSubSec(window, subsec_val);
     Timebase_UpCounter_SS_Set_Value(window, Timebase_UpCounter_SS_Get_TargetValue(window) - Timebase_UpCounter_SS_Get_TemporaryValue(window));
   }
 }
