@@ -702,9 +702,6 @@ void Timebase_UpCounter_SS_Update(uint8_t window){
 	}
 	curr_s *= Timebase->Config.UpdateRate;
 	curr_ss = Timebase_UpCounter_SS_Get_EndValueSubSec(window) - curr_ss;
-	if(curr_ss < 0){
-	  curr_ss = 0;
-	}
 	curr_ss += curr_s;
     Timebase_UpCounter_SS_Set_TemporaryValue(window, curr_ss );
     Timebase_UpCounter_SS_Set_Value(window, Timebase_UpCounter_SS_Get_TargetValue(window) - Timebase_UpCounter_SS_Get_TemporaryValue(window) );
