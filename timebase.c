@@ -37,6 +37,7 @@ typedef struct timebase_time_t{
   volatile int32_t         Seconds          ;
   volatile uint16_t        SubSecondsShadow ;
   volatile int32_t         SecondsShadow    ;
+  volatile uint8_t         VariablesSync    ;
   
   #ifdef TIMEBASE_TIME_WINDOW_CALCULATION
   int32_t                  StartTimeSeconds   ;
@@ -189,6 +190,7 @@ void Timebase_Struct_Init(void){
   Timebase->Time.SecondsShadow = 0;
   Timebase->Time.SubSeconds = 0;
   Timebase->Time.Seconds = 0;
+  Timebase->Time.VariablesSync = 0;
   Timebase->Time.LastSample = 0;
   
   #ifdef TIMEBASE_TIME_WINDOW_CALCULATION
@@ -424,8 +426,21 @@ void Timebase_Timer_Set_Seconds(int32_t value){
 }
 
 void Timebase_Timer_Sync_With_Shadow_Variables(void){
-  Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
-  Timebase->Time.Seconds    = Timebase->Time.SecondsShadow;
+  if(Timebase->Time.VariablesSync == TIMEBASE_FALSE){
+  
+	#ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
+    Timebase_Atomic_Operation_Start();
+    Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
+    Timebase->Time.Seconds    = Timebase->Time.SecondsShadow;
+    Timebase_Atomic_Operation_End();
+    #else
+    #warning Shadow Variables Atomic Sync Turned Off
+    Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
+    Timebase->Time.Seconds    = Timebase->Time.SecondsShadow;
+    #endif
+	
+	Timebase->Time.VariablesSync = TIMEBASE_TRUE;
+  }
 }
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
@@ -1374,18 +1389,9 @@ void Timebase_Init(uint16_t UpdateRateHz){
 
 void Timebase_Main_Loop_Executables(void){
   
-  #ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
-  Timebase_Atomic_Operation_Start();
-  Timebase_Timer_Sync_With_Shadow_Variables();
-  Timebase_Atomic_Operation_End();
-  #else
-  #warning Shadow Variables Atomic Sync Turned Off
-  Timebase_Timer_Sync_With_Shadow_Variables();
-  #endif
-  
-  
   #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
   if(Timebase->UpdateRequest & UPCOUNTER_SS_UPDATE_REQ){
+    Timebase_Timer_Sync_With_Shadow_Variables();
     //add upcounter ss function
 	Timebase->UpdateRequest &=~ UPCOUNTER_SS_UPDATE_REQ;
   }
@@ -1393,6 +1399,7 @@ void Timebase_Main_Loop_Executables(void){
 
   #ifdef TIMEBASE_UPCOUNTER
   if(Timebase->UpdateRequest & UPCOUNTER_UPDATE_REQ){
+    Timebase_Timer_Sync_With_Shadow_Variables();
     Timebase_UpCounter_Update_All();
 	Timebase->UpdateRequest &=~ UPCOUNTER_UPDATE_REQ;
   }
@@ -1402,6 +1409,7 @@ void Timebase_Main_Loop_Executables(void){
   
   #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
   if(Timebase->UpdateRequest & DOWNCOUNTER_SS_UPDATE_REQ){
+    Timebase_Timer_Sync_With_Shadow_Variables();
     Timebase_DownCounter_SS_Update_All();
 	Timebase->UpdateRequest &=~ DOWNCOUNTER_SS_UPDATE_REQ;
   }
@@ -1409,10 +1417,12 @@ void Timebase_Main_Loop_Executables(void){
   
   #ifdef TIMEBASE_DOWNCOUNTER
   if(Timebase->UpdateRequest & DOWNCOUNTER_UPDATE_REQ){
+    Timebase_Timer_Sync_With_Shadow_Variables();
     Timebase_DownCounter_Update_All();
 	Timebase->UpdateRequest &=~ DOWNCOUNTER_UPDATE_REQ;
   }
   #endif
+  Timebase->Time.VariablesSync = TIMEBASE_FALSE;
 }
 
 void Timebase_ISR_Executables(void){
