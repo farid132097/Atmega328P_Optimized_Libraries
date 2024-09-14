@@ -94,10 +94,10 @@ typedef struct timebase_downcounter_ss_t{
 
 #ifdef TIMEBASE_DOWNCOUNTER
 typedef struct timebase_downcounter_t{
-  timebase_status_t         Status           ;
-  int32_t                   EndValue         ;
-  int32_t                   Value            ;
-  int32_t                   PeriodValue      ;
+  timebase_status_t         Status         ;
+  int32_t                   EndValue       ;
+  int32_t                   Value          ;
+  int32_t                   PeriodValue    ;
 }timebase_downcounter_t;
 #endif
 
@@ -1436,7 +1436,7 @@ void Timebase_ISR_Executables(void){
   Timebase->UpdateRequest |= DOWNCOUNTER_SS_UPDATE_REQ;
   #endif
   
-  if((Timebase->Time.SubSecondsShadow % Timebase->Config.UpdateRate) == 0){
+  if(Timebase->Time.SubSecondsShadow >= Timebase->Config.UpdateRate){
     Timebase->Time.SecondsShadow++;
     Timebase->Time.SubSecondsShadow = 0;
 	

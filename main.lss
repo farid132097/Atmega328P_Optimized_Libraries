@@ -3,29 +3,29 @@ main.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         0000001a  00800100  00002ee6  00002f7a  2**0
+  0 .data         0000001a  00800100  00002ebc  00002f50  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00002ee6  00000000  00000000  00000094  2**1
+  1 .text         00002ebc  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          0000009d  0080011a  0080011a  00002f94  2**0
+  2 .bss          0000009d  0080011a  0080011a  00002f6a  2**0
                   ALLOC
-  3 .debug_aranges 00000060  00000000  00000000  00002f94  2**0
+  3 .debug_aranges 00000060  00000000  00000000  00002f6a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_pubnames 00001850  00000000  00000000  00002ff4  2**0
+  4 .debug_pubnames 00001850  00000000  00000000  00002fca  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00004694  00000000  00000000  00004844  2**0
+  5 .debug_info   00004694  00000000  00000000  0000481a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000005bb  00000000  00000000  00008ed8  2**0
+  6 .debug_abbrev 000005bb  00000000  00000000  00008eae  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00002214  00000000  00000000  00009493  2**0
+  7 .debug_line   00002214  00000000  00000000  00009469  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000ac0  00000000  00000000  0000b6a8  2**2
+  8 .debug_frame  00000ac0  00000000  00000000  0000b680  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00001a5b  00000000  00000000  0000c168  2**0
+  9 .debug_str    00001a5b  00000000  00000000  0000c140  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000194a  00000000  00000000  0000dbc3  2**0
+ 10 .debug_loc    0000194a  00000000  00000000  0000db9b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000048  00000000  00000000  0000f50d  2**0
+ 11 .debug_ranges 00000048  00000000  00000000  0000f4e5  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -47,7 +47,7 @@ Disassembly of section .text:
       34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
       38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
       3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-      40:	0c 94 d7 16 	jmp	0x2dae	; 0x2dae <__vector_16>
+      40:	0c 94 d6 16 	jmp	0x2dac	; 0x2dac <__vector_16>
       44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
       48:	0c 94 b4 02 	jmp	0x568	; 0x568 <__vector_18>
       4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -70,7 +70,7 @@ Disassembly of section .text:
       74:	11 e0       	ldi	r17, 0x01	; 1
       76:	a0 e0       	ldi	r26, 0x00	; 0
       78:	b1 e0       	ldi	r27, 0x01	; 1
-      7a:	e6 ee       	ldi	r30, 0xE6	; 230
+      7a:	ec eb       	ldi	r30, 0xBC	; 188
       7c:	fe e2       	ldi	r31, 0x2E	; 46
       7e:	02 c0       	rjmp	.+4      	; 0x84 <.do_copy_data_start>
 
@@ -97,7 +97,7 @@ Disassembly of section .text:
       96:	b1 07       	cpc	r27, r17
       98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
       9a:	0e 94 53 00 	call	0xa6	; 0xa6 <main>
-      9e:	0c 94 71 17 	jmp	0x2ee2	; 0x2ee2 <_exit>
+      9e:	0c 94 5c 17 	jmp	0x2eb8	; 0x2eb8 <_exit>
 
 000000a2 <__bad_interrupt>:
       a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -301,7 +301,7 @@ void UART_Config_BAUD_Rate(uint32_t baud_rate){
      176:	73 ee       	ldi	r23, 0xE3	; 227
      178:	86 e1       	ldi	r24, 0x16	; 22
      17a:	90 e0       	ldi	r25, 0x00	; 0
-     17c:	0e 94 34 17 	call	0x2e68	; 0x2e68 <__udivmodsi4>
+     17c:	0e 94 1f 17 	call	0x2e3e	; 0x2e3e <__udivmodsi4>
      180:	21 50       	subi	r18, 0x01	; 1
      182:	30 40       	sbci	r19, 0x00	; 0
      184:	40 40       	sbci	r20, 0x00	; 0
@@ -849,7 +849,7 @@ void UART_Determine_Digit_Numbers(uint32_t num){
      41a:	30 e0       	ldi	r19, 0x00	; 0
      41c:	40 e0       	ldi	r20, 0x00	; 0
      41e:	50 e0       	ldi	r21, 0x00	; 0
-     420:	0e 94 34 17 	call	0x2e68	; 0x2e68 <__udivmodsi4>
+     420:	0e 94 1f 17 	call	0x2e3e	; 0x2e3e <__udivmodsi4>
      424:	f8 01       	movw	r30, r16
      426:	61 83       	std	Z+1, r22	; 0x01
       num/=10;
@@ -859,7 +859,7 @@ void UART_Determine_Digit_Numbers(uint32_t num){
      42e:	30 e0       	ldi	r19, 0x00	; 0
      430:	40 e0       	ldi	r20, 0x00	; 0
      432:	50 e0       	ldi	r21, 0x00	; 0
-     434:	0e 94 34 17 	call	0x2e68	; 0x2e68 <__udivmodsi4>
+     434:	0e 94 1f 17 	call	0x2e3e	; 0x2e3e <__udivmodsi4>
      438:	c9 01       	movw	r24, r18
      43a:	da 01       	movw	r26, r20
      43c:	6c 01       	movw	r12, r24
@@ -1546,7 +1546,7 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
      88e:	7b e1       	ldi	r23, 0x1B	; 27
      890:	87 eb       	ldi	r24, 0xB7	; 183
      892:	90 e0       	ldi	r25, 0x00	; 0
-     894:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+     894:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
      898:	72 2e       	mov	r7, r18
      89a:	83 2e       	mov	r8, r19
      89c:	94 2e       	mov	r9, r20
@@ -1577,7 +1577,7 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
      8c2:	78 2d       	mov	r23, r8
      8c4:	89 2d       	mov	r24, r9
      8c6:	9e 2d       	mov	r25, r14
-     8c8:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+     8c8:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
      8cc:	c9 01       	movw	r24, r18
      8ce:	da 01       	movw	r26, r20
      8d0:	9c 01       	movw	r18, r24
@@ -1987,7 +1987,7 @@ void Timebase_Atomic_Operation_End(void){
      a88:	7a 81       	ldd	r23, Y+2	; 0x02
      a8a:	80 e0       	ldi	r24, 0x00	; 0
      a8c:	90 e0       	ldi	r25, 0x00	; 0
-     a8e:	0e 94 01 17 	call	0x2e02	; 0x2e02 <__mulsi3>
+     a8e:	0e 94 00 17 	call	0x2e00	; 0x2e00 <__mulsi3>
      a92:	3b 01       	movw	r6, r22
      a94:	4c 01       	movw	r8, r24
   smpl_val += smpl_ss;
@@ -2049,7 +2049,7 @@ void Timebase_Atomic_Operation_End(void){
      aca:	7a 81       	ldd	r23, Y+2	; 0x02
      acc:	80 e0       	ldi	r24, 0x00	; 0
      ace:	90 e0       	ldi	r25, 0x00	; 0
-     ad0:	0e 94 01 17 	call	0x2e02	; 0x2e02 <__mulsi3>
+     ad0:	0e 94 00 17 	call	0x2e00	; 0x2e00 <__mulsi3>
 	curr_val += curr_ss;
      ad4:	00 e0       	ldi	r16, 0x00	; 0
      ad6:	10 e0       	ldi	r17, 0x00	; 0
@@ -2497,7 +2497,7 @@ void Timebase_Atomic_Operation_End(void){
      c82:	7a 81       	ldd	r23, Y+2	; 0x02
      c84:	80 e0       	ldi	r24, 0x00	; 0
      c86:	90 e0       	ldi	r25, 0x00	; 0
-     c88:	0e 94 01 17 	call	0x2e02	; 0x2e02 <__mulsi3>
+     c88:	0e 94 00 17 	call	0x2e00	; 0x2e00 <__mulsi3>
 	curr_s += curr_ss;
      c8c:	29 8d       	ldd	r18, Y+25	; 0x19
      c8e:	3a 8d       	ldd	r19, Y+26	; 0x1a
@@ -3371,7 +3371,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
     1176:	50 e0       	ldi	r21, 0x00	; 0
     1178:	c5 01       	movw	r24, r10
     117a:	b4 01       	movw	r22, r8
-    117c:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+    117c:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
     1180:	7b 01       	movw	r14, r22
     1182:	8c 01       	movw	r16, r24
 	int32_t sec_val    = value / Timebase->Config.UpdateRate;
@@ -3385,7 +3385,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
     1192:	50 e0       	ldi	r21, 0x00	; 0
     1194:	c5 01       	movw	r24, r10
     1196:	b4 01       	movw	r22, r8
-    1198:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+    1198:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
     119c:	c9 01       	movw	r24, r18
     119e:	da 01       	movw	r26, r20
     11a0:	3c 01       	movw	r6, r24
@@ -3423,7 +3423,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
     11d8:	50 e0       	ldi	r21, 0x00	; 0
     11da:	c6 01       	movw	r24, r12
     11dc:	b5 01       	movw	r22, r10
-    11de:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+    11de:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
     11e2:	ac 01       	movw	r20, r24
     11e4:	cb 01       	movw	r24, r22
     11e6:	da 01       	movw	r26, r20
@@ -6142,7 +6142,7 @@ void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
     2040:	50 e0       	ldi	r21, 0x00	; 0
     2042:	c5 01       	movw	r24, r10
     2044:	b4 01       	movw	r22, r8
-    2046:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+    2046:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
     204a:	7b 01       	movw	r14, r22
     204c:	8c 01       	movw	r16, r24
 	int32_t sec_val    = value / Timebase->Config.UpdateRate;
@@ -6156,7 +6156,7 @@ void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
     205c:	50 e0       	ldi	r21, 0x00	; 0
     205e:	c5 01       	movw	r24, r10
     2060:	b4 01       	movw	r22, r8
-    2062:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+    2062:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
     2066:	c9 01       	movw	r24, r18
     2068:	da 01       	movw	r26, r20
     206a:	3c 01       	movw	r6, r24
@@ -6194,7 +6194,7 @@ void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
     20a2:	50 e0       	ldi	r21, 0x00	; 0
     20a4:	c6 01       	movw	r24, r12
     20a6:	b5 01       	movw	r22, r10
-    20a8:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+    20a8:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
     20ac:	ac 01       	movw	r20, r24
     20ae:	cb 01       	movw	r24, r22
     20b0:	da 01       	movw	r26, r20
@@ -6482,7 +6482,7 @@ void Timebase_DownCounter_SS_Update(uint8_t window){
     2210:	50 e0       	ldi	r21, 0x00	; 0
     2212:	c2 01       	movw	r24, r4
     2214:	b1 01       	movw	r22, r2
-    2216:	0e 94 01 17 	call	0x2e02	; 0x2e02 <__mulsi3>
+    2216:	0e 94 00 17 	call	0x2e00	; 0x2e00 <__mulsi3>
 	temp_s += temp_ss;
     221a:	f8 01       	movw	r30, r16
     221c:	24 e0       	ldi	r18, 0x04	; 4
@@ -6645,7 +6645,7 @@ void Timebase_DownCounter_SS_Set_EndValueSec(uint8_t window, int32_t value){
     22ba:	50 e0       	ldi	r21, 0x00	; 0
     22bc:	c2 01       	movw	r24, r4
     22be:	b1 01       	movw	r22, r2
-    22c0:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+    22c0:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
     22c4:	e2 0e       	add	r14, r18
     22c6:	f3 1e       	adc	r15, r19
     22c8:	04 1f       	adc	r16, r20
@@ -6664,7 +6664,7 @@ void Timebase_DownCounter_SS_Set_EndValueSubSec(uint8_t window, int32_t value){
     22da:	b1 01       	movw	r22, r2
     22dc:	a6 01       	movw	r20, r12
     22de:	95 01       	movw	r18, r10
-    22e0:	0e 94 56 17 	call	0x2eac	; 0x2eac <__divmodsi4>
+    22e0:	0e 94 41 17 	call	0x2e82	; 0x2e82 <__divmodsi4>
     22e4:	88 24       	eor	r8, r8
     22e6:	99 24       	eor	r9, r9
     22e8:	66 0e       	add	r6, r22
@@ -8767,230 +8767,204 @@ void Timebase_ISR_Executables(void){
     2d74:	86 8f       	std	Z+30, r24	; 0x1e
   #endif
   
-  if((Timebase->Time.SubSecondsShadow % Timebase->Config.UpdateRate) == 0){
-    2d76:	86 85       	ldd	r24, Z+14	; 0x0e
-    2d78:	97 85       	ldd	r25, Z+15	; 0x0f
-    2d7a:	61 81       	ldd	r22, Z+1	; 0x01
-    2d7c:	72 81       	ldd	r23, Z+2	; 0x02
-    2d7e:	0e 94 20 17 	call	0x2e40	; 0x2e40 <__udivmodhi4>
-    2d82:	89 2b       	or	r24, r25
-    2d84:	99 f4       	brne	.+38     	; 0x2dac <Timebase_ISR_Executables+0x54>
+  if(Timebase->Time.SubSecondsShadow >= Timebase->Config.UpdateRate){
+    2d76:	26 85       	ldd	r18, Z+14	; 0x0e
+    2d78:	37 85       	ldd	r19, Z+15	; 0x0f
+    2d7a:	81 81       	ldd	r24, Z+1	; 0x01
+    2d7c:	92 81       	ldd	r25, Z+2	; 0x02
+    2d7e:	28 17       	cp	r18, r24
+    2d80:	39 07       	cpc	r19, r25
+    2d82:	98 f0       	brcs	.+38     	; 0x2daa <Timebase_ISR_Executables+0x52>
     Timebase->Time.SecondsShadow++;
-    2d86:	80 89       	ldd	r24, Z+16	; 0x10
-    2d88:	91 89       	ldd	r25, Z+17	; 0x11
-    2d8a:	a2 89       	ldd	r26, Z+18	; 0x12
-    2d8c:	b3 89       	ldd	r27, Z+19	; 0x13
-    2d8e:	01 96       	adiw	r24, 0x01	; 1
-    2d90:	a1 1d       	adc	r26, r1
-    2d92:	b1 1d       	adc	r27, r1
-    2d94:	80 8b       	std	Z+16, r24	; 0x10
-    2d96:	91 8b       	std	Z+17, r25	; 0x11
-    2d98:	a2 8b       	std	Z+18, r26	; 0x12
-    2d9a:	b3 8b       	std	Z+19, r27	; 0x13
+    2d84:	80 89       	ldd	r24, Z+16	; 0x10
+    2d86:	91 89       	ldd	r25, Z+17	; 0x11
+    2d88:	a2 89       	ldd	r26, Z+18	; 0x12
+    2d8a:	b3 89       	ldd	r27, Z+19	; 0x13
+    2d8c:	01 96       	adiw	r24, 0x01	; 1
+    2d8e:	a1 1d       	adc	r26, r1
+    2d90:	b1 1d       	adc	r27, r1
+    2d92:	80 8b       	std	Z+16, r24	; 0x10
+    2d94:	91 8b       	std	Z+17, r25	; 0x11
+    2d96:	a2 8b       	std	Z+18, r26	; 0x12
+    2d98:	b3 8b       	std	Z+19, r27	; 0x13
     Timebase->Time.SubSecondsShadow = 0;
-    2d9c:	17 86       	std	Z+15, r1	; 0x0f
-    2d9e:	16 86       	std	Z+14, r1	; 0x0e
+    2d9a:	17 86       	std	Z+15, r1	; 0x0f
+    2d9c:	16 86       	std	Z+14, r1	; 0x0e
 	
 	#ifdef TIMEBASE_UPCOUNTER
     Timebase->UpdateRequest |= UPCOUNTER_UPDATE_REQ;
-    2da0:	86 8d       	ldd	r24, Z+30	; 0x1e
-    2da2:	81 60       	ori	r24, 0x01	; 1
-    2da4:	86 8f       	std	Z+30, r24	; 0x1e
+    2d9e:	86 8d       	ldd	r24, Z+30	; 0x1e
+    2da0:	81 60       	ori	r24, 0x01	; 1
+    2da2:	86 8f       	std	Z+30, r24	; 0x1e
     #endif
 	
 	#ifdef TIMEBASE_DOWNCOUNTER
     Timebase->UpdateRequest |= DOWNCOUNTER_UPDATE_REQ;
-    2da6:	86 8d       	ldd	r24, Z+30	; 0x1e
-    2da8:	82 60       	ori	r24, 0x02	; 2
-    2daa:	86 8f       	std	Z+30, r24	; 0x1e
-    2dac:	08 95       	ret
+    2da4:	86 8d       	ldd	r24, Z+30	; 0x1e
+    2da6:	82 60       	ori	r24, 0x02	; 2
+    2da8:	86 8f       	std	Z+30, r24	; 0x1e
+    2daa:	08 95       	ret
 
-00002dae <__vector_16>:
+00002dac <__vector_16>:
 
 
 
 /*************************************ISR Start************************************/
 
 ISR(TIMER0_OVF_vect){
-    2dae:	1f 92       	push	r1
-    2db0:	0f 92       	push	r0
-    2db2:	0f b6       	in	r0, 0x3f	; 63
-    2db4:	0f 92       	push	r0
-    2db6:	11 24       	eor	r1, r1
-    2db8:	2f 93       	push	r18
-    2dba:	3f 93       	push	r19
-    2dbc:	4f 93       	push	r20
-    2dbe:	5f 93       	push	r21
-    2dc0:	6f 93       	push	r22
-    2dc2:	7f 93       	push	r23
-    2dc4:	8f 93       	push	r24
-    2dc6:	9f 93       	push	r25
-    2dc8:	af 93       	push	r26
-    2dca:	bf 93       	push	r27
-    2dcc:	ef 93       	push	r30
-    2dce:	ff 93       	push	r31
+    2dac:	1f 92       	push	r1
+    2dae:	0f 92       	push	r0
+    2db0:	0f b6       	in	r0, 0x3f	; 63
+    2db2:	0f 92       	push	r0
+    2db4:	11 24       	eor	r1, r1
+    2db6:	2f 93       	push	r18
+    2db8:	3f 93       	push	r19
+    2dba:	4f 93       	push	r20
+    2dbc:	5f 93       	push	r21
+    2dbe:	6f 93       	push	r22
+    2dc0:	7f 93       	push	r23
+    2dc2:	8f 93       	push	r24
+    2dc4:	9f 93       	push	r25
+    2dc6:	af 93       	push	r26
+    2dc8:	bf 93       	push	r27
+    2dca:	ef 93       	push	r30
+    2dcc:	ff 93       	push	r31
   TCNT0  = Timebase->Time.OVFUpdateValue;
-    2dd0:	e0 91 49 01 	lds	r30, 0x0149
-    2dd4:	f0 91 4a 01 	lds	r31, 0x014A
-    2dd8:	83 81       	ldd	r24, Z+3	; 0x03
-    2dda:	86 bd       	out	0x26, r24	; 38
+    2dce:	e0 91 49 01 	lds	r30, 0x0149
+    2dd2:	f0 91 4a 01 	lds	r31, 0x014A
+    2dd6:	83 81       	ldd	r24, Z+3	; 0x03
+    2dd8:	86 bd       	out	0x26, r24	; 38
   Timebase_ISR_Executables();
-    2ddc:	0e 94 ac 16 	call	0x2d58	; 0x2d58 <Timebase_ISR_Executables>
+    2dda:	0e 94 ac 16 	call	0x2d58	; 0x2d58 <Timebase_ISR_Executables>
 }
-    2de0:	ff 91       	pop	r31
-    2de2:	ef 91       	pop	r30
-    2de4:	bf 91       	pop	r27
-    2de6:	af 91       	pop	r26
-    2de8:	9f 91       	pop	r25
-    2dea:	8f 91       	pop	r24
-    2dec:	7f 91       	pop	r23
-    2dee:	6f 91       	pop	r22
-    2df0:	5f 91       	pop	r21
-    2df2:	4f 91       	pop	r20
-    2df4:	3f 91       	pop	r19
-    2df6:	2f 91       	pop	r18
-    2df8:	0f 90       	pop	r0
-    2dfa:	0f be       	out	0x3f, r0	; 63
-    2dfc:	0f 90       	pop	r0
-    2dfe:	1f 90       	pop	r1
-    2e00:	18 95       	reti
+    2dde:	ff 91       	pop	r31
+    2de0:	ef 91       	pop	r30
+    2de2:	bf 91       	pop	r27
+    2de4:	af 91       	pop	r26
+    2de6:	9f 91       	pop	r25
+    2de8:	8f 91       	pop	r24
+    2dea:	7f 91       	pop	r23
+    2dec:	6f 91       	pop	r22
+    2dee:	5f 91       	pop	r21
+    2df0:	4f 91       	pop	r20
+    2df2:	3f 91       	pop	r19
+    2df4:	2f 91       	pop	r18
+    2df6:	0f 90       	pop	r0
+    2df8:	0f be       	out	0x3f, r0	; 63
+    2dfa:	0f 90       	pop	r0
+    2dfc:	1f 90       	pop	r1
+    2dfe:	18 95       	reti
 
-00002e02 <__mulsi3>:
-    2e02:	62 9f       	mul	r22, r18
-    2e04:	d0 01       	movw	r26, r0
-    2e06:	73 9f       	mul	r23, r19
-    2e08:	f0 01       	movw	r30, r0
-    2e0a:	82 9f       	mul	r24, r18
-    2e0c:	e0 0d       	add	r30, r0
-    2e0e:	f1 1d       	adc	r31, r1
-    2e10:	64 9f       	mul	r22, r20
-    2e12:	e0 0d       	add	r30, r0
-    2e14:	f1 1d       	adc	r31, r1
-    2e16:	92 9f       	mul	r25, r18
-    2e18:	f0 0d       	add	r31, r0
-    2e1a:	83 9f       	mul	r24, r19
-    2e1c:	f0 0d       	add	r31, r0
-    2e1e:	74 9f       	mul	r23, r20
-    2e20:	f0 0d       	add	r31, r0
-    2e22:	65 9f       	mul	r22, r21
-    2e24:	f0 0d       	add	r31, r0
-    2e26:	99 27       	eor	r25, r25
-    2e28:	72 9f       	mul	r23, r18
-    2e2a:	b0 0d       	add	r27, r0
-    2e2c:	e1 1d       	adc	r30, r1
-    2e2e:	f9 1f       	adc	r31, r25
-    2e30:	63 9f       	mul	r22, r19
-    2e32:	b0 0d       	add	r27, r0
-    2e34:	e1 1d       	adc	r30, r1
-    2e36:	f9 1f       	adc	r31, r25
-    2e38:	bd 01       	movw	r22, r26
-    2e3a:	cf 01       	movw	r24, r30
-    2e3c:	11 24       	eor	r1, r1
-    2e3e:	08 95       	ret
+00002e00 <__mulsi3>:
+    2e00:	62 9f       	mul	r22, r18
+    2e02:	d0 01       	movw	r26, r0
+    2e04:	73 9f       	mul	r23, r19
+    2e06:	f0 01       	movw	r30, r0
+    2e08:	82 9f       	mul	r24, r18
+    2e0a:	e0 0d       	add	r30, r0
+    2e0c:	f1 1d       	adc	r31, r1
+    2e0e:	64 9f       	mul	r22, r20
+    2e10:	e0 0d       	add	r30, r0
+    2e12:	f1 1d       	adc	r31, r1
+    2e14:	92 9f       	mul	r25, r18
+    2e16:	f0 0d       	add	r31, r0
+    2e18:	83 9f       	mul	r24, r19
+    2e1a:	f0 0d       	add	r31, r0
+    2e1c:	74 9f       	mul	r23, r20
+    2e1e:	f0 0d       	add	r31, r0
+    2e20:	65 9f       	mul	r22, r21
+    2e22:	f0 0d       	add	r31, r0
+    2e24:	99 27       	eor	r25, r25
+    2e26:	72 9f       	mul	r23, r18
+    2e28:	b0 0d       	add	r27, r0
+    2e2a:	e1 1d       	adc	r30, r1
+    2e2c:	f9 1f       	adc	r31, r25
+    2e2e:	63 9f       	mul	r22, r19
+    2e30:	b0 0d       	add	r27, r0
+    2e32:	e1 1d       	adc	r30, r1
+    2e34:	f9 1f       	adc	r31, r25
+    2e36:	bd 01       	movw	r22, r26
+    2e38:	cf 01       	movw	r24, r30
+    2e3a:	11 24       	eor	r1, r1
+    2e3c:	08 95       	ret
 
-00002e40 <__udivmodhi4>:
-    2e40:	aa 1b       	sub	r26, r26
-    2e42:	bb 1b       	sub	r27, r27
-    2e44:	51 e1       	ldi	r21, 0x11	; 17
-    2e46:	07 c0       	rjmp	.+14     	; 0x2e56 <__udivmodhi4_ep>
+00002e3e <__udivmodsi4>:
+    2e3e:	a1 e2       	ldi	r26, 0x21	; 33
+    2e40:	1a 2e       	mov	r1, r26
+    2e42:	aa 1b       	sub	r26, r26
+    2e44:	bb 1b       	sub	r27, r27
+    2e46:	fd 01       	movw	r30, r26
+    2e48:	0d c0       	rjmp	.+26     	; 0x2e64 <__udivmodsi4_ep>
 
-00002e48 <__udivmodhi4_loop>:
-    2e48:	aa 1f       	adc	r26, r26
-    2e4a:	bb 1f       	adc	r27, r27
-    2e4c:	a6 17       	cp	r26, r22
-    2e4e:	b7 07       	cpc	r27, r23
-    2e50:	10 f0       	brcs	.+4      	; 0x2e56 <__udivmodhi4_ep>
-    2e52:	a6 1b       	sub	r26, r22
-    2e54:	b7 0b       	sbc	r27, r23
+00002e4a <__udivmodsi4_loop>:
+    2e4a:	aa 1f       	adc	r26, r26
+    2e4c:	bb 1f       	adc	r27, r27
+    2e4e:	ee 1f       	adc	r30, r30
+    2e50:	ff 1f       	adc	r31, r31
+    2e52:	a2 17       	cp	r26, r18
+    2e54:	b3 07       	cpc	r27, r19
+    2e56:	e4 07       	cpc	r30, r20
+    2e58:	f5 07       	cpc	r31, r21
+    2e5a:	20 f0       	brcs	.+8      	; 0x2e64 <__udivmodsi4_ep>
+    2e5c:	a2 1b       	sub	r26, r18
+    2e5e:	b3 0b       	sbc	r27, r19
+    2e60:	e4 0b       	sbc	r30, r20
+    2e62:	f5 0b       	sbc	r31, r21
 
-00002e56 <__udivmodhi4_ep>:
-    2e56:	88 1f       	adc	r24, r24
-    2e58:	99 1f       	adc	r25, r25
-    2e5a:	5a 95       	dec	r21
-    2e5c:	a9 f7       	brne	.-22     	; 0x2e48 <__udivmodhi4_loop>
-    2e5e:	80 95       	com	r24
-    2e60:	90 95       	com	r25
-    2e62:	bc 01       	movw	r22, r24
-    2e64:	cd 01       	movw	r24, r26
-    2e66:	08 95       	ret
+00002e64 <__udivmodsi4_ep>:
+    2e64:	66 1f       	adc	r22, r22
+    2e66:	77 1f       	adc	r23, r23
+    2e68:	88 1f       	adc	r24, r24
+    2e6a:	99 1f       	adc	r25, r25
+    2e6c:	1a 94       	dec	r1
+    2e6e:	69 f7       	brne	.-38     	; 0x2e4a <__udivmodsi4_loop>
+    2e70:	60 95       	com	r22
+    2e72:	70 95       	com	r23
+    2e74:	80 95       	com	r24
+    2e76:	90 95       	com	r25
+    2e78:	9b 01       	movw	r18, r22
+    2e7a:	ac 01       	movw	r20, r24
+    2e7c:	bd 01       	movw	r22, r26
+    2e7e:	cf 01       	movw	r24, r30
+    2e80:	08 95       	ret
 
-00002e68 <__udivmodsi4>:
-    2e68:	a1 e2       	ldi	r26, 0x21	; 33
-    2e6a:	1a 2e       	mov	r1, r26
-    2e6c:	aa 1b       	sub	r26, r26
-    2e6e:	bb 1b       	sub	r27, r27
-    2e70:	fd 01       	movw	r30, r26
-    2e72:	0d c0       	rjmp	.+26     	; 0x2e8e <__udivmodsi4_ep>
+00002e82 <__divmodsi4>:
+    2e82:	97 fb       	bst	r25, 7
+    2e84:	09 2e       	mov	r0, r25
+    2e86:	05 26       	eor	r0, r21
+    2e88:	0e d0       	rcall	.+28     	; 0x2ea6 <__divmodsi4_neg1>
+    2e8a:	57 fd       	sbrc	r21, 7
+    2e8c:	04 d0       	rcall	.+8      	; 0x2e96 <__divmodsi4_neg2>
+    2e8e:	d7 df       	rcall	.-82     	; 0x2e3e <__udivmodsi4>
+    2e90:	0a d0       	rcall	.+20     	; 0x2ea6 <__divmodsi4_neg1>
+    2e92:	00 1c       	adc	r0, r0
+    2e94:	38 f4       	brcc	.+14     	; 0x2ea4 <__divmodsi4_exit>
 
-00002e74 <__udivmodsi4_loop>:
-    2e74:	aa 1f       	adc	r26, r26
-    2e76:	bb 1f       	adc	r27, r27
-    2e78:	ee 1f       	adc	r30, r30
-    2e7a:	ff 1f       	adc	r31, r31
-    2e7c:	a2 17       	cp	r26, r18
-    2e7e:	b3 07       	cpc	r27, r19
-    2e80:	e4 07       	cpc	r30, r20
-    2e82:	f5 07       	cpc	r31, r21
-    2e84:	20 f0       	brcs	.+8      	; 0x2e8e <__udivmodsi4_ep>
-    2e86:	a2 1b       	sub	r26, r18
-    2e88:	b3 0b       	sbc	r27, r19
-    2e8a:	e4 0b       	sbc	r30, r20
-    2e8c:	f5 0b       	sbc	r31, r21
+00002e96 <__divmodsi4_neg2>:
+    2e96:	50 95       	com	r21
+    2e98:	40 95       	com	r20
+    2e9a:	30 95       	com	r19
+    2e9c:	21 95       	neg	r18
+    2e9e:	3f 4f       	sbci	r19, 0xFF	; 255
+    2ea0:	4f 4f       	sbci	r20, 0xFF	; 255
+    2ea2:	5f 4f       	sbci	r21, 0xFF	; 255
 
-00002e8e <__udivmodsi4_ep>:
-    2e8e:	66 1f       	adc	r22, r22
-    2e90:	77 1f       	adc	r23, r23
-    2e92:	88 1f       	adc	r24, r24
-    2e94:	99 1f       	adc	r25, r25
-    2e96:	1a 94       	dec	r1
-    2e98:	69 f7       	brne	.-38     	; 0x2e74 <__udivmodsi4_loop>
-    2e9a:	60 95       	com	r22
-    2e9c:	70 95       	com	r23
-    2e9e:	80 95       	com	r24
-    2ea0:	90 95       	com	r25
-    2ea2:	9b 01       	movw	r18, r22
-    2ea4:	ac 01       	movw	r20, r24
-    2ea6:	bd 01       	movw	r22, r26
-    2ea8:	cf 01       	movw	r24, r30
-    2eaa:	08 95       	ret
+00002ea4 <__divmodsi4_exit>:
+    2ea4:	08 95       	ret
 
-00002eac <__divmodsi4>:
-    2eac:	97 fb       	bst	r25, 7
-    2eae:	09 2e       	mov	r0, r25
-    2eb0:	05 26       	eor	r0, r21
-    2eb2:	0e d0       	rcall	.+28     	; 0x2ed0 <__divmodsi4_neg1>
-    2eb4:	57 fd       	sbrc	r21, 7
-    2eb6:	04 d0       	rcall	.+8      	; 0x2ec0 <__divmodsi4_neg2>
-    2eb8:	d7 df       	rcall	.-82     	; 0x2e68 <__udivmodsi4>
-    2eba:	0a d0       	rcall	.+20     	; 0x2ed0 <__divmodsi4_neg1>
-    2ebc:	00 1c       	adc	r0, r0
-    2ebe:	38 f4       	brcc	.+14     	; 0x2ece <__divmodsi4_exit>
+00002ea6 <__divmodsi4_neg1>:
+    2ea6:	f6 f7       	brtc	.-4      	; 0x2ea4 <__divmodsi4_exit>
+    2ea8:	90 95       	com	r25
+    2eaa:	80 95       	com	r24
+    2eac:	70 95       	com	r23
+    2eae:	61 95       	neg	r22
+    2eb0:	7f 4f       	sbci	r23, 0xFF	; 255
+    2eb2:	8f 4f       	sbci	r24, 0xFF	; 255
+    2eb4:	9f 4f       	sbci	r25, 0xFF	; 255
+    2eb6:	08 95       	ret
 
-00002ec0 <__divmodsi4_neg2>:
-    2ec0:	50 95       	com	r21
-    2ec2:	40 95       	com	r20
-    2ec4:	30 95       	com	r19
-    2ec6:	21 95       	neg	r18
-    2ec8:	3f 4f       	sbci	r19, 0xFF	; 255
-    2eca:	4f 4f       	sbci	r20, 0xFF	; 255
-    2ecc:	5f 4f       	sbci	r21, 0xFF	; 255
+00002eb8 <_exit>:
+    2eb8:	f8 94       	cli
 
-00002ece <__divmodsi4_exit>:
-    2ece:	08 95       	ret
-
-00002ed0 <__divmodsi4_neg1>:
-    2ed0:	f6 f7       	brtc	.-4      	; 0x2ece <__divmodsi4_exit>
-    2ed2:	90 95       	com	r25
-    2ed4:	80 95       	com	r24
-    2ed6:	70 95       	com	r23
-    2ed8:	61 95       	neg	r22
-    2eda:	7f 4f       	sbci	r23, 0xFF	; 255
-    2edc:	8f 4f       	sbci	r24, 0xFF	; 255
-    2ede:	9f 4f       	sbci	r25, 0xFF	; 255
-    2ee0:	08 95       	ret
-
-00002ee2 <_exit>:
-    2ee2:	f8 94       	cli
-
-00002ee4 <__stop_program>:
-    2ee4:	ff cf       	rjmp	.-2      	; 0x2ee4 <__stop_program>
+00002eba <__stop_program>:
+    2eba:	ff cf       	rjmp	.-2      	; 0x2eba <__stop_program>
