@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   4 .debug_pubnames 00001850  00000000  00000000  00002fca  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00004694  00000000  00000000  0000481a  2**0
+  5 .debug_info   0000469f  00000000  00000000  0000481a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000005bb  00000000  00000000  00008eae  2**0
+  6 .debug_abbrev 000005bb  00000000  00000000  00008eb9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00002214  00000000  00000000  00009469  2**0
+  7 .debug_line   00002214  00000000  00000000  00009474  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000ac0  00000000  00000000  0000b680  2**2
+  8 .debug_frame  00000ac0  00000000  00000000  0000b688  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00001a5b  00000000  00000000  0000c140  2**0
+  9 .debug_str    00001a5b  00000000  00000000  0000c148  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000194a  00000000  00000000  0000db9b  2**0
+ 10 .debug_loc    0000192c  00000000  00000000  0000dba3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000048  00000000  00000000  0000f4e5  2**0
+ 11 .debug_ranges 00000048  00000000  00000000  0000f4cf  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -3209,7 +3209,7 @@ uint8_t Timebase_UpCounter_SS_Get_Status(uint8_t window){
     10b0:	e0 91 49 01 	lds	r30, 0x0149
     10b4:	f0 91 4a 01 	lds	r31, 0x014A
     10b8:	90 e0       	ldi	r25, 0x00	; 0
-    Timebase_UpCounter_SS_Set_Status(window , COUNTER_STATE_START);    
+    Timebase_UpCounter_SS_Set_Status(window , COUNTER_STATE_START);
   }
 }
 
@@ -3293,7 +3293,7 @@ uint8_t Timebase_UpCounter_SS_Get_Status(uint8_t window){
 
 
 void Timebase_UpCounter_SS_Set_Securely(uint8_t window, int32_t value){
-  int32_t curr_s = 0;
+  int32_t curr_s, curr_ss;
   if( Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_RESET ){
     112a:	89 e1       	ldi	r24, 0x19	; 25
     112c:	90 e0       	ldi	r25, 0x00	; 0
@@ -3331,23 +3331,23 @@ void Timebase_UpCounter_SS_Set_TemporaryValue(uint8_t window, int32_t value){
     1154:	16 a6       	std	Z+46, r1	; 0x2e
     1156:	17 a6       	std	Z+47, r1	; 0x2f
     1158:	10 aa       	std	Z+48, r1	; 0x30
-  return Timebase->Time.SubSeconds;
+int32_t Timebase_UpCounter_SS_Get_TargetValue(uint8_t window){
+  return Timebase->UpCounterSS[window].Target;
 }
 
-
-int32_t Timebase_Timer_Get_Seconds(void){
-  return Timebase->Time.Seconds;
-    115a:	f9 01       	movw	r30, r18
-    115c:	82 85       	ldd	r24, Z+10	; 0x0a
-    115e:	93 85       	ldd	r25, Z+11	; 0x0b
-    1160:	a4 85       	ldd	r26, Z+12	; 0x0c
-    1162:	b5 85       	ldd	r27, Z+13	; 0x0d
+void Timebase_UpCounter_SS_Set_TargetValue(uint8_t window, int32_t value){
+  Timebase->UpCounterSS[window].Target = value;
+    115a:	41 a7       	std	Z+41, r20	; 0x29
+    115c:	52 a7       	std	Z+42, r21	; 0x2a
+    115e:	63 a7       	std	Z+43, r22	; 0x2b
+    1160:	74 a7       	std	Z+44, r23	; 0x2c
   return Timebase->Time.SecondsShadow;
 }
 
 
 uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
+    1162:	f9 01       	movw	r30, r18
     1164:	c0 84       	ldd	r12, Z+8	; 0x08
     1166:	d1 84       	ldd	r13, Z+9	; 0x09
 }
@@ -3359,11 +3359,11 @@ int32_t Timebase_Timer_Get_Seconds(void){
     116a:	33 84       	ldd	r3, Z+11	; 0x0b
     116c:	44 84       	ldd	r4, Z+12	; 0x0c
     116e:	55 84       	ldd	r5, Z+13	; 0x0d
+    Timebase_UpCounter_SS_Set_Value(window, 0);
     Timebase_UpCounter_SS_Set_TemporaryValue(window, 0);
-    //Timebase_UpCounter_SS_Set_TargetValue(window, value);
-	curr_s = Timebase_Timer_Get_Seconds();
-	int32_t temp_ss = Timebase_Timer_Get_SubSeconds();
-	int32_t temp_s  = Timebase_Timer_Get_Seconds();
+    Timebase_UpCounter_SS_Set_TargetValue(window, value);
+	curr_ss = Timebase_Timer_Get_SubSeconds();
+	curr_s  = Timebase_Timer_Get_Seconds();
 	int32_t subsec_val = value % Timebase->Config.UpdateRate;
     1170:	21 81       	ldd	r18, Z+1	; 0x01
     1172:	32 81       	ldd	r19, Z+2	; 0x02
@@ -3390,7 +3390,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
     119e:	da 01       	movw	r26, r20
     11a0:	3c 01       	movw	r6, r24
     11a2:	4d 01       	movw	r8, r26
-	subsec_val += temp_ss;
+	subsec_val += curr_ss;
     11a4:	56 01       	movw	r10, r12
     11a6:	cc 24       	eor	r12, r12
     11a8:	dd 24       	eor	r13, r13
@@ -3487,7 +3487,7 @@ void Timebase_UpCounter_SS_Set_Status(uint8_t window, uint8_t value){
     122e:	91 7e       	andi	r25, 0xE1	; 225
     1230:	92 60       	ori	r25, 0x02	; 2
     1232:	90 a3       	std	Z+32, r25	; 0x20
-	sec_val += temp_s;
+	sec_val += curr_s;
     Timebase_UpCounter_SS_Set_EndValueSec(window, sec_val);
 	Timebase_UpCounter_SS_Set_EndValueSubSec(window, subsec_val);
     Timebase_UpCounter_SS_Start(window);
@@ -3577,7 +3577,7 @@ uint8_t Timebase_UpCounter_SS_Get_Status(uint8_t window){
 } 
 
 void Timebase_UpCounter_SS_Update(uint8_t window){
-  int32_t curr_s = 0;
+  int32_t curr_s, curr_ss;
   if( Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
     12ba:	81 30       	cpi	r24, 0x01	; 1
     12bc:	51 f5       	brne	.+84     	; 0x1312 <Timebase_UpCounter_SS_Update+0x86>
@@ -3617,7 +3617,7 @@ void Timebase_UpCounter_SS_Set_Value(uint8_t window, int32_t value){
     12e8:	92 ab       	std	Z+50, r25	; 0x32
     12ea:	a3 ab       	std	Z+51, r26	; 0x33
     12ec:	b4 ab       	std	Z+52, r27	; 0x34
-  int32_t curr_s = 0;
+  int32_t curr_s, curr_ss;
   if( Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
 	curr_s = Timebase_Timer_Get_Seconds();
     //Timebase_UpCounter_SS_Set_TemporaryValue(window, Timebase_UpCounter_SS_Get_EndValue(window) - curr_s );

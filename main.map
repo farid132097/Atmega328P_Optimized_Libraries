@@ -546,11 +546,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_pubnames
                 0x000002b3     0x159d timebase.o
 
-.debug_info     0x00000000     0x4694
+.debug_info     0x00000000     0x469f
  *(.debug_info)
  .debug_info    0x00000000      0x119 main.o
  .debug_info    0x00000119      0x68c uart.o
- .debug_info    0x000007a5     0x3eef timebase.o
+ .debug_info    0x000007a5     0x3efa timebase.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000      0x5bb
@@ -580,11 +580,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_str     0x0000038e     0x16cd timebase.o
                                0x1814 (size before relaxing)
 
-.debug_loc      0x00000000     0x194a
+.debug_loc      0x00000000     0x192c
  *(.debug_loc)
  .debug_loc     0x00000000       0x30 main.o
  .debug_loc     0x00000030      0x40c uart.o
- .debug_loc     0x0000043c     0x150e timebase.o
+ .debug_loc     0x0000043c     0x14f0 timebase.o
 
 .debug_macinfo
  *(.debug_macinfo)
