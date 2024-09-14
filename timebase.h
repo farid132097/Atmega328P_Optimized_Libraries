@@ -46,7 +46,7 @@ int32_t  Timebase_Window_Timer_Get_Interval(void);
 int32_t  Timebase_Window_Timer_Get_Interval_Reset(void);
 
 
-//UpCounter Functions
+//UpCounter SS Functions
 uint8_t  Timebase_UpCounter_SS_Get_Status(uint8_t window);
 void     Timebase_UpCounter_SS_Set_Status(uint8_t window, uint8_t value);
 int32_t  Timebase_UpCounter_SS_Get_Value(uint8_t window);
@@ -86,8 +86,10 @@ uint8_t  Timebase_UpCounter_Get_Status(uint8_t window);
 void     Timebase_UpCounter_Set_Status(uint8_t window, uint8_t value);
 int32_t  Timebase_UpCounter_Get_Value(uint8_t window);
 void     Timebase_UpCounter_Set_Value(uint8_t window, int32_t value);
-int32_t  Timebase_UpCounter_Get_EndValue(uint8_t window);
-void     Timebase_UpCounter_Set_EndValue(uint8_t window, int32_t value);
+int32_t  Timebase_UpCounter_Get_EndValueSec(uint8_t window);
+int32_t  Timebase_UpCounter_Get_EndValueSubSec(uint8_t window);
+void     Timebase_UpCounter_Set_EndValueSec(uint8_t window, int32_t value);
+void     Timebase_UpCounter_Set_EndValueSubSec(uint8_t window, int32_t value);
 int32_t  Timebase_UpCounter_Get_TargetValue(uint8_t window);
 void     Timebase_UpCounter_Set_TargetValue(uint8_t window, int32_t value);
 int32_t  Timebase_UpCounter_Get_TemporaryValue(uint8_t window);

@@ -677,7 +677,7 @@ void Timebase_UpCounter_SS_Set_Securely(uint8_t window, int32_t value){
 	subsec_val += curr_ss;
 	if(subsec_val >= Timebase->Config.UpdateRate){
 	  sec_val += 1;
-	  subsec_val = subsec_val % Timebase->Config.UpdateRate;
+	  subsec_val %= Timebase->Config.UpdateRate;
 	}
 	sec_val += curr_s;
     Timebase_UpCounter_SS_Set_EndValueSec(window, sec_val);
@@ -759,7 +759,8 @@ void Timebase_UpCounter_SS_Set_Period_Value_Securely(uint8_t window, int32_t val
 }
 
 int32_t Timebase_UpCounter_SS_Get_Remaining_Period_Value(uint8_t window){
-  int32_t temp = Timebase_UpCounter_SS_Get_PeriodValue( window ) - Timebase_UpCounter_SS_Get_Value( window );
+  int32_t temp = Timebase_UpCounter_SS_Get_PeriodValue( window );
+  temp -= Timebase_UpCounter_SS_Get_Value( window );
   if(temp < 0){
     temp = 0;
   }
@@ -825,11 +826,19 @@ void Timebase_UpCounter_Set_Value(uint8_t window, int32_t value){
   Timebase->UpCounter[window].Value = value;
 }
 
-int32_t Timebase_UpCounter_Get_EndValue(uint8_t window){
+int32_t Timebase_UpCounter_Get_EndValueSec(uint8_t window){
   return Timebase->UpCounter[window].EndValue;
 }
 
-void Timebase_UpCounter_Set_EndValue(uint8_t window, int32_t value){
+int32_t Timebase_UpCounter_Get_EndValueSubSec(uint8_t window){
+  return Timebase->UpCounter[window].EndValue;
+}
+
+void Timebase_UpCounter_Set_EndValueSec(uint8_t window, int32_t value){
+  Timebase->UpCounter[window].EndValue = value;
+}
+
+void Timebase_UpCounter_Set_EndValueSubSec(uint8_t window, int32_t value){
   Timebase->UpCounter[window].EndValue = value;
 }
 
@@ -872,7 +881,8 @@ void Timebase_UpCounter_Clear_Period_Flag(uint8_t window){
 void Timebase_UpCounter_Reset(uint8_t window){
   Timebase_UpCounter_Set_Status(window, COUNTER_STATE_RESET);
   Timebase_UpCounter_Set_Value(window, 0);
-  Timebase_UpCounter_Set_EndValue(window, 0);
+  Timebase_UpCounter_Set_EndValueSec(window, 0);
+  Timebase_UpCounter_Set_EndValueSubSec(window, 0);
   Timebase_UpCounter_Set_TargetValue(window, 0);
   Timebase_UpCounter_Set_TemporaryValue(window, 0);
   Timebase_UpCounter_Set_PeriodValue(window, 0);
@@ -903,7 +913,7 @@ void Timebase_UpCounter_Set_Securely(uint8_t window, int32_t value){
     Timebase_UpCounter_Set_TemporaryValue(window, 0);
     Timebase_UpCounter_Set_TargetValue(window, value);
 	curr_s = Timebase_Timer_Get_Seconds();
-    Timebase_UpCounter_Set_EndValue(window, curr_s + value);  
+    //Timebase_UpCounter_Set_EndValue(window, curr_s + value);  
     Timebase_UpCounter_Start(window);
   }
 }
@@ -917,17 +927,17 @@ void Timebase_UpCounter_Update(uint8_t window){
   int32_t curr_s = 0;
   if( Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STARTED ){
 	curr_s = Timebase_Timer_Get_Seconds();
-    Timebase_UpCounter_Set_TemporaryValue(window, Timebase_UpCounter_Get_EndValue(window) - curr_s );
+    //Timebase_UpCounter_Set_TemporaryValue(window, Timebase_UpCounter_Get_EndValue(window) - curr_s );
     Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window) - Timebase_UpCounter_Get_TemporaryValue(window) );
     if(Timebase_UpCounter_Get_TemporaryValue(window) <= 0){
-      Timebase_UpCounter_Set_EndValue(window, 0);
+      //Timebase_UpCounter_Set_EndValue(window, 0);
       Timebase_UpCounter_Set_TemporaryValue(window, 0);
       Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window));
       Timebase_UpCounter_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
   } else if (Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STOPPED){
     curr_s = Timebase_Timer_Get_Seconds();
-    Timebase_UpCounter_Set_EndValue(window, Timebase_UpCounter_Get_TemporaryValue(window) + curr_s);
+    //Timebase_UpCounter_Set_EndValue(window, Timebase_UpCounter_Get_TemporaryValue(window) + curr_s);
     Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window) - Timebase_UpCounter_Get_TemporaryValue(window));
   }
 }
