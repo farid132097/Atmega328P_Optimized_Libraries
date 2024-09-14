@@ -434,8 +434,10 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
   int32_t smpl_ss  = 0, smpl_s   = 0;
   int32_t curr_ss  = 0, curr_s   = 0;
   
-  smpl_ss  = Timebase_Timer_Get_SubSeconds();
-  smpl_s   = Timebase_Timer_Get_Seconds();
+  Timebase_Atomic_Operation_Start();
+  smpl_ss  = Timebase_Timer_Get_SubSecondsShadow();
+  smpl_s   = Timebase_Timer_Get_SecondsShadow();
+  Timebase_Atomic_Operation_End();
   
   smpl_val  = smpl_s;
   smpl_val *= Timebase->Config.UpdateRate;
@@ -443,8 +445,10 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
   smpl_val += value;
   
   while(curr_val<smpl_val){
-    curr_ss   = Timebase_Timer_Get_SubSeconds();
-	curr_s    = Timebase_Timer_Get_Seconds();
+    Timebase_Atomic_Operation_Start();
+    curr_ss   = Timebase_Timer_Get_SubSecondsShadow();
+	curr_s    = Timebase_Timer_Get_SecondsShadow();
+	Timebase_Atomic_Operation_End();
     curr_val  = curr_s;
 	curr_val *= Timebase->Config.UpdateRate;
 	curr_val += curr_ss;
@@ -454,9 +458,20 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
 
 
 void Timebase_Timer_Await_SubSeconds(uint16_t value){
-  while(Timebase_Timer_Get_SubSeconds() != Timebase->Time.LastSample);
-  
-  Timebase->Time.LastSample = Timebase_Timer_Get_SubSeconds() + value;
+  uint16_t temp=0;
+  Timebase_Atomic_Operation_Start();
+  temp = Timebase_Timer_Get_SubSecondsShadow();
+  Timebase_Atomic_Operation_End();
+  while(temp != Timebase->Time.LastSample){
+    Timebase_Atomic_Operation_Start();
+    temp = Timebase_Timer_Get_SubSecondsShadow();
+    Timebase_Atomic_Operation_End();
+  }
+  Timebase_Atomic_Operation_Start();
+  temp = Timebase_Timer_Get_SubSecondsShadow();
+  Timebase_Atomic_Operation_End();
+  Timebase->Time.LastSample = temp;
+  Timebase->Time.LastSample += value;
   if(Timebase->Time.LastSample >= Timebase->Config.UpdateRate){
     Timebase->Time.LastSample -= Timebase->Config.UpdateRate;
   }
@@ -465,10 +480,14 @@ void Timebase_Timer_Await_SubSeconds(uint16_t value){
 
 void Timebase_Timer_Delay_Seconds(uint16_t value){
   int32_t curr_s = 0, target_s = 0;
-  target_s = Timebase_Timer_Get_Seconds();
+  Timebase_Atomic_Operation_Start();
+  target_s = Timebase_Timer_Get_SecondsShadow();
+  Timebase_Atomic_Operation_End();
   target_s += value;
   while(target_s > curr_s){
-    curr_s = Timebase_Timer_Get_Seconds();
+    Timebase_Atomic_Operation_Start();
+    curr_s = Timebase_Timer_Get_SecondsShadow();
+	Timebase_Atomic_Operation_End();
   }
 }
 
@@ -481,8 +500,10 @@ void Timebase_Window_Timer_Reset(void){
 
 void Timebase_Window_Timer_Start(void){
   if(Timebase->Time.Status == COUNTER_STATE_RESET){
-    Timebase->Time.StartTimeSeconds = Timebase_Timer_Get_Seconds();
-    Timebase->Time.StartTimeSubSeconds = Timebase_Timer_Get_SubSeconds();
+    Timebase_Atomic_Operation_Start();
+    Timebase->Time.StartTimeSeconds = Timebase_Timer_Get_SecondsShadow();
+    Timebase->Time.StartTimeSubSeconds = Timebase_Timer_Get_SubSecondsShadow();
+	Timebase_Atomic_Operation_End();
     Timebase->Time.Status = COUNTER_STATE_STARTED;
   }
 }
@@ -491,8 +512,10 @@ void Timebase_Window_Timer_Start(void){
 int32_t Timebase_Window_Timer_Get_Interval(void){
   int32_t curr_ss = 0, curr_s = 0;
   if(Timebase->Time.Status == COUNTER_STATE_STARTED){
-    curr_s = Timebase_Timer_Get_Seconds();
-    curr_ss = Timebase_Timer_Get_SubSeconds();
+    Timebase_Atomic_Operation_Start();
+    curr_s = Timebase_Timer_Get_SecondsShadow();
+    curr_ss = Timebase_Timer_Get_SubSecondsShadow();
+	Timebase_Atomic_Operation_End();
 	curr_s -= Timebase->Time.StartTimeSeconds;
 	curr_ss -= Timebase->Time.StartTimeSubSeconds;
 	curr_s *= Timebase->Config.UpdateRate;
