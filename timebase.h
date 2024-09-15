@@ -8,8 +8,8 @@
 
 #define  TIMEBASE_UPCOUNTER                1
 #define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
-#define  TIMEBASE_DOWNCOUNTER              1
-#define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   1
+#define  TIMEBASE_DOWNCOUNTER              10
+#define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   10
 
 
 //Config Functions
@@ -40,6 +40,9 @@ void     Timebase_Timer_Sync_With_Shadow_Variables(void);
 void     Timebase_Timer_Delay_SubSeconds(uint16_t value);
 void     Timebase_Timer_Await_SubSeconds(uint16_t value);
 void     Timebase_Timer_Delay_Seconds(uint16_t value);
+
+
+//Window Calculation
 void     Timebase_Window_Timer_Reset(void);
 void     Timebase_Window_Timer_Start(void);
 int32_t  Timebase_Window_Timer_Get_Interval(void);

@@ -11,8 +11,8 @@
 #include "timebase.h"
 
 #define  TIMEBASE_COUNT_ATOMIC_OPERATION
-#define  TIMEBASE_TOKEN_FUNCTIONS
-#define  TIMEBASE_TIME_WINDOW_CALCULATION
+//#define  TIMEBASE_TOKEN_FUNCTIONS
+//#define  TIMEBASE_TIME_WINDOW_CALCULATION
 
 
 
@@ -506,7 +506,19 @@ void Timebase_Timer_Delay_Seconds(uint16_t value){
   }
 }
 
+/******************************Base Timer Functions End******************************/
 
+
+
+
+
+
+
+
+
+/****************************Time Window Functions Start*****************************/
+
+#ifdef TIMEBASE_TIME_WINDOW_CALCULATION
 void Timebase_Window_Timer_Reset(void){
   Timebase->Time.StartTimeSeconds = 0;
   Timebase->Time.StartTimeSubSeconds = 0;
@@ -549,7 +561,9 @@ int32_t Timebase_Window_Timer_Get_Interval_Reset(void){
   return val;
 }
 
-/******************************Base Timer Functions End******************************/
+#endif
+
+/*****************************Time Window Functions End******************************/
 
 
 
