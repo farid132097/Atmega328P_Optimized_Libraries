@@ -1149,9 +1149,6 @@ void Timebase_DownCounter_SS_Update(uint8_t window){
 	int32_t temp_s  = Timebase_Timer_Get_Seconds();
 	temp_ss = Timebase_DownCounter_SS_Get_EndValueSubSec(window) - temp_ss;
 	temp_s = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
-	if(temp_s < 0){
-	  temp_s = 0;
-	}
 	temp_s *= Timebase->Config.UpdateRate;
 	temp_s += temp_ss;
 	Timebase_DownCounter_SS_Set_Value(window, temp_s);
