@@ -17,15 +17,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   6 .debug_abbrev 000005bb  00000000  00000000  00008fae  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000021cc  00000000  00000000  00009569  2**0
+  7 .debug_line   000021d6  00000000  00000000  00009569  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000a60  00000000  00000000  0000b738  2**2
+  8 .debug_frame  00000a60  00000000  00000000  0000b740  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000199b  00000000  00000000  0000c198  2**0
+  9 .debug_str    0000199b  00000000  00000000  0000c1a0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00001b20  00000000  00000000  0000db33  2**0
+ 10 .debug_loc    00001b20  00000000  00000000  0000db3b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000048  00000000  00000000  0000f653  2**0
+ 11 .debug_ranges 00000048  00000000  00000000  0000f65b  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -5349,9 +5349,9 @@ int32_t Timebase_Timer_Get_Seconds(void){
   int32_t temp_ss, temp_s, subsec_val, sec_val;
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_RESET ){
     Timebase_DownCounter_SS_Set_Value(window, value);
-	temp_ss = Timebase_Timer_Get_SubSeconds();
-	temp_s  = Timebase_Timer_Get_Seconds();
-	subsec_val = value % Timebase->Config.UpdateRate;
+	temp_ss     = Timebase_Timer_Get_SubSeconds();
+	temp_s      = Timebase_Timer_Get_Seconds();
+	subsec_val  = value % Timebase->Config.UpdateRate;
     1d8e:	21 81       	ldd	r18, Z+1	; 0x01
     1d90:	32 81       	ldd	r19, Z+2	; 0x02
     1d92:	40 e0       	ldi	r20, 0x00	; 0
@@ -5361,7 +5361,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
     1d9a:	0e 94 45 18 	call	0x308a	; 0x308a <__divmodsi4>
     1d9e:	7b 01       	movw	r14, r22
     1da0:	8c 01       	movw	r16, r24
-	sec_val    = value / Timebase->Config.UpdateRate;
+	sec_val     = value / Timebase->Config.UpdateRate;
     1da2:	ab 81       	ldd	r26, Y+3	; 0x03
     1da4:	bc 81       	ldd	r27, Y+4	; 0x04
     1da6:	11 96       	adiw	r26, 0x01	; 1
@@ -5670,7 +5670,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
     temp_ss = Timebase_Timer_Get_SubSeconds();
 	temp_s  = Timebase_Timer_Get_Seconds();
 	temp_ss = Timebase_DownCounter_SS_Get_EndValueSubSec(window) - temp_ss;
-	temp_s = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
+	temp_s  = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
     1f3c:	25 e4       	ldi	r18, 0x45	; 69
     1f3e:	a2 2e       	mov	r10, r18
     1f40:	b1 2c       	mov	r11, r1
@@ -5701,7 +5701,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
     1f66:	7f 09       	sbc	r23, r15
     1f68:	80 0b       	sbc	r24, r16
     1f6a:	91 0b       	sbc	r25, r17
-	temp_s = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
+	temp_s  = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
 	temp_s *= Timebase->Config.UpdateRate;
 	temp_s += temp_ss;
     1f6c:	de 01       	movw	r26, r28
@@ -5730,7 +5730,7 @@ void Timebase_DownCounter_SS_Set_Value(uint8_t window, int32_t value){
     1f8e:	82 83       	std	Z+2, r24	; 0x02
     1f90:	93 83       	std	Z+3, r25	; 0x03
 	temp_ss = Timebase_DownCounter_SS_Get_EndValueSubSec(window) - temp_ss;
-	temp_s = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
+	temp_s  = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
 	temp_s *= Timebase->Config.UpdateRate;
 	temp_s += temp_ss;
 	Timebase_DownCounter_SS_Set_Value(window, temp_s);

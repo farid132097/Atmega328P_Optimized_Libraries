@@ -364,6 +364,23 @@ void Timebase_Atomic_Operation_End(void){
 
 
 
+/*************************************ISR Start************************************/
+
+ISR(TIMER0_OVF_vect){
+  TCNT0  = Timebase->Time.OVFUpdateValue;
+  Timebase_ISR_Executables();
+}
+
+/**************************************ISR End*************************************/
+
+
+
+
+
+
+
+
+
 /*********************************Token Functions Start*******************************/
 
 #ifdef TIMEBASE_TOKEN_FUNCTIONS
@@ -430,7 +447,7 @@ void Timebase_Timer_Set_Seconds(int32_t value){
 
 void Timebase_Timer_Sync_With_Shadow_Variables(void){
   if(Timebase->Time.VariablesSync == TIMEBASE_FALSE){
-  
+    
 	#ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
     Timebase_Atomic_Operation_Start();
     Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
@@ -448,9 +465,8 @@ void Timebase_Timer_Sync_With_Shadow_Variables(void){
 
 void Timebase_Timer_Delay_SubSeconds(uint16_t value){
   
-  int32_t smpl_val = 0, curr_val = 0;
-  int32_t smpl_ss  = 0, smpl_s   = 0;
-  int32_t curr_ss  = 0, curr_s   = 0;
+  int32_t smpl_val = 0, smpl_ss = 0, smpl_s = 0;
+  int32_t curr_val = 0, curr_ss = 0, curr_s = 0; 
   
   Timebase_Atomic_Operation_Start();
   smpl_ss  = Timebase_Timer_Get_SubSecondsShadow();
@@ -1123,10 +1139,10 @@ void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
   int32_t temp_ss, temp_s, subsec_val, sec_val;
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_RESET ){
     Timebase_DownCounter_SS_Set_Value(window, value);
-	temp_ss = Timebase_Timer_Get_SubSeconds();
-	temp_s  = Timebase_Timer_Get_Seconds();
-	subsec_val = value % Timebase->Config.UpdateRate;
-	sec_val    = value / Timebase->Config.UpdateRate;
+	temp_ss     = Timebase_Timer_Get_SubSeconds();
+	temp_s      = Timebase_Timer_Get_Seconds();
+	subsec_val  = value % Timebase->Config.UpdateRate;
+	sec_val     = value / Timebase->Config.UpdateRate;
 	subsec_val += temp_ss;
 	if(subsec_val >= Timebase->Config.UpdateRate){
 	  sec_val += 1;
@@ -1151,7 +1167,7 @@ void Timebase_DownCounter_SS_Update(uint8_t window){
     temp_ss = Timebase_Timer_Get_SubSeconds();
 	temp_s  = Timebase_Timer_Get_Seconds();
 	temp_ss = Timebase_DownCounter_SS_Get_EndValueSubSec(window) - temp_ss;
-	temp_s = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
+	temp_s  = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
 	temp_s *= Timebase->Config.UpdateRate;
 	temp_s += temp_ss;
 	Timebase_DownCounter_SS_Set_Value(window, temp_s);
@@ -1506,26 +1522,5 @@ void Timebase_ISR_Executables(void){
 }
 
 /********************************Common Functions End*******************************/
-
-
-
-
-
-
-
-
-
-/*************************************ISR Start************************************/
-
-ISR(TIMER0_OVF_vect){
-  TCNT0  = Timebase->Time.OVFUpdateValue;
-  Timebase_ISR_Executables();
-}
-
-/**************************************ISR End*************************************/
-
-
-
-
 
 
