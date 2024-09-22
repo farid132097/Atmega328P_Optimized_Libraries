@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   4 .debug_pubnames 000017aa  00000000  00000000  000031cc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000046a0  00000000  00000000  00004976  2**0
+  5 .debug_info   00004638  00000000  00000000  00004976  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000005ac  00000000  00000000  00009016  2**0
+  6 .debug_abbrev 000005bb  00000000  00000000  00008fae  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000021cc  00000000  00000000  000095c2  2**0
+  7 .debug_line   000021cc  00000000  00000000  00009569  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000a60  00000000  00000000  0000b790  2**2
+  8 .debug_frame  00000a60  00000000  00000000  0000b738  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000199b  00000000  00000000  0000c1f0  2**0
+  9 .debug_str    0000199b  00000000  00000000  0000c198  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00001b28  00000000  00000000  0000db8b  2**0
+ 10 .debug_loc    00001b20  00000000  00000000  0000db33  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000048  00000000  00000000  0000f6b3  2**0
+ 11 .debug_ranges 00000048  00000000  00000000  0000f653  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -445,97 +445,100 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
      33e:	0f be       	out	0x3f, r0	; 63
      340:	cd bf       	out	0x3d, r28	; 61
      342:	8c 01       	movw	r16, r24
+  uint8_t  Prescaler_val = 0, clock_div_index = 0;
+  uint16_t clock_div_factor[5] = {1, 8, 64, 256, 1024};
+     344:	de 01       	movw	r26, r28
+     346:	11 96       	adiw	r26, 0x01	; 1
+     348:	e5 e0       	ldi	r30, 0x05	; 5
+     34a:	f1 e0       	ldi	r31, 0x01	; 1
+     34c:	8a e0       	ldi	r24, 0x0A	; 10
+     34e:	01 90       	ld	r0, Z+
+     350:	0d 92       	st	X+, r0
+     352:	81 50       	subi	r24, 0x01	; 1
+     354:	e1 f7       	brne	.-8      	; 0x34e <Timebase_Timer_Config+0x36>
+  int32_t  temp, curr_freq;
   if(Timebase->Config.TimerType.WatchDogTimer == 1){
-     344:	c0 90 43 01 	lds	r12, 0x0143
-     348:	d0 90 44 01 	lds	r13, 0x0144
-     34c:	f6 01       	movw	r30, r12
-     34e:	80 81       	ld	r24, Z
-     350:	80 ff       	sbrs	r24, 0
-     352:	31 c0       	rjmp	.+98     	; 0x3b6 <Timebase_Timer_Config+0x9e>
-    uint8_t Prescaler_val = 0;
+     356:	c0 90 43 01 	lds	r12, 0x0143
+     35a:	d0 90 44 01 	lds	r13, 0x0144
+     35e:	f6 01       	movw	r30, r12
+     360:	80 81       	ld	r24, Z
+     362:	80 ff       	sbrs	r24, 0
+     364:	31 c0       	rjmp	.+98     	; 0x3c8 <Timebase_Timer_Config+0xb0>
+    
     if(UpdateRateHz == 1){
-     354:	01 30       	cpi	r16, 0x01	; 1
-     356:	11 05       	cpc	r17, r1
-     358:	11 f4       	brne	.+4      	; 0x35e <Timebase_Timer_Config+0x46>
-     35a:	96 e0       	ldi	r25, 0x06	; 6
-     35c:	19 c0       	rjmp	.+50     	; 0x390 <Timebase_Timer_Config+0x78>
+     366:	01 30       	cpi	r16, 0x01	; 1
+     368:	11 05       	cpc	r17, r1
+     36a:	11 f4       	brne	.+4      	; 0x370 <Timebase_Timer_Config+0x58>
+     36c:	96 e0       	ldi	r25, 0x06	; 6
+     36e:	19 c0       	rjmp	.+50     	; 0x3a2 <Timebase_Timer_Config+0x8a>
       Prescaler_val = 0x06;
     }else if(UpdateRateHz ==2 ){
-     35e:	02 30       	cpi	r16, 0x02	; 2
-     360:	11 05       	cpc	r17, r1
-     362:	11 f4       	brne	.+4      	; 0x368 <Timebase_Timer_Config+0x50>
-     364:	95 e0       	ldi	r25, 0x05	; 5
-     366:	14 c0       	rjmp	.+40     	; 0x390 <Timebase_Timer_Config+0x78>
+     370:	02 30       	cpi	r16, 0x02	; 2
+     372:	11 05       	cpc	r17, r1
+     374:	11 f4       	brne	.+4      	; 0x37a <Timebase_Timer_Config+0x62>
+     376:	95 e0       	ldi	r25, 0x05	; 5
+     378:	14 c0       	rjmp	.+40     	; 0x3a2 <Timebase_Timer_Config+0x8a>
       Prescaler_val = 0x05;
     }else if(UpdateRateHz == 4){
-     368:	04 30       	cpi	r16, 0x04	; 4
-     36a:	11 05       	cpc	r17, r1
-     36c:	11 f4       	brne	.+4      	; 0x372 <Timebase_Timer_Config+0x5a>
-     36e:	94 e0       	ldi	r25, 0x04	; 4
-     370:	0f c0       	rjmp	.+30     	; 0x390 <Timebase_Timer_Config+0x78>
+     37a:	04 30       	cpi	r16, 0x04	; 4
+     37c:	11 05       	cpc	r17, r1
+     37e:	11 f4       	brne	.+4      	; 0x384 <Timebase_Timer_Config+0x6c>
+     380:	94 e0       	ldi	r25, 0x04	; 4
+     382:	0f c0       	rjmp	.+30     	; 0x3a2 <Timebase_Timer_Config+0x8a>
       Prescaler_val = 0x04;
     }else if(UpdateRateHz == 8){
-     372:	08 30       	cpi	r16, 0x08	; 8
-     374:	11 05       	cpc	r17, r1
-     376:	11 f4       	brne	.+4      	; 0x37c <Timebase_Timer_Config+0x64>
-     378:	93 e0       	ldi	r25, 0x03	; 3
-     37a:	0a c0       	rjmp	.+20     	; 0x390 <Timebase_Timer_Config+0x78>
+     384:	08 30       	cpi	r16, 0x08	; 8
+     386:	11 05       	cpc	r17, r1
+     388:	11 f4       	brne	.+4      	; 0x38e <Timebase_Timer_Config+0x76>
+     38a:	93 e0       	ldi	r25, 0x03	; 3
+     38c:	0a c0       	rjmp	.+20     	; 0x3a2 <Timebase_Timer_Config+0x8a>
       Prescaler_val = 0x03;
     }else if(UpdateRateHz == 16){
-     37c:	00 31       	cpi	r16, 0x10	; 16
-     37e:	11 05       	cpc	r17, r1
-     380:	11 f4       	brne	.+4      	; 0x386 <Timebase_Timer_Config+0x6e>
-     382:	92 e0       	ldi	r25, 0x02	; 2
-     384:	05 c0       	rjmp	.+10     	; 0x390 <Timebase_Timer_Config+0x78>
-     386:	90 e0       	ldi	r25, 0x00	; 0
-     388:	00 32       	cpi	r16, 0x20	; 32
-     38a:	11 05       	cpc	r17, r1
-     38c:	09 f4       	brne	.+2      	; 0x390 <Timebase_Timer_Config+0x78>
-     38e:	91 e0       	ldi	r25, 0x01	; 1
+     38e:	00 31       	cpi	r16, 0x10	; 16
+     390:	11 05       	cpc	r17, r1
+     392:	11 f4       	brne	.+4      	; 0x398 <Timebase_Timer_Config+0x80>
+     394:	92 e0       	ldi	r25, 0x02	; 2
+     396:	05 c0       	rjmp	.+10     	; 0x3a2 <Timebase_Timer_Config+0x8a>
+     398:	90 e0       	ldi	r25, 0x00	; 0
+     39a:	00 32       	cpi	r16, 0x20	; 32
+     39c:	11 05       	cpc	r17, r1
+     39e:	09 f4       	brne	.+2      	; 0x3a2 <Timebase_Timer_Config+0x8a>
+     3a0:	91 e0       	ldi	r25, 0x01	; 1
     }else if(UpdateRateHz == 64){
       Prescaler_val = 0x00;
     }else{
       Prescaler_val = 0x00;
     }
     cli();
-     390:	f8 94       	cli
+     3a2:	f8 94       	cli
     MCUSR  &=~(1<<WDRF);
-     392:	84 b7       	in	r24, 0x34	; 52
-     394:	87 7f       	andi	r24, 0xF7	; 247
-     396:	84 bf       	out	0x34, r24	; 52
+     3a4:	84 b7       	in	r24, 0x34	; 52
+     3a6:	87 7f       	andi	r24, 0xF7	; 247
+     3a8:	84 bf       	out	0x34, r24	; 52
     WDTCSR |= (1<<WDIF);
-     398:	80 91 60 00 	lds	r24, 0x0060
-     39c:	80 68       	ori	r24, 0x80	; 128
-     39e:	80 93 60 00 	sts	0x0060, r24
+     3aa:	80 91 60 00 	lds	r24, 0x0060
+     3ae:	80 68       	ori	r24, 0x80	; 128
+     3b0:	80 93 60 00 	sts	0x0060, r24
     WDTCSR |= (1<<WDCE)|(1<<WDE);
-     3a2:	80 91 60 00 	lds	r24, 0x0060
-     3a6:	88 61       	ori	r24, 0x18	; 24
-     3a8:	80 93 60 00 	sts	0x0060, r24
+     3b4:	80 91 60 00 	lds	r24, 0x0060
+     3b8:	88 61       	ori	r24, 0x18	; 24
+     3ba:	80 93 60 00 	sts	0x0060, r24
     WDTCSR  = (1<<WDIE)|Prescaler_val;
-     3ac:	90 64       	ori	r25, 0x40	; 64
-     3ae:	90 93 60 00 	sts	0x0060, r25
+     3be:	90 64       	ori	r25, 0x40	; 64
+     3c0:	90 93 60 00 	sts	0x0060, r25
     sei();
-     3b2:	78 94       	sei
-     3b4:	67 c0       	rjmp	.+206    	; 0x484 <Timebase_Timer_Config+0x16c>
+     3c4:	78 94       	sei
+     3c6:	5e c0       	rjmp	.+188    	; 0x484 <Timebase_Timer_Config+0x16c>
   }else if(Timebase->Config.TimerType.RealTimeCounter == 1){
-     3b6:	81 fd       	sbrc	r24, 1
-     3b8:	65 c0       	rjmp	.+202    	; 0x484 <Timebase_Timer_Config+0x16c>
+     3c8:	81 fd       	sbrc	r24, 1
+     3ca:	5c c0       	rjmp	.+184    	; 0x484 <Timebase_Timer_Config+0x16c>
     //add rtc functions
   }else if(Timebase->Config.TimerType.GeneralTimer == 1){
-     3ba:	82 ff       	sbrs	r24, 2
-     3bc:	63 c0       	rjmp	.+198    	; 0x484 <Timebase_Timer_Config+0x16c>
+     3cc:	82 ff       	sbrs	r24, 2
+     3ce:	5a c0       	rjmp	.+180    	; 0x484 <Timebase_Timer_Config+0x16c>
     
-	int32_t temp = F_CPU;
-	uint16_t clock_div_factor[5] = {1, 8, 64, 256, 1024};
-     3be:	de 01       	movw	r26, r28
-     3c0:	11 96       	adiw	r26, 0x01	; 1
-     3c2:	e5 e0       	ldi	r30, 0x05	; 5
-     3c4:	f1 e0       	ldi	r31, 0x01	; 1
-     3c6:	8a e0       	ldi	r24, 0x0A	; 10
-     3c8:	01 90       	ld	r0, Z+
-     3ca:	0d 92       	st	X+, r0
-     3cc:	81 50       	subi	r24, 0x01	; 1
-     3ce:	e1 f7       	brne	.-8      	; 0x3c8 <Timebase_Timer_Config+0xb0>
+	temp = F_CPU;
+	
 	
 	temp /= UpdateRateHz;
      3d0:	98 01       	movw	r18, r16
@@ -560,8 +563,8 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
      3f8:	ad 01       	movw	r20, r26
      3fa:	ff 24       	eor	r15, r15
      3fc:	14 c0       	rjmp	.+40     	; 0x426 <Timebase_Timer_Config+0x10e>
-	uint8_t  clock_div_index = 0;
-	int32_t  curr_freq = temp;
+	clock_div_index = 0;
+	curr_freq = temp;
 	
 	while( curr_freq > 0xFF ){
 	  curr_freq  = temp;
@@ -589,8 +592,8 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
      424:	31 f0       	breq	.+12     	; 0x432 <Timebase_Timer_Config+0x11a>
 	temp /= UpdateRateHz;
 	
-	uint8_t  clock_div_index = 0;
-	int32_t  curr_freq = temp;
+	clock_div_index = 0;
+	curr_freq = temp;
 	
 	while( curr_freq > 0xFF ){
      426:	2f 3f       	cpi	r18, 0xFF	; 255
@@ -2006,7 +2009,7 @@ uint8_t Timebase_UpCounter_SS_Get_Status(uint8_t window){
 
 
 void Timebase_UpCounter_SS_Set_Securely(uint8_t window, int32_t value){
-  int32_t curr_s, curr_ss;
+  int32_t curr_s, curr_ss, subsec_val, sec_val;
   if( Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_RESET ){
      b64:	89 e1       	ldi	r24, 0x19	; 25
      b66:	90 e0       	ldi	r25, 0x00	; 0
@@ -2077,7 +2080,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
     Timebase_UpCounter_SS_Set_TargetValue(window, value);
 	curr_ss = Timebase_Timer_Get_SubSeconds();
 	curr_s  = Timebase_Timer_Get_Seconds();
-	int32_t subsec_val = value % Timebase->Config.UpdateRate;
+	subsec_val = value % Timebase->Config.UpdateRate;
      baa:	21 81       	ldd	r18, Z+1	; 0x01
      bac:	32 81       	ldd	r19, Z+2	; 0x02
      bae:	40 e0       	ldi	r20, 0x00	; 0
@@ -2087,7 +2090,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
      bb6:	0e 94 45 18 	call	0x308a	; 0x308a <__divmodsi4>
      bba:	7b 01       	movw	r14, r22
      bbc:	8c 01       	movw	r16, r24
-	int32_t sec_val    = value / Timebase->Config.UpdateRate;
+	sec_val    = value / Timebase->Config.UpdateRate;
      bbe:	ab 81       	ldd	r26, Y+3	; 0x03
      bc0:	bc 81       	ldd	r27, Y+4	; 0x04
      bc2:	11 96       	adiw	r26, 0x01	; 1
@@ -2314,7 +2317,7 @@ uint8_t Timebase_UpCounter_SS_Get_Status(uint8_t window){
 } 
 
 void Timebase_UpCounter_SS_Update(uint8_t window){
-  int32_t curr_s, curr_ss;
+  int32_t curr_s, curr_ss, value, subsec_val, sec_val;
   if( Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
      d24:	81 30       	cpi	r24, 0x01	; 1
      d26:	09 f0       	breq	.+2      	; 0xd2a <Timebase_UpCounter_SS_Update+0x64>
@@ -2340,7 +2343,7 @@ uint16_t Timebase_Timer_Get_SubSeconds(void){
      d36:	f1 84       	ldd	r15, Z+9	; 0x09
 
 void Timebase_UpCounter_SS_Update(uint8_t window){
-  int32_t curr_s, curr_ss;
+  int32_t curr_s, curr_ss, value, subsec_val, sec_val;
   if( Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
 	curr_s  = Timebase_Timer_Get_Seconds();
 	curr_ss = Timebase_Timer_Get_SubSeconds();
@@ -2610,8 +2613,8 @@ int32_t Timebase_UpCounter_SS_Get_TemporaryValue(uint8_t window){
   } else if (Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_STOPPED){
     curr_s  = Timebase_Timer_Get_Seconds();
 	curr_ss = Timebase_Timer_Get_SubSeconds();
-	int32_t value = Timebase_UpCounter_SS_Get_TemporaryValue(window);
-	int32_t subsec_val = value % Timebase->Config.UpdateRate;
+	value      = Timebase_UpCounter_SS_Get_TemporaryValue(window);
+	subsec_val = value % Timebase->Config.UpdateRate;
      e9a:	11 96       	adiw	r26, 0x01	; 1
      e9c:	2d 91       	ld	r18, X+
      e9e:	3c 91       	ld	r19, X
@@ -2623,7 +2626,7 @@ int32_t Timebase_UpCounter_SS_Get_TemporaryValue(uint8_t window){
      eaa:	0e 94 45 18 	call	0x308a	; 0x308a <__divmodsi4>
      eae:	7b 01       	movw	r14, r22
      eb0:	8c 01       	movw	r16, r24
-	int32_t sec_val    = value / Timebase->Config.UpdateRate;
+	sec_val    = value / Timebase->Config.UpdateRate;
      eb2:	d1 01       	movw	r26, r2
      eb4:	11 96       	adiw	r26, 0x01	; 1
      eb6:	2d 91       	ld	r18, X+
@@ -5288,11 +5291,11 @@ uint8_t Timebase_DownCounter_SS_Get_Status(uint8_t window){
     1d48:	b0 e0       	ldi	r27, 0x00	; 0
     1d4a:	ba 83       	std	Y+2, r27	; 0x02
     1d4c:	a9 83       	std	Y+1, r26	; 0x01
-  }
 }
 
 
 void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
+  int32_t temp_ss, temp_s, subsec_val, sec_val;
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_RESET ){
     1d4e:	fd 01       	movw	r30, r26
     1d50:	64 e0       	ldi	r22, 0x04	; 4
@@ -5343,12 +5346,12 @@ int32_t Timebase_Timer_Get_Seconds(void){
     1d88:	33 84       	ldd	r3, Z+11	; 0x0b
     1d8a:	44 84       	ldd	r4, Z+12	; 0x0c
     1d8c:	55 84       	ldd	r5, Z+13	; 0x0d
-void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
+  int32_t temp_ss, temp_s, subsec_val, sec_val;
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_RESET ){
     Timebase_DownCounter_SS_Set_Value(window, value);
-	int32_t temp_ss = Timebase_Timer_Get_SubSeconds();
-	int32_t temp_s  = Timebase_Timer_Get_Seconds();
-	int32_t subsec_val = value % Timebase->Config.UpdateRate;
+	temp_ss = Timebase_Timer_Get_SubSeconds();
+	temp_s  = Timebase_Timer_Get_Seconds();
+	subsec_val = value % Timebase->Config.UpdateRate;
     1d8e:	21 81       	ldd	r18, Z+1	; 0x01
     1d90:	32 81       	ldd	r19, Z+2	; 0x02
     1d92:	40 e0       	ldi	r20, 0x00	; 0
@@ -5358,7 +5361,7 @@ void Timebase_DownCounter_SS_Set_Securely(uint8_t window, int32_t value){
     1d9a:	0e 94 45 18 	call	0x308a	; 0x308a <__divmodsi4>
     1d9e:	7b 01       	movw	r14, r22
     1da0:	8c 01       	movw	r16, r24
-	int32_t sec_val    = value / Timebase->Config.UpdateRate;
+	sec_val    = value / Timebase->Config.UpdateRate;
     1da2:	ab 81       	ldd	r26, Y+3	; 0x03
     1da4:	bc 81       	ldd	r27, Y+4	; 0x04
     1da6:	11 96       	adiw	r26, 0x01	; 1
@@ -5627,11 +5630,11 @@ uint8_t Timebase_DownCounter_SS_Get_Status(uint8_t window){
     1f20:	8c 91       	ld	r24, X
     1f22:	86 95       	lsr	r24
     1f24:	8f 70       	andi	r24, 0x0F	; 15
-  Timebase_DownCounter_SS_Reset( window );
-  Timebase_DownCounter_SS_Set_Securely( window, value );
 } 
 
 void Timebase_DownCounter_SS_Update(uint8_t window){
+  int32_t temp_s, temp_ss;
+  int32_t curr_val, curr_s, curr_ss;
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
     1f26:	81 30       	cpi	r24, 0x01	; 1
     1f28:	09 f0       	breq	.+2      	; 0x1f2c <Timebase_DownCounter_SS_Update+0x5a>
@@ -5644,12 +5647,12 @@ uint16_t Timebase_Timer_Get_SubSeconds(void){
   return Timebase->Time.SubSeconds;
     1f2c:	e0 84       	ldd	r14, Z+8	; 0x08
     1f2e:	f1 84       	ldd	r15, Z+9	; 0x09
-  Timebase_DownCounter_SS_Set_Securely( window, value );
-} 
 
 void Timebase_DownCounter_SS_Update(uint8_t window){
+  int32_t temp_s, temp_ss;
+  int32_t curr_val, curr_s, curr_ss;
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
-    int32_t temp_ss = Timebase_Timer_Get_SubSeconds();
+    temp_ss = Timebase_Timer_Get_SubSeconds();
     1f30:	00 e0       	ldi	r16, 0x00	; 0
     1f32:	10 e0       	ldi	r17, 0x00	; 0
   return Timebase->Time.SubSeconds;
@@ -5662,10 +5665,10 @@ int32_t Timebase_Timer_Get_Seconds(void){
     1f36:	73 84       	ldd	r7, Z+11	; 0x0b
     1f38:	84 84       	ldd	r8, Z+12	; 0x0c
     1f3a:	95 84       	ldd	r9, Z+13	; 0x0d
-void Timebase_DownCounter_SS_Update(uint8_t window){
+  int32_t curr_val, curr_s, curr_ss;
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
-    int32_t temp_ss = Timebase_Timer_Get_SubSeconds();
-	int32_t temp_s  = Timebase_Timer_Get_Seconds();
+    temp_ss = Timebase_Timer_Get_SubSeconds();
+	temp_s  = Timebase_Timer_Get_Seconds();
 	temp_ss = Timebase_DownCounter_SS_Get_EndValueSubSec(window) - temp_ss;
 	temp_s = Timebase_DownCounter_SS_Get_EndValueSec(window) - temp_s;
     1f3c:	25 e4       	ldi	r18, 0x45	; 69
@@ -5685,11 +5688,11 @@ void Timebase_DownCounter_SS_Update(uint8_t window){
 	temp_s *= Timebase->Config.UpdateRate;
     1f58:	61 81       	ldd	r22, Z+1	; 0x01
     1f5a:	72 81       	ldd	r23, Z+2	; 0x02
-
-void Timebase_DownCounter_SS_Update(uint8_t window){
+  int32_t temp_s, temp_ss;
+  int32_t curr_val, curr_s, curr_ss;
   if( Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_STARTED ){
-    int32_t temp_ss = Timebase_Timer_Get_SubSeconds();
-	int32_t temp_s  = Timebase_Timer_Get_Seconds();
+    temp_ss = Timebase_Timer_Get_SubSeconds();
+	temp_s  = Timebase_Timer_Get_Seconds();
 	temp_ss = Timebase_DownCounter_SS_Get_EndValueSubSec(window) - temp_ss;
     1f5c:	80 e0       	ldi	r24, 0x00	; 0
     1f5e:	90 e0       	ldi	r25, 0x00	; 0
@@ -5828,13 +5831,13 @@ int32_t Timebase_DownCounter_SS_Get_Value(uint8_t window){
     1fe2:	5b 80       	ldd	r5, Y+3	; 0x03
     }
   } else if (Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_STOPPED){
-    int32_t temp_ss  = Timebase_Timer_Get_SubSeconds();
-	int32_t temp_s   = Timebase_Timer_Get_Seconds();
-	int32_t curr_val = Timebase_DownCounter_SS_Get_Value(window);
-	int32_t curr_s   = curr_val / Timebase->Config.UpdateRate;
+    temp_ss  = Timebase_Timer_Get_SubSeconds();
+	temp_s   = Timebase_Timer_Get_Seconds();
+	curr_val = Timebase_DownCounter_SS_Get_Value(window);
+	curr_s   = curr_val / Timebase->Config.UpdateRate;
     1fe4:	21 81       	ldd	r18, Z+1	; 0x01
     1fe6:	32 81       	ldd	r19, Z+2	; 0x02
-	int32_t curr_ss  = curr_val % Timebase->Config.UpdateRate;
+	curr_ss  = curr_val % Timebase->Config.UpdateRate;
     1fe8:	a1 80       	ldd	r10, Z+1	; 0x01
     1fea:	b2 80       	ldd	r11, Z+2	; 0x02
 int32_t Timebase_DownCounter_SS_Get_EndValueSubSec(uint8_t window){
@@ -5878,8 +5881,8 @@ void Timebase_DownCounter_SS_Set_EndValueSubSec(uint8_t window, int32_t value){
     2028:	79 82       	std	Y+1, r7	; 0x01
     202a:	8a 82       	std	Y+2, r8	; 0x02
     202c:	9b 82       	std	Y+3, r9	; 0x03
-	int32_t curr_s   = curr_val / Timebase->Config.UpdateRate;
-	int32_t curr_ss  = curr_val % Timebase->Config.UpdateRate;
+	curr_s   = curr_val / Timebase->Config.UpdateRate;
+	curr_ss  = curr_val % Timebase->Config.UpdateRate;
 	Timebase_DownCounter_SS_Set_EndValueSec(window, curr_s + temp_s );
 	Timebase_DownCounter_SS_Set_EndValueSubSec(window, curr_ss + temp_ss);
   }

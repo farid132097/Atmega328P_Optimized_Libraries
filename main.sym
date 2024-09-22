@@ -235,7 +235,7 @@
 000030c4 T _etext
 000030d8 A __data_load_end
 00800100 D __data_start
-00800105 d C.2.1704
+00800105 d C.1.1688
 00800114 b UART
 00800114 B __bss_start
 00800114 D __data_end
