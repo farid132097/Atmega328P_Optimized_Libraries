@@ -28,51 +28,56 @@
 
 
 typedef struct timebase_time_t{
-  volatile uint8_t         OVFUpdateValue   ;
-  volatile int32_t         LastSample       ;
-  volatile uint16_t        SubSeconds       ;
-  volatile int32_t         Seconds          ;
-  volatile uint16_t        SubSecondsShadow ;
-  volatile int32_t         SecondsShadow    ;
-  volatile uint8_t         VariablesSync    ;
+  volatile uint8_t         OVFUpdateValue     ;
+  volatile int32_t         LastSample         ;
+  volatile uint16_t        SubSeconds         ;
+  volatile int32_t         Seconds            ;
+  volatile uint16_t        SubSecondsShadow   ;
+  volatile int32_t         SecondsShadow      ;
+  volatile uint8_t         VariablesSync      ;
   
   #ifdef TIMEBASE_TIME_WINDOW_CALCULATION
   int32_t                  StartTimeSeconds   ;
   int32_t                  StartTimeSubSeconds;
   uint8_t                  Status             ;
   #endif
+  
+  #ifdef TIMEBASE_LP_DOWNCOUNTER
+  volatile int32_t         LPTimerSeconds     ;
+  #endif
+  
 }timebase_time_t;
 
 typedef union {
   struct {
-    uint8_t               PeriodFlag     :1;
-    uint8_t               Value          :4;
+    uint8_t               PeriodFlag        :1;
+    uint8_t               Value             :4;
   };
-  volatile uint8_t        StatusByte       ;
+  volatile uint8_t        StatusByte          ;
 } timebase_status_t;
 
 
 #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
 typedef struct timebase_upcounter_ss_t{
-  timebase_status_t       Status           ;
-  int32_t                 EndValueSec      ;
-  int32_t                 EndValueSubSec   ;
-  int32_t                 Target           ;
-  int32_t                 Temporary        ;
-  int32_t                 Value            ;
-  int32_t                 PeriodValue      ;
+  timebase_status_t       Status             ;
+  int32_t                 EndValueSec        ;
+  int32_t                 EndValueSubSec     ;
+  int32_t                 Target             ;
+  int32_t                 Temporary          ;
+  int32_t                 Value              ;
+  int32_t                 PeriodValue        ;
 }timebase_upcounter_ss_t;
 #endif
 
 
 #ifdef TIMEBASE_UPCOUNTER
 typedef struct timebase_upcounter_t{
-  timebase_status_t       Status           ;
-  int32_t                 EndValue         ;
-  int32_t                 Target           ;
-  int32_t                 Temporary        ;
-  int32_t                 Value            ;
-  int32_t                 PeriodValue      ;
+  timebase_status_t       Status             ;
+  int32_t                 EndValue           ;
+  int32_t                 Target             ;
+  int32_t                 Temporary          ;
+  int32_t                 Value              ;
+  int32_t                 PeriodValue        ;
 }timebase_upcounter_t;
 #endif
 
@@ -80,35 +85,35 @@ typedef struct timebase_upcounter_t{
 
 #ifdef TIMEBASE_DOWNCOUNTER_SUBSECONDS
 typedef struct timebase_downcounter_ss_t{
-  timebase_status_t       Status           ;
-  int32_t                 EndValueSec      ;
-  int32_t                 EndValueSubSec   ;
-  int32_t                 Value            ;
-  int32_t                 PeriodValue      ;
+  timebase_status_t       Status             ;
+  int32_t                 EndValueSec        ;
+  int32_t                 EndValueSubSec     ;
+  int32_t                 Value              ;
+  int32_t                 PeriodValue        ;
 }timebase_downcounter_ss_t;
 #endif
 
 
 #ifdef TIMEBASE_DOWNCOUNTER
 typedef struct timebase_downcounter_t{
-  timebase_status_t         Status         ;
-  int32_t                   EndValue       ;
-  int32_t                   Value          ;
-  int32_t                   PeriodValue    ;
+  timebase_status_t         Status           ;
+  int32_t                   EndValue         ;
+  int32_t                   Value            ;
+  int32_t                   PeriodValue      ;
 }timebase_downcounter_t;
 #endif
 
 typedef struct timebase_config_t{
-  volatile uint16_t       UpdateRate       ;
+  volatile uint16_t       UpdateRate         ;
 }timebase_config_t;
 
 typedef struct timebase_t{
-  timebase_config_t      Config                             ;
-  timebase_time_t        Time                               ;
-  volatile uint8_t       UpdateRequest                      ;
+  timebase_config_t      Config              ;
+  timebase_time_t        Time                ;
+  volatile uint8_t       UpdateRequest       ;
   
   #ifdef TIMEBASE_TOKEN_FUNCTIONS
-  volatile uint8_t       ActiveTokens                       ;
+  volatile uint8_t       ActiveTokens        ;
   #endif
   
   #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
@@ -125,6 +130,10 @@ typedef struct timebase_t{
   
   #ifdef TIMEBASE_DOWNCOUNTER
   timebase_downcounter_t DownCounter[TIMEBASE_DOWNCOUNTER]  ;
+  #endif
+  
+  #ifdef TIMEBASE_LP_DOWNCOUNTER
+  timebase_downcounter_t LPDownCounter[TIMEBASE_LP_DOWNCOUNTER]  ;
   #endif
   
 }timebase_t;
@@ -187,9 +196,13 @@ void Timebase_Struct_Init(void){
   Timebase->Time.LastSample = 0;
   
   #ifdef TIMEBASE_TIME_WINDOW_CALCULATION
-    Timebase->Time.StartTimeSeconds = 0;
-	Timebase->Time.StartTimeSubSeconds = 0;
-	Timebase->Time.Status = 0;
+  Timebase->Time.StartTimeSeconds = 0;
+  Timebase->Time.StartTimeSubSeconds = 0;
+  Timebase->Time.Status = 0;
+  #endif
+  
+  #ifdef TIMEBASE_LP_DOWNCOUNTER
+  Timebase->Time.LPTimerSeconds = 0;
   #endif
   
   Timebase->UpdateRequest = 0;
@@ -237,6 +250,15 @@ void Timebase_Struct_Init(void){
 	Timebase->DownCounterSS[i].EndValueSubSec = 0;
     Timebase->DownCounterSS[i].Value = 0;
     Timebase->DownCounterSS[i].PeriodValue = 0;
+  }
+  #endif
+  
+  #ifdef TIMEBASE_LP_DOWNCOUNTER
+  for(uint8_t i=0; i < TIMEBASE_LP_DOWNCOUNTER; i++){
+    Timebase->LPDownCounter[i].Status.StatusByte = 0; 
+    Timebase->LPDownCounter[i].EndValue = 0;
+    Timebase->LPDownCounter[i].Value = 0;
+    Timebase->LPDownCounter[i].PeriodValue = 0;
   }
   #endif
   
@@ -295,6 +317,35 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
 }
 
 
+void Timebase_LPTimer_Config(void){
+    uint8_t  Prescaler_val;
+	
+    //if(UpdateRateHz == 1){
+      Prescaler_val = 0x06;
+    /*}else if(UpdateRateHz ==2 ){
+      Prescaler_val = 0x05;
+    }else if(UpdateRateHz == 4){
+      Prescaler_val = 0x04;
+    }else if(UpdateRateHz == 8){
+      Prescaler_val = 0x03;
+    }else if(UpdateRateHz == 16){
+      Prescaler_val = 0x02;
+    }else if(UpdateRateHz == 32){
+      Prescaler_val = 0x01;
+    }else if(UpdateRateHz == 64){
+      Prescaler_val = 0x00;
+    }else{
+      Prescaler_val = 0x00;
+    }*/
+    cli();
+    MCUSR  &=~(1<<WDRF);
+    WDTCSR |= (1<<WDIF);
+    WDTCSR |= (1<<WDCE)|(1<<WDE);
+    WDTCSR  = (1<<WDIE)|Prescaler_val;
+    sei();
+}
+
+
 /**********************************Basic Functions End********************************/
 
 
@@ -327,14 +378,31 @@ void Timebase_Atomic_Operation_End(void){
 
 
 
-/*************************************ISR Start************************************/
+/***********************************Timer ISR Start**********************************/
 
 ISR(TIMER0_OVF_vect){
   TCNT0  = Timebase->Time.OVFUpdateValue;
   Timebase_ISR_Executables();
 }
 
-/**************************************ISR End*************************************/
+/************************************Timer ISR End***********************************/
+
+
+
+
+
+
+
+
+
+/**********************************LPTimer ISR Start*********************************/
+
+ISR(WDT_vect){
+  WDTCSR |= (1<<WDIE);
+  Timebase_ISR_Executables();
+}
+
+/***********************************LPTimer ISR End**********************************/
 
 
 
