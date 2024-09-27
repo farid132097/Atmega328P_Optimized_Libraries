@@ -10,6 +10,7 @@
 #define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
 #define  TIMEBASE_DOWNCOUNTER              1
 #define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   1
+#define  TIMEBASE_LP_DOWNCOUNTER           1
 
 
 //Config Functions

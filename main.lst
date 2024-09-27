@@ -99,55 +99,73 @@
  107 006c 90E0      		ldi r25,hi8(50)
  108 006e 0E94 0000 		call Timebase_Timer_Await_SubSeconds
  109               	.LM14:
- 110 0072 80E0      		ldi r24,lo8(0)
- 111 0074 0E94 0000 		call Timebase_UpCounter_SS_Get_Value
- 112 0078 0E94 0000 		call UART_Transmit_Number
- 113               	.LM15:
- 114 007c 80E0      		ldi r24,lo8(.LC0)
- 115 007e 90E0      		ldi r25,hi8(.LC0)
- 116 0080 0E94 0000 		call UART_Transmit_Text
- 117               	.LM16:
- 118 0084 80E0      		ldi r24,lo8(0)
- 119 0086 0E94 0000 		call Timebase_UpCounter_Get_Value
- 120 008a 0E94 0000 		call UART_Transmit_Number
- 121               	.LM17:
- 122 008e 80E0      		ldi r24,lo8(.LC0)
- 123 0090 90E0      		ldi r25,hi8(.LC0)
- 124 0092 0E94 0000 		call UART_Transmit_Text
- 125               	.LM18:
- 126 0096 80E0      		ldi r24,lo8(0)
- 127 0098 0E94 0000 		call Timebase_DownCounter_SS_Get_Value
- 128 009c 0E94 0000 		call UART_Transmit_Number
- 129               	.LM19:
- 130 00a0 80E0      		ldi r24,lo8(.LC0)
- 131 00a2 90E0      		ldi r25,hi8(.LC0)
- 132 00a4 0E94 0000 		call UART_Transmit_Text
- 133               	.LM20:
- 134 00a8 80E0      		ldi r24,lo8(0)
- 135 00aa 0E94 0000 		call Timebase_DownCounter_Get_Value
- 136 00ae 0E94 0000 		call UART_Transmit_Number
- 137               	.LM21:
- 138 00b2 80E0      		ldi r24,lo8(.LC1)
- 139 00b4 90E0      		ldi r25,hi8(.LC1)
- 140 00b6 0E94 0000 		call UART_Transmit_Text
- 141               	.LM22:
- 142 00ba 5E9A      		sbi 43-32,6
- 143               	.LM23:
- 144 00bc 0E94 0000 		call Timebase_Main_Loop_Executables
- 145               	.LM24:
- 146 00c0 5E98      		cbi 43-32,6
- 147 00c2 00C0      		rjmp .L3
- 148               	.LFE6:
- 174               	.Letext0:
+ 110 0072 0E94 0000 		call Timebase_Timer_Get_Seconds
+ 111 0076 0E94 0000 		call UART_Transmit_Number
+ 112               	.LM15:
+ 113 007a 80E0      		ldi r24,lo8(.LC0)
+ 114 007c 90E0      		ldi r25,hi8(.LC0)
+ 115 007e 0E94 0000 		call UART_Transmit_Text
+ 116               	.LM16:
+ 117 0082 0E94 0000 		call Timebase_Timer_Get_SubSeconds
+ 118 0086 A0E0      		ldi r26,lo8(0)
+ 119 0088 B0E0      		ldi r27,hi8(0)
+ 120 008a BC01      		movw r22,r24
+ 121 008c CD01      		movw r24,r26
+ 122 008e 0E94 0000 		call UART_Transmit_Number
+ 123               	.LM17:
+ 124 0092 80E0      		ldi r24,lo8(.LC0)
+ 125 0094 90E0      		ldi r25,hi8(.LC0)
+ 126 0096 0E94 0000 		call UART_Transmit_Text
+ 127               	.LM18:
+ 128 009a 80E0      		ldi r24,lo8(0)
+ 129 009c 0E94 0000 		call Timebase_UpCounter_SS_Get_Value
+ 130 00a0 0E94 0000 		call UART_Transmit_Number
+ 131               	.LM19:
+ 132 00a4 80E0      		ldi r24,lo8(.LC0)
+ 133 00a6 90E0      		ldi r25,hi8(.LC0)
+ 134 00a8 0E94 0000 		call UART_Transmit_Text
+ 135               	.LM20:
+ 136 00ac 80E0      		ldi r24,lo8(0)
+ 137 00ae 0E94 0000 		call Timebase_UpCounter_Get_Value
+ 138 00b2 0E94 0000 		call UART_Transmit_Number
+ 139               	.LM21:
+ 140 00b6 80E0      		ldi r24,lo8(.LC0)
+ 141 00b8 90E0      		ldi r25,hi8(.LC0)
+ 142 00ba 0E94 0000 		call UART_Transmit_Text
+ 143               	.LM22:
+ 144 00be 80E0      		ldi r24,lo8(0)
+ 145 00c0 0E94 0000 		call Timebase_DownCounter_SS_Get_Value
+ 146 00c4 0E94 0000 		call UART_Transmit_Number
+ 147               	.LM23:
+ 148 00c8 80E0      		ldi r24,lo8(.LC0)
+ 149 00ca 90E0      		ldi r25,hi8(.LC0)
+ 150 00cc 0E94 0000 		call UART_Transmit_Text
+ 151               	.LM24:
+ 152 00d0 80E0      		ldi r24,lo8(0)
+ 153 00d2 0E94 0000 		call Timebase_DownCounter_Get_Value
+ 154 00d6 0E94 0000 		call UART_Transmit_Number
+ 155               	.LM25:
+ 156 00da 80E0      		ldi r24,lo8(.LC1)
+ 157 00dc 90E0      		ldi r25,hi8(.LC1)
+ 158 00de 0E94 0000 		call UART_Transmit_Text
+ 159               	.LM26:
+ 160 00e2 5E9A      		sbi 43-32,6
+ 161               	.LM27:
+ 162 00e4 0E94 0000 		call Timebase_Main_Loop_Executables
+ 163               	.LM28:
+ 164 00e8 5E98      		cbi 43-32,6
+ 165 00ea 00C0      		rjmp .L3
+ 166               	.LFE6:
+ 192               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\WALTON\AppData\Local\Temp/ccdVVpv4.s:2      *ABS*:0000003f __SREG__
-C:\Users\WALTON\AppData\Local\Temp/ccdVVpv4.s:3      *ABS*:0000003e __SP_H__
-C:\Users\WALTON\AppData\Local\Temp/ccdVVpv4.s:4      *ABS*:0000003d __SP_L__
-C:\Users\WALTON\AppData\Local\Temp/ccdVVpv4.s:5      *ABS*:00000034 __CCP__
-C:\Users\WALTON\AppData\Local\Temp/ccdVVpv4.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccdVVpv4.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccdVVpv4.s:24     .text:00000000 main
+C:\Users\farid\AppData\Local\Temp/cc2JJYx0.s:2      *ABS*:0000003f __SREG__
+C:\Users\farid\AppData\Local\Temp/cc2JJYx0.s:3      *ABS*:0000003e __SP_H__
+C:\Users\farid\AppData\Local\Temp/cc2JJYx0.s:4      *ABS*:0000003d __SP_L__
+C:\Users\farid\AppData\Local\Temp/cc2JJYx0.s:5      *ABS*:00000034 __CCP__
+C:\Users\farid\AppData\Local\Temp/cc2JJYx0.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\farid\AppData\Local\Temp/cc2JJYx0.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\farid\AppData\Local\Temp/cc2JJYx0.s:24     .text:00000000 main
 
 UNDEFINED SYMBOLS
 UART_Init
@@ -157,9 +175,11 @@ Timebase_UpCounter_Set_Securely
 Timebase_DownCounter_SS_Set_Securely
 Timebase_DownCounter_Set_Securely
 Timebase_Timer_Await_SubSeconds
-Timebase_UpCounter_SS_Get_Value
+Timebase_Timer_Get_Seconds
 UART_Transmit_Number
 UART_Transmit_Text
+Timebase_Timer_Get_SubSeconds
+Timebase_UpCounter_SS_Get_Value
 Timebase_UpCounter_Get_Value
 Timebase_DownCounter_SS_Get_Value
 Timebase_DownCounter_Get_Value

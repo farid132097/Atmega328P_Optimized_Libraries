@@ -3,12 +3,18 @@
  * Author: MD. Faridul Islam
  * Atmega328P Timebase Library
  * Created on October 30, 2022, 19:00
+ * Software Version 3.0
  */
+
+
+
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "timebase.h"
+
+
 
 #define  TIMEBASE_COUNT_ATOMIC_OPERATION
 //#define  TIMEBASE_TOKEN_FUNCTIONS
@@ -20,15 +26,6 @@
 
 /********************************Structure & Enumeration Start******************************/
 
-typedef union {
-  struct {
-    volatile uint8_t       WatchDogTimer  :1;
-    volatile uint8_t       RealTimeCounter:1;
-    volatile uint8_t       GeneralTimer   :1;
-    volatile uint8_t       TimerIndex     :5;
-  };
-  volatile uint8_t         Value            ;
-} timebase_timer_t;
 
 typedef struct timebase_time_t{
   volatile uint8_t         OVFUpdateValue   ;
@@ -102,7 +99,6 @@ typedef struct timebase_downcounter_t{
 #endif
 
 typedef struct timebase_config_t{
-  timebase_timer_t        TimerType        ;
   volatile uint16_t       UpdateRate       ;
 }timebase_config_t;
 
@@ -181,9 +177,6 @@ timebase_t *Timebase;
 
 void Timebase_Struct_Init(void){
   Timebase=&Timebase_type;
-  Timebase->Config.TimerType.Value = 0;
-  Timebase->Config.TimerType.GeneralTimer = 1;
-  Timebase->Config.TimerType.TimerIndex = 0;
   Timebase->Config.UpdateRate = 1;
   Timebase->Time.OVFUpdateValue=0;
   Timebase->Time.SubSecondsShadow = 0;
@@ -251,83 +244,53 @@ void Timebase_Struct_Init(void){
 
 
 void Timebase_Timer_Config(uint16_t UpdateRateHz){
-  uint8_t  Prescaler_val = 0, clock_div_index = 0;
+  uint8_t  clock_div_index = 0;
   uint16_t clock_div_factor[5] = {1, 8, 64, 256, 1024};
   int32_t  temp, curr_freq;
-  if(Timebase->Config.TimerType.WatchDogTimer == 1){
-    
-    if(UpdateRateHz == 1){
-      Prescaler_val = 0x06;
-    }else if(UpdateRateHz ==2 ){
-      Prescaler_val = 0x05;
-    }else if(UpdateRateHz == 4){
-      Prescaler_val = 0x04;
-    }else if(UpdateRateHz == 8){
-      Prescaler_val = 0x03;
-    }else if(UpdateRateHz == 16){
-      Prescaler_val = 0x02;
-    }else if(UpdateRateHz == 32){
-      Prescaler_val = 0x01;
-    }else if(UpdateRateHz == 64){
-      Prescaler_val = 0x00;
-    }else{
-      Prescaler_val = 0x00;
-    }
-    cli();
-    MCUSR  &=~(1<<WDRF);
-    WDTCSR |= (1<<WDIF);
-    WDTCSR |= (1<<WDCE)|(1<<WDE);
-    WDTCSR  = (1<<WDIE)|Prescaler_val;
-    sei();
-  }else if(Timebase->Config.TimerType.RealTimeCounter == 1){
-    //add rtc functions
-  }else if(Timebase->Config.TimerType.GeneralTimer == 1){
-    
-	temp = F_CPU;
+
+  temp = F_CPU;
+  temp /= UpdateRateHz;
 	
+  clock_div_index = 0;
+  curr_freq = temp;
 	
-	temp /= UpdateRateHz;
-	
-	clock_div_index = 0;
-	curr_freq = temp;
-	
-	while( curr_freq > 0xFF ){
-	  curr_freq  = temp;
-	  curr_freq /= clock_div_factor[clock_div_index];
-	  clock_div_index++;
-	  if(clock_div_index == 5){
-	    break;
-	  }
+  while( curr_freq > 0xFF ){
+	curr_freq  = temp;
+	curr_freq /= clock_div_factor[clock_div_index];
+	clock_div_index++;
+	if(clock_div_index == 5){
+	  break;
 	}
-	
-	clock_div_index -= 1;
-	
-	TCCR0A = 0x00;
-    TCCR0B = 0x00;
-    TIMSK0 = 0x00;
-    TIFR0  = 0x00;
-    OCR0A  = 0x00;
-    OCR0B  = 0x00;
-    TCNT0  = 0x00;
-    OCR0A  = 0x00;
-	
-	if(clock_div_index == 0){
-	  TCCR0B = (1<<CS00);
-	}else if(clock_div_index == 1){
-	  TCCR0B = (1<<CS01);
-	}else if(clock_div_index == 2){
-	  TCCR0B = (1<<CS00)|(1<<CS01);
-	}else if(clock_div_index == 3){
-	  TCCR0B = (1<<CS02);
-	}else if(clock_div_index == 4){
-	  TCCR0B = (1<<CS00)|(1<<CS02);
-	}
-	
-	Timebase->Time.OVFUpdateValue = (0xFF-curr_freq);
-	TCNT0  = Timebase->Time.OVFUpdateValue;
-	TIMSK0 = (1<<TOIE0);
-    sei();
   }
+	
+  clock_div_index -= 1;
+	
+  TCCR0A = 0x00;
+  TCCR0B = 0x00;
+  TIMSK0 = 0x00;
+  TIFR0  = 0x00;
+  OCR0A  = 0x00;
+  OCR0B  = 0x00;
+  TCNT0  = 0x00;
+  OCR0A  = 0x00;
+	
+  if(clock_div_index == 0){
+	TCCR0B = (1<<CS00);
+  }else if(clock_div_index == 1){
+	TCCR0B = (1<<CS01);
+  }else if(clock_div_index == 2){
+	TCCR0B = (1<<CS00)|(1<<CS01);
+  }else if(clock_div_index == 3){
+	TCCR0B = (1<<CS02);
+  }else if(clock_div_index == 4){
+	TCCR0B = (1<<CS00)|(1<<CS02);
+  }
+	
+  Timebase->Time.OVFUpdateValue = (0xFF-curr_freq);
+  TCNT0  = Timebase->Time.OVFUpdateValue;
+  TIMSK0 = (1<<TOIE0);
+  sei();
+
   Timebase->Config.UpdateRate = UpdateRateHz;
 }
 

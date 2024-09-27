@@ -26,9 +26,9 @@
 
 
 //#define  DEBUG_USE_DELAY
-#define  DEBUG_USE_TIMER0
+//#define  DEBUG_USE_TIMER0
 //#define  DEBUG_USE_TIMER1
-//#define  DEBUG_USE_TIMER2
+#define  DEBUG_USE_TIMER2
 
 #define  DEBUG_RX_BUF_SIZE 32
 

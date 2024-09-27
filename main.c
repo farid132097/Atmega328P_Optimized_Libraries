@@ -25,6 +25,11 @@ int main(void){
     
 	Timebase_Timer_Await_SubSeconds(50);
 	
+	UART_Transmit_Number(Timebase_Timer_Get_Seconds());
+	UART_Transmit_Text(",");
+	UART_Transmit_Number(Timebase_Timer_Get_SubSeconds());
+	UART_Transmit_Text(",");
+	
 	UART_Transmit_Number(Timebase_UpCounter_SS_Get_Value(0));
 	UART_Transmit_Text(",");
 	UART_Transmit_Number(Timebase_UpCounter_Get_Value(0));
