@@ -11,8 +11,8 @@
 
 #define  UART_DOUBLE_SPEED
 #define  UART_ENABLE_TX    
-#define  UART_ENABLE_RX    
-#define  UART_ENABLE_RX_INT
+//#define  UART_ENABLE_RX    
+//#define  UART_ENABLE_RX_INT
 #define  UART_BUFFER_SIZE   32
 
 typedef struct uart_t{
@@ -117,6 +117,7 @@ uint8_t UART_Receive_Byte(void){
   return val;
 }
 
+#ifdef UART_ENABLE_RX_INT
 uint8_t UART_Last_Received_Byte(void){
   return UART.LastByteReceived;
 }
@@ -124,7 +125,7 @@ uint8_t UART_Last_Received_Byte(void){
 void UART_Reset_Last_Received_Byte(void){
   UART.LastByteReceived = 0;
 }
-
+#endif
 
 
 
@@ -225,7 +226,7 @@ void UART_Transmit_Number(int32_t num){
 }
 
 
-
+#ifdef UART_ENABLE_RX_INT
 uint8_t UART_Read_From_Buffer(uint16_t index){
   return UART.Buffer[index];
 }
@@ -234,7 +235,7 @@ uint8_t UART_Read_From_Buffer(uint16_t index){
 uint16_t UART_Current_Buffer_Index(void){
   return UART.BufferIndex;
 }
-
+#endif
 
 
 

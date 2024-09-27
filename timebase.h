@@ -3,6 +3,7 @@
  * Author: MD. Faridul Islam
  * Atmega328P Timebase Library
  * Created on October 30, 2022, 19:00
+ * Software Version 3.0 (Incomplete)
  */
 
 
@@ -16,6 +17,7 @@
 //Config Functions
 void     Timebase_Struct_Init(void);
 void     Timebase_Timer_Config(uint16_t UpdateRateHz);
+void     Timebase_LPTimer_Config(uint16_t UpdateRateHz);
 
 
 //Atomic Operations
@@ -41,6 +43,14 @@ void     Timebase_Timer_Sync_With_Shadow_Variables(void);
 void     Timebase_Timer_Delay_SubSeconds(uint16_t value);
 void     Timebase_Timer_Await_SubSeconds(uint16_t value);
 void     Timebase_Timer_Delay_Seconds(uint16_t value);
+
+
+//Low Power Timer Functions
+uint16_t Timebase_LPTimer_Get_SubSeconds(void);
+int32_t  Timebase_LPTimer_Get_Seconds(void);
+void     Timebase_LPTimer_Set_SubSeconds(uint16_t value);
+void     Timebase_LPTimer_Set_Seconds(int32_t value);
+void     Timebase_LPTimer_Delay_Seconds(uint16_t value);
 
 
 //Window Calculation
@@ -180,10 +190,43 @@ void     Timebase_DownCounter_Update_All(void);
 void     Timebase_DownCounter_Reset_All(void);
 
 
+
+//Low Power DownCounter Functions
+uint8_t  Timebase_LPDownCounter_Get_Status(uint8_t window);
+void     Timebase_LPDownCounter_Set_Status(uint8_t window, uint8_t value);
+int32_t  Timebase_LPDownCounter_Get_Value(uint8_t window);
+void     Timebase_LPDownCounter_Set_Value(uint8_t window, int32_t value);
+int32_t  Timebase_LPDownCounter_Get_EndValue(uint8_t window);
+void     Timebase_LPDownCounter_Set_EndValue(uint8_t window, int32_t value);
+int32_t  Timebase_LPDownCounter_Get_PeriodValue(uint8_t window);
+void     Timebase_LPDownCounter_Set_PeriodValue(uint8_t window, int32_t value);
+uint8_t  Timebase_LPDownCounter_Get_Period_Flag(uint8_t window);
+void     Timebase_LPDownCounter_Set_Period_Flag(uint8_t window);
+void     Timebase_LPDownCounter_Clear_Period_Flag(uint8_t window);
+void     Timebase_LPDownCounter_Reset(uint8_t window);
+void     Timebase_LPDownCounter_Clear_All_Flags(uint8_t window);
+void     Timebase_LPDownCounter_Start(uint8_t window);
+void     Timebase_LPDownCounter_Stop(uint8_t window);
+void     Timebase_LPDownCounter_Set_Securely(uint8_t window, int32_t value);
+void     Timebase_LPDownCounter_Set_Forcefully(uint8_t window, int32_t value);
+void     Timebase_LPDownCounter_Update(uint8_t window);
+uint8_t  Timebase_LPDownCounter_Expired(uint8_t window);
+uint8_t  Timebase_LPDownCounter_Expired_Event(uint8_t window);
+void     Timebase_LPDownCounter_Set_Period_Value_Securely(uint8_t window, int32_t value);
+int32_t  Timebase_LPDownCounter_Get_Remaining_Period_Value(uint8_t window);
+uint8_t  Timebase_LPDownCounter_Period_Value_Expired(uint8_t window);
+uint8_t  Timebase_LPDownCounter_Period_Value_Expired_Event(uint8_t window);
+void     Timebase_LPDownCounter_Update_All(void);
+void     Timebase_LPDownCounter_Reset_All(void);
+
+
 //Common Functions
+uint8_t  Timebase_Get_Update_Req_Sts(void);
 void     Timebase_Reset(void);
+void     Timebase_LP_Reset(void);
 void     Timebase_Init(uint16_t UpdateRateHz);
 void     Timebase_Main_Loop_Executables(void);
 void     Timebase_ISR_Executables(void);
+void     Timebase_LP_ISR_Executables(void);
 
 
