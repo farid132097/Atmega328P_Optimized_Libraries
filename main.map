@@ -17,7 +17,7 @@ Allocating common symbols
 Common symbol       size              file
 
 Timebase            0x2               timebase.o
-Timebase_type       0x15              timebase.o
+Timebase_type       0x2f              timebase.o
 
 Memory Configuration
 
@@ -132,7 +132,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x9ee
+.text           0x00000000     0x145c
  *(.vectors)
  .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vectors
@@ -193,7 +193,6 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x000000a2                __vector_24
                 0x000000a2                __vector_12
                 0x000000a2                __bad_interrupt
-                0x000000a2                __vector_6
                 0x000000a2                __vector_3
                 0x000000a2                __vector_23
                 0x000000a2                __vector_25
@@ -215,74 +214,112 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x000000a2                __vector_20
  .text          0x000000a6       0x2c main.o
                 0x000000a6                main
- .text          0x000000d2      0x4d2 timebase.o
-                0x00000512                Timebase_ISR_Executables
-                0x000004ec                Timebase_Reset
-                0x000004f0                Timebase_Init
-                0x00000404                Timebase_Timer_Await_SubSeconds
-                0x00000252                Timebase_Timer_Disable
-                0x00000266                Timebase_Atomic_Operation_Start
-                0x000002da                Timebase_Timer_Get_SubSecondsShadow_Securely
-                0x00000294                Timebase_Timer_Get_SubSeconds
-                0x00000138                Timebase_Timer_Enable
-                0x000002c8                Timebase_Timer_Set_Seconds
-                0x00000506                Timebase_Main_Loop_Executables
-                0x000002f4                Timebase_Timer_Get_SecondsShadow_Securely
-                0x000004ee                Timebase_LP_Reset
-                0x0000026e                Timebase_Timer_Get_SubSecondsShadow
-                0x000002a4                Timebase_Timer_Get_Seconds
+ .text          0x000000d2      0xf40 timebase.o
+                0x000006ba                Timebase_LPDownCounter_Get_Status
+                0x00000c46                Timebase_LPDownCounter_Expired_Event
+                0x00000eec                Timebase_ISR_Executables
+                0x00000cf8                Timebase_LPDownCounter_Set_Period_Value_Securely
+                0x000002d6                Timebase_LPTimer_Enable
+                0x000005f8                Timebase_LPTimer_Get_Seconds
+                0x00000e9e                Timebase_Reset
+                0x00000ea6                Timebase_Init
+                0x00000502                Timebase_Timer_Await_SubSeconds
+                0x00000346                Timebase_LPTimer_Disable
+                0x000002c2                Timebase_Timer_Disable
+                0x00000364                Timebase_Atomic_Operation_Start
+                0x000009c6                Timebase_LPDownCounter_Stop
+                0x000003d8                Timebase_Timer_Get_SubSecondsShadow_Securely
+                0x00000fc0                __vector_6
+                0x00000994                Timebase_LPDownCounter_Start
+                0x00000392                Timebase_Timer_Get_SubSeconds
+                0x000001a0                Timebase_Timer_Enable
+                0x00000640                Timebase_LPTimer_Delay_Seconds
+                0x000007c8                Timebase_LPDownCounter_Get_PeriodValue
+                0x000009f8                Timebase_LPDownCounter_Set_Securely
+                0x000003c6                Timebase_Timer_Set_Seconds
+                0x00000a9e                Timebase_LPDownCounter_Set_Forcefully
+                0x00000e26                Timebase_LPDownCounter_Period_Value_Expired_Event
+                0x0000076a                Timebase_LPDownCounter_Get_EndValue
+                0x00000956                Timebase_LPDownCounter_Clear_All_Flags
+                0x0000070c                Timebase_LPDownCounter_Get_Value
+                0x00000ec8                Timebase_Main_Loop_Executables
+                0x00000e6a                Timebase_LPDownCounter_Reset_All
+                0x000003f2                Timebase_Timer_Get_SecondsShadow_Securely
+                0x00000ea0                Timebase_LP_Reset
+                0x0000036c                Timebase_Timer_Get_SubSecondsShadow
+                0x00000db0                Timebase_LPDownCounter_Period_Value_Expired
+                0x000003a2                Timebase_Timer_Get_Seconds
+                0x00000c16                Timebase_LPDownCounter_Expired
+                0x00000918                Timebase_LPDownCounter_Reset
+                0x000007fe                Timebase_LPDownCounter_Set_PeriodValue
+                0x00000620                Timebase_LPTimer_Set_SubSeconds
                 0x000000d2                Timebase_Struct_Init
-                0x0000049e                Timebase_Timer_Delay_Seconds
-                0x000002ba                Timebase_Timer_Set_SubSeconds
-                0x0000026a                Timebase_Atomic_Operation_End
-                0x0000031c                Timebase_Timer_Sync_With_Shadow_Variables
-                0x0000027e                Timebase_Timer_Get_SecondsShadow
-                0x000004e0                Timebase_Get_Update_Req_Sts
-                0x0000054e                __vector_16
-                0x0000034c                Timebase_Timer_Delay_SubSeconds
-                0x000005a2                Timebase_LP_ISR_Executables
- .text          0x000005a4      0x38e uart.o
-                0x00000810                UART_Transmit_New_Line
-                0x000008cc                UART_Transmit_Number
-                0x00000900                UART_Init
-                0x000008fe                UART_Flush_Buffer
-                0x00000634                UART_Receive_Byte
-                0x00000624                UART_Transmit_Byte
-                0x000005bc                UART_Config_Clock
-                0x000005ba                UART_Config_GPIO
-                0x00000616                UART_Config_Receiver_Interrupt
-                0x0000072e                UART_Transmit_Byte_Bin
-                0x0000081a                UART_Transmit_Space
-                0x000005f2                UART_Config_Transmitter
-                0x000005a4                UART_Struct_Init
-                0x00000604                UART_Config_Receiver
-                0x000007ee                UART_Transmit_Text
-                0x000005be                UART_Config_BAUD_Rate
-                0x00000824                UART_Determine_Digit_Numbers
-                0x000008a2                UART_Transmit_Number_Digits
-                0x0000067c                UART_Transmit_Byte_Hex
- .text          0x00000932        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
- .text          0x00000932        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
- .text          0x00000932        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
- .text          0x00000932        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text          0x00000932        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text          0x00000932        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x00000932                . = ALIGN (0x2)
+                0x0000059c                Timebase_Timer_Delay_Seconds
+                0x0000084a                Timebase_LPDownCounter_Get_Period_Flag
+                0x000003b8                Timebase_Timer_Set_SubSeconds
+                0x000008f0                Timebase_LPDownCounter_Set_ReloadValue
+                0x000007a0                Timebase_LPDownCounter_Set_EndValue
+                0x00000368                Timebase_Atomic_Operation_End
+                0x00000742                Timebase_LPDownCounter_Set_Value
+                0x0000086e                Timebase_LPDownCounter_Set_Period_Flag
+                0x00000b12                Timebase_LPDownCounter_Update
+                0x0000041a                Timebase_Timer_Sync_With_Shadow_Variables
+                0x00000c94                Timebase_LPDownCounter_Oneshot_Expired_Event
+                0x0000037c                Timebase_Timer_Get_SecondsShadow
+                0x00000e92                Timebase_Get_Update_Req_Sts
+                0x00000894                Timebase_LPDownCounter_Clear_Period_Flag
+                0x000008ba                Timebase_LPDownCounter_Get_ReloadValue
+                0x0000062e                Timebase_LPTimer_Set_Seconds
+                0x00000d68                Timebase_LPDownCounter_Get_Remaining_Period_Value
+                0x000005de                Timebase_LPTimer_Get_SubSeconds
+                0x00000f28                __vector_16
+                0x0000044a                Timebase_Timer_Delay_SubSeconds
+                0x00000f7e                Timebase_LP_ISR_Executables
+                0x00000c9a                Timebase_LPDownCounter_Continuous_Expired_Event
+                0x000006e0                Timebase_LPDownCounter_Set_Status
+                0x00000e62                Timebase_LPDownCounter_Update_All
+ .text          0x00001012      0x38e uart.o
+                0x0000127e                UART_Transmit_New_Line
+                0x0000133a                UART_Transmit_Number
+                0x0000136e                UART_Init
+                0x0000136c                UART_Flush_Buffer
+                0x000010a2                UART_Receive_Byte
+                0x00001092                UART_Transmit_Byte
+                0x0000102a                UART_Config_Clock
+                0x00001028                UART_Config_GPIO
+                0x00001084                UART_Config_Receiver_Interrupt
+                0x0000119c                UART_Transmit_Byte_Bin
+                0x00001288                UART_Transmit_Space
+                0x00001060                UART_Config_Transmitter
+                0x00001012                UART_Struct_Init
+                0x00001072                UART_Config_Receiver
+                0x0000125c                UART_Transmit_Text
+                0x0000102c                UART_Config_BAUD_Rate
+                0x00001292                UART_Determine_Digit_Numbers
+                0x00001310                UART_Transmit_Number_Digits
+                0x000010ea                UART_Transmit_Byte_Hex
+ .text          0x000013a0        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+ .text          0x000013a0        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .text          0x000013a0        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+ .text          0x000013a0        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x000013a0        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x000013a0        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x000013a0                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00000932       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
-                0x00000932                __mulsi3
- .text.libgcc   0x00000970       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000970                __udivmodsi4
- .text.libgcc   0x000009b4       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
-                0x000009b4                __divmodsi4
- .text.libgcc   0x000009ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x000009ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x000009ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x000009ea                . = ALIGN (0x2)
+ .text.libgcc   0x000013a0       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+                0x000013a0                __mulsi3
+ .text.libgcc   0x000013de       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x000013de                __udivmodsi4
+ .text.libgcc   0x00001422       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+                0x00001422                __divmodsi4
+ .text.libgcc   0x00001458        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00001458        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00001458        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x00001458                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000009ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x000009ea                exit
-                0x000009ea                _exit
+ .fini9         0x00001458        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00001458                exit
+                0x00001458                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -301,11 +338,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000009ea        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x00001458        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000009ee                _etext = .
+                0x0000145c                _etext = .
 
-.data           0x00800100       0x10 load address 0x000009ee
+.data           0x00800100       0x10 load address 0x0000145c
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
@@ -327,7 +364,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00800110                _edata = .
                 0x00800110                PROVIDE (__data_end, .)
 
-.bss            0x00800110       0x21
+.bss            0x00800110       0x3b
                 0x00800110                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800110        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
@@ -342,19 +379,19 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .bss           0x0080011a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
  *(.bss*)
  *(COMMON)
- COMMON         0x0080011a       0x17 timebase.o
+ COMMON         0x0080011a       0x31 timebase.o
                 0x0080011a                Timebase
                 0x0080011c                Timebase_type
-                0x00800131                PROVIDE (__bss_end, .)
-                0x000009ee                __data_load_start = LOADADDR (.data)
-                0x000009fe                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0080014b                PROVIDE (__bss_end, .)
+                0x0000145c                __data_load_start = LOADADDR (.data)
+                0x0000146c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800131        0x0
-                0x00800131                PROVIDE (__noinit_start, .)
+.noinit         0x0080014b        0x0
+                0x0080014b                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800131                PROVIDE (__noinit_end, .)
-                0x00800131                _end = .
-                0x00800131                PROVIDE (__heap_start, .)
+                0x0080014b                PROVIDE (__noinit_end, .)
+                0x0080014b                _end = .
+                0x0080014b                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -415,53 +452,53 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00000040       0x20 uart.o
 
 .debug_pubnames
-                0x00000000      0x55f
+                0x00000000      0xb37
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000       0x1b main.o
  .debug_pubnames
-                0x0000001b      0x355 timebase.o
+                0x0000001b      0x92d timebase.o
  .debug_pubnames
-                0x00000370      0x1ef uart.o
+                0x00000948      0x1ef uart.o
 
-.debug_info     0x00000000      0xd8e
+.debug_info     0x00000000     0x2140
  *(.debug_info)
  .debug_info    0x00000000      0x11f main.o
- .debug_info    0x0000011f      0x742 timebase.o
- .debug_info    0x00000861      0x52d uart.o
+ .debug_info    0x0000011f     0x1af4 timebase.o
+ .debug_info    0x00001c13      0x52d uart.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x45a
+.debug_abbrev   0x00000000      0x557
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0xb6 main.o
- .debug_abbrev  0x000000b6      0x1a1 timebase.o
- .debug_abbrev  0x00000257      0x203 uart.o
+ .debug_abbrev  0x000000b6      0x29e timebase.o
+ .debug_abbrev  0x00000354      0x203 uart.o
 
-.debug_line     0x00000000      0xb5b
+.debug_line     0x00000000     0x1349
  *(.debug_line)
  .debug_line    0x00000000      0x11d main.o
- .debug_line    0x0000011d      0x5bb timebase.o
- .debug_line    0x000006d8      0x483 uart.o
+ .debug_line    0x0000011d      0xda9 timebase.o
+ .debug_line    0x00000ec6      0x483 uart.o
 
-.debug_frame    0x00000000      0x300
+.debug_frame    0x00000000      0x560
  *(.debug_frame)
  .debug_frame   0x00000000       0x20 main.o
- .debug_frame   0x00000020      0x1a0 timebase.o
- .debug_frame   0x000001c0      0x140 uart.o
+ .debug_frame   0x00000020      0x400 timebase.o
+ .debug_frame   0x00000420      0x140 uart.o
 
-.debug_str      0x00000000      0x6c1
+.debug_str      0x00000000      0xd91
  *(.debug_str)
  .debug_str     0x00000000       0xc6 main.o
                                  0xfa (size before relaxing)
- .debug_str     0x000000c6      0x407 timebase.o
-                                0x4f5 (size before relaxing)
- .debug_str     0x000004cd      0x1f4 uart.o
+ .debug_str     0x000000c6      0xad7 timebase.o
+                                0xc2a (size before relaxing)
+ .debug_str     0x00000b9d      0x1f4 uart.o
                                 0x2cf (size before relaxing)
 
-.debug_loc      0x00000000      0x6f2
+.debug_loc      0x00000000      0xcf6
  *(.debug_loc)
- .debug_loc     0x00000000      0x341 timebase.o
- .debug_loc     0x00000341      0x3b1 uart.o
+ .debug_loc     0x00000000      0x945 timebase.o
+ .debug_loc     0x00000945      0x3b1 uart.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -481,6 +518,43 @@ Timebase_Get_Update_Req_Sts                       timebase.o
 Timebase_ISR_Executables                          timebase.o
 Timebase_Init                                     timebase.o
                                                   main.o
+Timebase_LPDownCounter_Clear_All_Flags            timebase.o
+Timebase_LPDownCounter_Clear_Period_Flag          timebase.o
+Timebase_LPDownCounter_Continuous_Expired_Event   timebase.o
+Timebase_LPDownCounter_Expired                    timebase.o
+Timebase_LPDownCounter_Expired_Event              timebase.o
+Timebase_LPDownCounter_Get_EndValue               timebase.o
+Timebase_LPDownCounter_Get_PeriodValue            timebase.o
+Timebase_LPDownCounter_Get_Period_Flag            timebase.o
+Timebase_LPDownCounter_Get_ReloadValue            timebase.o
+Timebase_LPDownCounter_Get_Remaining_Period_Value timebase.o
+Timebase_LPDownCounter_Get_Status                 timebase.o
+Timebase_LPDownCounter_Get_Value                  timebase.o
+Timebase_LPDownCounter_Oneshot_Expired_Event      timebase.o
+Timebase_LPDownCounter_Period_Value_Expired       timebase.o
+Timebase_LPDownCounter_Period_Value_Expired_Event timebase.o
+Timebase_LPDownCounter_Reset                      timebase.o
+Timebase_LPDownCounter_Reset_All                  timebase.o
+Timebase_LPDownCounter_Set_EndValue               timebase.o
+Timebase_LPDownCounter_Set_Forcefully             timebase.o
+Timebase_LPDownCounter_Set_PeriodValue            timebase.o
+Timebase_LPDownCounter_Set_Period_Flag            timebase.o
+Timebase_LPDownCounter_Set_Period_Value_Securely  timebase.o
+Timebase_LPDownCounter_Set_ReloadValue            timebase.o
+Timebase_LPDownCounter_Set_Securely               timebase.o
+Timebase_LPDownCounter_Set_Status                 timebase.o
+Timebase_LPDownCounter_Set_Value                  timebase.o
+Timebase_LPDownCounter_Start                      timebase.o
+Timebase_LPDownCounter_Stop                       timebase.o
+Timebase_LPDownCounter_Update                     timebase.o
+Timebase_LPDownCounter_Update_All                 timebase.o
+Timebase_LPTimer_Delay_Seconds                    timebase.o
+Timebase_LPTimer_Disable                          timebase.o
+Timebase_LPTimer_Enable                           timebase.o
+Timebase_LPTimer_Get_Seconds                      timebase.o
+Timebase_LPTimer_Get_SubSeconds                   timebase.o
+Timebase_LPTimer_Set_Seconds                      timebase.o
+Timebase_LPTimer_Set_SubSeconds                   timebase.o
 Timebase_LP_ISR_Executables                       timebase.o
 Timebase_LP_Reset                                 timebase.o
 Timebase_Main_Loop_Executables                    timebase.o
@@ -565,7 +639,8 @@ __vector_25                                       c:/winavr-20100110/bin/../lib/
 __vector_3                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
 __vector_4                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
 __vector_5                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
-__vector_6                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+__vector_6                                        timebase.o
+                                                  c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
 __vector_7                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
 __vector_8                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
 __vector_9                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o

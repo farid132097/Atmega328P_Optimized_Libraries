@@ -11,7 +11,7 @@
 //#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
 //#define  TIMEBASE_DOWNCOUNTER              1
 //#define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   1
-//#define  TIMEBASE_LP_DOWNCOUNTER           1
+#define  TIMEBASE_LP_DOWNCOUNTER           1
 
 
 //Config Functions
@@ -81,6 +81,8 @@ int32_t  Timebase_UpCounter_SS_Get_PeriodValue(uint8_t window);
 void     Timebase_UpCounter_SS_Set_PeriodValue(uint8_t window, int32_t value);
 uint8_t  Timebase_UpCounter_SS_Get_Period_Flag(uint8_t window);
 void     Timebase_UpCounter_SS_Set_Period_Flag(uint8_t window);
+int32_t  Timebase_UpCounter_SS_Get_ReloadValue(uint8_t window);
+void     Timebase_UpCounter_SS_Set_ReloadValue(uint8_t window, int32_t value);
 void     Timebase_UpCounter_SS_Clear_Period_Flag(uint8_t window);
 void     Timebase_UpCounter_SS_Reset(uint8_t window);
 void     Timebase_UpCounter_SS_Clear_All_Flags(uint8_t window);
@@ -91,6 +93,8 @@ void     Timebase_UpCounter_SS_Set_Forcefully(uint8_t window, int32_t value);
 void     Timebase_UpCounter_SS_Update(uint8_t window);
 uint8_t  Timebase_UpCounter_SS_Expired(uint8_t window);
 uint8_t  Timebase_UpCounter_SS_Expired_Event(uint8_t window);
+uint8_t  Timebase_UpCounter_SS_Oneshot_Expired_Event(uint8_t window);
+uint8_t  Timebase_UpCounter_SS_Continuous_Expired_Event(uint8_t window);
 void     Timebase_UpCounter_SS_Set_Period_Value_Securely(uint8_t window, int32_t value);
 int32_t  Timebase_UpCounter_SS_Get_Remaining_Period_Value(uint8_t window);
 uint8_t  Timebase_UpCounter_SS_Period_Value_Expired(uint8_t window);
@@ -117,6 +121,8 @@ void     Timebase_UpCounter_Set_PeriodValue(uint8_t window, int32_t value);
 uint8_t  Timebase_UpCounter_Get_Period_Flag(uint8_t window);
 void     Timebase_UpCounter_Set_Period_Flag(uint8_t window);
 void     Timebase_UpCounter_Clear_Period_Flag(uint8_t window);
+int32_t  Timebase_UpCounter_Get_ReloadValue(uint8_t window);
+void     Timebase_UpCounter_Set_ReloadValue(uint8_t window, int32_t value);
 void     Timebase_UpCounter_Reset(uint8_t window);
 void     Timebase_UpCounter_Clear_All_Flags(uint8_t window);
 void     Timebase_UpCounter_Start(uint8_t window);
@@ -126,6 +132,8 @@ void     Timebase_UpCounter_Set_Forcefully(uint8_t window, int32_t value);
 void     Timebase_UpCounter_Update(uint8_t window);
 uint8_t  Timebase_UpCounter_Expired(uint8_t window);
 uint8_t  Timebase_UpCounter_Expired_Event(uint8_t window);
+uint8_t  Timebase_UpCounter_Oneshot_Expired_Event(uint8_t window);
+uint8_t  Timebase_UpCounter_Continuous_Expired_Event(uint8_t window);
 void     Timebase_UpCounter_Set_Period_Value_Securely(uint8_t window, int32_t value);
 int32_t  Timebase_UpCounter_Get_Remaining_Period_Value(uint8_t window);
 uint8_t  Timebase_UpCounter_Period_Value_Expired(uint8_t window);
@@ -148,6 +156,8 @@ void     Timebase_DownCounter_SS_Set_PeriodValue(uint8_t window, int32_t value);
 uint8_t  Timebase_DownCounter_SS_Get_Period_Flag(uint8_t window);
 void     Timebase_DownCounter_SS_Set_Period_Flag(uint8_t window);
 void     Timebase_DownCounter_SS_Clear_Period_Flag(uint8_t window);
+int32_t  Timebase_DownCounter_SS_Get_ReloadValue(uint8_t window);
+void     Timebase_DownCounter_SS_Set_ReloadValue(uint8_t window, int32_t value);
 void     Timebase_DownCounter_SS_Reset(uint8_t window);
 void     Timebase_DownCounter_SS_Clear_All_Flags(uint8_t window);
 void     Timebase_DownCounter_SS_Start(uint8_t window);
@@ -157,6 +167,8 @@ void     Timebase_DownCounter_SS_Set_Forcefully(uint8_t window, int32_t value);
 void     Timebase_DownCounter_SS_Update(uint8_t window);
 uint8_t  Timebase_DownCounter_SS_Expired(uint8_t window);
 uint8_t  Timebase_DownCounter_SS_Expired_Event(uint8_t window);
+uint8_t  Timebase_DownCounter_SS_Oneshot_Expired_Event(uint8_t window);
+uint8_t  Timebase_DownCounter_SS_Continuous_Expired_Event(uint8_t window);
 void     Timebase_DownCounter_SS_Set_Period_Value_Securely(uint8_t window, int32_t value);
 int32_t  Timebase_DownCounter_SS_Get_Remaining_Period_Value(uint8_t window);
 uint8_t  Timebase_DownCounter_SS_Period_Value_Expired(uint8_t window);
@@ -177,6 +189,8 @@ void     Timebase_DownCounter_Set_PeriodValue(uint8_t window, int32_t value);
 uint8_t  Timebase_DownCounter_Get_Period_Flag(uint8_t window);
 void     Timebase_DownCounter_Set_Period_Flag(uint8_t window);
 void     Timebase_DownCounter_Clear_Period_Flag(uint8_t window);
+int32_t  Timebase_DownCounter_Get_ReloadValue(uint8_t window);
+void     Timebase_DownCounter_Set_ReloadValue(uint8_t window, int32_t value);
 void     Timebase_DownCounter_Reset(uint8_t window);
 void     Timebase_DownCounter_Clear_All_Flags(uint8_t window);
 void     Timebase_DownCounter_Start(uint8_t window);
@@ -186,6 +200,8 @@ void     Timebase_DownCounter_Set_Forcefully(uint8_t window, int32_t value);
 void     Timebase_DownCounter_Update(uint8_t window);
 uint8_t  Timebase_DownCounter_Expired(uint8_t window);
 uint8_t  Timebase_DownCounter_Expired_Event(uint8_t window);
+uint8_t  Timebase_DownCounter_Oneshot_Expired_Event(uint8_t window);
+uint8_t  Timebase_DownCounter_Continuous_Expired_Event(uint8_t window);
 void     Timebase_DownCounter_Set_Period_Value_Securely(uint8_t window, int32_t value);
 int32_t  Timebase_DownCounter_Get_Remaining_Period_Value(uint8_t window);
 uint8_t  Timebase_DownCounter_Period_Value_Expired(uint8_t window);
@@ -207,6 +223,8 @@ void     Timebase_LPDownCounter_Set_PeriodValue(uint8_t window, int32_t value);
 uint8_t  Timebase_LPDownCounter_Get_Period_Flag(uint8_t window);
 void     Timebase_LPDownCounter_Set_Period_Flag(uint8_t window);
 void     Timebase_LPDownCounter_Clear_Period_Flag(uint8_t window);
+int32_t  Timebase_LPDownCounter_Get_ReloadValue(uint8_t window);
+void     Timebase_LPDownCounter_Set_ReloadValue(uint8_t window, int32_t value);
 void     Timebase_LPDownCounter_Reset(uint8_t window);
 void     Timebase_LPDownCounter_Clear_All_Flags(uint8_t window);
 void     Timebase_LPDownCounter_Start(uint8_t window);
@@ -216,6 +234,8 @@ void     Timebase_LPDownCounter_Set_Forcefully(uint8_t window, int32_t value);
 void     Timebase_LPDownCounter_Update(uint8_t window);
 uint8_t  Timebase_LPDownCounter_Expired(uint8_t window);
 uint8_t  Timebase_LPDownCounter_Expired_Event(uint8_t window);
+uint8_t  Timebase_LPDownCounter_Oneshot_Expired_Event(uint8_t window);
+uint8_t  Timebase_LPDownCounter_Continuous_Expired_Event(uint8_t window);
 void     Timebase_LPDownCounter_Set_Period_Value_Securely(uint8_t window, int32_t value);
 int32_t  Timebase_LPDownCounter_Get_Remaining_Period_Value(uint8_t window);
 uint8_t  Timebase_LPDownCounter_Period_Value_Expired(uint8_t window);
