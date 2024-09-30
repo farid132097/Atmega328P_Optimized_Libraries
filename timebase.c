@@ -294,7 +294,7 @@ void Timebase_Struct_Init(void){
 }
 
 
-void Timebase_Timer_Config(uint16_t UpdateRateHz){
+void Timebase_Timer_Enable(uint16_t UpdateRateHz){
   uint8_t  clock_div_index = 0;
   uint16_t clock_div_factor[5] = {1, 8, 64, 256, 1024};
   int32_t  temp, curr_freq;
@@ -336,7 +336,8 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
   }else if(clock_div_index == 4){
 	TCCR0B = (1<<CS00)|(1<<CS02);
   }
-	
+  
+  
   Timebase->Time.OVFUpdateValue = (0xFF-curr_freq);
   TCNT0  = Timebase->Time.OVFUpdateValue;
   TIMSK0 = (1<<TOIE0);
@@ -347,11 +348,23 @@ void Timebase_Timer_Config(uint16_t UpdateRateHz){
 
 
 
+void Timebase_Timer_Disable(void){
+  TCCR0A = 0x00;
+  TCCR0B = 0x00;
+  TIMSK0 = 0x00;
+  TIFR0  = 0x07;
+  OCR0A  = 0x00;
+  OCR0B  = 0x00;
+  TCNT0  = 0x00;
+}
+
+
+
 
 
 #ifdef TIMEBASE_LP_TIMER_ENABLE
 
-void Timebase_LPTimer_Config(uint16_t UpdateRateHz){
+void Timebase_LPTimer_Enable(uint16_t UpdateRateHz){
     uint8_t  Prescaler_val;
 	
     if(UpdateRateHz == 1){
@@ -378,6 +391,16 @@ void Timebase_LPTimer_Config(uint16_t UpdateRateHz){
     WDTCSR  = (1<<WDIE)|Prescaler_val;
     sei();
 	Timebase->Config.LPUpdateRate = UpdateRateHz;
+}
+
+
+void Timebase_LPTimer_Disable(void){
+    cli();
+    MCUSR  &=~(1<<WDRF);
+    WDTCSR |= (1<<WDIF);
+    WDTCSR |= (1<<WDCE)|(1<<WDE);
+    WDTCSR  = 0x00;
+    sei();
 }
 
 #endif
@@ -1969,12 +1992,12 @@ void Timebase_LP_Reset(void){
 
 void Timebase_Init(uint16_t UpdateRateHz){
   Timebase_Struct_Init();
-  Timebase_Timer_Config(UpdateRateHz);
+  Timebase_Timer_Enable(UpdateRateHz);
   Timebase_Reset();
   
   #ifdef TIMEBASE_LP_TIMER_ENABLE
   #warning LPTimer default Freq 1Hz
-  Timebase_LPTimer_Config(1);
+  Timebase_LPTimer_Enable(1);
   Timebase_LP_Reset();
   #endif
   

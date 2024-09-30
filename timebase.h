@@ -16,8 +16,10 @@
 
 //Config Functions
 void     Timebase_Struct_Init(void);
-void     Timebase_Timer_Config(uint16_t UpdateRateHz);
-void     Timebase_LPTimer_Config(uint16_t UpdateRateHz);
+void     Timebase_Timer_Enable(uint16_t UpdateRateHz);
+void     Timebase_Timer_Disable(void);
+void     Timebase_LPTimer_Enable(uint16_t UpdateRateHz);
+void     Timebase_LPTimer_Disable(void);
 
 
 //Atomic Operations
