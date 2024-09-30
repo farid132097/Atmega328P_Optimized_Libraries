@@ -7,11 +7,11 @@
  */
 
 
-#define  TIMEBASE_UPCOUNTER                1
-#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
-#define  TIMEBASE_DOWNCOUNTER              1
-#define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   1
-#define  TIMEBASE_LP_DOWNCOUNTER           1
+//#define  TIMEBASE_UPCOUNTER                1
+//#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
+//#define  TIMEBASE_DOWNCOUNTER              1
+//#define  TIMEBASE_DOWNCOUNTER_SUBSECONDS   1
+//#define  TIMEBASE_LP_DOWNCOUNTER           1
 
 
 //Config Functions
@@ -39,6 +39,8 @@ uint16_t Timebase_Timer_Get_SubSeconds(void);
 int32_t  Timebase_Timer_Get_Seconds(void);
 void     Timebase_Timer_Set_SubSeconds(uint16_t value);
 void     Timebase_Timer_Set_Seconds(int32_t value);
+uint16_t Timebase_Timer_Get_SubSecondsShadow_Securely(void);
+int32_t  Timebase_Timer_Get_SecondsShadow_Securely(void);
 void     Timebase_Timer_Sync_With_Shadow_Variables(void);
 void     Timebase_Timer_Delay_SubSeconds(uint16_t value);
 void     Timebase_Timer_Await_SubSeconds(uint16_t value);

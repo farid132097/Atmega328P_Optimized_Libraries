@@ -17,16 +17,16 @@ int main(void){
   PORTD &=~ (1<<0);
   _delay_ms(500);
   
-  
+  /*
   Timebase_UpCounter_SS_Set_Securely(0, 20000);
   Timebase_UpCounter_Set_Securely(0, 18);
   Timebase_DownCounter_SS_Set_Securely(0, 160000);
   Timebase_DownCounter_Set_Securely(0, 14);
-  Timebase_LPDownCounter_Set_Securely(0, 5);
+  Timebase_LPDownCounter_Set_Securely(0, 5);*/
   
   while(1){
     
-	Timebase_Timer_Await_SubSeconds(10);
+	/*Timebase_Timer_Await_SubSeconds(10);
 	
 	UART_Transmit_Byte_Hex(Timebase_Get_Update_Req_Sts());
 	UART_Transmit_Text(",");
@@ -58,7 +58,7 @@ int main(void){
 	
 	PORTD |= (1<<0);
 	Timebase_Main_Loop_Executables();
-	PORTD &=~(1<<0);
+	PORTD &=~(1<<0);*/
 	
   }
 }
