@@ -1,5 +1,5 @@
-main.o: main.c timebase.h uart.h
+main.o: main.c timebase.h app.h
 
 timebase.h:
 
-uart.h:
+app.h:

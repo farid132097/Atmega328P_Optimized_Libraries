@@ -1,0 +1,88 @@
+   1               		.file	"app.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.data
+  17               	.LC0:
+  18 0000 0D0A 00   		.string	"\r\n"
+  19               		.text
+  20               	.global	App_Main_Loop
+  22               	App_Main_Loop:
+  23               	.LFB3:
+  24               	.LM1:
+  25               	/* prologue: function */
+  26               	/* frame size = 0 */
+  27               	.LM2:
+  28 0000 80E0      		ldi r24,lo8(0)
+  29 0002 0E94 0000 		call Timebase_DownCounter_SS_Continuous_Expired_Event
+  30 0006 8823      		tst r24
+  31 0008 01F0      		breq .L3
+  32               	.LM3:
+  33 000a 0E94 0000 		call Timebase_LPTimer_Get_Seconds
+  34 000e 0E94 0000 		call UART_Transmit_Number
+  35               	.LM4:
+  36 0012 80E0      		ldi r24,lo8(.LC0)
+  37 0014 90E0      		ldi r25,hi8(.LC0)
+  38 0016 0E94 0000 		call UART_Transmit_Text
+  39               	.L3:
+  40 001a 0895      		ret
+  41               	.LFE3:
+  43               	.global	App_Setup
+  45               	App_Setup:
+  46               	.LFB2:
+  47               	.LM5:
+  48               	/* prologue: function */
+  49               	/* frame size = 0 */
+  50               	.LM6:
+  51 001c 60E0      		ldi r22,lo8(57600)
+  52 001e 71EE      		ldi r23,hi8(57600)
+  53 0020 80E0      		ldi r24,hlo8(57600)
+  54 0022 90E0      		ldi r25,hhi8(57600)
+  55 0024 0E94 0000 		call UART_Init
+  56               	.LM7:
+  57 0028 509A      		sbi 42-32,0
+  58               	.LM8:
+  59 002a 5898      		cbi 43-32,0
+  60               	.LM9:
+  61 002c 80E0      		ldi r24,lo8(0)
+  62 002e 42E3      		ldi r20,lo8(50)
+  63 0030 50E0      		ldi r21,hi8(50)
+  64 0032 60E0      		ldi r22,hlo8(50)
+  65 0034 70E0      		ldi r23,hhi8(50)
+  66 0036 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
+  67               	.LM10:
+  68 003a 80E0      		ldi r24,lo8(0)
+  69 003c 45E0      		ldi r20,lo8(5)
+  70 003e 50E0      		ldi r21,hi8(5)
+  71 0040 60E0      		ldi r22,hlo8(5)
+  72 0042 70E0      		ldi r23,hhi8(5)
+  73 0044 0E94 0000 		call Timebase_LPDownCounter_Set_Securely
+  74               	/* epilogue start */
+  75               	.LM11:
+  76 0048 0895      		ret
+  77               	.LFE2:
+ 111               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 app.c
+C:\Users\WALTON\AppData\Local\Temp/ccnFQNhD.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccnFQNhD.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccnFQNhD.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccnFQNhD.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccnFQNhD.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccnFQNhD.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccnFQNhD.s:22     .text:00000000 App_Main_Loop
+C:\Users\WALTON\AppData\Local\Temp/ccnFQNhD.s:45     .text:0000001c App_Setup
+
+UNDEFINED SYMBOLS
+Timebase_DownCounter_SS_Continuous_Expired_Event
+Timebase_LPTimer_Get_Seconds
+UART_Transmit_Number
+UART_Transmit_Text
+UART_Init
+Timebase_DownCounter_SS_Set_Securely
+Timebase_LPDownCounter_Set_Securely
+__do_copy_data

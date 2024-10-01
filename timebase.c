@@ -16,7 +16,7 @@
 
 
 
-#define  TIMEBASE_COUNT_ATOMIC_OPERATION
+//#define  TIMEBASE_COUNT_ATOMIC_OPERATION
 //#define  TIMEBASE_TOKEN_FUNCTIONS
 //#define  TIMEBASE_TIME_WINDOW_CALCULATION
 
@@ -1012,7 +1012,7 @@ void Timebase_UpCounter_SS_Update(uint8_t window){
       Timebase_UpCounter_SS_Set_TemporaryValue(window, 0);
       Timebase_UpCounter_SS_Set_Value(window, Timebase_UpCounter_SS_Get_TargetValue(window));
 	  int32_t temp = Timebase_UpCounter_SS_Get_ReloadValue(window);
-	  //reset
+	  //reset  
 	  Timebase_UpCounter_SS_Set_ReloadValue(window, temp);
       Timebase_UpCounter_SS_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
