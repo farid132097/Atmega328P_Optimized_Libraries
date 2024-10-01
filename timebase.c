@@ -1011,6 +1011,9 @@ void Timebase_UpCounter_SS_Update(uint8_t window){
 	  Timebase_UpCounter_SS_Set_EndValueSubSec(window, 0);
       Timebase_UpCounter_SS_Set_TemporaryValue(window, 0);
       Timebase_UpCounter_SS_Set_Value(window, Timebase_UpCounter_SS_Get_TargetValue(window));
+	  int32_t temp = Timebase_UpCounter_SS_Get_ReloadValue(window);
+	  //reset
+	  Timebase_UpCounter_SS_Set_ReloadValue(window, temp);
       Timebase_UpCounter_SS_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
   } else if (Timebase_UpCounter_SS_Get_Status( window ) == COUNTER_STATE_STOPPED){
@@ -1295,6 +1298,9 @@ void Timebase_UpCounter_Update(uint8_t window){
       Timebase_UpCounter_Set_EndValueSec(window, 0);
       Timebase_UpCounter_Set_TemporaryValue(window, 0);
       Timebase_UpCounter_Set_Value(window, Timebase_UpCounter_Get_TargetValue(window));
+	  int32_t temp = Timebase_UpCounter_Get_ReloadValue(window);
+	  //reset
+	  Timebase_UpCounter_Set_ReloadValue(window, temp);
       Timebase_UpCounter_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
   } else if (Timebase_UpCounter_Get_Status( window ) == COUNTER_STATE_STOPPED){
@@ -1551,7 +1557,9 @@ void Timebase_DownCounter_SS_Update(uint8_t window){
 	temp_s += temp_ss;
 	Timebase_DownCounter_SS_Set_Value(window, temp_s);
     if(Timebase_DownCounter_SS_Get_Value(window) <= 0){
+	  int32_t temp = Timebase_DownCounter_SS_Get_ReloadValue(window);
       Timebase_DownCounter_SS_Reset(window);
+	  Timebase_DownCounter_SS_Set_ReloadValue(window, temp);
       Timebase_DownCounter_SS_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
   } else if (Timebase_DownCounter_SS_Get_Status( window ) == COUNTER_STATE_STOPPED){
@@ -1781,7 +1789,9 @@ void Timebase_DownCounter_Update(uint8_t window){
   if( Timebase_DownCounter_Get_Status( window ) == COUNTER_STATE_STARTED ){ 
     Timebase_DownCounter_Set_Value(window, Timebase_DownCounter_Get_EndValue(window) - Timebase_Timer_Get_Seconds());
     if(Timebase_DownCounter_Get_Value(window) <= 0){
+	  int32_t temp = Timebase_DownCounter_Get_ReloadValue(window);
       Timebase_DownCounter_Reset(window);
+	  Timebase_DownCounter_Set_ReloadValue(window, temp);
       Timebase_DownCounter_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
   } else if (Timebase_DownCounter_Get_Status( window ) == COUNTER_STATE_STOPPED){
@@ -2004,7 +2014,9 @@ void Timebase_LPDownCounter_Update(uint8_t window){
   if( Timebase_LPDownCounter_Get_Status( window ) == COUNTER_STATE_STARTED ){ 
     Timebase_LPDownCounter_Set_Value(window, Timebase_LPDownCounter_Get_EndValue(window) - Timebase_LPTimer_Get_Seconds());
     if(Timebase_LPDownCounter_Get_Value(window) <= 0){
+	  int32_t temp = Timebase_LPDownCounter_Get_ReloadValue(window);
       Timebase_LPDownCounter_Reset(window);
+	  Timebase_LPDownCounter_Set_ReloadValue(window, temp);
       Timebase_LPDownCounter_Set_Status(window, COUNTER_STATE_EXPIRED);
     }
   } else if (Timebase_LPDownCounter_Get_Status( window ) == COUNTER_STATE_STOPPED){
