@@ -3,29 +3,29 @@ main.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000012  00800100  0000202a  000020be  2**0
+  0 .data         00000012  00800100  00002572  00002606  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000202a  00000000  00000000  00000094  2**1
+  1 .text         00002572  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000050  00800112  00800112  000020d0  2**0
+  2 .bss          00000098  00800112  00800112  00002618  2**0
                   ALLOC
-  3 .debug_aranges 00000080  00000000  00000000  000020d0  2**0
+  3 .debug_aranges 000000a0  00000000  00000000  00002618  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_pubnames 000010ce  00000000  00000000  00002150  2**0
+  4 .debug_pubnames 0000137e  00000000  00000000  000026b8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0000346e  00000000  00000000  0000321e  2**0
+  5 .debug_info   00003bfe  00000000  00000000  00003a36  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000052c  00000000  00000000  0000668c  2**0
+  6 .debug_abbrev 000006f9  00000000  00000000  00007634  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00001a2b  00000000  00000000  00006bb8  2**0
+  7 .debug_line   00001e8f  00000000  00000000  00007d2d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000790  00000000  00000000  000085e4  2**2
+  8 .debug_frame  00000980  00000000  00000000  00009bbc  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000129c  00000000  00000000  00008d74  2**0
+  9 .debug_str    00001584  00000000  00000000  0000a53c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000014ba  00000000  00000000  0000a010  2**0
+ 10 .debug_loc    00001556  00000000  00000000  0000bac0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000048  00000000  00000000  0000b4ca  2**0
+ 11 .debug_ranges 00000048  00000000  00000000  0000d016  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -70,8 +70,8 @@ Disassembly of section .text:
       74:	11 e0       	ldi	r17, 0x01	; 1
       76:	a0 e0       	ldi	r26, 0x00	; 0
       78:	b1 e0       	ldi	r27, 0x01	; 1
-      7a:	ea e2       	ldi	r30, 0x2A	; 42
-      7c:	f0 e2       	ldi	r31, 0x20	; 32
+      7a:	e2 e7       	ldi	r30, 0x72	; 114
+      7c:	f5 e2       	ldi	r31, 0x25	; 37
       7e:	02 c0       	rjmp	.+4      	; 0x84 <.do_copy_data_start>
 
 00000080 <.do_copy_data_loop>:
@@ -93,11 +93,11 @@ Disassembly of section .text:
       92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-      94:	a2 36       	cpi	r26, 0x62	; 98
+      94:	aa 3a       	cpi	r26, 0xAA	; 170
       96:	b1 07       	cpc	r27, r17
       98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
       9a:	0e 94 53 00 	call	0xa6	; 0xa6 <main>
-      9e:	0c 94 13 10 	jmp	0x2026	; 0x2026 <_exit>
+      9e:	0c 94 b7 12 	jmp	0x256e	; 0x256e <_exit>
 
 000000a2 <__bad_interrupt>:
       a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -353,7 +353,7 @@ void Timebase_Timer_Enable(uint16_t UpdateRateHz){
      26a:	7b e1       	ldi	r23, 0x1B	; 27
      26c:	87 eb       	ldi	r24, 0xB7	; 183
      26e:	90 e0       	ldi	r25, 0x00	; 0
-     270:	0e 94 f8 0f 	call	0x1ff0	; 0x1ff0 <__divmodsi4>
+     270:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
      274:	b2 2e       	mov	r11, r18
      276:	c3 2e       	mov	r12, r19
      278:	d4 2e       	mov	r13, r20
@@ -384,7 +384,7 @@ void Timebase_Timer_Enable(uint16_t UpdateRateHz){
      29e:	7c 2d       	mov	r23, r12
      2a0:	8d 2d       	mov	r24, r13
      2a2:	90 2f       	mov	r25, r16
-     2a4:	0e 94 f8 0f 	call	0x1ff0	; 0x1ff0 <__divmodsi4>
+     2a4:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
      2a8:	c9 01       	movw	r24, r18
      2aa:	da 01       	movw	r26, r20
      2ac:	9c 01       	movw	r18, r24
@@ -941,7 +941,7 @@ int32_t Timebase_Timer_Get_SecondsShadow_Securely(void){
      53a:	50 e0       	ldi	r21, 0x00	; 0
      53c:	c8 01       	movw	r24, r16
      53e:	b7 01       	movw	r22, r14
-     540:	0e 94 b7 0f 	call	0x1f6e	; 0x1f6e <__mulsi3>
+     540:	0e 94 5b 12 	call	0x24b6	; 0x24b6 <__mulsi3>
   smpl_val += smpl_ss;
      544:	76 01       	movw	r14, r12
      546:	00 e0       	ldi	r16, 0x00	; 0
@@ -1011,7 +1011,7 @@ int32_t Timebase_Timer_Get_SecondsShadow_Securely(void){
      598:	50 e0       	ldi	r21, 0x00	; 0
      59a:	c6 01       	movw	r24, r12
      59c:	b5 01       	movw	r22, r10
-     59e:	0e 94 b7 0f 	call	0x1f6e	; 0x1f6e <__mulsi3>
+     59e:	0e 94 5b 12 	call	0x24b6	; 0x24b6 <__mulsi3>
      5a2:	9b 01       	movw	r18, r22
      5a4:	ac 01       	movw	r20, r24
 	curr_val += curr_ss;
@@ -2319,7 +2319,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
      c76:	50 e0       	ldi	r21, 0x00	; 0
      c78:	c2 01       	movw	r24, r4
      c7a:	b1 01       	movw	r22, r2
-     c7c:	0e 94 f8 0f 	call	0x1ff0	; 0x1ff0 <__divmodsi4>
+     c7c:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
      c80:	7b 01       	movw	r14, r22
      c82:	8c 01       	movw	r16, r24
 	sec_val     = value / Timebase->Config.UpdateRate;
@@ -2331,7 +2331,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
      c8e:	50 e0       	ldi	r21, 0x00	; 0
      c90:	c2 01       	movw	r24, r4
      c92:	b1 01       	movw	r22, r2
-     c94:	0e 94 f8 0f 	call	0x1ff0	; 0x1ff0 <__divmodsi4>
+     c94:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
      c98:	c9 01       	movw	r24, r18
      c9a:	da 01       	movw	r26, r20
      c9c:	3c 01       	movw	r6, r24
@@ -2371,7 +2371,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
      cd8:	50 e0       	ldi	r21, 0x00	; 0
      cda:	c6 01       	movw	r24, r12
      cdc:	b5 01       	movw	r22, r10
-     cde:	0e 94 f8 0f 	call	0x1ff0	; 0x1ff0 <__divmodsi4>
+     cde:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
      ce2:	ac 01       	movw	r20, r24
      ce4:	cb 01       	movw	r24, r22
      ce6:	da 01       	movw	r26, r20
@@ -2710,7 +2710,7 @@ int32_t Timebase_Timer_Get_Seconds(void){
 	temp_ss = Timebase_DownCounter_SS_Get_EndValueSubSec(window) - temp_ss;
      e74:	80 e0       	ldi	r24, 0x00	; 0
      e76:	90 e0       	ldi	r25, 0x00	; 0
-     e78:	0e 94 b7 0f 	call	0x1f6e	; 0x1f6e <__mulsi3>
+     e78:	0e 94 5b 12 	call	0x24b6	; 0x24b6 <__mulsi3>
      e7c:	6e 19       	sub	r22, r14
      e7e:	7f 09       	sbc	r23, r15
      e80:	80 0b       	sbc	r24, r16
@@ -2874,7 +2874,7 @@ void Timebase_DownCounter_SS_Set_EndValueSec(uint8_t window, int32_t value){
      f02:	50 e0       	ldi	r21, 0x00	; 0
      f04:	c2 01       	movw	r24, r4
      f06:	b1 01       	movw	r22, r2
-     f08:	0e 94 f8 0f 	call	0x1ff0	; 0x1ff0 <__divmodsi4>
+     f08:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
      f0c:	e2 0e       	add	r14, r18
      f0e:	f3 1e       	adc	r15, r19
      f10:	04 1f       	adc	r16, r20
@@ -2894,7 +2894,7 @@ void Timebase_DownCounter_SS_Set_EndValueSubSec(uint8_t window, int32_t value){
      f22:	b1 01       	movw	r22, r2
      f24:	a6 01       	movw	r20, r12
      f26:	95 01       	movw	r18, r10
-     f28:	0e 94 f8 0f 	call	0x1ff0	; 0x1ff0 <__divmodsi4>
+     f28:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
      f2c:	88 24       	eor	r8, r8
      f2e:	99 24       	eor	r9, r9
      f30:	66 0e       	add	r6, r22
@@ -5638,7 +5638,7 @@ void UART_Config_BAUD_Rate(uint32_t baud_rate){
     1c00:	73 ee       	ldi	r23, 0xE3	; 227
     1c02:	86 e1       	ldi	r24, 0x16	; 22
     1c04:	90 e0       	ldi	r25, 0x00	; 0
-    1c06:	0e 94 d6 0f 	call	0x1fac	; 0x1fac <__udivmodsi4>
+    1c06:	0e 94 7a 12 	call	0x24f4	; 0x24f4 <__udivmodsi4>
     1c0a:	21 50       	subi	r18, 0x01	; 1
     1c0c:	30 40       	sbci	r19, 0x00	; 0
     1c0e:	40 40       	sbci	r20, 0x00	; 0
@@ -6171,7 +6171,7 @@ void UART_Determine_Digit_Numbers(uint32_t num){
     1e98:	30 e0       	ldi	r19, 0x00	; 0
     1e9a:	40 e0       	ldi	r20, 0x00	; 0
     1e9c:	50 e0       	ldi	r21, 0x00	; 0
-    1e9e:	0e 94 d6 0f 	call	0x1fac	; 0x1fac <__udivmodsi4>
+    1e9e:	0e 94 7a 12 	call	0x24f4	; 0x24f4 <__udivmodsi4>
     1ea2:	f8 01       	movw	r30, r16
     1ea4:	61 83       	std	Z+1, r22	; 0x01
       num/=10;
@@ -6181,7 +6181,7 @@ void UART_Determine_Digit_Numbers(uint32_t num){
     1eac:	30 e0       	ldi	r19, 0x00	; 0
     1eae:	40 e0       	ldi	r20, 0x00	; 0
     1eb0:	50 e0       	ldi	r21, 0x00	; 0
-    1eb2:	0e 94 d6 0f 	call	0x1fac	; 0x1fac <__udivmodsi4>
+    1eb2:	0e 94 7a 12 	call	0x24f4	; 0x24f4 <__udivmodsi4>
     1eb6:	c9 01       	movw	r24, r18
     1eb8:	da 01       	movw	r26, r20
     1eba:	6c 01       	movw	r12, r24
@@ -6370,116 +6370,946 @@ void UART_Config_Transmitter(void){
     1f6a:	ef 90       	pop	r14
     1f6c:	08 95       	ret
 
-00001f6e <__mulsi3>:
-    1f6e:	62 9f       	mul	r22, r18
-    1f70:	d0 01       	movw	r26, r0
-    1f72:	73 9f       	mul	r23, r19
-    1f74:	f0 01       	movw	r30, r0
-    1f76:	82 9f       	mul	r24, r18
-    1f78:	e0 0d       	add	r30, r0
-    1f7a:	f1 1d       	adc	r31, r1
-    1f7c:	64 9f       	mul	r22, r20
-    1f7e:	e0 0d       	add	r30, r0
-    1f80:	f1 1d       	adc	r31, r1
-    1f82:	92 9f       	mul	r25, r18
-    1f84:	f0 0d       	add	r31, r0
-    1f86:	83 9f       	mul	r24, r19
-    1f88:	f0 0d       	add	r31, r0
-    1f8a:	74 9f       	mul	r23, r20
-    1f8c:	f0 0d       	add	r31, r0
-    1f8e:	65 9f       	mul	r22, r21
-    1f90:	f0 0d       	add	r31, r0
-    1f92:	99 27       	eor	r25, r25
-    1f94:	72 9f       	mul	r23, r18
-    1f96:	b0 0d       	add	r27, r0
-    1f98:	e1 1d       	adc	r30, r1
-    1f9a:	f9 1f       	adc	r31, r25
-    1f9c:	63 9f       	mul	r22, r19
-    1f9e:	b0 0d       	add	r27, r0
-    1fa0:	e1 1d       	adc	r30, r1
-    1fa2:	f9 1f       	adc	r31, r25
-    1fa4:	bd 01       	movw	r22, r26
-    1fa6:	cf 01       	movw	r24, r30
-    1fa8:	11 24       	eor	r1, r1
-    1faa:	08 95       	ret
+00001f6e <PID_Struct_Init>:
 
-00001fac <__udivmodsi4>:
-    1fac:	a1 e2       	ldi	r26, 0x21	; 33
-    1fae:	1a 2e       	mov	r1, r26
-    1fb0:	aa 1b       	sub	r26, r26
-    1fb2:	bb 1b       	sub	r27, r27
-    1fb4:	fd 01       	movw	r30, r26
-    1fb6:	0d c0       	rjmp	.+26     	; 0x1fd2 <__udivmodsi4_ep>
+PID_t PID_type;
+PID_t *PID;
 
-00001fb8 <__udivmodsi4_loop>:
-    1fb8:	aa 1f       	adc	r26, r26
-    1fba:	bb 1f       	adc	r27, r27
-    1fbc:	ee 1f       	adc	r30, r30
-    1fbe:	ff 1f       	adc	r31, r31
-    1fc0:	a2 17       	cp	r26, r18
-    1fc2:	b3 07       	cpc	r27, r19
-    1fc4:	e4 07       	cpc	r30, r20
-    1fc6:	f5 07       	cpc	r31, r21
-    1fc8:	20 f0       	brcs	.+8      	; 0x1fd2 <__udivmodsi4_ep>
-    1fca:	a2 1b       	sub	r26, r18
-    1fcc:	b3 0b       	sbc	r27, r19
-    1fce:	e4 0b       	sbc	r30, r20
-    1fd0:	f5 0b       	sbc	r31, r21
+void PID_Struct_Init(void){
+  PID=&PID_type;
+    1f6e:	84 e6       	ldi	r24, 0x64	; 100
+    1f70:	91 e0       	ldi	r25, 0x01	; 1
+    1f72:	90 93 63 01 	sts	0x0163, r25
+    1f76:	80 93 62 01 	sts	0x0162, r24
+  PID->Input.Kp = 0;
+    1f7a:	10 92 64 01 	sts	0x0164, r1
+    1f7e:	10 92 65 01 	sts	0x0165, r1
+    1f82:	10 92 66 01 	sts	0x0166, r1
+    1f86:	10 92 67 01 	sts	0x0167, r1
+  PID->Input.Ki = 0;
+    1f8a:	10 92 68 01 	sts	0x0168, r1
+    1f8e:	10 92 69 01 	sts	0x0169, r1
+    1f92:	10 92 6a 01 	sts	0x016A, r1
+    1f96:	10 92 6b 01 	sts	0x016B, r1
+  PID->Input.Kd = 0;
+    1f9a:	10 92 6c 01 	sts	0x016C, r1
+    1f9e:	10 92 6d 01 	sts	0x016D, r1
+    1fa2:	10 92 6e 01 	sts	0x016E, r1
+    1fa6:	10 92 6f 01 	sts	0x016F, r1
+  PID->Input.SetPoint = 0;
+    1faa:	10 92 70 01 	sts	0x0170, r1
+    1fae:	10 92 71 01 	sts	0x0171, r1
+    1fb2:	10 92 72 01 	sts	0x0172, r1
+    1fb6:	10 92 73 01 	sts	0x0173, r1
+  PID->Input.ProcessValue = 0;
+    1fba:	10 92 74 01 	sts	0x0174, r1
+    1fbe:	10 92 75 01 	sts	0x0175, r1
+    1fc2:	10 92 76 01 	sts	0x0176, r1
+    1fc6:	10 92 77 01 	sts	0x0177, r1
+  PID->Error.PError = 0;
+    1fca:	10 92 78 01 	sts	0x0178, r1
+    1fce:	10 92 79 01 	sts	0x0179, r1
+    1fd2:	10 92 7a 01 	sts	0x017A, r1
+    1fd6:	10 92 7b 01 	sts	0x017B, r1
+  PID->Error.DError = 0;
+    1fda:	10 92 7c 01 	sts	0x017C, r1
+    1fde:	10 92 7d 01 	sts	0x017D, r1
+    1fe2:	10 92 7e 01 	sts	0x017E, r1
+    1fe6:	10 92 7f 01 	sts	0x017F, r1
+  PID->Error.IError = 0;
+    1fea:	10 92 80 01 	sts	0x0180, r1
+    1fee:	10 92 81 01 	sts	0x0181, r1
+    1ff2:	10 92 82 01 	sts	0x0182, r1
+    1ff6:	10 92 83 01 	sts	0x0183, r1
+  PID->Error.IErrorLimit = 0;
+    1ffa:	10 92 84 01 	sts	0x0184, r1
+    1ffe:	10 92 85 01 	sts	0x0185, r1
+    2002:	10 92 86 01 	sts	0x0186, r1
+    2006:	10 92 87 01 	sts	0x0187, r1
+  PID->Error.LastError = 0;
+    200a:	10 92 88 01 	sts	0x0188, r1
+    200e:	10 92 89 01 	sts	0x0189, r1
+    2012:	10 92 8a 01 	sts	0x018A, r1
+    2016:	10 92 8b 01 	sts	0x018B, r1
+  PID->Products.PError = 0;
+    201a:	10 92 8c 01 	sts	0x018C, r1
+    201e:	10 92 8d 01 	sts	0x018D, r1
+    2022:	10 92 8e 01 	sts	0x018E, r1
+    2026:	10 92 8f 01 	sts	0x018F, r1
+  PID->Products.IError = 0;
+    202a:	10 92 90 01 	sts	0x0190, r1
+    202e:	10 92 91 01 	sts	0x0191, r1
+    2032:	10 92 92 01 	sts	0x0192, r1
+    2036:	10 92 93 01 	sts	0x0193, r1
+  PID->Products.DError = 0;
+    203a:	10 92 94 01 	sts	0x0194, r1
+    203e:	10 92 95 01 	sts	0x0195, r1
+    2042:	10 92 96 01 	sts	0x0196, r1
+    2046:	10 92 97 01 	sts	0x0197, r1
+  PID->Products.ScaleFact = 0;
+    204a:	10 92 98 01 	sts	0x0198, r1
+    204e:	10 92 99 01 	sts	0x0199, r1
+    2052:	10 92 9a 01 	sts	0x019A, r1
+    2056:	10 92 9b 01 	sts	0x019B, r1
+  PID->Output = 0;
+    205a:	10 92 9c 01 	sts	0x019C, r1
+    205e:	10 92 9d 01 	sts	0x019D, r1
+    2062:	10 92 9e 01 	sts	0x019E, r1
+    2066:	10 92 9f 01 	sts	0x019F, r1
+}
+    206a:	08 95       	ret
 
-00001fd2 <__udivmodsi4_ep>:
-    1fd2:	66 1f       	adc	r22, r22
-    1fd4:	77 1f       	adc	r23, r23
-    1fd6:	88 1f       	adc	r24, r24
-    1fd8:	99 1f       	adc	r25, r25
-    1fda:	1a 94       	dec	r1
-    1fdc:	69 f7       	brne	.-38     	; 0x1fb8 <__udivmodsi4_loop>
-    1fde:	60 95       	com	r22
-    1fe0:	70 95       	com	r23
-    1fe2:	80 95       	com	r24
-    1fe4:	90 95       	com	r25
-    1fe6:	9b 01       	movw	r18, r22
-    1fe8:	ac 01       	movw	r20, r24
-    1fea:	bd 01       	movw	r22, r26
-    1fec:	cf 01       	movw	r24, r30
-    1fee:	08 95       	ret
+0000206c <PID_Set_Kp>:
 
-00001ff0 <__divmodsi4>:
-    1ff0:	97 fb       	bst	r25, 7
-    1ff2:	09 2e       	mov	r0, r25
-    1ff4:	05 26       	eor	r0, r21
-    1ff6:	0e d0       	rcall	.+28     	; 0x2014 <__divmodsi4_neg1>
-    1ff8:	57 fd       	sbrc	r21, 7
-    1ffa:	04 d0       	rcall	.+8      	; 0x2004 <__divmodsi4_neg2>
-    1ffc:	d7 df       	rcall	.-82     	; 0x1fac <__udivmodsi4>
-    1ffe:	0a d0       	rcall	.+20     	; 0x2014 <__divmodsi4_neg1>
-    2000:	00 1c       	adc	r0, r0
-    2002:	38 f4       	brcc	.+14     	; 0x2012 <__divmodsi4_exit>
 
-00002004 <__divmodsi4_neg2>:
-    2004:	50 95       	com	r21
-    2006:	40 95       	com	r20
-    2008:	30 95       	com	r19
-    200a:	21 95       	neg	r18
-    200c:	3f 4f       	sbci	r19, 0xFF	; 255
-    200e:	4f 4f       	sbci	r20, 0xFF	; 255
-    2010:	5f 4f       	sbci	r21, 0xFF	; 255
+void PID_Set_Kp(signed long kp){
+  PID->Input.Kp = kp;
+    206c:	e0 91 62 01 	lds	r30, 0x0162
+    2070:	f0 91 63 01 	lds	r31, 0x0163
+    2074:	60 83       	st	Z, r22
+    2076:	71 83       	std	Z+1, r23	; 0x01
+    2078:	82 83       	std	Z+2, r24	; 0x02
+    207a:	93 83       	std	Z+3, r25	; 0x03
+}
+    207c:	08 95       	ret
 
-00002012 <__divmodsi4_exit>:
-    2012:	08 95       	ret
+0000207e <PID_Set_Ki>:
 
-00002014 <__divmodsi4_neg1>:
-    2014:	f6 f7       	brtc	.-4      	; 0x2012 <__divmodsi4_exit>
-    2016:	90 95       	com	r25
-    2018:	80 95       	com	r24
-    201a:	70 95       	com	r23
-    201c:	61 95       	neg	r22
-    201e:	7f 4f       	sbci	r23, 0xFF	; 255
-    2020:	8f 4f       	sbci	r24, 0xFF	; 255
-    2022:	9f 4f       	sbci	r25, 0xFF	; 255
-    2024:	08 95       	ret
+void PID_Set_Ki(signed long ki){
+  PID->Input.Ki = ki;
+    207e:	e0 91 62 01 	lds	r30, 0x0162
+    2082:	f0 91 63 01 	lds	r31, 0x0163
+    2086:	64 83       	std	Z+4, r22	; 0x04
+    2088:	75 83       	std	Z+5, r23	; 0x05
+    208a:	86 83       	std	Z+6, r24	; 0x06
+    208c:	97 83       	std	Z+7, r25	; 0x07
+}
+    208e:	08 95       	ret
 
-00002026 <_exit>:
-    2026:	f8 94       	cli
+00002090 <PID_Set_Kd>:
 
-00002028 <__stop_program>:
-    2028:	ff cf       	rjmp	.-2      	; 0x2028 <__stop_program>
+void PID_Set_Kd(signed long kd){
+  PID->Input.Kd = kd;
+    2090:	e0 91 62 01 	lds	r30, 0x0162
+    2094:	f0 91 63 01 	lds	r31, 0x0163
+    2098:	60 87       	std	Z+8, r22	; 0x08
+    209a:	71 87       	std	Z+9, r23	; 0x09
+    209c:	82 87       	std	Z+10, r24	; 0x0a
+    209e:	93 87       	std	Z+11, r25	; 0x0b
+}
+    20a0:	08 95       	ret
+
+000020a2 <PID_Set_Constants>:
+
+void PID_Set_Constants(signed long kp, signed long ki, signed long kd){
+    20a2:	ef 92       	push	r14
+    20a4:	ff 92       	push	r15
+    20a6:	0f 93       	push	r16
+    20a8:	1f 93       	push	r17
+  PID->Output = 0;
+}
+
+
+void PID_Set_Kp(signed long kp){
+  PID->Input.Kp = kp;
+    20aa:	e0 91 62 01 	lds	r30, 0x0162
+    20ae:	f0 91 63 01 	lds	r31, 0x0163
+    20b2:	60 83       	st	Z, r22
+    20b4:	71 83       	std	Z+1, r23	; 0x01
+    20b6:	82 83       	std	Z+2, r24	; 0x02
+    20b8:	93 83       	std	Z+3, r25	; 0x03
+}
+
+void PID_Set_Ki(signed long ki){
+  PID->Input.Ki = ki;
+    20ba:	24 83       	std	Z+4, r18	; 0x04
+    20bc:	35 83       	std	Z+5, r19	; 0x05
+    20be:	46 83       	std	Z+6, r20	; 0x06
+    20c0:	57 83       	std	Z+7, r21	; 0x07
+}
+
+void PID_Set_Kd(signed long kd){
+  PID->Input.Kd = kd;
+    20c2:	e0 86       	std	Z+8, r14	; 0x08
+    20c4:	f1 86       	std	Z+9, r15	; 0x09
+    20c6:	02 87       	std	Z+10, r16	; 0x0a
+    20c8:	13 87       	std	Z+11, r17	; 0x0b
+
+void PID_Set_Constants(signed long kp, signed long ki, signed long kd){
+  PID_Set_Kp(kp);
+  PID_Set_Ki(ki);
+  PID_Set_Kd(kd);
+}
+    20ca:	1f 91       	pop	r17
+    20cc:	0f 91       	pop	r16
+    20ce:	ff 90       	pop	r15
+    20d0:	ef 90       	pop	r14
+    20d2:	08 95       	ret
+
+000020d4 <PID_Set_SetPoint>:
+
+void PID_Set_SetPoint(signed long set_point){
+  PID->Input.SetPoint = set_point;
+    20d4:	e0 91 62 01 	lds	r30, 0x0162
+    20d8:	f0 91 63 01 	lds	r31, 0x0163
+    20dc:	64 87       	std	Z+12, r22	; 0x0c
+    20de:	75 87       	std	Z+13, r23	; 0x0d
+    20e0:	86 87       	std	Z+14, r24	; 0x0e
+    20e2:	97 87       	std	Z+15, r25	; 0x0f
+}
+    20e4:	08 95       	ret
+
+000020e6 <PID_Set_ProcessValue>:
+
+void PID_Set_ProcessValue(signed long process_value){
+  PID->Input.ProcessValue = process_value;
+    20e6:	e0 91 62 01 	lds	r30, 0x0162
+    20ea:	f0 91 63 01 	lds	r31, 0x0163
+    20ee:	60 8b       	std	Z+16, r22	; 0x10
+    20f0:	71 8b       	std	Z+17, r23	; 0x11
+    20f2:	82 8b       	std	Z+18, r24	; 0x12
+    20f4:	93 8b       	std	Z+19, r25	; 0x13
+}
+    20f6:	08 95       	ret
+
+000020f8 <PID_Set_Max_IError>:
+
+void PID_Set_Max_IError(signed long max_ierror){
+  PID->Error.IErrorLimit = max_ierror;
+    20f8:	e0 91 62 01 	lds	r30, 0x0162
+    20fc:	f0 91 63 01 	lds	r31, 0x0163
+    2100:	60 a3       	std	Z+32, r22	; 0x20
+    2102:	71 a3       	std	Z+33, r23	; 0x21
+    2104:	82 a3       	std	Z+34, r24	; 0x22
+    2106:	93 a3       	std	Z+35, r25	; 0x23
+}
+    2108:	08 95       	ret
+
+0000210a <PID_Set_Scaling_Factor>:
+
+void PID_Set_Scaling_Factor(signed long scale_fact){
+  PID->Products.ScaleFact = scale_fact;
+    210a:	e0 91 62 01 	lds	r30, 0x0162
+    210e:	f0 91 63 01 	lds	r31, 0x0163
+    2112:	64 ab       	std	Z+52, r22	; 0x34
+    2114:	75 ab       	std	Z+53, r23	; 0x35
+    2116:	86 ab       	std	Z+54, r24	; 0x36
+    2118:	97 ab       	std	Z+55, r25	; 0x37
+}
+    211a:	08 95       	ret
+
+0000211c <PID_Reset_IError>:
+
+
+
+
+void PID_Reset_IError(void){
+  PID->Error.IError = 0;
+    211c:	e0 91 62 01 	lds	r30, 0x0162
+    2120:	f0 91 63 01 	lds	r31, 0x0163
+    2124:	14 8e       	std	Z+28, r1	; 0x1c
+    2126:	15 8e       	std	Z+29, r1	; 0x1d
+    2128:	16 8e       	std	Z+30, r1	; 0x1e
+    212a:	17 8e       	std	Z+31, r1	; 0x1f
+}
+    212c:	08 95       	ret
+
+0000212e <PID_Calculate_Error>:
+
+void PID_Calculate_Error(void){
+    212e:	ef 92       	push	r14
+    2130:	ff 92       	push	r15
+    2132:	0f 93       	push	r16
+    2134:	1f 93       	push	r17
+  PID->Error.PError = PID->Input.SetPoint - PID->Input.ProcessValue;
+    2136:	e0 91 62 01 	lds	r30, 0x0162
+    213a:	f0 91 63 01 	lds	r31, 0x0163
+    213e:	24 85       	ldd	r18, Z+12	; 0x0c
+    2140:	35 85       	ldd	r19, Z+13	; 0x0d
+    2142:	46 85       	ldd	r20, Z+14	; 0x0e
+    2144:	57 85       	ldd	r21, Z+15	; 0x0f
+    2146:	80 89       	ldd	r24, Z+16	; 0x10
+    2148:	91 89       	ldd	r25, Z+17	; 0x11
+    214a:	a2 89       	ldd	r26, Z+18	; 0x12
+    214c:	b3 89       	ldd	r27, Z+19	; 0x13
+    214e:	28 1b       	sub	r18, r24
+    2150:	39 0b       	sbc	r19, r25
+    2152:	4a 0b       	sbc	r20, r26
+    2154:	5b 0b       	sbc	r21, r27
+    2156:	24 8b       	std	Z+20, r18	; 0x14
+    2158:	35 8b       	std	Z+21, r19	; 0x15
+    215a:	46 8b       	std	Z+22, r20	; 0x16
+    215c:	57 8b       	std	Z+23, r21	; 0x17
+  PID->Error.DError = PID->Error.PError - PID->Error.LastError;
+    215e:	84 a1       	ldd	r24, Z+36	; 0x24
+    2160:	95 a1       	ldd	r25, Z+37	; 0x25
+    2162:	a6 a1       	ldd	r26, Z+38	; 0x26
+    2164:	b7 a1       	ldd	r27, Z+39	; 0x27
+    2166:	79 01       	movw	r14, r18
+    2168:	8a 01       	movw	r16, r20
+    216a:	e8 1a       	sub	r14, r24
+    216c:	f9 0a       	sbc	r15, r25
+    216e:	0a 0b       	sbc	r16, r26
+    2170:	1b 0b       	sbc	r17, r27
+    2172:	e0 8e       	std	Z+24, r14	; 0x18
+    2174:	f1 8e       	std	Z+25, r15	; 0x19
+    2176:	02 8f       	std	Z+26, r16	; 0x1a
+    2178:	13 8f       	std	Z+27, r17	; 0x1b
+  PID->Error.LastError = PID->Error.PError;
+    217a:	24 a3       	std	Z+36, r18	; 0x24
+    217c:	35 a3       	std	Z+37, r19	; 0x25
+    217e:	46 a3       	std	Z+38, r20	; 0x26
+    2180:	57 a3       	std	Z+39, r21	; 0x27
+  PID->Error.IError += PID->Error.PError;
+    2182:	e4 8c       	ldd	r14, Z+28	; 0x1c
+    2184:	f5 8c       	ldd	r15, Z+29	; 0x1d
+    2186:	06 8d       	ldd	r16, Z+30	; 0x1e
+    2188:	17 8d       	ldd	r17, Z+31	; 0x1f
+    218a:	e2 0e       	add	r14, r18
+    218c:	f3 1e       	adc	r15, r19
+    218e:	04 1f       	adc	r16, r20
+    2190:	15 1f       	adc	r17, r21
+    2192:	e4 8e       	std	Z+28, r14	; 0x1c
+    2194:	f5 8e       	std	Z+29, r15	; 0x1d
+    2196:	06 8f       	std	Z+30, r16	; 0x1e
+    2198:	17 8f       	std	Z+31, r17	; 0x1f
+  if     ( PID->Error.IError > PID->Error.IErrorLimit ){
+    219a:	80 a1       	ldd	r24, Z+32	; 0x20
+    219c:	91 a1       	ldd	r25, Z+33	; 0x21
+    219e:	a2 a1       	ldd	r26, Z+34	; 0x22
+    21a0:	b3 a1       	ldd	r27, Z+35	; 0x23
+    21a2:	8e 15       	cp	r24, r14
+    21a4:	9f 05       	cpc	r25, r15
+    21a6:	a0 07       	cpc	r26, r16
+    21a8:	b1 07       	cpc	r27, r17
+    21aa:	2c f4       	brge	.+10     	; 0x21b6 <PID_Calculate_Error+0x88>
+    PID->Error.IError = PID->Error.IErrorLimit;
+    21ac:	84 8f       	std	Z+28, r24	; 0x1c
+    21ae:	95 8f       	std	Z+29, r25	; 0x1d
+    21b0:	a6 8f       	std	Z+30, r26	; 0x1e
+    21b2:	b7 8f       	std	Z+31, r27	; 0x1f
+    21b4:	10 c0       	rjmp	.+32     	; 0x21d6 <PID_Calculate_Error+0xa8>
+  }
+  else if( PID->Error.IError < -PID->Error.IErrorLimit ){
+    21b6:	22 27       	eor	r18, r18
+    21b8:	33 27       	eor	r19, r19
+    21ba:	a9 01       	movw	r20, r18
+    21bc:	28 1b       	sub	r18, r24
+    21be:	39 0b       	sbc	r19, r25
+    21c0:	4a 0b       	sbc	r20, r26
+    21c2:	5b 0b       	sbc	r21, r27
+    21c4:	e2 16       	cp	r14, r18
+    21c6:	f3 06       	cpc	r15, r19
+    21c8:	04 07       	cpc	r16, r20
+    21ca:	15 07       	cpc	r17, r21
+    21cc:	24 f4       	brge	.+8      	; 0x21d6 <PID_Calculate_Error+0xa8>
+    PID->Error.IError = -PID->Error.IErrorLimit;
+    21ce:	24 8f       	std	Z+28, r18	; 0x1c
+    21d0:	35 8f       	std	Z+29, r19	; 0x1d
+    21d2:	46 8f       	std	Z+30, r20	; 0x1e
+    21d4:	57 8f       	std	Z+31, r21	; 0x1f
+  }
+}
+    21d6:	1f 91       	pop	r17
+    21d8:	0f 91       	pop	r16
+    21da:	ff 90       	pop	r15
+    21dc:	ef 90       	pop	r14
+    21de:	08 95       	ret
+
+000021e0 <PID_Calculate_Error_Products>:
+
+void PID_Calculate_Error_Products(void){
+    21e0:	4f 92       	push	r4
+    21e2:	5f 92       	push	r5
+    21e4:	6f 92       	push	r6
+    21e6:	7f 92       	push	r7
+    21e8:	8f 92       	push	r8
+    21ea:	9f 92       	push	r9
+    21ec:	af 92       	push	r10
+    21ee:	bf 92       	push	r11
+    21f0:	cf 92       	push	r12
+    21f2:	df 92       	push	r13
+    21f4:	ef 92       	push	r14
+    21f6:	ff 92       	push	r15
+    21f8:	0f 93       	push	r16
+    21fa:	1f 93       	push	r17
+    21fc:	df 93       	push	r29
+    21fe:	cf 93       	push	r28
+    2200:	00 d0       	rcall	.+0      	; 0x2202 <PID_Calculate_Error_Products+0x22>
+    2202:	00 d0       	rcall	.+0      	; 0x2204 <PID_Calculate_Error_Products+0x24>
+    2204:	cd b7       	in	r28, 0x3d	; 61
+    2206:	de b7       	in	r29, 0x3e	; 62
+  PID->Products.PError = ( PID->Error.PError * PID->Input.Kp );
+    2208:	c0 90 62 01 	lds	r12, 0x0162
+    220c:	d0 90 63 01 	lds	r13, 0x0163
+    2210:	f6 01       	movw	r30, r12
+    2212:	60 81       	ld	r22, Z
+    2214:	71 81       	ldd	r23, Z+1	; 0x01
+    2216:	82 81       	ldd	r24, Z+2	; 0x02
+    2218:	93 81       	ldd	r25, Z+3	; 0x03
+    221a:	24 89       	ldd	r18, Z+20	; 0x14
+    221c:	35 89       	ldd	r19, Z+21	; 0x15
+    221e:	46 89       	ldd	r20, Z+22	; 0x16
+    2220:	57 89       	ldd	r21, Z+23	; 0x17
+    2222:	0e 94 5b 12 	call	0x24b6	; 0x24b6 <__mulsi3>
+    2226:	69 83       	std	Y+1, r22	; 0x01
+    2228:	7a 83       	std	Y+2, r23	; 0x02
+    222a:	8b 83       	std	Y+3, r24	; 0x03
+    222c:	9c 83       	std	Y+4, r25	; 0x04
+  PID->Products.IError = ( PID->Error.IError * PID->Input.Ki );
+    222e:	f6 01       	movw	r30, r12
+    2230:	64 81       	ldd	r22, Z+4	; 0x04
+    2232:	75 81       	ldd	r23, Z+5	; 0x05
+    2234:	86 81       	ldd	r24, Z+6	; 0x06
+    2236:	97 81       	ldd	r25, Z+7	; 0x07
+    2238:	24 8d       	ldd	r18, Z+28	; 0x1c
+    223a:	35 8d       	ldd	r19, Z+29	; 0x1d
+    223c:	46 8d       	ldd	r20, Z+30	; 0x1e
+    223e:	57 8d       	ldd	r21, Z+31	; 0x1f
+    2240:	0e 94 5b 12 	call	0x24b6	; 0x24b6 <__mulsi3>
+    2244:	2b 01       	movw	r4, r22
+    2246:	3c 01       	movw	r6, r24
+  PID->Products.DError = ( PID->Error.DError * PID->Input.Kd );
+    2248:	f6 01       	movw	r30, r12
+    224a:	60 85       	ldd	r22, Z+8	; 0x08
+    224c:	71 85       	ldd	r23, Z+9	; 0x09
+    224e:	82 85       	ldd	r24, Z+10	; 0x0a
+    2250:	93 85       	ldd	r25, Z+11	; 0x0b
+    2252:	20 8d       	ldd	r18, Z+24	; 0x18
+    2254:	31 8d       	ldd	r19, Z+25	; 0x19
+    2256:	42 8d       	ldd	r20, Z+26	; 0x1a
+    2258:	53 8d       	ldd	r21, Z+27	; 0x1b
+    225a:	0e 94 5b 12 	call	0x24b6	; 0x24b6 <__mulsi3>
+    225e:	4b 01       	movw	r8, r22
+    2260:	5c 01       	movw	r10, r24
+  PID->Products.PError/= PID->Products.ScaleFact;
+    2262:	f6 01       	movw	r30, r12
+    2264:	e4 a8       	ldd	r14, Z+52	; 0x34
+    2266:	f5 a8       	ldd	r15, Z+53	; 0x35
+    2268:	06 a9       	ldd	r16, Z+54	; 0x36
+    226a:	17 a9       	ldd	r17, Z+55	; 0x37
+    226c:	69 81       	ldd	r22, Y+1	; 0x01
+    226e:	7a 81       	ldd	r23, Y+2	; 0x02
+    2270:	8b 81       	ldd	r24, Y+3	; 0x03
+    2272:	9c 81       	ldd	r25, Y+4	; 0x04
+    2274:	a8 01       	movw	r20, r16
+    2276:	97 01       	movw	r18, r14
+    2278:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
+    227c:	f6 01       	movw	r30, r12
+    227e:	20 a7       	std	Z+40, r18	; 0x28
+    2280:	31 a7       	std	Z+41, r19	; 0x29
+    2282:	42 a7       	std	Z+42, r20	; 0x2a
+    2284:	53 a7       	std	Z+43, r21	; 0x2b
+  PID->Products.IError/= PID->Products.ScaleFact;
+    2286:	c3 01       	movw	r24, r6
+    2288:	b2 01       	movw	r22, r4
+    228a:	a8 01       	movw	r20, r16
+    228c:	97 01       	movw	r18, r14
+    228e:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
+    2292:	f6 01       	movw	r30, r12
+    2294:	24 a7       	std	Z+44, r18	; 0x2c
+    2296:	35 a7       	std	Z+45, r19	; 0x2d
+    2298:	46 a7       	std	Z+46, r20	; 0x2e
+    229a:	57 a7       	std	Z+47, r21	; 0x2f
+  PID->Products.DError/= PID->Products.ScaleFact;
+    229c:	c5 01       	movw	r24, r10
+    229e:	b4 01       	movw	r22, r8
+    22a0:	a8 01       	movw	r20, r16
+    22a2:	97 01       	movw	r18, r14
+    22a4:	0e 94 9c 12 	call	0x2538	; 0x2538 <__divmodsi4>
+    22a8:	f6 01       	movw	r30, r12
+    22aa:	20 ab       	std	Z+48, r18	; 0x30
+    22ac:	31 ab       	std	Z+49, r19	; 0x31
+    22ae:	42 ab       	std	Z+50, r20	; 0x32
+    22b0:	53 ab       	std	Z+51, r21	; 0x33
+}
+    22b2:	0f 90       	pop	r0
+    22b4:	0f 90       	pop	r0
+    22b6:	0f 90       	pop	r0
+    22b8:	0f 90       	pop	r0
+    22ba:	cf 91       	pop	r28
+    22bc:	df 91       	pop	r29
+    22be:	1f 91       	pop	r17
+    22c0:	0f 91       	pop	r16
+    22c2:	ff 90       	pop	r15
+    22c4:	ef 90       	pop	r14
+    22c6:	df 90       	pop	r13
+    22c8:	cf 90       	pop	r12
+    22ca:	bf 90       	pop	r11
+    22cc:	af 90       	pop	r10
+    22ce:	9f 90       	pop	r9
+    22d0:	8f 90       	pop	r8
+    22d2:	7f 90       	pop	r7
+    22d4:	6f 90       	pop	r6
+    22d6:	5f 90       	pop	r5
+    22d8:	4f 90       	pop	r4
+    22da:	08 95       	ret
+
+000022dc <PID_Execute_Routine>:
+
+void PID_Execute_Routine(void){
+  signed long control_value = 0;
+  PID_Calculate_Error();
+    22dc:	0e 94 97 10 	call	0x212e	; 0x212e <PID_Calculate_Error>
+  PID_Calculate_Error_Products();
+    22e0:	0e 94 f0 10 	call	0x21e0	; 0x21e0 <PID_Calculate_Error_Products>
+  control_value  = PID->Products.PError;
+    22e4:	e0 91 62 01 	lds	r30, 0x0162
+    22e8:	f0 91 63 01 	lds	r31, 0x0163
+    22ec:	20 a5       	ldd	r18, Z+40	; 0x28
+    22ee:	31 a5       	ldd	r19, Z+41	; 0x29
+    22f0:	42 a5       	ldd	r20, Z+42	; 0x2a
+    22f2:	53 a5       	ldd	r21, Z+43	; 0x2b
+  control_value += PID->Products.IError;
+    22f4:	84 a5       	ldd	r24, Z+44	; 0x2c
+    22f6:	95 a5       	ldd	r25, Z+45	; 0x2d
+    22f8:	a6 a5       	ldd	r26, Z+46	; 0x2e
+    22fa:	b7 a5       	ldd	r27, Z+47	; 0x2f
+    22fc:	28 0f       	add	r18, r24
+    22fe:	39 1f       	adc	r19, r25
+    2300:	4a 1f       	adc	r20, r26
+    2302:	5b 1f       	adc	r21, r27
+  control_value += PID->Products.DError;
+    2304:	80 a9       	ldd	r24, Z+48	; 0x30
+    2306:	91 a9       	ldd	r25, Z+49	; 0x31
+    2308:	a2 a9       	ldd	r26, Z+50	; 0x32
+    230a:	b3 a9       	ldd	r27, Z+51	; 0x33
+    230c:	28 0f       	add	r18, r24
+    230e:	39 1f       	adc	r19, r25
+    2310:	4a 1f       	adc	r20, r26
+    2312:	5b 1f       	adc	r21, r27
+  PID->Output = control_value;
+    2314:	20 af       	std	Z+56, r18	; 0x38
+    2316:	31 af       	std	Z+57, r19	; 0x39
+    2318:	42 af       	std	Z+58, r20	; 0x3a
+    231a:	53 af       	std	Z+59, r21	; 0x3b
+  if(control_value < 0){
+    231c:	57 ff       	sbrs	r21, 7
+    231e:	05 c0       	rjmp	.+10     	; 0x232a <PID_Execute_Routine+0x4e>
+    PID->OutputNonNegative = 0;
+    2320:	14 ae       	std	Z+60, r1	; 0x3c
+    2322:	15 ae       	std	Z+61, r1	; 0x3d
+    2324:	16 ae       	std	Z+62, r1	; 0x3e
+    2326:	17 ae       	std	Z+63, r1	; 0x3f
+    2328:	08 95       	ret
+  }else{
+    PID->OutputNonNegative = control_value;
+    232a:	24 af       	std	Z+60, r18	; 0x3c
+    232c:	35 af       	std	Z+61, r19	; 0x3d
+    232e:	46 af       	std	Z+62, r20	; 0x3e
+    2330:	57 af       	std	Z+63, r21	; 0x3f
+    2332:	08 95       	ret
+
+00002334 <PID_Get_Kp>:
+  }
+}
+
+signed long PID_Get_Kp(void){
+    2334:	e0 91 62 01 	lds	r30, 0x0162
+    2338:	f0 91 63 01 	lds	r31, 0x0163
+    233c:	60 81       	ld	r22, Z
+    233e:	71 81       	ldd	r23, Z+1	; 0x01
+  return PID->Input.Kp;
+}
+    2340:	82 81       	ldd	r24, Z+2	; 0x02
+    2342:	93 81       	ldd	r25, Z+3	; 0x03
+    2344:	08 95       	ret
+
+00002346 <PID_Get_Ki>:
+
+signed long PID_Get_Ki(void){
+    2346:	e0 91 62 01 	lds	r30, 0x0162
+    234a:	f0 91 63 01 	lds	r31, 0x0163
+    234e:	64 81       	ldd	r22, Z+4	; 0x04
+    2350:	75 81       	ldd	r23, Z+5	; 0x05
+  return PID->Input.Ki;
+}
+    2352:	86 81       	ldd	r24, Z+6	; 0x06
+    2354:	97 81       	ldd	r25, Z+7	; 0x07
+    2356:	08 95       	ret
+
+00002358 <PID_Get_Kd>:
+
+signed long PID_Get_Kd(void){
+    2358:	e0 91 62 01 	lds	r30, 0x0162
+    235c:	f0 91 63 01 	lds	r31, 0x0163
+    2360:	60 85       	ldd	r22, Z+8	; 0x08
+    2362:	71 85       	ldd	r23, Z+9	; 0x09
+  return PID->Input.Kd;
+}
+    2364:	82 85       	ldd	r24, Z+10	; 0x0a
+    2366:	93 85       	ldd	r25, Z+11	; 0x0b
+    2368:	08 95       	ret
+
+0000236a <PID_Get_Set_Point>:
+
+signed long PID_Get_Set_Point(void){
+    236a:	e0 91 62 01 	lds	r30, 0x0162
+    236e:	f0 91 63 01 	lds	r31, 0x0163
+    2372:	64 85       	ldd	r22, Z+12	; 0x0c
+    2374:	75 85       	ldd	r23, Z+13	; 0x0d
+  return PID->Input.SetPoint;
+}
+    2376:	86 85       	ldd	r24, Z+14	; 0x0e
+    2378:	97 85       	ldd	r25, Z+15	; 0x0f
+    237a:	08 95       	ret
+
+0000237c <PID_Get_Process_Value>:
+
+signed long PID_Get_Process_Value(void){
+    237c:	e0 91 62 01 	lds	r30, 0x0162
+    2380:	f0 91 63 01 	lds	r31, 0x0163
+    2384:	60 89       	ldd	r22, Z+16	; 0x10
+    2386:	71 89       	ldd	r23, Z+17	; 0x11
+  return PID->Input.ProcessValue;
+}
+    2388:	82 89       	ldd	r24, Z+18	; 0x12
+    238a:	93 89       	ldd	r25, Z+19	; 0x13
+    238c:	08 95       	ret
+
+0000238e <PID_Get_PError>:
+
+signed long PID_Get_PError(void){
+    238e:	e0 91 62 01 	lds	r30, 0x0162
+    2392:	f0 91 63 01 	lds	r31, 0x0163
+    2396:	64 89       	ldd	r22, Z+20	; 0x14
+    2398:	75 89       	ldd	r23, Z+21	; 0x15
+  return PID->Error.PError;
+}
+    239a:	86 89       	ldd	r24, Z+22	; 0x16
+    239c:	97 89       	ldd	r25, Z+23	; 0x17
+    239e:	08 95       	ret
+
+000023a0 <PID_Get_IError>:
+
+signed long PID_Get_IError(void){
+    23a0:	e0 91 62 01 	lds	r30, 0x0162
+    23a4:	f0 91 63 01 	lds	r31, 0x0163
+    23a8:	64 8d       	ldd	r22, Z+28	; 0x1c
+    23aa:	75 8d       	ldd	r23, Z+29	; 0x1d
+  return PID->Error.IError;
+}
+    23ac:	86 8d       	ldd	r24, Z+30	; 0x1e
+    23ae:	97 8d       	ldd	r25, Z+31	; 0x1f
+    23b0:	08 95       	ret
+
+000023b2 <PID_Get_DError>:
+
+signed long PID_Get_DError(void){
+    23b2:	e0 91 62 01 	lds	r30, 0x0162
+    23b6:	f0 91 63 01 	lds	r31, 0x0163
+    23ba:	60 8d       	ldd	r22, Z+24	; 0x18
+    23bc:	71 8d       	ldd	r23, Z+25	; 0x19
+  return PID->Error.DError;
+}
+    23be:	82 8d       	ldd	r24, Z+26	; 0x1a
+    23c0:	93 8d       	ldd	r25, Z+27	; 0x1b
+    23c2:	08 95       	ret
+
+000023c4 <PID_Get_Max_IError>:
+
+signed long PID_Get_Max_IError(void){
+    23c4:	e0 91 62 01 	lds	r30, 0x0162
+    23c8:	f0 91 63 01 	lds	r31, 0x0163
+    23cc:	60 a1       	ldd	r22, Z+32	; 0x20
+    23ce:	71 a1       	ldd	r23, Z+33	; 0x21
+  return PID->Error.IErrorLimit;
+}
+    23d0:	82 a1       	ldd	r24, Z+34	; 0x22
+    23d2:	93 a1       	ldd	r25, Z+35	; 0x23
+    23d4:	08 95       	ret
+
+000023d6 <PID_Get_PError_Product>:
+
+signed long PID_Get_PError_Product(void){
+    23d6:	e0 91 62 01 	lds	r30, 0x0162
+    23da:	f0 91 63 01 	lds	r31, 0x0163
+    23de:	60 a5       	ldd	r22, Z+40	; 0x28
+    23e0:	71 a5       	ldd	r23, Z+41	; 0x29
+  return PID->Products.PError;
+}
+    23e2:	82 a5       	ldd	r24, Z+42	; 0x2a
+    23e4:	93 a5       	ldd	r25, Z+43	; 0x2b
+    23e6:	08 95       	ret
+
+000023e8 <PID_Get_IError_Product>:
+
+signed long PID_Get_IError_Product(void){
+    23e8:	e0 91 62 01 	lds	r30, 0x0162
+    23ec:	f0 91 63 01 	lds	r31, 0x0163
+    23f0:	64 a5       	ldd	r22, Z+44	; 0x2c
+    23f2:	75 a5       	ldd	r23, Z+45	; 0x2d
+  return PID->Products.IError;
+}
+    23f4:	86 a5       	ldd	r24, Z+46	; 0x2e
+    23f6:	97 a5       	ldd	r25, Z+47	; 0x2f
+    23f8:	08 95       	ret
+
+000023fa <PID_Get_DError_Product>:
+
+signed long PID_Get_DError_Product(void){
+    23fa:	e0 91 62 01 	lds	r30, 0x0162
+    23fe:	f0 91 63 01 	lds	r31, 0x0163
+    2402:	60 a9       	ldd	r22, Z+48	; 0x30
+    2404:	71 a9       	ldd	r23, Z+49	; 0x31
+  return PID->Products.DError;
+}
+    2406:	82 a9       	ldd	r24, Z+50	; 0x32
+    2408:	93 a9       	ldd	r25, Z+51	; 0x33
+    240a:	08 95       	ret
+
+0000240c <PID_Get_Scaling_Factor>:
+
+signed long PID_Get_Scaling_Factor(void){
+    240c:	e0 91 62 01 	lds	r30, 0x0162
+    2410:	f0 91 63 01 	lds	r31, 0x0163
+    2414:	64 a9       	ldd	r22, Z+52	; 0x34
+    2416:	75 a9       	ldd	r23, Z+53	; 0x35
+  return PID->Products.ScaleFact;
+}
+    2418:	86 a9       	ldd	r24, Z+54	; 0x36
+    241a:	97 a9       	ldd	r25, Z+55	; 0x37
+    241c:	08 95       	ret
+
+0000241e <PID_Get_Output>:
+
+
+signed long PID_Get_Output(void){
+    241e:	e0 91 62 01 	lds	r30, 0x0162
+    2422:	f0 91 63 01 	lds	r31, 0x0163
+    2426:	60 ad       	ldd	r22, Z+56	; 0x38
+    2428:	71 ad       	ldd	r23, Z+57	; 0x39
+  return PID->Output;
+}
+    242a:	82 ad       	ldd	r24, Z+58	; 0x3a
+    242c:	93 ad       	ldd	r25, Z+59	; 0x3b
+    242e:	08 95       	ret
+
+00002430 <PID_Get_Output_NonNegative>:
+
+signed long PID_Get_Output_NonNegative(void){
+    2430:	e0 91 62 01 	lds	r30, 0x0162
+    2434:	f0 91 63 01 	lds	r31, 0x0163
+    2438:	64 ad       	ldd	r22, Z+60	; 0x3c
+    243a:	75 ad       	ldd	r23, Z+61	; 0x3d
+  return PID->OutputNonNegative;
+}
+    243c:	86 ad       	ldd	r24, Z+62	; 0x3e
+    243e:	97 ad       	ldd	r25, Z+63	; 0x3f
+    2440:	08 95       	ret
+
+00002442 <PID_Init>:
+
+
+
+void PID_Init(void){
+  PID_Struct_Init();
+    2442:	0e 94 b7 0f 	call	0x1f6e	; 0x1f6e <PID_Struct_Init>
+}
+    2446:	08 95       	ret
+
+00002448 <PID_Init_Module>:
+
+void PID_Init_Module(signed long kp, signed long ki, signed long kd, signed long max_ierror, signed long scaling_fact){
+    2448:	af 92       	push	r10
+    244a:	bf 92       	push	r11
+    244c:	cf 92       	push	r12
+    244e:	df 92       	push	r13
+    2450:	ef 92       	push	r14
+    2452:	ff 92       	push	r15
+    2454:	0f 93       	push	r16
+    2456:	1f 93       	push	r17
+    2458:	df 93       	push	r29
+    245a:	cf 93       	push	r28
+    245c:	cd b7       	in	r28, 0x3d	; 61
+    245e:	de b7       	in	r29, 0x3e	; 62
+  PID->Output = 0;
+}
+
+
+void PID_Set_Kp(signed long kp){
+  PID->Input.Kp = kp;
+    2460:	e0 91 62 01 	lds	r30, 0x0162
+    2464:	f0 91 63 01 	lds	r31, 0x0163
+    2468:	60 83       	st	Z, r22
+    246a:	71 83       	std	Z+1, r23	; 0x01
+    246c:	82 83       	std	Z+2, r24	; 0x02
+    246e:	93 83       	std	Z+3, r25	; 0x03
+}
+
+void PID_Set_Ki(signed long ki){
+  PID->Input.Ki = ki;
+    2470:	24 83       	std	Z+4, r18	; 0x04
+    2472:	35 83       	std	Z+5, r19	; 0x05
+    2474:	46 83       	std	Z+6, r20	; 0x06
+    2476:	57 83       	std	Z+7, r21	; 0x07
+}
+
+void PID_Set_Kd(signed long kd){
+  PID->Input.Kd = kd;
+    2478:	e0 86       	std	Z+8, r14	; 0x08
+    247a:	f1 86       	std	Z+9, r15	; 0x09
+    247c:	02 87       	std	Z+10, r16	; 0x0a
+    247e:	13 87       	std	Z+11, r17	; 0x0b
+void PID_Set_ProcessValue(signed long process_value){
+  PID->Input.ProcessValue = process_value;
+}
+
+void PID_Set_Max_IError(signed long max_ierror){
+  PID->Error.IErrorLimit = max_ierror;
+    2480:	a0 a2       	std	Z+32, r10	; 0x20
+    2482:	b1 a2       	std	Z+33, r11	; 0x21
+    2484:	c2 a2       	std	Z+34, r12	; 0x22
+    2486:	d3 a2       	std	Z+35, r13	; 0x23
+}
+
+void PID_Set_Scaling_Factor(signed long scale_fact){
+  PID->Products.ScaleFact = scale_fact;
+    2488:	8d 85       	ldd	r24, Y+13	; 0x0d
+    248a:	9e 85       	ldd	r25, Y+14	; 0x0e
+    248c:	af 85       	ldd	r26, Y+15	; 0x0f
+    248e:	b8 89       	ldd	r27, Y+16	; 0x10
+    2490:	84 ab       	std	Z+52, r24	; 0x34
+    2492:	95 ab       	std	Z+53, r25	; 0x35
+    2494:	a6 ab       	std	Z+54, r26	; 0x36
+    2496:	b7 ab       	std	Z+55, r27	; 0x37
+
+
+
+
+void PID_Reset_IError(void){
+  PID->Error.IError = 0;
+    2498:	14 8e       	std	Z+28, r1	; 0x1c
+    249a:	15 8e       	std	Z+29, r1	; 0x1d
+    249c:	16 8e       	std	Z+30, r1	; 0x1e
+    249e:	17 8e       	std	Z+31, r1	; 0x1f
+  PID_Set_Ki(ki);
+  PID_Set_Kd(kd);
+  PID_Set_Max_IError(max_ierror);
+  PID_Set_Scaling_Factor(scaling_fact);
+  PID_Reset_IError();
+    24a0:	cf 91       	pop	r28
+    24a2:	df 91       	pop	r29
+    24a4:	1f 91       	pop	r17
+    24a6:	0f 91       	pop	r16
+    24a8:	ff 90       	pop	r15
+    24aa:	ef 90       	pop	r14
+    24ac:	df 90       	pop	r13
+    24ae:	cf 90       	pop	r12
+    24b0:	bf 90       	pop	r11
+    24b2:	af 90       	pop	r10
+    24b4:	08 95       	ret
+
+000024b6 <__mulsi3>:
+    24b6:	62 9f       	mul	r22, r18
+    24b8:	d0 01       	movw	r26, r0
+    24ba:	73 9f       	mul	r23, r19
+    24bc:	f0 01       	movw	r30, r0
+    24be:	82 9f       	mul	r24, r18
+    24c0:	e0 0d       	add	r30, r0
+    24c2:	f1 1d       	adc	r31, r1
+    24c4:	64 9f       	mul	r22, r20
+    24c6:	e0 0d       	add	r30, r0
+    24c8:	f1 1d       	adc	r31, r1
+    24ca:	92 9f       	mul	r25, r18
+    24cc:	f0 0d       	add	r31, r0
+    24ce:	83 9f       	mul	r24, r19
+    24d0:	f0 0d       	add	r31, r0
+    24d2:	74 9f       	mul	r23, r20
+    24d4:	f0 0d       	add	r31, r0
+    24d6:	65 9f       	mul	r22, r21
+    24d8:	f0 0d       	add	r31, r0
+    24da:	99 27       	eor	r25, r25
+    24dc:	72 9f       	mul	r23, r18
+    24de:	b0 0d       	add	r27, r0
+    24e0:	e1 1d       	adc	r30, r1
+    24e2:	f9 1f       	adc	r31, r25
+    24e4:	63 9f       	mul	r22, r19
+    24e6:	b0 0d       	add	r27, r0
+    24e8:	e1 1d       	adc	r30, r1
+    24ea:	f9 1f       	adc	r31, r25
+    24ec:	bd 01       	movw	r22, r26
+    24ee:	cf 01       	movw	r24, r30
+    24f0:	11 24       	eor	r1, r1
+    24f2:	08 95       	ret
+
+000024f4 <__udivmodsi4>:
+    24f4:	a1 e2       	ldi	r26, 0x21	; 33
+    24f6:	1a 2e       	mov	r1, r26
+    24f8:	aa 1b       	sub	r26, r26
+    24fa:	bb 1b       	sub	r27, r27
+    24fc:	fd 01       	movw	r30, r26
+    24fe:	0d c0       	rjmp	.+26     	; 0x251a <__udivmodsi4_ep>
+
+00002500 <__udivmodsi4_loop>:
+    2500:	aa 1f       	adc	r26, r26
+    2502:	bb 1f       	adc	r27, r27
+    2504:	ee 1f       	adc	r30, r30
+    2506:	ff 1f       	adc	r31, r31
+    2508:	a2 17       	cp	r26, r18
+    250a:	b3 07       	cpc	r27, r19
+    250c:	e4 07       	cpc	r30, r20
+    250e:	f5 07       	cpc	r31, r21
+    2510:	20 f0       	brcs	.+8      	; 0x251a <__udivmodsi4_ep>
+    2512:	a2 1b       	sub	r26, r18
+    2514:	b3 0b       	sbc	r27, r19
+    2516:	e4 0b       	sbc	r30, r20
+    2518:	f5 0b       	sbc	r31, r21
+
+0000251a <__udivmodsi4_ep>:
+    251a:	66 1f       	adc	r22, r22
+    251c:	77 1f       	adc	r23, r23
+    251e:	88 1f       	adc	r24, r24
+    2520:	99 1f       	adc	r25, r25
+    2522:	1a 94       	dec	r1
+    2524:	69 f7       	brne	.-38     	; 0x2500 <__udivmodsi4_loop>
+    2526:	60 95       	com	r22
+    2528:	70 95       	com	r23
+    252a:	80 95       	com	r24
+    252c:	90 95       	com	r25
+    252e:	9b 01       	movw	r18, r22
+    2530:	ac 01       	movw	r20, r24
+    2532:	bd 01       	movw	r22, r26
+    2534:	cf 01       	movw	r24, r30
+    2536:	08 95       	ret
+
+00002538 <__divmodsi4>:
+    2538:	97 fb       	bst	r25, 7
+    253a:	09 2e       	mov	r0, r25
+    253c:	05 26       	eor	r0, r21
+    253e:	0e d0       	rcall	.+28     	; 0x255c <__divmodsi4_neg1>
+    2540:	57 fd       	sbrc	r21, 7
+    2542:	04 d0       	rcall	.+8      	; 0x254c <__divmodsi4_neg2>
+    2544:	d7 df       	rcall	.-82     	; 0x24f4 <__udivmodsi4>
+    2546:	0a d0       	rcall	.+20     	; 0x255c <__divmodsi4_neg1>
+    2548:	00 1c       	adc	r0, r0
+    254a:	38 f4       	brcc	.+14     	; 0x255a <__divmodsi4_exit>
+
+0000254c <__divmodsi4_neg2>:
+    254c:	50 95       	com	r21
+    254e:	40 95       	com	r20
+    2550:	30 95       	com	r19
+    2552:	21 95       	neg	r18
+    2554:	3f 4f       	sbci	r19, 0xFF	; 255
+    2556:	4f 4f       	sbci	r20, 0xFF	; 255
+    2558:	5f 4f       	sbci	r21, 0xFF	; 255
+
+0000255a <__divmodsi4_exit>:
+    255a:	08 95       	ret
+
+0000255c <__divmodsi4_neg1>:
+    255c:	f6 f7       	brtc	.-4      	; 0x255a <__divmodsi4_exit>
+    255e:	90 95       	com	r25
+    2560:	80 95       	com	r24
+    2562:	70 95       	com	r23
+    2564:	61 95       	neg	r22
+    2566:	7f 4f       	sbci	r23, 0xFF	; 255
+    2568:	8f 4f       	sbci	r24, 0xFF	; 255
+    256a:	9f 4f       	sbci	r25, 0xFF	; 255
+    256c:	08 95       	ret
+
+0000256e <_exit>:
+    256e:	f8 94       	cli
+
+00002570 <__stop_program>:
+    2570:	ff cf       	rjmp	.-2      	; 0x2570 <__stop_program>

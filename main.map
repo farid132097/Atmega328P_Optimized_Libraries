@@ -16,6 +16,8 @@ c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
 Allocating common symbols
 Common symbol       size              file
 
+PID                 0x2               pid.o
+PID_type            0x46              pid.o
 Timebase            0x2               timebase.o
 Timebase_type       0x44              timebase.o
 
@@ -38,6 +40,7 @@ LOAD main.o
 LOAD app.o
 LOAD timebase.o
 LOAD uart.o
+LOAD pid.o
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libm.a
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a
@@ -133,7 +136,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x202a
+.text           0x00000000     0x2572
  *(.vectors)
  .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vectors
@@ -334,28 +337,59 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00001e60                UART_Determine_Digit_Numbers
                 0x00001ede                UART_Transmit_Number_Digits
                 0x00001cb8                UART_Transmit_Byte_Hex
- .text          0x00001f6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
- .text          0x00001f6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
- .text          0x00001f6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
- .text          0x00001f6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text          0x00001f6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text          0x00001f6e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x00001f6e                . = ALIGN (0x2)
+ .text          0x00001f6e      0x548 pid.o
+                0x000020d4                PID_Set_SetPoint
+                0x000020f8                PID_Set_Max_IError
+                0x000020e6                PID_Set_ProcessValue
+                0x0000236a                PID_Get_Set_Point
+                0x000023b2                PID_Get_DError
+                0x0000207e                PID_Set_Ki
+                0x000023fa                PID_Get_DError_Product
+                0x00002358                PID_Get_Kd
+                0x00002334                PID_Get_Kp
+                0x00002442                PID_Init
+                0x00002430                PID_Get_Output_NonNegative
+                0x000023a0                PID_Get_IError
+                0x0000206c                PID_Set_Kp
+                0x0000237c                PID_Get_Process_Value
+                0x00001f6e                PID_Struct_Init
+                0x00002346                PID_Get_Ki
+                0x000022dc                PID_Execute_Routine
+                0x0000210a                PID_Set_Scaling_Factor
+                0x0000211c                PID_Reset_IError
+                0x000023d6                PID_Get_PError_Product
+                0x000023c4                PID_Get_Max_IError
+                0x00002448                PID_Init_Module
+                0x0000241e                PID_Get_Output
+                0x000021e0                PID_Calculate_Error_Products
+                0x000020a2                PID_Set_Constants
+                0x000023e8                PID_Get_IError_Product
+                0x0000212e                PID_Calculate_Error
+                0x0000240c                PID_Get_Scaling_Factor
+                0x0000238e                PID_Get_PError
+                0x00002090                PID_Set_Kd
+ .text          0x000024b6        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+ .text          0x000024b6        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .text          0x000024b6        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+ .text          0x000024b6        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x000024b6        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x000024b6        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x000024b6                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00001f6e       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
-                0x00001f6e                __mulsi3
- .text.libgcc   0x00001fac       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
-                0x00001fac                __udivmodsi4
- .text.libgcc   0x00001ff0       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
-                0x00001ff0                __divmodsi4
- .text.libgcc   0x00002026        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x00002026        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x00002026        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x00002026                . = ALIGN (0x2)
+ .text.libgcc   0x000024b6       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+                0x000024b6                __mulsi3
+ .text.libgcc   0x000024f4       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x000024f4                __udivmodsi4
+ .text.libgcc   0x00002538       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+                0x00002538                __divmodsi4
+ .text.libgcc   0x0000256e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x0000256e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000256e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x0000256e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00002026        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00002026                exit
-                0x00002026                _exit
+ .fini9         0x0000256e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x0000256e                exit
+                0x0000256e                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -374,11 +408,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00002026        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000256e        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000202a                _etext = .
+                0x00002572                _etext = .
 
-.data           0x00800100       0x12 load address 0x0000202a
+.data           0x00800100       0x12 load address 0x00002572
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
@@ -386,6 +420,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .data          0x00800100        0x3 app.o
  .data          0x00800103        0xa timebase.o
  .data          0x0080010d        0x5 uart.o
+ .data          0x00800112        0x0 pid.o
  .data          0x00800112        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
  .data          0x00800112        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
  .data          0x00800112        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
@@ -400,7 +435,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00800112                _edata = .
                 0x00800112                PROVIDE (__data_end, .)
 
-.bss            0x00800112       0x50
+.bss            0x00800112       0x98
                 0x00800112                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800112        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
@@ -408,6 +443,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .bss           0x00800112        0x0 app.o
  .bss           0x00800112        0x0 timebase.o
  .bss           0x00800112        0xa uart.o
+ .bss           0x0080011c        0x0 pid.o
  .bss           0x0080011c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
  .bss           0x0080011c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
  .bss           0x0080011c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
@@ -419,16 +455,19 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  COMMON         0x0080011c       0x46 timebase.o
                 0x0080011c                Timebase
                 0x0080011e                Timebase_type
-                0x00800162                PROVIDE (__bss_end, .)
-                0x0000202a                __data_load_start = LOADADDR (.data)
-                0x0000203c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800162       0x48 pid.o
+                0x00800162                PID
+                0x00800164                PID_type
+                0x008001aa                PROVIDE (__bss_end, .)
+                0x00002572                __data_load_start = LOADADDR (.data)
+                0x00002584                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800162        0x0
-                0x00800162                PROVIDE (__noinit_start, .)
+.noinit         0x008001aa        0x0
+                0x008001aa                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800162                PROVIDE (__noinit_end, .)
-                0x00800162                _end = .
-                0x00800162                PROVIDE (__heap_start, .)
+                0x008001aa                PROVIDE (__noinit_end, .)
+                0x008001aa                _end = .
+                0x008001aa                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -479,7 +518,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x80
+.debug_aranges  0x00000000       0xa0
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x20 main.o
@@ -489,9 +528,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00000040       0x20 timebase.o
  .debug_aranges
                 0x00000060       0x20 uart.o
+ .debug_aranges
+                0x00000080       0x20 pid.o
 
 .debug_pubnames
-                0x00000000     0x10ce
+                0x00000000     0x137e
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000       0x1b main.o
@@ -501,51 +542,60 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x0000004d      0xe92 timebase.o
  .debug_pubnames
                 0x00000edf      0x1ef uart.o
+ .debug_pubnames
+                0x000010ce      0x2b0 pid.o
 
-.debug_info     0x00000000     0x346e
+.debug_info     0x00000000     0x3bfe
  *(.debug_info)
  .debug_info    0x00000000       0x76 main.o
  .debug_info    0x00000076       0x86 app.o
  .debug_info    0x000000fc     0x2e45 timebase.o
  .debug_info    0x00002f41      0x52d uart.o
+ .debug_info    0x0000346e      0x790 pid.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x52c
+.debug_abbrev   0x00000000      0x6f9
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0x41 main.o
  .debug_abbrev  0x00000041       0x3f app.o
  .debug_abbrev  0x00000080      0x2a9 timebase.o
  .debug_abbrev  0x00000329      0x203 uart.o
+ .debug_abbrev  0x0000052c      0x1cd pid.o
 
-.debug_line     0x00000000     0x1a2b
+.debug_line     0x00000000     0x1e8f
  *(.debug_line)
  .debug_line    0x00000000       0x70 main.o
  .debug_line    0x00000070       0xa1 app.o
  .debug_line    0x00000111     0x1497 timebase.o
  .debug_line    0x000015a8      0x483 uart.o
+ .debug_line    0x00001a2b      0x464 pid.o
 
-.debug_frame    0x00000000      0x790
+.debug_frame    0x00000000      0x980
  *(.debug_frame)
  .debug_frame   0x00000000       0x20 main.o
  .debug_frame   0x00000020       0x30 app.o
  .debug_frame   0x00000050      0x600 timebase.o
  .debug_frame   0x00000650      0x140 uart.o
+ .debug_frame   0x00000790      0x1f0 pid.o
 
-.debug_str      0x00000000     0x129c
+.debug_str      0x00000000     0x1584
  *(.debug_str)
  .debug_str     0x00000000       0x83 main.o
                                  0xb7 (size before relaxing)
  .debug_str     0x00000083       0x1e app.o
                                  0xc9 (size before relaxing)
- .debug_str     0x000000a1     0x1007 timebase.o
+ .debug_str     0x000000a1     0x1001 timebase.o
                                0x1174 (size before relaxing)
- .debug_str     0x000010a8      0x1f4 uart.o
+ .debug_str     0x000010a2      0x1ee uart.o
                                 0x2cf (size before relaxing)
+ .debug_str     0x00001290      0x2f4 pid.o
+                                0x3e0 (size before relaxing)
 
-.debug_loc      0x00000000     0x14ba
+.debug_loc      0x00000000     0x1556
  *(.debug_loc)
  .debug_loc     0x00000000     0x1109 timebase.o
  .debug_loc     0x00001109      0x3b1 uart.o
+ .debug_loc     0x000014ba       0x9c pid.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -562,6 +612,38 @@ App_Main_Loop                                     app.o
                                                   main.o
 App_Setup                                         app.o
                                                   main.o
+PID                                               pid.o
+PID_Calculate_Error                               pid.o
+PID_Calculate_Error_Products                      pid.o
+PID_Execute_Routine                               pid.o
+PID_Get_DError                                    pid.o
+PID_Get_DError_Product                            pid.o
+PID_Get_IError                                    pid.o
+PID_Get_IError_Product                            pid.o
+PID_Get_Kd                                        pid.o
+PID_Get_Ki                                        pid.o
+PID_Get_Kp                                        pid.o
+PID_Get_Max_IError                                pid.o
+PID_Get_Output                                    pid.o
+PID_Get_Output_NonNegative                        pid.o
+PID_Get_PError                                    pid.o
+PID_Get_PError_Product                            pid.o
+PID_Get_Process_Value                             pid.o
+PID_Get_Scaling_Factor                            pid.o
+PID_Get_Set_Point                                 pid.o
+PID_Init                                          pid.o
+PID_Init_Module                                   pid.o
+PID_Reset_IError                                  pid.o
+PID_Set_Constants                                 pid.o
+PID_Set_Kd                                        pid.o
+PID_Set_Ki                                        pid.o
+PID_Set_Kp                                        pid.o
+PID_Set_Max_IError                                pid.o
+PID_Set_ProcessValue                              pid.o
+PID_Set_Scaling_Factor                            pid.o
+PID_Set_SetPoint                                  pid.o
+PID_Struct_Init                                   pid.o
+PID_type                                          pid.o
 Timebase                                          timebase.o
 Timebase_Atomic_Operation_End                     timebase.o
 Timebase_Atomic_Operation_Start                   timebase.o
@@ -692,8 +774,10 @@ __data_end                                        c:/winavr-20100110/bin/../lib/
 __data_load_start                                 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
 __data_start                                      c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
 __divmodsi4                                       c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+                                                  pid.o
                                                   timebase.o
 __do_clear_bss                                    c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                                                  pid.o
                                                   uart.o
                                                   timebase.o
 __do_copy_data                                    c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
@@ -703,6 +787,7 @@ __do_copy_data                                    c:/winavr-20100110/bin/../lib/
 __heap_end                                        c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
 __init                                            c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
 __mulsi3                                          c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+                                                  pid.o
                                                   timebase.o
 __stack                                           c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
 __udivmodsi4                                      c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)

@@ -1,0 +1,1003 @@
+   1               		.file	"pid.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	PID_Struct_Init
+  18               	PID_Struct_Init:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 80E0      		ldi r24,lo8(PID_type)
+  25 0002 90E0      		ldi r25,hi8(PID_type)
+  26 0004 9093 0000 		sts (PID)+1,r25
+  27 0008 8093 0000 		sts PID,r24
+  28               	.LM3:
+  29 000c 1092 0000 		sts PID_type,__zero_reg__
+  30 0010 1092 0000 		sts (PID_type)+1,__zero_reg__
+  31 0014 1092 0000 		sts (PID_type)+2,__zero_reg__
+  32 0018 1092 0000 		sts (PID_type)+3,__zero_reg__
+  33               	.LM4:
+  34 001c 1092 0000 		sts PID_type+4,__zero_reg__
+  35 0020 1092 0000 		sts (PID_type+4)+1,__zero_reg__
+  36 0024 1092 0000 		sts (PID_type+4)+2,__zero_reg__
+  37 0028 1092 0000 		sts (PID_type+4)+3,__zero_reg__
+  38               	.LM5:
+  39 002c 1092 0000 		sts PID_type+8,__zero_reg__
+  40 0030 1092 0000 		sts (PID_type+8)+1,__zero_reg__
+  41 0034 1092 0000 		sts (PID_type+8)+2,__zero_reg__
+  42 0038 1092 0000 		sts (PID_type+8)+3,__zero_reg__
+  43               	.LM6:
+  44 003c 1092 0000 		sts PID_type+12,__zero_reg__
+  45 0040 1092 0000 		sts (PID_type+12)+1,__zero_reg__
+  46 0044 1092 0000 		sts (PID_type+12)+2,__zero_reg__
+  47 0048 1092 0000 		sts (PID_type+12)+3,__zero_reg__
+  48               	.LM7:
+  49 004c 1092 0000 		sts PID_type+16,__zero_reg__
+  50 0050 1092 0000 		sts (PID_type+16)+1,__zero_reg__
+  51 0054 1092 0000 		sts (PID_type+16)+2,__zero_reg__
+  52 0058 1092 0000 		sts (PID_type+16)+3,__zero_reg__
+  53               	.LM8:
+  54 005c 1092 0000 		sts PID_type+20,__zero_reg__
+  55 0060 1092 0000 		sts (PID_type+20)+1,__zero_reg__
+  56 0064 1092 0000 		sts (PID_type+20)+2,__zero_reg__
+  57 0068 1092 0000 		sts (PID_type+20)+3,__zero_reg__
+  58               	.LM9:
+  59 006c 1092 0000 		sts PID_type+24,__zero_reg__
+  60 0070 1092 0000 		sts (PID_type+24)+1,__zero_reg__
+  61 0074 1092 0000 		sts (PID_type+24)+2,__zero_reg__
+  62 0078 1092 0000 		sts (PID_type+24)+3,__zero_reg__
+  63               	.LM10:
+  64 007c 1092 0000 		sts PID_type+28,__zero_reg__
+  65 0080 1092 0000 		sts (PID_type+28)+1,__zero_reg__
+  66 0084 1092 0000 		sts (PID_type+28)+2,__zero_reg__
+  67 0088 1092 0000 		sts (PID_type+28)+3,__zero_reg__
+  68               	.LM11:
+  69 008c 1092 0000 		sts PID_type+32,__zero_reg__
+  70 0090 1092 0000 		sts (PID_type+32)+1,__zero_reg__
+  71 0094 1092 0000 		sts (PID_type+32)+2,__zero_reg__
+  72 0098 1092 0000 		sts (PID_type+32)+3,__zero_reg__
+  73               	.LM12:
+  74 009c 1092 0000 		sts PID_type+36,__zero_reg__
+  75 00a0 1092 0000 		sts (PID_type+36)+1,__zero_reg__
+  76 00a4 1092 0000 		sts (PID_type+36)+2,__zero_reg__
+  77 00a8 1092 0000 		sts (PID_type+36)+3,__zero_reg__
+  78               	.LM13:
+  79 00ac 1092 0000 		sts PID_type+40,__zero_reg__
+  80 00b0 1092 0000 		sts (PID_type+40)+1,__zero_reg__
+  81 00b4 1092 0000 		sts (PID_type+40)+2,__zero_reg__
+  82 00b8 1092 0000 		sts (PID_type+40)+3,__zero_reg__
+  83               	.LM14:
+  84 00bc 1092 0000 		sts PID_type+44,__zero_reg__
+  85 00c0 1092 0000 		sts (PID_type+44)+1,__zero_reg__
+  86 00c4 1092 0000 		sts (PID_type+44)+2,__zero_reg__
+  87 00c8 1092 0000 		sts (PID_type+44)+3,__zero_reg__
+  88               	.LM15:
+  89 00cc 1092 0000 		sts PID_type+48,__zero_reg__
+  90 00d0 1092 0000 		sts (PID_type+48)+1,__zero_reg__
+  91 00d4 1092 0000 		sts (PID_type+48)+2,__zero_reg__
+  92 00d8 1092 0000 		sts (PID_type+48)+3,__zero_reg__
+  93               	.LM16:
+  94 00dc 1092 0000 		sts PID_type+52,__zero_reg__
+  95 00e0 1092 0000 		sts (PID_type+52)+1,__zero_reg__
+  96 00e4 1092 0000 		sts (PID_type+52)+2,__zero_reg__
+  97 00e8 1092 0000 		sts (PID_type+52)+3,__zero_reg__
+  98               	.LM17:
+  99 00ec 1092 0000 		sts PID_type+56,__zero_reg__
+ 100 00f0 1092 0000 		sts (PID_type+56)+1,__zero_reg__
+ 101 00f4 1092 0000 		sts (PID_type+56)+2,__zero_reg__
+ 102 00f8 1092 0000 		sts (PID_type+56)+3,__zero_reg__
+ 103               	/* epilogue start */
+ 104               	.LM18:
+ 105 00fc 0895      		ret
+ 106               	.LFE2:
+ 108               	.global	PID_Set_Kp
+ 110               	PID_Set_Kp:
+ 111               	.LFB3:
+ 112               	.LM19:
+ 113               	.LVL0:
+ 114               	/* prologue: function */
+ 115               	/* frame size = 0 */
+ 116               	.LM20:
+ 117 00fe E091 0000 		lds r30,PID
+ 118 0102 F091 0000 		lds r31,(PID)+1
+ 119 0106 6083      		st Z,r22
+ 120 0108 7183      		std Z+1,r23
+ 121 010a 8283      		std Z+2,r24
+ 122 010c 9383      		std Z+3,r25
+ 123               	/* epilogue start */
+ 124               	.LM21:
+ 125 010e 0895      		ret
+ 126               	.LFE3:
+ 128               	.global	PID_Set_Ki
+ 130               	PID_Set_Ki:
+ 131               	.LFB4:
+ 132               	.LM22:
+ 133               	.LVL1:
+ 134               	/* prologue: function */
+ 135               	/* frame size = 0 */
+ 136               	.LM23:
+ 137 0110 E091 0000 		lds r30,PID
+ 138 0114 F091 0000 		lds r31,(PID)+1
+ 139 0118 6483      		std Z+4,r22
+ 140 011a 7583      		std Z+5,r23
+ 141 011c 8683      		std Z+6,r24
+ 142 011e 9783      		std Z+7,r25
+ 143               	/* epilogue start */
+ 144               	.LM24:
+ 145 0120 0895      		ret
+ 146               	.LFE4:
+ 148               	.global	PID_Set_Kd
+ 150               	PID_Set_Kd:
+ 151               	.LFB5:
+ 152               	.LM25:
+ 153               	.LVL2:
+ 154               	/* prologue: function */
+ 155               	/* frame size = 0 */
+ 156               	.LM26:
+ 157 0122 E091 0000 		lds r30,PID
+ 158 0126 F091 0000 		lds r31,(PID)+1
+ 159 012a 6087      		std Z+8,r22
+ 160 012c 7187      		std Z+9,r23
+ 161 012e 8287      		std Z+10,r24
+ 162 0130 9387      		std Z+11,r25
+ 163               	/* epilogue start */
+ 164               	.LM27:
+ 165 0132 0895      		ret
+ 166               	.LFE5:
+ 168               	.global	PID_Set_Constants
+ 170               	PID_Set_Constants:
+ 171               	.LFB6:
+ 172               	.LM28:
+ 173               	.LVL3:
+ 174 0134 EF92      		push r14
+ 175               	.LVL4:
+ 176 0136 FF92      		push r15
+ 177 0138 0F93      		push r16
+ 178 013a 1F93      		push r17
+ 179               	/* prologue: function */
+ 180               	/* frame size = 0 */
+ 181               	.LBB20:
+ 182               	.LBB21:
+ 183               	.LM29:
+ 184 013c E091 0000 		lds r30,PID
+ 185 0140 F091 0000 		lds r31,(PID)+1
+ 186 0144 6083      		st Z,r22
+ 187 0146 7183      		std Z+1,r23
+ 188 0148 8283      		std Z+2,r24
+ 189 014a 9383      		std Z+3,r25
+ 190               	.LBE21:
+ 191               	.LBE20:
+ 192               	.LBB22:
+ 193               	.LBB23:
+ 194               	.LM30:
+ 195 014c 2483      		std Z+4,r18
+ 196 014e 3583      		std Z+5,r19
+ 197 0150 4683      		std Z+6,r20
+ 198 0152 5783      		std Z+7,r21
+ 199               	.LBE23:
+ 200               	.LBE22:
+ 201               	.LBB24:
+ 202               	.LBB25:
+ 203               	.LM31:
+ 204 0154 E086      		std Z+8,r14
+ 205 0156 F186      		std Z+9,r15
+ 206 0158 0287      		std Z+10,r16
+ 207 015a 1387      		std Z+11,r17
+ 208               	.LVL5:
+ 209               	/* epilogue start */
+ 210               	.LBE25:
+ 211               	.LBE24:
+ 212               	.LM32:
+ 213 015c 1F91      		pop r17
+ 214 015e 0F91      		pop r16
+ 215 0160 FF90      		pop r15
+ 216 0162 EF90      		pop r14
+ 217               	.LVL6:
+ 218 0164 0895      		ret
+ 219               	.LFE6:
+ 221               	.global	PID_Set_SetPoint
+ 223               	PID_Set_SetPoint:
+ 224               	.LFB7:
+ 225               	.LM33:
+ 226               	.LVL7:
+ 227               	/* prologue: function */
+ 228               	/* frame size = 0 */
+ 229               	.LM34:
+ 230 0166 E091 0000 		lds r30,PID
+ 231 016a F091 0000 		lds r31,(PID)+1
+ 232 016e 6487      		std Z+12,r22
+ 233 0170 7587      		std Z+13,r23
+ 234 0172 8687      		std Z+14,r24
+ 235 0174 9787      		std Z+15,r25
+ 236               	/* epilogue start */
+ 237               	.LM35:
+ 238 0176 0895      		ret
+ 239               	.LFE7:
+ 241               	.global	PID_Set_ProcessValue
+ 243               	PID_Set_ProcessValue:
+ 244               	.LFB8:
+ 245               	.LM36:
+ 246               	.LVL8:
+ 247               	/* prologue: function */
+ 248               	/* frame size = 0 */
+ 249               	.LM37:
+ 250 0178 E091 0000 		lds r30,PID
+ 251 017c F091 0000 		lds r31,(PID)+1
+ 252 0180 608B      		std Z+16,r22
+ 253 0182 718B      		std Z+17,r23
+ 254 0184 828B      		std Z+18,r24
+ 255 0186 938B      		std Z+19,r25
+ 256               	/* epilogue start */
+ 257               	.LM38:
+ 258 0188 0895      		ret
+ 259               	.LFE8:
+ 261               	.global	PID_Set_Max_IError
+ 263               	PID_Set_Max_IError:
+ 264               	.LFB9:
+ 265               	.LM39:
+ 266               	.LVL9:
+ 267               	/* prologue: function */
+ 268               	/* frame size = 0 */
+ 269               	.LM40:
+ 270 018a E091 0000 		lds r30,PID
+ 271 018e F091 0000 		lds r31,(PID)+1
+ 272 0192 60A3      		std Z+32,r22
+ 273 0194 71A3      		std Z+33,r23
+ 274 0196 82A3      		std Z+34,r24
+ 275 0198 93A3      		std Z+35,r25
+ 276               	/* epilogue start */
+ 277               	.LM41:
+ 278 019a 0895      		ret
+ 279               	.LFE9:
+ 281               	.global	PID_Set_Scaling_Factor
+ 283               	PID_Set_Scaling_Factor:
+ 284               	.LFB10:
+ 285               	.LM42:
+ 286               	.LVL10:
+ 287               	/* prologue: function */
+ 288               	/* frame size = 0 */
+ 289               	.LM43:
+ 290 019c E091 0000 		lds r30,PID
+ 291 01a0 F091 0000 		lds r31,(PID)+1
+ 292 01a4 64AB      		std Z+52,r22
+ 293 01a6 75AB      		std Z+53,r23
+ 294 01a8 86AB      		std Z+54,r24
+ 295 01aa 97AB      		std Z+55,r25
+ 296               	/* epilogue start */
+ 297               	.LM44:
+ 298 01ac 0895      		ret
+ 299               	.LFE10:
+ 301               	.global	PID_Reset_IError
+ 303               	PID_Reset_IError:
+ 304               	.LFB11:
+ 305               	.LM45:
+ 306               	/* prologue: function */
+ 307               	/* frame size = 0 */
+ 308               	.LM46:
+ 309 01ae E091 0000 		lds r30,PID
+ 310 01b2 F091 0000 		lds r31,(PID)+1
+ 311 01b6 148E      		std Z+28,__zero_reg__
+ 312 01b8 158E      		std Z+29,__zero_reg__
+ 313 01ba 168E      		std Z+30,__zero_reg__
+ 314 01bc 178E      		std Z+31,__zero_reg__
+ 315               	/* epilogue start */
+ 316               	.LM47:
+ 317 01be 0895      		ret
+ 318               	.LFE11:
+ 320               	.global	PID_Calculate_Error
+ 322               	PID_Calculate_Error:
+ 323               	.LFB12:
+ 324               	.LM48:
+ 325 01c0 EF92      		push r14
+ 326 01c2 FF92      		push r15
+ 327 01c4 0F93      		push r16
+ 328 01c6 1F93      		push r17
+ 329               	/* prologue: function */
+ 330               	/* frame size = 0 */
+ 331               	.LM49:
+ 332 01c8 E091 0000 		lds r30,PID
+ 333 01cc F091 0000 		lds r31,(PID)+1
+ 334 01d0 2485      		ldd r18,Z+12
+ 335 01d2 3585      		ldd r19,Z+13
+ 336 01d4 4685      		ldd r20,Z+14
+ 337 01d6 5785      		ldd r21,Z+15
+ 338 01d8 8089      		ldd r24,Z+16
+ 339 01da 9189      		ldd r25,Z+17
+ 340 01dc A289      		ldd r26,Z+18
+ 341 01de B389      		ldd r27,Z+19
+ 342 01e0 281B      		sub r18,r24
+ 343 01e2 390B      		sbc r19,r25
+ 344 01e4 4A0B      		sbc r20,r26
+ 345 01e6 5B0B      		sbc r21,r27
+ 346 01e8 248B      		std Z+20,r18
+ 347 01ea 358B      		std Z+21,r19
+ 348 01ec 468B      		std Z+22,r20
+ 349 01ee 578B      		std Z+23,r21
+ 350               	.LM50:
+ 351 01f0 84A1      		ldd r24,Z+36
+ 352 01f2 95A1      		ldd r25,Z+37
+ 353 01f4 A6A1      		ldd r26,Z+38
+ 354 01f6 B7A1      		ldd r27,Z+39
+ 355 01f8 7901      		movw r14,r18
+ 356 01fa 8A01      		movw r16,r20
+ 357 01fc E81A      		sub r14,r24
+ 358 01fe F90A      		sbc r15,r25
+ 359 0200 0A0B      		sbc r16,r26
+ 360 0202 1B0B      		sbc r17,r27
+ 361 0204 E08E      		std Z+24,r14
+ 362 0206 F18E      		std Z+25,r15
+ 363 0208 028F      		std Z+26,r16
+ 364 020a 138F      		std Z+27,r17
+ 365               	.LM51:
+ 366 020c 24A3      		std Z+36,r18
+ 367 020e 35A3      		std Z+37,r19
+ 368 0210 46A3      		std Z+38,r20
+ 369 0212 57A3      		std Z+39,r21
+ 370               	.LM52:
+ 371 0214 E48C      		ldd r14,Z+28
+ 372 0216 F58C      		ldd r15,Z+29
+ 373 0218 068D      		ldd r16,Z+30
+ 374 021a 178D      		ldd r17,Z+31
+ 375 021c E20E      		add r14,r18
+ 376 021e F31E      		adc r15,r19
+ 377 0220 041F      		adc r16,r20
+ 378 0222 151F      		adc r17,r21
+ 379 0224 E48E      		std Z+28,r14
+ 380 0226 F58E      		std Z+29,r15
+ 381 0228 068F      		std Z+30,r16
+ 382 022a 178F      		std Z+31,r17
+ 383               	.LM53:
+ 384 022c 80A1      		ldd r24,Z+32
+ 385 022e 91A1      		ldd r25,Z+33
+ 386 0230 A2A1      		ldd r26,Z+34
+ 387 0232 B3A1      		ldd r27,Z+35
+ 388 0234 8E15      		cp r24,r14
+ 389 0236 9F05      		cpc r25,r15
+ 390 0238 A007      		cpc r26,r16
+ 391 023a B107      		cpc r27,r17
+ 392 023c 04F4      		brge .L22
+ 393               	.LM54:
+ 394 023e 848F      		std Z+28,r24
+ 395 0240 958F      		std Z+29,r25
+ 396 0242 A68F      		std Z+30,r26
+ 397 0244 B78F      		std Z+31,r27
+ 398 0246 00C0      		rjmp .L24
+ 399               	.L22:
+ 400               	.LM55:
+ 401 0248 2227      		clr r18
+ 402 024a 3327      		clr r19
+ 403 024c A901      		movw r20,r18
+ 404 024e 281B      		sub r18,r24
+ 405 0250 390B      		sbc r19,r25
+ 406 0252 4A0B      		sbc r20,r26
+ 407 0254 5B0B      		sbc r21,r27
+ 408 0256 E216      		cp r14,r18
+ 409 0258 F306      		cpc r15,r19
+ 410 025a 0407      		cpc r16,r20
+ 411 025c 1507      		cpc r17,r21
+ 412 025e 04F4      		brge .L24
+ 413               	.LM56:
+ 414 0260 248F      		std Z+28,r18
+ 415 0262 358F      		std Z+29,r19
+ 416 0264 468F      		std Z+30,r20
+ 417 0266 578F      		std Z+31,r21
+ 418               	.L24:
+ 419               	/* epilogue start */
+ 420               	.LM57:
+ 421 0268 1F91      		pop r17
+ 422 026a 0F91      		pop r16
+ 423 026c FF90      		pop r15
+ 424 026e EF90      		pop r14
+ 425 0270 0895      		ret
+ 426               	.LFE12:
+ 428               	.global	PID_Calculate_Error_Products
+ 430               	PID_Calculate_Error_Products:
+ 431               	.LFB13:
+ 432               	.LM58:
+ 433 0272 4F92      		push r4
+ 434 0274 5F92      		push r5
+ 435 0276 6F92      		push r6
+ 436 0278 7F92      		push r7
+ 437 027a 8F92      		push r8
+ 438 027c 9F92      		push r9
+ 439 027e AF92      		push r10
+ 440 0280 BF92      		push r11
+ 441 0282 CF92      		push r12
+ 442 0284 DF92      		push r13
+ 443 0286 EF92      		push r14
+ 444 0288 FF92      		push r15
+ 445 028a 0F93      		push r16
+ 446 028c 1F93      		push r17
+ 447 028e DF93      		push r29
+ 448 0290 CF93      		push r28
+ 449 0292 00D0      		rcall .
+ 450 0294 00D0      		rcall .
+ 451 0296 CDB7      		in r28,__SP_L__
+ 452 0298 DEB7      		in r29,__SP_H__
+ 453               	/* prologue: function */
+ 454               	/* frame size = 4 */
+ 455               	.LM59:
+ 456 029a C090 0000 		lds r12,PID
+ 457 029e D090 0000 		lds r13,(PID)+1
+ 458 02a2 F601      		movw r30,r12
+ 459 02a4 6081      		ld r22,Z
+ 460 02a6 7181      		ldd r23,Z+1
+ 461 02a8 8281      		ldd r24,Z+2
+ 462 02aa 9381      		ldd r25,Z+3
+ 463 02ac 2489      		ldd r18,Z+20
+ 464 02ae 3589      		ldd r19,Z+21
+ 465 02b0 4689      		ldd r20,Z+22
+ 466 02b2 5789      		ldd r21,Z+23
+ 467 02b4 0E94 0000 		call __mulsi3
+ 468 02b8 6983      		std Y+1,r22
+ 469 02ba 7A83      		std Y+2,r23
+ 470 02bc 8B83      		std Y+3,r24
+ 471 02be 9C83      		std Y+4,r25
+ 472               	.LM60:
+ 473 02c0 F601      		movw r30,r12
+ 474 02c2 6481      		ldd r22,Z+4
+ 475 02c4 7581      		ldd r23,Z+5
+ 476 02c6 8681      		ldd r24,Z+6
+ 477 02c8 9781      		ldd r25,Z+7
+ 478 02ca 248D      		ldd r18,Z+28
+ 479 02cc 358D      		ldd r19,Z+29
+ 480 02ce 468D      		ldd r20,Z+30
+ 481 02d0 578D      		ldd r21,Z+31
+ 482 02d2 0E94 0000 		call __mulsi3
+ 483 02d6 2B01      		movw r4,r22
+ 484 02d8 3C01      		movw r6,r24
+ 485               	.LM61:
+ 486 02da F601      		movw r30,r12
+ 487 02dc 6085      		ldd r22,Z+8
+ 488 02de 7185      		ldd r23,Z+9
+ 489 02e0 8285      		ldd r24,Z+10
+ 490 02e2 9385      		ldd r25,Z+11
+ 491 02e4 208D      		ldd r18,Z+24
+ 492 02e6 318D      		ldd r19,Z+25
+ 493 02e8 428D      		ldd r20,Z+26
+ 494 02ea 538D      		ldd r21,Z+27
+ 495 02ec 0E94 0000 		call __mulsi3
+ 496 02f0 4B01      		movw r8,r22
+ 497 02f2 5C01      		movw r10,r24
+ 498               	.LM62:
+ 499 02f4 F601      		movw r30,r12
+ 500 02f6 E4A8      		ldd r14,Z+52
+ 501 02f8 F5A8      		ldd r15,Z+53
+ 502 02fa 06A9      		ldd r16,Z+54
+ 503 02fc 17A9      		ldd r17,Z+55
+ 504 02fe 6981      		ldd r22,Y+1
+ 505 0300 7A81      		ldd r23,Y+2
+ 506 0302 8B81      		ldd r24,Y+3
+ 507 0304 9C81      		ldd r25,Y+4
+ 508 0306 A801      		movw r20,r16
+ 509 0308 9701      		movw r18,r14
+ 510 030a 0E94 0000 		call __divmodsi4
+ 511 030e F601      		movw r30,r12
+ 512 0310 20A7      		std Z+40,r18
+ 513 0312 31A7      		std Z+41,r19
+ 514 0314 42A7      		std Z+42,r20
+ 515 0316 53A7      		std Z+43,r21
+ 516               	.LM63:
+ 517 0318 C301      		movw r24,r6
+ 518 031a B201      		movw r22,r4
+ 519 031c A801      		movw r20,r16
+ 520 031e 9701      		movw r18,r14
+ 521 0320 0E94 0000 		call __divmodsi4
+ 522 0324 F601      		movw r30,r12
+ 523 0326 24A7      		std Z+44,r18
+ 524 0328 35A7      		std Z+45,r19
+ 525 032a 46A7      		std Z+46,r20
+ 526 032c 57A7      		std Z+47,r21
+ 527               	.LM64:
+ 528 032e C501      		movw r24,r10
+ 529 0330 B401      		movw r22,r8
+ 530 0332 A801      		movw r20,r16
+ 531 0334 9701      		movw r18,r14
+ 532 0336 0E94 0000 		call __divmodsi4
+ 533 033a F601      		movw r30,r12
+ 534 033c 20AB      		std Z+48,r18
+ 535 033e 31AB      		std Z+49,r19
+ 536 0340 42AB      		std Z+50,r20
+ 537 0342 53AB      		std Z+51,r21
+ 538               	/* epilogue start */
+ 539               	.LM65:
+ 540 0344 0F90      		pop __tmp_reg__
+ 541 0346 0F90      		pop __tmp_reg__
+ 542 0348 0F90      		pop __tmp_reg__
+ 543 034a 0F90      		pop __tmp_reg__
+ 544 034c CF91      		pop r28
+ 545 034e DF91      		pop r29
+ 546 0350 1F91      		pop r17
+ 547 0352 0F91      		pop r16
+ 548 0354 FF90      		pop r15
+ 549 0356 EF90      		pop r14
+ 550 0358 DF90      		pop r13
+ 551 035a CF90      		pop r12
+ 552 035c BF90      		pop r11
+ 553 035e AF90      		pop r10
+ 554 0360 9F90      		pop r9
+ 555 0362 8F90      		pop r8
+ 556 0364 7F90      		pop r7
+ 557 0366 6F90      		pop r6
+ 558 0368 5F90      		pop r5
+ 559 036a 4F90      		pop r4
+ 560 036c 0895      		ret
+ 561               	.LFE13:
+ 563               	.global	PID_Execute_Routine
+ 565               	PID_Execute_Routine:
+ 566               	.LFB14:
+ 567               	.LM66:
+ 568               	/* prologue: function */
+ 569               	/* frame size = 0 */
+ 570               	.LM67:
+ 571 036e 0E94 0000 		call PID_Calculate_Error
+ 572               	.LM68:
+ 573 0372 0E94 0000 		call PID_Calculate_Error_Products
+ 574               	.LM69:
+ 575 0376 E091 0000 		lds r30,PID
+ 576 037a F091 0000 		lds r31,(PID)+1
+ 577 037e 20A5      		ldd r18,Z+40
+ 578 0380 31A5      		ldd r19,Z+41
+ 579 0382 42A5      		ldd r20,Z+42
+ 580 0384 53A5      		ldd r21,Z+43
+ 581               	.LVL11:
+ 582               	.LM70:
+ 583 0386 84A5      		ldd r24,Z+44
+ 584 0388 95A5      		ldd r25,Z+45
+ 585 038a A6A5      		ldd r26,Z+46
+ 586 038c B7A5      		ldd r27,Z+47
+ 587 038e 280F      		add r18,r24
+ 588 0390 391F      		adc r19,r25
+ 589 0392 4A1F      		adc r20,r26
+ 590 0394 5B1F      		adc r21,r27
+ 591               	.LM71:
+ 592 0396 80A9      		ldd r24,Z+48
+ 593 0398 91A9      		ldd r25,Z+49
+ 594 039a A2A9      		ldd r26,Z+50
+ 595 039c B3A9      		ldd r27,Z+51
+ 596 039e 280F      		add r18,r24
+ 597 03a0 391F      		adc r19,r25
+ 598 03a2 4A1F      		adc r20,r26
+ 599 03a4 5B1F      		adc r21,r27
+ 600               	.LM72:
+ 601 03a6 20AF      		std Z+56,r18
+ 602 03a8 31AF      		std Z+57,r19
+ 603 03aa 42AF      		std Z+58,r20
+ 604 03ac 53AF      		std Z+59,r21
+ 605               	.LM73:
+ 606 03ae 57FF      		sbrs r21,7
+ 607 03b0 00C0      		rjmp .L28
+ 608               	.LM74:
+ 609 03b2 14AE      		std Z+60,__zero_reg__
+ 610 03b4 15AE      		std Z+61,__zero_reg__
+ 611 03b6 16AE      		std Z+62,__zero_reg__
+ 612 03b8 17AE      		std Z+63,__zero_reg__
+ 613 03ba 0895      		ret
+ 614               	.L28:
+ 615               	.LM75:
+ 616 03bc 24AF      		std Z+60,r18
+ 617 03be 35AF      		std Z+61,r19
+ 618 03c0 46AF      		std Z+62,r20
+ 619 03c2 57AF      		std Z+63,r21
+ 620 03c4 0895      		ret
+ 621               	.LFE14:
+ 623               	.global	PID_Get_Kp
+ 625               	PID_Get_Kp:
+ 626               	.LFB15:
+ 627               	.LM76:
+ 628               	/* prologue: function */
+ 629               	/* frame size = 0 */
+ 630               	.LM77:
+ 631 03c6 E091 0000 		lds r30,PID
+ 632 03ca F091 0000 		lds r31,(PID)+1
+ 633 03ce 6081      		ld r22,Z
+ 634 03d0 7181      		ldd r23,Z+1
+ 635               	.LM78:
+ 636 03d2 8281      		ldd r24,Z+2
+ 637 03d4 9381      		ldd r25,Z+3
+ 638               	/* epilogue start */
+ 639 03d6 0895      		ret
+ 640               	.LFE15:
+ 642               	.global	PID_Get_Ki
+ 644               	PID_Get_Ki:
+ 645               	.LFB16:
+ 646               	.LM79:
+ 647               	/* prologue: function */
+ 648               	/* frame size = 0 */
+ 649               	.LM80:
+ 650 03d8 E091 0000 		lds r30,PID
+ 651 03dc F091 0000 		lds r31,(PID)+1
+ 652 03e0 6481      		ldd r22,Z+4
+ 653 03e2 7581      		ldd r23,Z+5
+ 654               	.LM81:
+ 655 03e4 8681      		ldd r24,Z+6
+ 656 03e6 9781      		ldd r25,Z+7
+ 657               	/* epilogue start */
+ 658 03e8 0895      		ret
+ 659               	.LFE16:
+ 661               	.global	PID_Get_Kd
+ 663               	PID_Get_Kd:
+ 664               	.LFB17:
+ 665               	.LM82:
+ 666               	/* prologue: function */
+ 667               	/* frame size = 0 */
+ 668               	.LM83:
+ 669 03ea E091 0000 		lds r30,PID
+ 670 03ee F091 0000 		lds r31,(PID)+1
+ 671 03f2 6085      		ldd r22,Z+8
+ 672 03f4 7185      		ldd r23,Z+9
+ 673               	.LM84:
+ 674 03f6 8285      		ldd r24,Z+10
+ 675 03f8 9385      		ldd r25,Z+11
+ 676               	/* epilogue start */
+ 677 03fa 0895      		ret
+ 678               	.LFE17:
+ 680               	.global	PID_Get_Set_Point
+ 682               	PID_Get_Set_Point:
+ 683               	.LFB18:
+ 684               	.LM85:
+ 685               	/* prologue: function */
+ 686               	/* frame size = 0 */
+ 687               	.LM86:
+ 688 03fc E091 0000 		lds r30,PID
+ 689 0400 F091 0000 		lds r31,(PID)+1
+ 690 0404 6485      		ldd r22,Z+12
+ 691 0406 7585      		ldd r23,Z+13
+ 692               	.LM87:
+ 693 0408 8685      		ldd r24,Z+14
+ 694 040a 9785      		ldd r25,Z+15
+ 695               	/* epilogue start */
+ 696 040c 0895      		ret
+ 697               	.LFE18:
+ 699               	.global	PID_Get_Process_Value
+ 701               	PID_Get_Process_Value:
+ 702               	.LFB19:
+ 703               	.LM88:
+ 704               	/* prologue: function */
+ 705               	/* frame size = 0 */
+ 706               	.LM89:
+ 707 040e E091 0000 		lds r30,PID
+ 708 0412 F091 0000 		lds r31,(PID)+1
+ 709 0416 6089      		ldd r22,Z+16
+ 710 0418 7189      		ldd r23,Z+17
+ 711               	.LM90:
+ 712 041a 8289      		ldd r24,Z+18
+ 713 041c 9389      		ldd r25,Z+19
+ 714               	/* epilogue start */
+ 715 041e 0895      		ret
+ 716               	.LFE19:
+ 718               	.global	PID_Get_PError
+ 720               	PID_Get_PError:
+ 721               	.LFB20:
+ 722               	.LM91:
+ 723               	/* prologue: function */
+ 724               	/* frame size = 0 */
+ 725               	.LM92:
+ 726 0420 E091 0000 		lds r30,PID
+ 727 0424 F091 0000 		lds r31,(PID)+1
+ 728 0428 6489      		ldd r22,Z+20
+ 729 042a 7589      		ldd r23,Z+21
+ 730               	.LM93:
+ 731 042c 8689      		ldd r24,Z+22
+ 732 042e 9789      		ldd r25,Z+23
+ 733               	/* epilogue start */
+ 734 0430 0895      		ret
+ 735               	.LFE20:
+ 737               	.global	PID_Get_IError
+ 739               	PID_Get_IError:
+ 740               	.LFB21:
+ 741               	.LM94:
+ 742               	/* prologue: function */
+ 743               	/* frame size = 0 */
+ 744               	.LM95:
+ 745 0432 E091 0000 		lds r30,PID
+ 746 0436 F091 0000 		lds r31,(PID)+1
+ 747 043a 648D      		ldd r22,Z+28
+ 748 043c 758D      		ldd r23,Z+29
+ 749               	.LM96:
+ 750 043e 868D      		ldd r24,Z+30
+ 751 0440 978D      		ldd r25,Z+31
+ 752               	/* epilogue start */
+ 753 0442 0895      		ret
+ 754               	.LFE21:
+ 756               	.global	PID_Get_DError
+ 758               	PID_Get_DError:
+ 759               	.LFB22:
+ 760               	.LM97:
+ 761               	/* prologue: function */
+ 762               	/* frame size = 0 */
+ 763               	.LM98:
+ 764 0444 E091 0000 		lds r30,PID
+ 765 0448 F091 0000 		lds r31,(PID)+1
+ 766 044c 608D      		ldd r22,Z+24
+ 767 044e 718D      		ldd r23,Z+25
+ 768               	.LM99:
+ 769 0450 828D      		ldd r24,Z+26
+ 770 0452 938D      		ldd r25,Z+27
+ 771               	/* epilogue start */
+ 772 0454 0895      		ret
+ 773               	.LFE22:
+ 775               	.global	PID_Get_Max_IError
+ 777               	PID_Get_Max_IError:
+ 778               	.LFB23:
+ 779               	.LM100:
+ 780               	/* prologue: function */
+ 781               	/* frame size = 0 */
+ 782               	.LM101:
+ 783 0456 E091 0000 		lds r30,PID
+ 784 045a F091 0000 		lds r31,(PID)+1
+ 785 045e 60A1      		ldd r22,Z+32
+ 786 0460 71A1      		ldd r23,Z+33
+ 787               	.LM102:
+ 788 0462 82A1      		ldd r24,Z+34
+ 789 0464 93A1      		ldd r25,Z+35
+ 790               	/* epilogue start */
+ 791 0466 0895      		ret
+ 792               	.LFE23:
+ 794               	.global	PID_Get_PError_Product
+ 796               	PID_Get_PError_Product:
+ 797               	.LFB24:
+ 798               	.LM103:
+ 799               	/* prologue: function */
+ 800               	/* frame size = 0 */
+ 801               	.LM104:
+ 802 0468 E091 0000 		lds r30,PID
+ 803 046c F091 0000 		lds r31,(PID)+1
+ 804 0470 60A5      		ldd r22,Z+40
+ 805 0472 71A5      		ldd r23,Z+41
+ 806               	.LM105:
+ 807 0474 82A5      		ldd r24,Z+42
+ 808 0476 93A5      		ldd r25,Z+43
+ 809               	/* epilogue start */
+ 810 0478 0895      		ret
+ 811               	.LFE24:
+ 813               	.global	PID_Get_IError_Product
+ 815               	PID_Get_IError_Product:
+ 816               	.LFB25:
+ 817               	.LM106:
+ 818               	/* prologue: function */
+ 819               	/* frame size = 0 */
+ 820               	.LM107:
+ 821 047a E091 0000 		lds r30,PID
+ 822 047e F091 0000 		lds r31,(PID)+1
+ 823 0482 64A5      		ldd r22,Z+44
+ 824 0484 75A5      		ldd r23,Z+45
+ 825               	.LM108:
+ 826 0486 86A5      		ldd r24,Z+46
+ 827 0488 97A5      		ldd r25,Z+47
+ 828               	/* epilogue start */
+ 829 048a 0895      		ret
+ 830               	.LFE25:
+ 832               	.global	PID_Get_DError_Product
+ 834               	PID_Get_DError_Product:
+ 835               	.LFB26:
+ 836               	.LM109:
+ 837               	/* prologue: function */
+ 838               	/* frame size = 0 */
+ 839               	.LM110:
+ 840 048c E091 0000 		lds r30,PID
+ 841 0490 F091 0000 		lds r31,(PID)+1
+ 842 0494 60A9      		ldd r22,Z+48
+ 843 0496 71A9      		ldd r23,Z+49
+ 844               	.LM111:
+ 845 0498 82A9      		ldd r24,Z+50
+ 846 049a 93A9      		ldd r25,Z+51
+ 847               	/* epilogue start */
+ 848 049c 0895      		ret
+ 849               	.LFE26:
+ 851               	.global	PID_Get_Scaling_Factor
+ 853               	PID_Get_Scaling_Factor:
+ 854               	.LFB27:
+ 855               	.LM112:
+ 856               	/* prologue: function */
+ 857               	/* frame size = 0 */
+ 858               	.LM113:
+ 859 049e E091 0000 		lds r30,PID
+ 860 04a2 F091 0000 		lds r31,(PID)+1
+ 861 04a6 64A9      		ldd r22,Z+52
+ 862 04a8 75A9      		ldd r23,Z+53
+ 863               	.LM114:
+ 864 04aa 86A9      		ldd r24,Z+54
+ 865 04ac 97A9      		ldd r25,Z+55
+ 866               	/* epilogue start */
+ 867 04ae 0895      		ret
+ 868               	.LFE27:
+ 870               	.global	PID_Get_Output
+ 872               	PID_Get_Output:
+ 873               	.LFB28:
+ 874               	.LM115:
+ 875               	/* prologue: function */
+ 876               	/* frame size = 0 */
+ 877               	.LM116:
+ 878 04b0 E091 0000 		lds r30,PID
+ 879 04b4 F091 0000 		lds r31,(PID)+1
+ 880 04b8 60AD      		ldd r22,Z+56
+ 881 04ba 71AD      		ldd r23,Z+57
+ 882               	.LM117:
+ 883 04bc 82AD      		ldd r24,Z+58
+ 884 04be 93AD      		ldd r25,Z+59
+ 885               	/* epilogue start */
+ 886 04c0 0895      		ret
+ 887               	.LFE28:
+ 889               	.global	PID_Get_Output_NonNegative
+ 891               	PID_Get_Output_NonNegative:
+ 892               	.LFB29:
+ 893               	.LM118:
+ 894               	/* prologue: function */
+ 895               	/* frame size = 0 */
+ 896               	.LM119:
+ 897 04c2 E091 0000 		lds r30,PID
+ 898 04c6 F091 0000 		lds r31,(PID)+1
+ 899 04ca 64AD      		ldd r22,Z+60
+ 900 04cc 75AD      		ldd r23,Z+61
+ 901               	.LM120:
+ 902 04ce 86AD      		ldd r24,Z+62
+ 903 04d0 97AD      		ldd r25,Z+63
+ 904               	/* epilogue start */
+ 905 04d2 0895      		ret
+ 906               	.LFE29:
+ 908               	.global	PID_Init
+ 910               	PID_Init:
+ 911               	.LFB30:
+ 912               	.LM121:
+ 913               	/* prologue: function */
+ 914               	/* frame size = 0 */
+ 915               	.LM122:
+ 916 04d4 0E94 0000 		call PID_Struct_Init
+ 917               	/* epilogue start */
+ 918               	.LM123:
+ 919 04d8 0895      		ret
+ 920               	.LFE30:
+ 922               	.global	PID_Init_Module
+ 924               	PID_Init_Module:
+ 925               	.LFB31:
+ 926               	.LM124:
+ 927               	.LVL12:
+ 928 04da AF92      		push r10
+ 929               	.LVL13:
+ 930 04dc BF92      		push r11
+ 931 04de CF92      		push r12
+ 932 04e0 DF92      		push r13
+ 933 04e2 EF92      		push r14
+ 934               	.LVL14:
+ 935 04e4 FF92      		push r15
+ 936 04e6 0F93      		push r16
+ 937 04e8 1F93      		push r17
+ 938 04ea DF93      		push r29
+ 939 04ec CF93      		push r28
+ 940 04ee CDB7      		in r28,__SP_L__
+ 941 04f0 DEB7      		in r29,__SP_H__
+ 942               	/* prologue: function */
+ 943               	/* frame size = 0 */
+ 944               	.LBB26:
+ 945               	.LBB27:
+ 946               	.LM125:
+ 947 04f2 E091 0000 		lds r30,PID
+ 948 04f6 F091 0000 		lds r31,(PID)+1
+ 949 04fa 6083      		st Z,r22
+ 950 04fc 7183      		std Z+1,r23
+ 951 04fe 8283      		std Z+2,r24
+ 952 0500 9383      		std Z+3,r25
+ 953               	.LBE27:
+ 954               	.LBE26:
+ 955               	.LBB28:
+ 956               	.LBB29:
+ 957               	.LM126:
+ 958 0502 2483      		std Z+4,r18
+ 959 0504 3583      		std Z+5,r19
+ 960 0506 4683      		std Z+6,r20
+ 961 0508 5783      		std Z+7,r21
+ 962               	.LBE29:
+ 963               	.LBE28:
+ 964               	.LBB30:
+ 965               	.LBB31:
+ 966               	.LM127:
+ 967 050a E086      		std Z+8,r14
+ 968 050c F186      		std Z+9,r15
+ 969 050e 0287      		std Z+10,r16
+ 970 0510 1387      		std Z+11,r17
+ 971               	.LVL15:
+ 972               	.LBE31:
+ 973               	.LBE30:
+ 974               	.LBB32:
+ 975               	.LBB33:
+ 976               	.LM128:
+ 977 0512 A0A2      		std Z+32,r10
+ 978 0514 B1A2      		std Z+33,r11
+ 979 0516 C2A2      		std Z+34,r12
+ 980 0518 D3A2      		std Z+35,r13
+ 981               	.LVL16:
+ 982               	.LBE33:
+ 983               	.LBE32:
+ 984               	.LBB34:
+ 985               	.LBB35:
+ 986               	.LM129:
+ 987 051a 8D85      		ldd r24,Y+13
+ 988 051c 9E85      		ldd r25,Y+14
+ 989 051e AF85      		ldd r26,Y+15
+ 990 0520 B889      		ldd r27,Y+16
+ 991 0522 84AB      		std Z+52,r24
+ 992 0524 95AB      		std Z+53,r25
+ 993 0526 A6AB      		std Z+54,r26
+ 994 0528 B7AB      		std Z+55,r27
+ 995               	.LBE35:
+ 996               	.LBE34:
+ 997               	.LBB36:
+ 998               	.LBB37:
+ 999               	.LM130:
+ 1000 052a 148E      		std Z+28,__zero_reg__
+ 1001 052c 158E      		std Z+29,__zero_reg__
+ 1002 052e 168E      		std Z+30,__zero_reg__
+ 1003 0530 178E      		std Z+31,__zero_reg__
+ 1004               	/* epilogue start */
+ 1005               	.LBE37:
+ 1006               	.LBE36:
+ 1007               	.LM131:
+ 1008 0532 CF91      		pop r28
+ 1009 0534 DF91      		pop r29
+ 1010 0536 1F91      		pop r17
+ 1011 0538 0F91      		pop r16
+ 1012 053a FF90      		pop r15
+ 1013 053c EF90      		pop r14
+ 1014               	.LVL17:
+ 1015 053e DF90      		pop r13
+ 1016 0540 CF90      		pop r12
+ 1017 0542 BF90      		pop r11
+ 1018 0544 AF90      		pop r10
+ 1019               	.LVL18:
+ 1020 0546 0895      		ret
+ 1021               	.LFE31:
+ 1023               		.comm PID_type,70,1
+ 1024               		.comm PID,2,1
+ 1281               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 pid.c
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:18     .text:00000000 PID_Struct_Init
+                            *COM*:00000046 PID_type
+                            *COM*:00000002 PID
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:110    .text:000000fe PID_Set_Kp
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:130    .text:00000110 PID_Set_Ki
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:150    .text:00000122 PID_Set_Kd
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:170    .text:00000134 PID_Set_Constants
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:223    .text:00000166 PID_Set_SetPoint
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:243    .text:00000178 PID_Set_ProcessValue
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:263    .text:0000018a PID_Set_Max_IError
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:283    .text:0000019c PID_Set_Scaling_Factor
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:303    .text:000001ae PID_Reset_IError
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:322    .text:000001c0 PID_Calculate_Error
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:430    .text:00000272 PID_Calculate_Error_Products
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:565    .text:0000036e PID_Execute_Routine
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:625    .text:000003c6 PID_Get_Kp
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:644    .text:000003d8 PID_Get_Ki
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:663    .text:000003ea PID_Get_Kd
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:682    .text:000003fc PID_Get_Set_Point
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:701    .text:0000040e PID_Get_Process_Value
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:720    .text:00000420 PID_Get_PError
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:739    .text:00000432 PID_Get_IError
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:758    .text:00000444 PID_Get_DError
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:777    .text:00000456 PID_Get_Max_IError
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:796    .text:00000468 PID_Get_PError_Product
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:815    .text:0000047a PID_Get_IError_Product
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:834    .text:0000048c PID_Get_DError_Product
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:853    .text:0000049e PID_Get_Scaling_Factor
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:872    .text:000004b0 PID_Get_Output
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:891    .text:000004c2 PID_Get_Output_NonNegative
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:910    .text:000004d4 PID_Init
+C:\Users\WALTON\AppData\Local\Temp/ccRZ0cKZ.s:924    .text:000004da PID_Init_Module
+
+UNDEFINED SYMBOLS
+__mulsi3
+__divmodsi4
+__do_clear_bss
