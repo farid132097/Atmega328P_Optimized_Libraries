@@ -1,1 +1,3 @@
-pid.o: pid.c
+pid.o: pid.c pid.h
+
+pid.h:
