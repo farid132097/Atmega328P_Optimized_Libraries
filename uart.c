@@ -26,9 +26,7 @@
 
 
 
-
-
-
+//Define Software Error Codes
 #define  UART_RX_ERR_NO_ERR          0x00U
 #define  UART_RX_ERR_FRAMING         0x01U
 #define  UART_RX_ERR_OVERRUN         0x02U
@@ -742,9 +740,8 @@ void UART_Timer_ISR_Handler(void){
 	if(UART.RxPacket.DataReadComplete == UART_FALSE){
 	  UART.Error = UART_RX_ERR_READ_INCOMPLETE;
 	}
-    
+    UART_RX_Packet_CRC_Check();
     #ifdef UART_CRC_ENABLE
-	UART_RX_Packet_CRC_Check();
 	if(UART.RxPacket.CRCStatus == UART_TRUE){
 	  UART.RxPacket.DataAvailable = UART_TRUE;
 	}
@@ -825,6 +822,13 @@ uint16_t UART_CRC_Calculate_Block(uint8_t *buf, uint8_t len){
 
 
 
+
+
+
+
+
+/**********UART RX Packet Check Functions Start************/
+
 void UART_RX_Packet_CRC_Check(void){
   uint16_t crc_calc = 0, crc_recv = 0;
   crc_calc   =  UART_CRC_Calculate_Block(UART.Buf, UART_Data_Len_Get()-2);
@@ -840,6 +844,15 @@ void UART_RX_Packet_CRC_Check(void){
     UART.RxPacket.CRCStatus = UART_FALSE;
   }
 }
+
+/***********UART RX Packet Check Functions End*************/
+
+
+
+
+
+
+
 
 
 /*****************UART Init Functions Start****************/
