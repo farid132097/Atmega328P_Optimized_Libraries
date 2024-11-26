@@ -6,67 +6,97 @@
    6               	__tmp_reg__ = 0
    7               	__zero_reg__ = 1
   15               	.Ltext0:
-  16               	.global	App_Main_Loop
-  18               	App_Main_Loop:
-  19               	.LFB3:
-  20               	.LM1:
-  21               	/* prologue: function */
-  22               	/* frame size = 0 */
-  23               	.LM2:
-  24 0000 80E0      		ldi r24,lo8(0)
-  25 0002 0E94 0000 		call Timebase_DownCounter_SS_Continuous_Expired_Event
-  26               	/* epilogue start */
-  27               	.LM3:
-  28 0006 0895      		ret
-  29               	.LFE3:
-  31               	.global	App_Setup
-  33               	App_Setup:
-  34               	.LFB2:
-  35               	.LM4:
-  36               	/* prologue: function */
-  37               	/* frame size = 0 */
-  38               	.LM5:
-  39 0008 60E0      		ldi r22,lo8(57600)
-  40 000a 71EE      		ldi r23,hi8(57600)
-  41 000c 80E0      		ldi r24,hlo8(57600)
-  42 000e 90E0      		ldi r25,hhi8(57600)
-  43 0010 0E94 0000 		call UART_Init
-  44               	.LM6:
-  45 0014 509A      		sbi 42-32,0
-  46               	.LM7:
-  47 0016 5898      		cbi 43-32,0
-  48               	.LM8:
-  49 0018 80E0      		ldi r24,lo8(0)
-  50 001a 42E3      		ldi r20,lo8(50)
-  51 001c 50E0      		ldi r21,hi8(50)
-  52 001e 60E0      		ldi r22,hlo8(50)
-  53 0020 70E0      		ldi r23,hhi8(50)
-  54 0022 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
-  55               	.LM9:
-  56 0026 80E0      		ldi r24,lo8(0)
-  57 0028 45E0      		ldi r20,lo8(5)
-  58 002a 50E0      		ldi r21,hi8(5)
-  59 002c 60E0      		ldi r22,hlo8(5)
-  60 002e 70E0      		ldi r23,hhi8(5)
-  61 0030 0E94 0000 		call Timebase_LPDownCounter_Set_Securely
-  62               	/* epilogue start */
-  63               	.LM10:
-  64 0034 0895      		ret
-  65               	.LFE2:
-  99               	.Letext0:
+  16               		.data
+  17               	.LC0:
+  18 0000 4361 6C63 		.string	"CalcCRC"
+  18      4352 4300 
+  19               	.LC1:
+  20 0008 4572 726F 		.string	"ErrorCode"
+  20      7243 6F64 
+  20      6500 
+  21               		.text
+  22               	.global	App_Main_Loop
+  24               	App_Main_Loop:
+  25               	.LFB3:
+  26               	.LM1:
+  27               	/* prologue: function */
+  28               	/* frame size = 0 */
+  29               	.LM2:
+  30 0000 0E94 0000 		call UART_Data_Available
+  31 0004 8823      		tst r24
+  32 0006 01F0      		breq .L3
+  33               	.LM3:
+  34 0008 0E94 0000 		call UART_Data_Calculated_CRC_Get
+  35 000c AC01      		movw r20,r24
+  36 000e 60E0      		ldi r22,lo8(0)
+  37 0010 70E0      		ldi r23,hi8(0)
+  38 0012 80E0      		ldi r24,lo8(.LC0)
+  39 0014 90E0      		ldi r25,hi8(.LC0)
+  40 0016 0E94 0000 		call UART_Tx_Parameter_Hex_SP
+  41               	.LM4:
+  42 001a 0E94 0000 		call UART_Error_Code_Get
+  43 001e 482F      		mov r20,r24
+  44 0020 50E0      		ldi r21,lo8(0)
+  45 0022 60E0      		ldi r22,lo8(0)
+  46 0024 70E0      		ldi r23,hi8(0)
+  47 0026 80E0      		ldi r24,lo8(.LC1)
+  48 0028 90E0      		ldi r25,hi8(.LC1)
+  49 002a 0E94 0000 		call UART_Tx_Parameter_Hex_SP
+  50               	.LM5:
+  51 002e 0E94 0000 		call UART_Data_Print_Buf
+  52               	.LM6:
+  53 0032 0E94 0000 		call UART_Buf_Flush
+  54               	.LM7:
+  55 0036 0E94 0000 		call UART_Data_Clear_Available_Flag
+  56               	.LM8:
+  57 003a 0E94 0000 		call UART_Data_Clear_Read_Complete_Flag
+  58               	.L3:
+  59 003e 0895      		ret
+  60               	.LFE3:
+  62               	.global	App_Setup
+  64               	App_Setup:
+  65               	.LFB2:
+  66               	.LM9:
+  67               	/* prologue: function */
+  68               	/* frame size = 0 */
+  69               	.LM10:
+  70 0040 60E0      		ldi r22,lo8(57600)
+  71 0042 71EE      		ldi r23,hi8(57600)
+  72 0044 80E0      		ldi r24,hlo8(57600)
+  73 0046 90E0      		ldi r25,hhi8(57600)
+  74 0048 0E94 0000 		call UART_Init
+  75               	.LM11:
+  76 004c 80E0      		ldi r24,lo8(0)
+  77 004e 42E3      		ldi r20,lo8(50)
+  78 0050 50E0      		ldi r21,hi8(50)
+  79 0052 60E0      		ldi r22,hlo8(50)
+  80 0054 70E0      		ldi r23,hhi8(50)
+  81 0056 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
+  82               	/* epilogue start */
+  83               	.LM12:
+  84 005a 0895      		ret
+  85               	.LFE2:
+ 119               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 app.c
-C:\Users\WALTON\AppData\Local\Temp/cc8RuvIG.s:2      *ABS*:0000003f __SREG__
-C:\Users\WALTON\AppData\Local\Temp/cc8RuvIG.s:3      *ABS*:0000003e __SP_H__
-C:\Users\WALTON\AppData\Local\Temp/cc8RuvIG.s:4      *ABS*:0000003d __SP_L__
-C:\Users\WALTON\AppData\Local\Temp/cc8RuvIG.s:5      *ABS*:00000034 __CCP__
-C:\Users\WALTON\AppData\Local\Temp/cc8RuvIG.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\WALTON\AppData\Local\Temp/cc8RuvIG.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\WALTON\AppData\Local\Temp/cc8RuvIG.s:18     .text:00000000 App_Main_Loop
-C:\Users\WALTON\AppData\Local\Temp/cc8RuvIG.s:33     .text:00000008 App_Setup
+C:\Users\WALTON\AppData\Local\Temp/ccRgLSEh.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccRgLSEh.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccRgLSEh.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccRgLSEh.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccRgLSEh.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccRgLSEh.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccRgLSEh.s:24     .text:00000000 App_Main_Loop
+C:\Users\WALTON\AppData\Local\Temp/ccRgLSEh.s:64     .text:00000040 App_Setup
 
 UNDEFINED SYMBOLS
-Timebase_DownCounter_SS_Continuous_Expired_Event
+UART_Data_Available
+UART_Data_Calculated_CRC_Get
+UART_Tx_Parameter_Hex_SP
+UART_Error_Code_Get
+UART_Data_Print_Buf
+UART_Buf_Flush
+UART_Data_Clear_Available_Flag
+UART_Data_Clear_Read_Complete_Flag
 UART_Init
 Timebase_DownCounter_SS_Set_Securely
-Timebase_LPDownCounter_Set_Securely
+__do_copy_data

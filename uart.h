@@ -6,6 +6,8 @@
  */
 
 void     UART_Struct_Init(void);
+void     UART_RX_Packet_Struct_Init(void);
+
 void     UART_Config_GPIO(void);
 void     UART_Config_Clock(void);
 void     UART_Config_BAUD_Rate(uint32_t baud_rate);
@@ -80,13 +82,24 @@ void     UART_Buf_Flush(void);
 uint8_t  UART_Buf_Get(uint16_t index);
 uint8_t  UART_Buf_Get_Index(void);
 
-//Data Availablity check using timer
+
+//UART Data Functions
 uint8_t  UART_Data_Available(void);
-void     UART_Data_Clear_Available_Flag(void);
 uint8_t  UART_Data_Len_Get(void);
+
+uint16_t UART_Data_Calculated_CRC_Get(void);
+uint16_t UART_Data_Received_CRC_Get(void);
+uint8_t  UART_Data_CRC_Status_Get(void);
+uint8_t  UART_Data_Read_Complete_Status(void);
+
+void     UART_Data_Clear_Available_Flag(void);
+void     UART_Data_Clear_Read_Complete_Flag(void);
+
 void     UART_Data_Copy_Buf(uint8_t *buf);
 void     UART_Data_Print_Buf(void);
 
+uint8_t  UART_Error_Code_Get(void);
+void     UART_Error_Code_Clear(void);
 
 void     UART_ISR_Handler(void);
 void     UART_Timer_ISR_Handler(void);

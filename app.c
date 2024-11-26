@@ -13,22 +13,27 @@ void App_Setup(void){
 
   UART_Init(57600);
   
-  DDRD  |=  (1<<0);
-  PORTD &=~ (1<<0);
   
   Timebase_DownCounter_SS_Set_Securely(0, 50);
-  Timebase_LPDownCounter_Set_Securely(0, 5);
-  
   
 }
 
 
 void App_Main_Loop(void){
-
-  if(Timebase_DownCounter_SS_Continuous_Expired_Event(0)){
-    //UART_Transmit_Number(Timebase_LPTimer_Get_Seconds());
-	//UART_Transmit_Text("\r\n");
+  
+  
+  if(UART_Data_Available()){
+    UART_Tx_Parameter_Hex_SP("CalcCRC", UART_Data_Calculated_CRC_Get() );
+    UART_Tx_Parameter_Hex_SP("ErrorCode", UART_Error_Code_Get() );
+    UART_Data_Print_Buf();
+	UART_Buf_Flush();
+	UART_Data_Clear_Available_Flag();
+	UART_Data_Clear_Read_Complete_Flag();
   }
+  
+  /*if(Timebase_DownCounter_SS_Continuous_Expired_Event(0)){
+    UART_Tx_Parameter_NL("Dcnt0", Timebase_DownCounter_SS_Get_Value(0));
+  }*/
   
 }
 

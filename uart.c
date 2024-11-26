@@ -14,22 +14,38 @@
 #define  UART_ENABLE_TX    
 #define  UART_ENABLE_RX    
 #define  UART_ENABLE_RX_INT
-#define  UART_BUFFER_SIZE   32
 
-//#define  UART_CRC_CVTE
-#define  UART_CRC_XMODEM
+#define  UART_BUFFER_SIZE            64U
+#define  UART_RX_PCKT_CMPLT_DELAY    50U
+
+
+
+//#define  UART_CRC_ENABLE     //Uncomment if packet validation by CRC is needed
+//#define  UART_CRC_CVTE     //Uncomment if CRC is by CVTE Protocol
+#define  UART_CRC_XMODEM     //Uncomment if CRC is by X-MODEM Protocol
+
+
+
+
+
+
+#define  UART_RX_ERR_NO_ERR          0x00U
+#define  UART_RX_ERR_FRAMING         0x01U
+#define  UART_RX_ERR_OVERRUN         0x02U
+#define  UART_RX_ERR_READ_INCOMPLETE 0x10U
 
 
 typedef struct uart_timer_t{
   volatile uint8_t   Enabled;
-  volatile uint8_t   DataAvailable;
+  volatile uint8_t   ResetVal;
 }uart_timer_t;
 
 typedef struct uart_rx_packet_t{
-  volatile uint8_t   ValidBuf[UART_BUFFER_SIZE];
-  volatile uint8_t   ValidBufLen;
   volatile uint16_t  CalculatedCRC;
   volatile uint16_t  ReceivedCRC;
+  volatile uint8_t   CRCStatus;
+  volatile uint8_t   DataAvailable;
+  volatile uint8_t   DataReadComplete;
 }uart_rx_packet_t;
 
 typedef struct uart_t{
@@ -77,7 +93,14 @@ void UART_Struct_Init(void){
   for(uint8_t i = 0; i < UART.BufSize; i++){
     UART.Buf[i] = UART_NULL;
   }
-  
+}
+
+void UART_RX_Packet_Struct_Init(void){
+  UART.RxPacket.CalculatedCRC    = UART_NULL;
+  UART.RxPacket.ReceivedCRC      = UART_NULL;
+  UART.RxPacket.CRCStatus        = UART_FALSE;
+  UART.RxPacket.DataAvailable    = UART_FALSE;
+  UART.RxPacket.DataReadComplete = UART_TRUE;
 }
 
 /********************UART Structure Functions End*****************/
@@ -138,13 +161,13 @@ uint8_t UART_Rx_Byte(void){
   volatile uint8_t val = 0;
   if( UCSR0A & (1<<FE0) ){
     val = UDR0;
-    UART.Error = 0x01;
+    UART.Error = UART_RX_ERR_FRAMING;
   }else if(UCSR0A & (1<<DOR0) ){
     val = UDR0;
-    UART.Error = 0x02;
+    UART.Error = UART_RX_ERR_OVERRUN;
   }else{
     val = UDR0;
-    UART.Error = 0x00;
+    UART.Error = UART_RX_ERR_NO_ERR;
   }
   return val;
 }
@@ -153,6 +176,7 @@ uint8_t UART_Rx_Byte(void){
 
 ISR(USART_RX_vect){
   UART_ISR_Handler();
+  //Clear flag if necessary
 }
 
 /**********************UART Init Functions End*******************/
@@ -169,18 +193,38 @@ ISR(USART_RX_vect){
 
 void UART_Timer_Struct_Init(void){
   UART.Timer.Enabled = UART_FALSE;
+  UART.Timer.ResetVal = UART_NULL;
 }
 
 void UART_Timer_Init(void){
+
+  uint32_t temp0 = F_CPU;
+  uint32_t temp1 = UART_RX_PCKT_CMPLT_DELAY;
+  temp1 *= 1000;
+  temp0 /= 1024;             //Prescaler
+  temp1 /= temp0;                    
+  UART.Timer.ResetVal = temp1;
+  UART.Timer.ResetVal = 0xFF - temp1;
   
+  ASSR   = 0x00;
+  TCCR2A = 0x00;
+  TCCR2B = 0x00;
+  TIMSK2 = 0x00;
+  TCNT2  = 0x00;
+  TIFR2  = 0xFF;
+  TIMSK2 = (1<<TOIE2);
+  sei();
+  #if UART_RX_PCKT_CMPLT_DELAY<20U
+    #warning UART_RX_PCKT_CMPLT_DELAY value < 20
+  #endif
 }
 
 void UART_Timer_Enable(void){
-  
+  TCCR2B = 0x07;
 }
 
 void UART_Timer_Disable(void){ 
-  
+  TCCR2B = 0x00;
 }
 
 uint8_t UART_Timer_Get_Status(void){
@@ -188,18 +232,19 @@ uint8_t UART_Timer_Get_Status(void){
 }
 
 uint16_t UART_Timer_Get_Val(void){
-  return 0;
+  return TCNT2;
 }
 
 
 void UART_Timer_Value_Reset(void){
-  
+  TCNT2 = UART.Timer.ResetVal;
 }
 
 
 
 ISR(TIMER2_OVF_vect){
   UART_Timer_ISR_Handler();
+  //Clear flag if necessary
 }
 
 
@@ -586,41 +631,78 @@ uint8_t UART_Buf_Get_Index(void){
 /*******************UART Data Functions Start****************/
 
 uint8_t UART_Data_Available(void){
-	return UART.Timer.DataAvailable;
+  return UART.RxPacket.DataAvailable;
+}
+
+uint8_t UART_Data_Len_Get(void){
+  return UART_Buf_Get_Index();
+}
+
+uint16_t UART_Data_Calculated_CRC_Get(void){
+  return UART.RxPacket.CalculatedCRC;
+}
+
+uint16_t UART_Data_Received_CRC_Get(void){
+  return UART.RxPacket.ReceivedCRC;
+}
+
+uint8_t UART_Data_CRC_Status_Get(void){
+  return UART.RxPacket.CRCStatus;
+}
+
+uint8_t UART_Data_Read_Complete_Status(void){
+  return UART.RxPacket.DataReadComplete;
 }
 
 void UART_Data_Clear_Available_Flag(void){
-	UART.Timer.DataAvailable = 0;
+  UART.RxPacket.DataAvailable = UART_FALSE;
 }
 
-
-uint8_t UART_Data_Len_Get(void){
-	return UART_Buf_Get_Index();
+void UART_Data_Clear_Read_Complete_Flag(void){
+  UART_Buf_Flush();
+  UART.RxPacket.DataReadComplete = UART_TRUE;
 }
-
 
 
 void UART_Data_Copy_Buf(uint8_t *buf){
-	for(uint16_t i = 0; i < UART_Data_Len_Get(); i++){
-		buf[i] = UART_Buf_Get(i);
-	}
+  for(uint16_t i = 0; i < UART_Data_Len_Get(); i++){
+	buf[i] = UART_Buf_Get(i);
+  }
 }
 
 
 void UART_Data_Print_Buf(void){
-	if(UART_Data_Available()){
-	  for(uint16_t i = 0; i < UART_Data_Len_Get(); i++){
-		  UART_Tx_Number_Hex( UART_Buf_Get(i) );
-	  }
+  for(uint16_t i = 0; i < UART_Data_Len_Get(); i++){
+	UART_Tx_Byte( UART_Buf_Get(i) );
   }
-	UART_Tx_NL();
+  UART_Tx_NL();
 }
 
 /********************UART Data Functions End*****************/
 
 
 
+
+
+
+
+
 \
+/******************Error Code Functions Start****************/
+
+uint8_t UART_Error_Code_Get(void){
+  return UART.Error;
+}
+
+void UART_Error_Code_Clear(void){
+  UART.Error = 0;
+}
+
+/******************Error Code Functions End******************/
+
+
+
+
 
 
 
@@ -633,7 +715,6 @@ void UART_ISR_Handler(void){
   if(UART.Error == 0x00){
     UART.Buf[UART.BufIndex] = UART.LastRxByte;
     UART.BufIndex++;
-
     if(UART.BufIndex >= UART.BufSize){
       UART.BufIndex = 0;
     }
@@ -641,19 +722,41 @@ void UART_ISR_Handler(void){
   else{
     UART.LastRxByte = UART_NULL;
   }
+  
+  UART_Timer_Value_Reset();
+  if(UART.Timer.Enabled == UART_FALSE){
+	UART_Timer_Enable();
+	UART.Timer.Enabled = UART_TRUE;
+  }
+  
 }
 
 void UART_Timer_ISR_Handler(void){
   if(UART.Timer.Enabled == UART_TRUE){
     UART_Timer_Disable();
+	UART.Timer.Enabled = UART_FALSE;
   }
   
   if(UART_Buf_Get_Index() != UART_NULL){
-    UART.Timer.DataAvailable = UART_TRUE;
+    
+	if(UART.RxPacket.DataReadComplete == UART_FALSE){
+	  UART.Error = UART_RX_ERR_READ_INCOMPLETE;
+	}
+    
+    #ifdef UART_CRC_ENABLE
 	UART_RX_Packet_CRC_Check();
-  }
-  else{
-	UART.Timer.DataAvailable = UART_FALSE;
+	if(UART.RxPacket.CRCStatus == UART_TRUE){
+	  UART.RxPacket.DataAvailable = UART_TRUE;
+	}
+	else{
+	  UART_Buf_Flush();
+	  UART.RxPacket.DataAvailable = UART_FALSE;
+	}
+	#else
+	UART.RxPacket.DataAvailable = UART_TRUE;
+	#endif
+	
+	UART.RxPacket.DataReadComplete = UART_FALSE;
   }
 }
 
@@ -730,15 +833,22 @@ void UART_RX_Packet_CRC_Check(void){
   crc_recv  |= UART_Buf_Get(UART_Data_Len_Get() - 1);
   UART.RxPacket.CalculatedCRC = crc_calc;
   UART.RxPacket.ReceivedCRC = crc_recv;
+  if(UART.RxPacket.CalculatedCRC == UART.RxPacket.ReceivedCRC){
+    UART.RxPacket.CRCStatus = UART_TRUE;
+  }
+  else{
+    UART.RxPacket.CRCStatus = UART_FALSE;
+  }
 }
-
-
 
 
 /*****************UART Init Functions Start****************/
 
 void UART_Init(uint32_t baud){
   UART_Struct_Init();
+  UART_RX_Packet_Struct_Init();
+  UART_Timer_Struct_Init();
+  
   UART_Config_GPIO();
   UART_Config_Clock();
   UART_Config_BAUD_Rate(baud);
@@ -755,6 +865,7 @@ void UART_Init(uint32_t baud){
   UART_Config_Rx_Interrupt();
   #endif
   
+  UART_Timer_Init();
   UART_Buf_Flush();
 }
 
