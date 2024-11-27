@@ -43,60 +43,51 @@
   48 0028 90E0      		ldi r25,hi8(.LC1)
   49 002a 0E94 0000 		call UART_Tx_Parameter_Hex_SP
   50               	.LM5:
-  51 002e 0E94 0000 		call UART_Data_Print_Buf
-  52               	.LM6:
-  53 0032 0E94 0000 		call UART_Buf_Flush
-  54               	.LM7:
-  55 0036 0E94 0000 		call UART_Data_Clear_Available_Flag
-  56               	.LM8:
-  57 003a 0E94 0000 		call UART_Data_Clear_Read_Complete_Flag
-  58               	.L3:
-  59 003e 0895      		ret
-  60               	.LFE3:
-  62               	.global	App_Setup
-  64               	App_Setup:
-  65               	.LFB2:
-  66               	.LM9:
-  67               	/* prologue: function */
-  68               	/* frame size = 0 */
-  69               	.LM10:
-  70 0040 60E0      		ldi r22,lo8(57600)
-  71 0042 71EE      		ldi r23,hi8(57600)
-  72 0044 80E0      		ldi r24,hlo8(57600)
-  73 0046 90E0      		ldi r25,hhi8(57600)
-  74 0048 0E94 0000 		call UART_Init
-  75               	.LM11:
-  76 004c 80E0      		ldi r24,lo8(0)
-  77 004e 42E3      		ldi r20,lo8(50)
-  78 0050 50E0      		ldi r21,hi8(50)
-  79 0052 60E0      		ldi r22,hlo8(50)
-  80 0054 70E0      		ldi r23,hhi8(50)
-  81 0056 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
-  82               	/* epilogue start */
-  83               	.LM12:
-  84 005a 0895      		ret
-  85               	.LFE2:
- 119               	.Letext0:
+  51 002e 0E94 0000 		call UART_RX_Packet_Read_Complete
+  52               	.L3:
+  53 0032 0895      		ret
+  54               	.LFE3:
+  56               	.global	App_Setup
+  58               	App_Setup:
+  59               	.LFB2:
+  60               	.LM6:
+  61               	/* prologue: function */
+  62               	/* frame size = 0 */
+  63               	.LM7:
+  64 0034 60E0      		ldi r22,lo8(57600)
+  65 0036 71EE      		ldi r23,hi8(57600)
+  66 0038 80E0      		ldi r24,hlo8(57600)
+  67 003a 90E0      		ldi r25,hhi8(57600)
+  68 003c 0E94 0000 		call UART_Init
+  69               	.LM8:
+  70 0040 80E0      		ldi r24,lo8(0)
+  71 0042 42E3      		ldi r20,lo8(50)
+  72 0044 50E0      		ldi r21,hi8(50)
+  73 0046 60E0      		ldi r22,hlo8(50)
+  74 0048 70E0      		ldi r23,hhi8(50)
+  75 004a 0E94 0000 		call Timebase_DownCounter_SS_Set_Securely
+  76               	/* epilogue start */
+  77               	.LM9:
+  78 004e 0895      		ret
+  79               	.LFE2:
+ 113               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 app.c
-C:\Users\WALTON\AppData\Local\Temp/ccO4coiK.s:2      *ABS*:0000003f __SREG__
-C:\Users\WALTON\AppData\Local\Temp/ccO4coiK.s:3      *ABS*:0000003e __SP_H__
-C:\Users\WALTON\AppData\Local\Temp/ccO4coiK.s:4      *ABS*:0000003d __SP_L__
-C:\Users\WALTON\AppData\Local\Temp/ccO4coiK.s:5      *ABS*:00000034 __CCP__
-C:\Users\WALTON\AppData\Local\Temp/ccO4coiK.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccO4coiK.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\WALTON\AppData\Local\Temp/ccO4coiK.s:24     .text:00000000 App_Main_Loop
-C:\Users\WALTON\AppData\Local\Temp/ccO4coiK.s:64     .text:00000040 App_Setup
+C:\Users\WALTON\AppData\Local\Temp/ccoOaGvR.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccoOaGvR.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccoOaGvR.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccoOaGvR.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccoOaGvR.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccoOaGvR.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccoOaGvR.s:24     .text:00000000 App_Main_Loop
+C:\Users\WALTON\AppData\Local\Temp/ccoOaGvR.s:58     .text:00000034 App_Setup
 
 UNDEFINED SYMBOLS
 UART_Data_Available
 UART_Data_Calculated_CRC_Get
 UART_Tx_Parameter_Hex_SP
 UART_Error_Code_Get
-UART_Data_Print_Buf
-UART_Buf_Flush
-UART_Data_Clear_Available_Flag
-UART_Data_Clear_Read_Complete_Flag
+UART_RX_Packet_Read_Complete
 UART_Init
 Timebase_DownCounter_SS_Set_Securely
 __do_copy_data

@@ -109,6 +109,7 @@ uint16_t UART_CRC_Calculate_Byte(uint16_t crc, uint8_t data);
 uint16_t UART_CRC_Calculate_Block(uint8_t *buf, uint8_t len);
 
 void     UART_RX_Packet_CRC_Check(void);
+void     UART_RX_Packet_Read_Complete(void);
 
 void     UART_Init(uint32_t baud);
 

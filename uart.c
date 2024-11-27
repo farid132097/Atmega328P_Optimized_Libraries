@@ -827,11 +827,11 @@ uint16_t UART_CRC_Calculate_Block(uint8_t *buf, uint8_t len){
 
 
 
-/**********UART RX Packet Check Functions Start************/
+/*************UART RX Packet Functions Start***************/
 
 void UART_RX_Packet_CRC_Check(void){
   uint16_t crc_calc = 0, crc_recv = 0;
-  crc_calc   =  UART_CRC_Calculate_Block(UART.Buf, UART_Data_Len_Get()-2);
+  crc_calc   =  UART_CRC_Calculate_Block((uint8_t*)UART.Buf, UART_Data_Len_Get()-2);
   crc_recv   =  UART_Buf_Get(UART_Data_Len_Get() - 2);
   crc_recv <<= 8;
   crc_recv  |= UART_Buf_Get(UART_Data_Len_Get() - 1);
@@ -845,7 +845,13 @@ void UART_RX_Packet_CRC_Check(void){
   }
 }
 
-/***********UART RX Packet Check Functions End*************/
+void UART_RX_Packet_Read_Complete(void){
+  UART_Buf_Flush();
+  UART_Data_Clear_Available_Flag();
+  UART_Data_Clear_Read_Complete_Flag();
+}
+
+/**************UART RX Packet Functions End****************/
 
 
 
