@@ -1,0 +1,112 @@
+   1               		.file	"thdbg.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	ThreadedDbg_Struct_Init
+  18               	ThreadedDbg_Struct_Init:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 1092 0000 		sts ThreadedDbg+40,__zero_reg__
+  25               	.LM3:
+  26 0004 1092 0000 		sts ThreadedDbg+41,__zero_reg__
+  27               	/* epilogue start */
+  28               	.LM4:
+  29 0008 0895      		ret
+  30               	.LFE2:
+  32               	.global	ThreadedDbg_Add_Function
+  34               	ThreadedDbg_Add_Function:
+  35               	.LFB3:
+  36               	.LM5:
+  37               	.LVL0:
+  38               	/* prologue: function */
+  39               	/* frame size = 0 */
+  40               	.LM6:
+  41 000a 2091 0000 		lds r18,ThreadedDbg+40
+  42 000e E22F      		mov r30,r18
+  43 0010 F0E0      		ldi r31,lo8(0)
+  44 0012 EE0F      		lsl r30
+  45 0014 FF1F      		rol r31
+  46 0016 E050      		subi r30,lo8(-(ThreadedDbg))
+  47 0018 F040      		sbci r31,hi8(-(ThreadedDbg))
+  48 001a 9183      		std Z+1,r25
+  49 001c 8083      		st Z,r24
+  50               	.LM7:
+  51 001e 2F5F      		subi r18,lo8(-(1))
+  52 0020 2093 0000 		sts ThreadedDbg+40,r18
+  53               	/* epilogue start */
+  54               	.LM8:
+  55 0024 0895      		ret
+  56               	.LFE3:
+  58               	.global	ThreadedDbg_Execute_Function
+  60               	ThreadedDbg_Execute_Function:
+  61               	.LFB4:
+  62               	.LM9:
+  63               	/* prologue: function */
+  64               	/* frame size = 0 */
+  65               	.LM10:
+  66 0026 E091 0000 		lds r30,ThreadedDbg+41
+  67 002a F0E0      		ldi r31,lo8(0)
+  68 002c EE0F      		lsl r30
+  69 002e FF1F      		rol r31
+  70 0030 E050      		subi r30,lo8(-(ThreadedDbg))
+  71 0032 F040      		sbci r31,hi8(-(ThreadedDbg))
+  72 0034 0190      		ld __tmp_reg__,Z+
+  73 0036 F081      		ld r31,Z
+  74 0038 E02D      		mov r30,__tmp_reg__
+  75 003a 0995      		icall
+  76               	.LM11:
+  77 003c 8091 0000 		lds r24,ThreadedDbg+41
+  78 0040 8F5F      		subi r24,lo8(-(1))
+  79 0042 8093 0000 		sts ThreadedDbg+41,r24
+  80               	.LM12:
+  81 0046 9091 0000 		lds r25,ThreadedDbg+40
+  82 004a 9817      		cp r25,r24
+  83 004c 00F4      		brsh .L7
+  84               	.LM13:
+  85 004e 1092 0000 		sts ThreadedDbg+41,__zero_reg__
+  86               	.L7:
+  87 0052 0895      		ret
+  88               	.LFE4:
+  90               	.global	ThreadedDbg_Init
+  92               	ThreadedDbg_Init:
+  93               	.LFB5:
+  94               	.LM14:
+  95               	/* prologue: function */
+  96               	/* frame size = 0 */
+  97               	.LBB4:
+  98               	.LBB5:
+  99               	.LM15:
+ 100 0054 1092 0000 		sts ThreadedDbg+40,__zero_reg__
+ 101               	.LM16:
+ 102 0058 1092 0000 		sts ThreadedDbg+41,__zero_reg__
+ 103               	/* epilogue start */
+ 104               	.LBE5:
+ 105               	.LBE4:
+ 106               	.LM17:
+ 107 005c 0895      		ret
+ 108               	.LFE5:
+ 110               		.comm ThreadedDbg,42,1
+ 159               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 thdbg.c
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:18     .text:00000000 ThreadedDbg_Struct_Init
+                            *COM*:0000002a ThreadedDbg
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:34     .text:0000000a ThreadedDbg_Add_Function
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:60     .text:00000026 ThreadedDbg_Execute_Function
+C:\Users\WALTON\AppData\Local\Temp/ccWNCNIe.s:92     .text:00000054 ThreadedDbg_Init
+
+UNDEFINED SYMBOLS
+__do_clear_bss
