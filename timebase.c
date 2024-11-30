@@ -37,6 +37,7 @@ typedef struct timebase_time_t{
   volatile uint16_t        SubSeconds         ;
   volatile int32_t         Seconds            ;
   volatile uint16_t        SubSecondsShadow   ;
+  volatile uint32_t        SubSecondsUpTime   ;
   volatile int32_t         SecondsShadow      ;
   volatile uint8_t         VariablesSync      ;
   
@@ -220,6 +221,7 @@ void Timebase_Struct_Init(void){
   Timebase->Config.UpdateRate = 1;
   Timebase->Time.OVFUpdateValue=0;
   Timebase->Time.SubSecondsShadow = 0;
+  Timebase->Time.SubSecondsUpTime = 0;
   Timebase->Time.SecondsShadow = 0;
   Timebase->Time.SubSeconds = 0;
   Timebase->Time.Seconds = 0;
@@ -528,6 +530,9 @@ uint16_t Timebase_Timer_Get_SubSecondsShadow(void){
   return Timebase->Time.SubSecondsShadow;
 }
 
+uint32_t Timebase_Timer_Get_SubSecondsUpTime(void){
+  return Timebase->Time.SubSecondsUpTime;
+}
 
 int32_t Timebase_Timer_Get_SecondsShadow(void){
   return Timebase->Time.SecondsShadow;
@@ -548,6 +553,25 @@ void Timebase_Timer_Set_SubSeconds(uint16_t value){
   Timebase->Time.SubSeconds = value;
 }
 
+void Timebase_Timer_Set_SubSecondsShadow(uint16_t value){
+	#ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
+	Timebase_Atomic_Operation_Start();
+	#endif
+  Timebase->Time.SubSecondsShadow = value;
+	#ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
+	Timebase_Atomic_Operation_End();
+	#endif
+}
+
+void Timebase_Timer_Set_SubSecondsUpTime(uint32_t value){
+	#ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
+	Timebase_Atomic_Operation_Start();
+	#endif
+  Timebase->Time.SubSecondsUpTime = value;
+	#ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
+	Timebase_Atomic_Operation_End();
+	#endif
+}
 
 void Timebase_Timer_Set_Seconds(int32_t value){
   Timebase->Time.Seconds = value;
@@ -559,9 +583,21 @@ uint16_t Timebase_Timer_Get_SubSecondsShadow_Securely(void){
   while( 1 ){
     tmp0 = Timebase->Time.SubSecondsShadow;
     tmp1 = Timebase->Time.SubSecondsShadow;
-	if(tmp0 == tmp1){
-	  break;
-	}
+	  if(tmp0 == tmp1){
+	    break;
+	  }
+  }
+  return tmp0;
+}
+
+uint32_t Timebase_Timer_Get_SubSecondsUpTime_Securely(void){
+  uint32_t tmp0 , tmp1 ;
+  while( 1 ){
+    tmp0 = Timebase->Time.SubSecondsUpTime;
+    tmp1 = Timebase->Time.SubSecondsUpTime;
+	  if(tmp0 == tmp1){
+	    break;
+	  }
   }
   return tmp0;
 }
@@ -571,9 +607,9 @@ int32_t Timebase_Timer_Get_SecondsShadow_Securely(void){
   while( 1 ){
     tmp0 = Timebase->Time.SecondsShadow;
     tmp1 = Timebase->Time.SecondsShadow;
-	if(tmp0 == tmp1){
-	  break;
-	}
+	  if(tmp0 == tmp1){
+	    break;
+	  }
   }
   return tmp0;
 }
@@ -581,7 +617,7 @@ int32_t Timebase_Timer_Get_SecondsShadow_Securely(void){
 void Timebase_Timer_Sync_With_Shadow_Variables(void){
   if(Timebase->Time.VariablesSync == TIMEBASE_FALSE){
     
-	#ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
+	  #ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
     Timebase_Atomic_Operation_Start();
     Timebase->Time.SubSeconds = Timebase->Time.SubSecondsShadow;
     Timebase->Time.Seconds    = Timebase->Time.SecondsShadow;
@@ -592,7 +628,7 @@ void Timebase_Timer_Sync_With_Shadow_Variables(void){
     Timebase->Time.Seconds    = Timebase_Timer_Get_SecondsShadow_Securely();
     #endif
 	
-	Timebase->Time.VariablesSync = TIMEBASE_TRUE;
+	  Timebase->Time.VariablesSync = TIMEBASE_TRUE;
   }
 }
 
@@ -621,16 +657,16 @@ void Timebase_Timer_Delay_SubSeconds(uint16_t value){
     #ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
     Timebase_Atomic_Operation_Start();
     curr_ss   = Timebase_Timer_Get_SubSecondsShadow();
-	curr_s    = Timebase_Timer_Get_SecondsShadow();
-	Timebase_Atomic_Operation_End();
-	#else
-	curr_ss  = Timebase_Timer_Get_SubSecondsShadow_Securely();
+	  curr_s    = Timebase_Timer_Get_SecondsShadow();
+	  Timebase_Atomic_Operation_End();
+	  #else
+	  curr_ss  = Timebase_Timer_Get_SubSecondsShadow_Securely();
     curr_s   = Timebase_Timer_Get_SecondsShadow_Securely();
     #endif
 	
     curr_val  = curr_s;
-	curr_val *= Timebase->Config.UpdateRate;
-	curr_val += curr_ss;
+	  curr_val *= Timebase->Config.UpdateRate;
+	  curr_val += curr_ss;
   }
   
 }
@@ -653,7 +689,7 @@ void Timebase_Timer_Await_SubSeconds(uint16_t value){
     Timebase_Atomic_Operation_Start();
     temp = Timebase_Timer_Get_SubSecondsShadow();
     Timebase_Atomic_Operation_End();
-	#else
+	  #else
     temp = Timebase_Timer_Get_SubSecondsShadow_Securely();
     #endif
   }
@@ -688,12 +724,12 @@ void Timebase_Timer_Delay_Seconds(uint16_t value){
   target_s += value;
   while(target_s > curr_s){
     
-	#ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
+	  #ifdef TIMEBASE_COUNT_ATOMIC_OPERATION
     Timebase_Atomic_Operation_Start();
     curr_s = Timebase_Timer_Get_SecondsShadow();
-	Timebase_Atomic_Operation_End();
-	#else
-	curr_s = Timebase_Timer_Get_SecondsShadow_Securely();
+	  Timebase_Atomic_Operation_End();
+	  #else
+	  curr_s = Timebase_Timer_Get_SecondsShadow_Securely();
     #endif
   }
 }
@@ -2211,6 +2247,7 @@ void Timebase_Main_Loop_Executables(void){
 
 void Timebase_ISR_Executables(void){
   Timebase->Time.SubSecondsShadow++;
+  Timebase->Time.SubSecondsUpTime++;
   
   #ifdef TIMEBASE_UPCOUNTER_SUBSECONDS
   Timebase->UpdateRequest |= UPCOUNTER_SS_UPDATE_REQ;

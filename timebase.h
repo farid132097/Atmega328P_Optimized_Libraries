@@ -37,11 +37,15 @@ void     Timebase_Token_Remove_All(void);
 //Timer Functions
 uint16_t Timebase_Timer_Get_SubSecondsShadow(void);
 int32_t  Timebase_Timer_Get_SecondsShadow(void);
+uint32_t Timebase_Timer_Get_SubSecondsUpTime(void);
 uint16_t Timebase_Timer_Get_SubSeconds(void);
 int32_t  Timebase_Timer_Get_Seconds(void);
 void     Timebase_Timer_Set_SubSeconds(uint16_t value);
+void     Timebase_Timer_Set_SubSecondsShadow(uint16_t value);
+void     Timebase_Timer_Set_SubSecondsUpTime(uint32_t value);
 void     Timebase_Timer_Set_Seconds(int32_t value);
 uint16_t Timebase_Timer_Get_SubSecondsShadow_Securely(void);
+uint32_t Timebase_Timer_Get_SubSecondsUpTime_Securely(void);
 int32_t  Timebase_Timer_Get_SecondsShadow_Securely(void);
 void     Timebase_Timer_Sync_With_Shadow_Variables(void);
 void     Timebase_Timer_Delay_SubSeconds(uint16_t value);
@@ -252,5 +256,3 @@ void     Timebase_Init(uint16_t UpdateRateHz);
 void     Timebase_Main_Loop_Executables(void);
 void     Timebase_ISR_Executables(void);
 void     Timebase_LP_ISR_Executables(void);
-
-
