@@ -31,6 +31,7 @@ void App_Setup(void){
   ThreadedDbg_Add_Function(Print1);
   ThreadedDbg_Add_Function(Print2);
   ThreadedDbg_Add_Function(Print3);
+  Timebase_DownCounter_Set_Forcefully(0,5);
   
 }
 
@@ -38,12 +39,16 @@ void App_Setup(void){
 void App_Main_Loop(void){
   
   Timebase_Window_Timer_Start();
+  if(Timebase_DownCounter_Continuous_Expired_Event(0)){
+    ThreadedDbg_Execution_Enable();
+  }
+  
+  
   ThreadedDbg_Execute_Function();
   uint16_t val = Timebase_Window_Timer_Get_Interval_Reset();
-  UART_Tx_Parameter_NL("LoopTime", val);
-  UART_Tx_NL();
-  //Timebase_Timer_Delay_SubSeconds(1);
   
+  //UART_Tx_Parameter_NL("LoopTime", val);
+  //UART_Tx_NL();
   
 }
 

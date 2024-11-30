@@ -6,188 +6,188 @@
    6               	__tmp_reg__ = 0
    7               	__zero_reg__ = 1
   15               	.Ltext0:
-  16               		.data
-  17               	.LC0:
-  18 0000 4C6F 6F70 		.string	"LoopTime"
-  18      5469 6D65 
-  18      00
-  19               		.text
-  20               	.global	App_Main_Loop
-  22               	App_Main_Loop:
-  23               	.LFB7:
-  24               	.LM1:
-  25               	/* prologue: function */
-  26               	/* frame size = 0 */
-  27               	.LM2:
-  28 0000 0E94 0000 		call Timebase_Window_Timer_Start
-  29               	.LM3:
-  30 0004 0E94 0000 		call ThreadedDbg_Execute_Function
-  31               	.LM4:
-  32 0008 0E94 0000 		call Timebase_Window_Timer_Get_Interval_Reset
-  33 000c AB01      		movw r20,r22
-  34 000e BC01      		movw r22,r24
-  35               	.LM5:
-  36 0010 60E0      		ldi r22,lo8(0)
-  37 0012 70E0      		ldi r23,hi8(0)
-  38 0014 80E0      		ldi r24,lo8(.LC0)
-  39 0016 90E0      		ldi r25,hi8(.LC0)
-  40 0018 0E94 0000 		call UART_Tx_Parameter_NL
-  41               	.LM6:
-  42 001c 0E94 0000 		call UART_Tx_NL
-  43               	/* epilogue start */
-  44               	.LM7:
-  45 0020 0895      		ret
-  46               	.LFE7:
-  48               	.global	App_Setup
-  50               	App_Setup:
-  51               	.LFB6:
-  52               	.LM8:
-  53               	/* prologue: function */
-  54               	/* frame size = 0 */
-  55               	.LM9:
-  56 0022 60E0      		ldi r22,lo8(57600)
-  57 0024 71EE      		ldi r23,hi8(57600)
-  58 0026 80E0      		ldi r24,hlo8(57600)
-  59 0028 90E0      		ldi r25,hhi8(57600)
-  60 002a 0E94 0000 		call UART_Init
-  61               	.LM10:
-  62 002e 0E94 0000 		call ThreadedDbg_Init
-  63               	.LM11:
-  64 0032 80E0      		ldi r24,lo8(gs(Print0))
-  65 0034 90E0      		ldi r25,hi8(gs(Print0))
-  66 0036 0E94 0000 		call ThreadedDbg_Add_Function
-  67               	.LM12:
-  68 003a 80E0      		ldi r24,lo8(gs(Print1))
-  69 003c 90E0      		ldi r25,hi8(gs(Print1))
-  70 003e 0E94 0000 		call ThreadedDbg_Add_Function
-  71               	.LM13:
-  72 0042 80E0      		ldi r24,lo8(gs(Print2))
-  73 0044 90E0      		ldi r25,hi8(gs(Print2))
-  74 0046 0E94 0000 		call ThreadedDbg_Add_Function
-  75               	.LM14:
-  76 004a 80E0      		ldi r24,lo8(gs(Print3))
-  77 004c 90E0      		ldi r25,hi8(gs(Print3))
-  78 004e 0E94 0000 		call ThreadedDbg_Add_Function
-  79               	/* epilogue start */
-  80               	.LM15:
-  81 0052 0895      		ret
-  82               	.LFE6:
-  84               		.data
-  85               	.LC1:
-  86 0009 5072 696E 		.string	"Print3"
-  86      7433 00
-  87               		.text
-  88               	.global	Print3
-  90               	Print3:
-  91               	.LFB5:
-  92               	.LM16:
-  93               	/* prologue: function */
-  94               	/* frame size = 0 */
-  95               	.LM17:
-  96 0054 80E0      		ldi r24,lo8(.LC1)
-  97 0056 90E0      		ldi r25,hi8(.LC1)
-  98 0058 46E2      		ldi r20,lo8(38)
-  99 005a 50E0      		ldi r21,hi8(38)
- 100 005c 60E0      		ldi r22,hlo8(38)
- 101 005e 70E0      		ldi r23,hhi8(38)
- 102 0060 0E94 0000 		call UART_Tx_Parameter_Hex_NL
- 103               	/* epilogue start */
- 104               	.LM18:
- 105 0064 0895      		ret
- 106               	.LFE5:
- 108               		.data
- 109               	.LC2:
- 110 0010 5072 696E 		.string	"Print2"
- 110      7432 00
- 111               		.text
- 112               	.global	Print2
- 114               	Print2:
- 115               	.LFB4:
- 116               	.LM19:
- 117               	/* prologue: function */
- 118               	/* frame size = 0 */
- 119               	.LM20:
- 120 0066 80E0      		ldi r24,lo8(.LC2)
- 121 0068 90E0      		ldi r25,hi8(.LC2)
- 122 006a 46E9      		ldi r20,lo8(150)
- 123 006c 50E0      		ldi r21,hi8(150)
- 124 006e 60E0      		ldi r22,hlo8(150)
- 125 0070 70E0      		ldi r23,hhi8(150)
- 126 0072 0E94 0000 		call UART_Tx_Parameter_Hex_NL
- 127               	/* epilogue start */
- 128               	.LM21:
- 129 0076 0895      		ret
- 130               	.LFE4:
- 132               		.data
- 133               	.LC3:
- 134 0017 5072 696E 		.string	"Print1"
- 134      7431 00
- 135               		.text
- 136               	.global	Print1
- 138               	Print1:
- 139               	.LFB3:
- 140               	.LM22:
- 141               	/* prologue: function */
- 142               	/* frame size = 0 */
- 143               	.LM23:
- 144 0078 80E0      		ldi r24,lo8(.LC3)
- 145 007a 90E0      		ldi r25,hi8(.LC3)
- 146 007c 40E0      		ldi r20,lo8(1792)
- 147 007e 57E0      		ldi r21,hi8(1792)
- 148 0080 60E0      		ldi r22,hlo8(1792)
- 149 0082 70E0      		ldi r23,hhi8(1792)
- 150 0084 0E94 0000 		call UART_Tx_Parameter_Hex_NL
- 151               	/* epilogue start */
- 152               	.LM24:
- 153 0088 0895      		ret
- 154               	.LFE3:
- 156               		.data
- 157               	.LC4:
- 158 001e 5072 696E 		.string	"Print0"
- 158      7430 00
- 159               		.text
- 160               	.global	Print0
- 162               	Print0:
- 163               	.LFB2:
- 164               	.LM25:
- 165               	/* prologue: function */
- 166               	/* frame size = 0 */
- 167               	.LM26:
- 168 008a 80E0      		ldi r24,lo8(.LC4)
- 169 008c 90E0      		ldi r25,hi8(.LC4)
- 170 008e 45E2      		ldi r20,lo8(37)
- 171 0090 50E0      		ldi r21,hi8(37)
- 172 0092 60E0      		ldi r22,hlo8(37)
- 173 0094 70E0      		ldi r23,hhi8(37)
- 174 0096 0E94 0000 		call UART_Tx_Parameter_Hex_NL
- 175               	/* epilogue start */
- 176               	.LM27:
- 177 009a 0895      		ret
- 178               	.LFE2:
- 244               	.Letext0:
+  16               	.global	App_Main_Loop
+  18               	App_Main_Loop:
+  19               	.LFB7:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 0E94 0000 		call Timebase_Window_Timer_Start
+  25               	.LM3:
+  26 0004 80E0      		ldi r24,lo8(0)
+  27 0006 0E94 0000 		call Timebase_DownCounter_Continuous_Expired_Event
+  28 000a 8823      		tst r24
+  29 000c 01F0      		breq .L2
+  30               	.LM4:
+  31 000e 0E94 0000 		call ThreadedDbg_Execution_Enable
+  32               	.L2:
+  33               	.LM5:
+  34 0012 0E94 0000 		call ThreadedDbg_Execute_Function
+  35               	.LM6:
+  36 0016 0E94 0000 		call Timebase_Window_Timer_Get_Interval_Reset
+  37               	/* epilogue start */
+  38               	.LM7:
+  39 001a 0895      		ret
+  40               	.LFE7:
+  42               	.global	App_Setup
+  44               	App_Setup:
+  45               	.LFB6:
+  46               	.LM8:
+  47               	/* prologue: function */
+  48               	/* frame size = 0 */
+  49               	.LM9:
+  50 001c 60E0      		ldi r22,lo8(57600)
+  51 001e 71EE      		ldi r23,hi8(57600)
+  52 0020 80E0      		ldi r24,hlo8(57600)
+  53 0022 90E0      		ldi r25,hhi8(57600)
+  54 0024 0E94 0000 		call UART_Init
+  55               	.LM10:
+  56 0028 0E94 0000 		call ThreadedDbg_Init
+  57               	.LM11:
+  58 002c 80E0      		ldi r24,lo8(gs(Print0))
+  59 002e 90E0      		ldi r25,hi8(gs(Print0))
+  60 0030 0E94 0000 		call ThreadedDbg_Add_Function
+  61               	.LM12:
+  62 0034 80E0      		ldi r24,lo8(gs(Print1))
+  63 0036 90E0      		ldi r25,hi8(gs(Print1))
+  64 0038 0E94 0000 		call ThreadedDbg_Add_Function
+  65               	.LM13:
+  66 003c 80E0      		ldi r24,lo8(gs(Print2))
+  67 003e 90E0      		ldi r25,hi8(gs(Print2))
+  68 0040 0E94 0000 		call ThreadedDbg_Add_Function
+  69               	.LM14:
+  70 0044 80E0      		ldi r24,lo8(gs(Print3))
+  71 0046 90E0      		ldi r25,hi8(gs(Print3))
+  72 0048 0E94 0000 		call ThreadedDbg_Add_Function
+  73               	.LM15:
+  74 004c 80E0      		ldi r24,lo8(0)
+  75 004e 45E0      		ldi r20,lo8(5)
+  76 0050 50E0      		ldi r21,hi8(5)
+  77 0052 60E0      		ldi r22,hlo8(5)
+  78 0054 70E0      		ldi r23,hhi8(5)
+  79 0056 0E94 0000 		call Timebase_DownCounter_Set_Forcefully
+  80               	/* epilogue start */
+  81               	.LM16:
+  82 005a 0895      		ret
+  83               	.LFE6:
+  85               		.data
+  86               	.LC0:
+  87 0000 5072 696E 		.string	"Print3"
+  87      7433 00
+  88               		.text
+  89               	.global	Print3
+  91               	Print3:
+  92               	.LFB5:
+  93               	.LM17:
+  94               	/* prologue: function */
+  95               	/* frame size = 0 */
+  96               	.LM18:
+  97 005c 80E0      		ldi r24,lo8(.LC0)
+  98 005e 90E0      		ldi r25,hi8(.LC0)
+  99 0060 46E2      		ldi r20,lo8(38)
+ 100 0062 50E0      		ldi r21,hi8(38)
+ 101 0064 60E0      		ldi r22,hlo8(38)
+ 102 0066 70E0      		ldi r23,hhi8(38)
+ 103 0068 0E94 0000 		call UART_Tx_Parameter_Hex_NL
+ 104               	/* epilogue start */
+ 105               	.LM19:
+ 106 006c 0895      		ret
+ 107               	.LFE5:
+ 109               		.data
+ 110               	.LC1:
+ 111 0007 5072 696E 		.string	"Print2"
+ 111      7432 00
+ 112               		.text
+ 113               	.global	Print2
+ 115               	Print2:
+ 116               	.LFB4:
+ 117               	.LM20:
+ 118               	/* prologue: function */
+ 119               	/* frame size = 0 */
+ 120               	.LM21:
+ 121 006e 80E0      		ldi r24,lo8(.LC1)
+ 122 0070 90E0      		ldi r25,hi8(.LC1)
+ 123 0072 46E9      		ldi r20,lo8(150)
+ 124 0074 50E0      		ldi r21,hi8(150)
+ 125 0076 60E0      		ldi r22,hlo8(150)
+ 126 0078 70E0      		ldi r23,hhi8(150)
+ 127 007a 0E94 0000 		call UART_Tx_Parameter_Hex_NL
+ 128               	/* epilogue start */
+ 129               	.LM22:
+ 130 007e 0895      		ret
+ 131               	.LFE4:
+ 133               		.data
+ 134               	.LC2:
+ 135 000e 5072 696E 		.string	"Print1"
+ 135      7431 00
+ 136               		.text
+ 137               	.global	Print1
+ 139               	Print1:
+ 140               	.LFB3:
+ 141               	.LM23:
+ 142               	/* prologue: function */
+ 143               	/* frame size = 0 */
+ 144               	.LM24:
+ 145 0080 80E0      		ldi r24,lo8(.LC2)
+ 146 0082 90E0      		ldi r25,hi8(.LC2)
+ 147 0084 40E0      		ldi r20,lo8(1792)
+ 148 0086 57E0      		ldi r21,hi8(1792)
+ 149 0088 60E0      		ldi r22,hlo8(1792)
+ 150 008a 70E0      		ldi r23,hhi8(1792)
+ 151 008c 0E94 0000 		call UART_Tx_Parameter_Hex_NL
+ 152               	/* epilogue start */
+ 153               	.LM25:
+ 154 0090 0895      		ret
+ 155               	.LFE3:
+ 157               		.data
+ 158               	.LC3:
+ 159 0015 5072 696E 		.string	"Print0"
+ 159      7430 00
+ 160               		.text
+ 161               	.global	Print0
+ 163               	Print0:
+ 164               	.LFB2:
+ 165               	.LM26:
+ 166               	/* prologue: function */
+ 167               	/* frame size = 0 */
+ 168               	.LM27:
+ 169 0092 80E0      		ldi r24,lo8(.LC3)
+ 170 0094 90E0      		ldi r25,hi8(.LC3)
+ 171 0096 45E2      		ldi r20,lo8(37)
+ 172 0098 50E0      		ldi r21,hi8(37)
+ 173 009a 60E0      		ldi r22,hlo8(37)
+ 174 009c 70E0      		ldi r23,hhi8(37)
+ 175 009e 0E94 0000 		call UART_Tx_Parameter_Hex_NL
+ 176               	/* epilogue start */
+ 177               	.LM28:
+ 178 00a2 0895      		ret
+ 179               	.LFE2:
+ 245               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 app.c
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:2      *ABS*:0000003f __SREG__
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:3      *ABS*:0000003e __SP_H__
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:4      *ABS*:0000003d __SP_L__
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:5      *ABS*:00000034 __CCP__
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:22     .text:00000000 App_Main_Loop
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:50     .text:00000022 App_Setup
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:162    .text:0000008a Print0
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:138    .text:00000078 Print1
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:114    .text:00000066 Print2
-C:\Users\WALTON\AppData\Local\Temp/cc4aQGte.s:90     .text:00000054 Print3
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:2      *ABS*:0000003f __SREG__
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:3      *ABS*:0000003e __SP_H__
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:4      *ABS*:0000003d __SP_L__
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:5      *ABS*:00000034 __CCP__
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:18     .text:00000000 App_Main_Loop
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:44     .text:0000001c App_Setup
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:163    .text:00000092 Print0
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:139    .text:00000080 Print1
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:115    .text:0000006e Print2
+C:\Users\WALTON\AppData\Local\Temp/ccWNcpWF.s:91     .text:0000005c Print3
 
 UNDEFINED SYMBOLS
 Timebase_Window_Timer_Start
+Timebase_DownCounter_Continuous_Expired_Event
+ThreadedDbg_Execution_Enable
 ThreadedDbg_Execute_Function
 Timebase_Window_Timer_Get_Interval_Reset
-UART_Tx_Parameter_NL
-UART_Tx_NL
 UART_Init
 ThreadedDbg_Init
 ThreadedDbg_Add_Function
+Timebase_DownCounter_Set_Forcefully
 UART_Tx_Parameter_Hex_NL
 __do_copy_data
