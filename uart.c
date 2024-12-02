@@ -841,13 +841,15 @@ uint16_t UART_CRC_Calculate_Block(uint8_t *buf, uint8_t len){
 
 void UART_RX_Packet_CRC_Check(void){
   uint16_t crc_calc = 0, crc_recv = 0;
-  crc_calc   =  UART_CRC_Calculate_Block((uint8_t*)UART.Buf, UART_Data_Len_Get()-2);
-  crc_recv   =  UART_Buf_Get(UART_Data_Len_Get() - 2);
-  crc_recv <<= 8;
-  crc_recv  |= UART_Buf_Get(UART_Data_Len_Get() - 1);
+  if( UART_Data_Len_Get() >= 2){
+    crc_calc   =  UART_CRC_Calculate_Block((uint8_t*)UART.Buf, UART_Data_Len_Get()-2);
+    crc_recv   =  UART_Buf_Get(UART_Data_Len_Get() - 2);
+    crc_recv <<= 8;
+    crc_recv  |= UART_Buf_Get(UART_Data_Len_Get() - 1);
+  }
   UART.RxPacket.CalculatedCRC = crc_calc;
   UART.RxPacket.ReceivedCRC = crc_recv;
-  if(UART.RxPacket.CalculatedCRC == UART.RxPacket.ReceivedCRC){
+  if( UART.RxPacket.CalculatedCRC == UART.RxPacket.ReceivedCRC ){
     UART.RxPacket.CRCStatus = UART_TRUE;
   }
   else{

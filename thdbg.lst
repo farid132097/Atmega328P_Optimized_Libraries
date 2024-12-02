@@ -131,19 +131,19 @@
  214               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 thdbg.c
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:2      *ABS*:0000003f __SREG__
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:3      *ABS*:0000003e __SP_H__
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:4      *ABS*:0000003d __SP_L__
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:5      *ABS*:00000034 __CCP__
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:18     .text:00000000 ThreadedDbg_Struct_Init
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:2      *ABS*:0000003f __SREG__
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:3      *ABS*:0000003e __SP_H__
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:4      *ABS*:0000003d __SP_L__
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:5      *ABS*:00000034 __CCP__
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:18     .text:00000000 ThreadedDbg_Struct_Init
                             *COM*:0000002b ThreadedDbg
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:36     .text:0000000e ThreadedDbg_Add_Function
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:62     .text:0000002a ThreadedDbg_Execution_Enable
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:77     .text:00000032 ThreadedDbg_Execution_Disable
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:91     .text:00000038 ThreadedDbg_Execute_Function
-C:\Users\farid\AppData\Local\Temp/cc3SIgAa.s:129    .text:00000072 ThreadedDbg_Init
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:36     .text:0000000e ThreadedDbg_Add_Function
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:62     .text:0000002a ThreadedDbg_Execution_Enable
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:77     .text:00000032 ThreadedDbg_Execution_Disable
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:91     .text:00000038 ThreadedDbg_Execute_Function
+C:\Users\farid\AppData\Local\Temp/ccVUrKoD.s:129    .text:00000072 ThreadedDbg_Init
 
 UNDEFINED SYMBOLS
 __do_clear_bss

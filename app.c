@@ -47,6 +47,14 @@ void App_Main_Loop(void){
   ThreadedDbg_Execute_Function();
   uint16_t val = Timebase_Window_Timer_Get_Interval_Reset();
   
+  if(UART_Data_Available()){
+    UART_Tx_Parameter_Hex_CM("CalCRC", UART_Data_Calculated_CRC_Get());
+    UART_Tx_Parameter_Hex_CM("RecCRC", UART_Data_Received_CRC_Get());
+    UART_Data_Print_Buf();
+	UART_Tx_NL();
+	UART_RX_Packet_Read_Complete();
+  }
+  
   //UART_Tx_Parameter_NL("LoopTime", val);
   //UART_Tx_NL();
   
