@@ -5,9 +5,15 @@
  * Created on October 30, 2022, 19:00
  */
 
+
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+
+
+
+
 #include "uart.h"
 
 #define  UART_DOUBLE_SPEED
@@ -21,7 +27,7 @@
 
 
 //#define  UART_CRC_ENABLE     //Uncomment if packet validation by CRC is needed
-//#define  UART_CRC_CVTE     //Uncomment if CRC is by CVTE Protocol
+//#define  UART_CRC_SUPPLIER     //Uncomment if CRC is by Supplier Protocol
 #define  UART_CRC_XMODEM     //Uncomment if CRC is by X-MODEM Protocol
 
 
@@ -84,7 +90,6 @@ void UART_Struct_Init(void){
     UART.Digits[i] = UART_NULL;
   }
   UART.InputNumDigits = UART_NULL;
-    
   UART.LastRxByte = UART_NULL;
   UART.BufSize = UART_BUFFER_SIZE;
   UART.BufIndex = 0;
@@ -150,9 +155,13 @@ void UART_Config_Rx_Interrupt(void){
   sei();
 }
 
+void UART_Clear_Interrupt_Flag(void){
+  //Clear flag if necessary
+}
+
 void UART_Tx_Byte(uint8_t val){
-  while(!(UCSR0A & (1<<UDRE0)));
-  UDR0 = val;
+  while( !(UCSR0A & (1<<UDRE0)) );
+  UDR0 = val;                                                                                                        
 }
 
 uint8_t UART_Rx_Byte(void){
@@ -160,7 +169,7 @@ uint8_t UART_Rx_Byte(void){
   if( UCSR0A & (1<<FE0) ){
     val = UDR0;
     UART.Error = UART_RX_ERR_FRAMING;
-  }else if(UCSR0A & (1<<DOR0) ){
+  }else if( UCSR0A & (1<<DOR0) ){
     val = UDR0;
     UART.Error = UART_RX_ERR_OVERRUN;
   }else{
@@ -174,7 +183,6 @@ uint8_t UART_Rx_Byte(void){
 
 ISR(USART_RX_vect){
   UART_ISR_Handler();
-  //Clear flag if necessary
 }
 
 /**********************UART Init Functions End*******************/
@@ -195,7 +203,6 @@ void UART_Timer_Struct_Init(void){
 }
 
 void UART_Timer_Init(void){
-
   uint32_t temp0 = F_CPU;
   uint32_t temp1 = UART_RX_PCKT_CMPLT_DELAY;
   temp1 *= 1000;
@@ -238,11 +245,12 @@ void UART_Timer_Value_Reset(void){
   TCNT2 = UART.Timer.ResetVal;
 }
 
-
+void UART_Timer_Clear_Interrupt_Flag(void){
+  //Clear flag if necessary
+}
 
 ISR(TIMER2_OVF_vect){
   UART_Timer_ISR_Handler();
-  //Clear flag if necessary
 }
 
 
@@ -709,6 +717,7 @@ void UART_Error_Code_Clear(void){
 /***************UART ISR Handler Functions Start************/
 
 void UART_ISR_Handler(void){
+  UART_Clear_Interrupt_Flag();
   UART.LastRxByte = (uint8_t)UART_Rx_Byte();
   if(UART.Error == 0x00){
     UART.Buf[UART.BufIndex] = UART.LastRxByte;
@@ -730,6 +739,7 @@ void UART_ISR_Handler(void){
 }
 
 void UART_Timer_ISR_Handler(void){
+  UART_Timer_Clear_Interrupt_Flag();
   if(UART.Timer.Enabled == UART_TRUE){
     UART_Timer_Disable();
 	UART.Timer.Enabled = UART_FALSE;
@@ -769,7 +779,7 @@ void UART_Timer_ISR_Handler(void){
 
 /******************UART CRC Functions Start****************/
 
-#ifdef   UART_CRC_CVTE
+#ifdef   UART_CRC_SUPPLIER
 
 uint16_t CRCTalbe[16] = {
  0x0000, 0xCC01, 0xD801, 0x1400,

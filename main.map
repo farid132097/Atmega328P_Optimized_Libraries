@@ -136,7 +136,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x2d48
+.text           0x00000000     0x2d4c
  *(.vectors)
  .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
                 0x00000000                __vectors
@@ -320,139 +320,141 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00001550                Timebase_DownCounter_Start
                 0x00000fc4                Timebase_DownCounter_SS_Expired
                 0x0000146c                Timebase_DownCounter_Get_ReloadValue
- .text          0x00001b6c      0xa9a uart.o
-                0x00001c50                UART_Rx_Byte
-                0x00002302                UART_Data_Print_Buf
-                0x00001d3e                UART_Tx_SP
-                0x00002336                UART_Error_Code_Get
-                0x00002080                UART_Tx_Number_Bin_CM
-                0x0000245c                UART_RX_Packet_CRC_Check
-                0x0000242c                UART_CRC_Calculate_Block
-                0x00001c98                UART_Timer_Struct_Init
+ .text          0x00001b6c      0xa9e uart.o
+                0x00001c52                UART_Rx_Byte
+                0x00002306                UART_Data_Print_Buf
+                0x00001d42                UART_Tx_SP
+                0x0000233a                UART_Error_Code_Get
+                0x00002084                UART_Tx_Number_Bin_CM
+                0x00002460                UART_RX_Packet_CRC_Check
+                0x00002430                UART_CRC_Calculate_Block
+                0x00001c9a                UART_Timer_Struct_Init
                 0x00001c20                UART_Config_Rx
-                0x00002574                UART_Init
-                0x000021b4                UART_Tx_Parameter_Bin_NL
-                0x00002292                UART_Data_Received_CRC_Get
-                0x00002184                UART_Tx_Parameter_Hex_CM
-                0x00002124                UART_Tx_Parameter_Hex_NL
-                0x00001f3e                UART_Tx_Number_Bin
+                0x00002578                UART_Init
+                0x000021b8                UART_Tx_Parameter_Bin_NL
+                0x00002296                UART_Data_Received_CRC_Get
+                0x00002188                UART_Tx_Parameter_Hex_CM
+                0x00002128                UART_Tx_Parameter_Hex_NL
+                0x00001f42                UART_Tx_Number_Bin
                 0x00001c32                UART_Config_Rx_Interrupt
-                0x00002286                UART_Data_Calculated_CRC_Get
-                0x00002030                UART_Tx_Number_Hex_NL
-                0x00001d4e                UART_Tx_CM
-                0x00002244                UART_Buf_Flush
-                0x000021e4                UART_Tx_Parameter_Bin_SP
-                0x00002214                UART_Tx_Parameter_Bin_CM
-                0x0000233c                UART_Error_Code_Clear
-                0x00002400                UART_CRC_Calculate_Byte
+                0x0000228a                UART_Data_Calculated_CRC_Get
+                0x00002034                UART_Tx_Number_Hex_NL
+                0x00001d52                UART_Tx_CM
+                0x00002248                UART_Buf_Flush
+                0x000021e8                UART_Tx_Parameter_Bin_SP
+                0x00002218                UART_Tx_Parameter_Bin_CM
+                0x00002340                UART_Error_Code_Clear
+                0x00002404                UART_CRC_Calculate_Byte
                 0x00001bd8                UART_Config_Clock
-                0x00001cec                UART_Timer_Value_Reset
-                0x0000204e                UART_Tx_Number_Hex_CM
-                0x00001d9e                UART_Tx_Text_CM
-                0x00002262                UART_Buf_Get
+                0x00001cee                UART_Timer_Value_Reset
+                0x00002052                UART_Tx_Number_Hex_CM
+                0x00001da2                UART_Tx_Text_CM
+                0x00002266                UART_Buf_Get
                 0x00001bd6                UART_Config_GPIO
-                0x00001cf6                UART_Tx_Buf
-                0x00002062                UART_Tx_Number_Bin_NL
-                0x0000229e                UART_Data_CRC_Status_Get
-                0x00001ce4                UART_Timer_Get_Val
-                0x00001d20                UART_Tx_NL
-                0x00001cd0                UART_Timer_Enable
-                0x0000201c                UART_Tx_Number_CM
+                0x00001cfa                UART_Tx_Buf
+                0x00002066                UART_Tx_Number_Bin_NL
+                0x000022a2                UART_Data_CRC_Status_Get
+                0x00001ce6                UART_Timer_Get_Val
+                0x00001d24                UART_Tx_NL
+                0x00001c40                UART_Clear_Interrupt_Flag
+                0x00001cd2                UART_Timer_Enable
+                0x00002020                UART_Tx_Number_CM
                 0x00001bb6                UART_RX_Packet_Struct_Init
-                0x000020c4                UART_Tx_Parameter_SP
-                0x00001e8c                UART_Tx_Number_Hex
-                0x00001cd8                UART_Timer_Disable
+                0x000020c8                UART_Tx_Parameter_SP
+                0x00001e90                UART_Tx_Number_Hex
+                0x00001cf8                UART_Timer_Clear_Interrupt_Flag
+                0x00001cda                UART_Timer_Disable
                 0x00001b6c                UART_Struct_Init
-                0x0000206c                UART_Tx_Number_Bin_SP
-                0x000022aa                UART_Data_Clear_Available_Flag
-                0x00001cde                UART_Timer_Get_Status
-                0x00001d80                UART_Tx_Text_NL
-                0x00001e5a                UART_Tx_Number
-                0x00002342                UART_ISR_Handler
-                0x00002506                __vector_9
+                0x00002070                UART_Tx_Number_Bin_SP
+                0x000022ae                UART_Data_Clear_Available_Flag
+                0x00001ce0                UART_Timer_Get_Status
+                0x00001d84                UART_Tx_Text_NL
+                0x00001e5e                UART_Tx_Number
+                0x00002346                UART_ISR_Handler
+                0x0000250a                __vector_9
                 0x00001c0e                UART_Config_Tx
-                0x00001d8a                UART_Tx_Text_SP
-                0x00001e30                UART_Tx_Number_Digits
-                0x000022a4                UART_Data_Read_Complete_Status
+                0x00001d8e                UART_Tx_Text_SP
+                0x00001e34                UART_Tx_Number_Digits
+                0x000022a8                UART_Data_Read_Complete_Status
                 0x00001bda                UART_Config_BAUD_Rate
-                0x00002094                UART_Tx_Parameter_NL
-                0x00002154                UART_Tx_Parameter_Hex_SP
-                0x000020f4                UART_Tx_Parameter_CM
-                0x00001db2                UART_Determine_Digit_Numbers
-                0x000022b0                UART_Data_Clear_Read_Complete_Flag
-                0x000022d4                UART_Data_Copy_Buf
-                0x0000203a                UART_Tx_Number_Hex_SP
-                0x00001ca2                UART_Timer_Init
-                0x00001ffe                UART_Tx_Number_NL
-                0x000024cc                UART_Timer_ISR_Handler
-                0x00001d5e                UART_Tx_Text
-                0x0000226c                UART_Buf_Get_Index
-                0x00002276                UART_Data_Available
-                0x000023b8                __vector_18
-                0x00001c40                UART_Tx_Byte
-                0x0000254e                UART_RX_Packet_Read_Complete
-                0x00002008                UART_Tx_Number_SP
-                0x0000227c                UART_Data_Len_Get
- .text          0x00002606      0x606 pid.o
-                0x00002780                PID_Set_SetPoint
-                0x000027a4                PID_Set_Max_IError
-                0x00002792                PID_Set_ProcessValue
-                0x00002a98                PID_Get_Set_Point
-                0x00002ae0                PID_Get_DError
-                0x0000271a                PID_Set_Ki
-                0x00002b28                PID_Get_DError_Product
-                0x00002a86                PID_Get_Kd
-                0x00002a62                PID_Get_Kp
-                0x00002b70                PID_Init
-                0x00002b5e                PID_Get_Output_NonNegative
-                0x00002ace                PID_Get_IError
-                0x00002708                PID_Set_Kp
-                0x00002aaa                PID_Get_Process_Value
-                0x00002606                PID_Struct_Init
-                0x00002a74                PID_Get_Ki
-                0x000029e2                PID_Execute_Routine
-                0x000027b6                PID_Set_Scaling_Factor
-                0x000027c8                PID_Reset_IError
-                0x00002b04                PID_Get_PError_Product
-                0x00002af2                PID_Get_Max_IError
-                0x00002b76                PID_Init_Module
-                0x00002b4c                PID_Get_Output
-                0x000028dc                PID_Calculate_Error_Products
-                0x0000273e                PID_Set_Constants
-                0x00002b16                PID_Get_IError_Product
-                0x000027da                PID_Calculate_Error
-                0x00002b3a                PID_Get_Scaling_Factor
-                0x00002abc                PID_Get_PError
-                0x0000272c                PID_Set_Kd
- .text          0x00002c0c       0x80 thdbg.o
-                0x00002c36                ThreadedDbg_Execution_Enable
-                0x00002c7e                ThreadedDbg_Init
-                0x00002c1a                ThreadedDbg_Add_Function
-                0x00002c44                ThreadedDbg_Execute_Function
-                0x00002c3e                ThreadedDbg_Execution_Disable
-                0x00002c0c                ThreadedDbg_Struct_Init
- .text          0x00002c8c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
- .text          0x00002c8c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
- .text          0x00002c8c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
- .text          0x00002c8c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text          0x00002c8c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text          0x00002c8c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x00002c8c                . = ALIGN (0x2)
+                0x00002098                UART_Tx_Parameter_NL
+                0x00002158                UART_Tx_Parameter_Hex_SP
+                0x000020f8                UART_Tx_Parameter_CM
+                0x00001db6                UART_Determine_Digit_Numbers
+                0x000022b4                UART_Data_Clear_Read_Complete_Flag
+                0x000022d8                UART_Data_Copy_Buf
+                0x0000203e                UART_Tx_Number_Hex_SP
+                0x00001ca4                UART_Timer_Init
+                0x00002002                UART_Tx_Number_NL
+                0x000024d0                UART_Timer_ISR_Handler
+                0x00001d62                UART_Tx_Text
+                0x00002270                UART_Buf_Get_Index
+                0x0000227a                UART_Data_Available
+                0x000023bc                __vector_18
+                0x00001c42                UART_Tx_Byte
+                0x00002552                UART_RX_Packet_Read_Complete
+                0x0000200c                UART_Tx_Number_SP
+                0x00002280                UART_Data_Len_Get
+ .text          0x0000260a      0x606 pid.o
+                0x00002784                PID_Set_SetPoint
+                0x000027a8                PID_Set_Max_IError
+                0x00002796                PID_Set_ProcessValue
+                0x00002a9c                PID_Get_Set_Point
+                0x00002ae4                PID_Get_DError
+                0x0000271e                PID_Set_Ki
+                0x00002b2c                PID_Get_DError_Product
+                0x00002a8a                PID_Get_Kd
+                0x00002a66                PID_Get_Kp
+                0x00002b74                PID_Init
+                0x00002b62                PID_Get_Output_NonNegative
+                0x00002ad2                PID_Get_IError
+                0x0000270c                PID_Set_Kp
+                0x00002aae                PID_Get_Process_Value
+                0x0000260a                PID_Struct_Init
+                0x00002a78                PID_Get_Ki
+                0x000029e6                PID_Execute_Routine
+                0x000027ba                PID_Set_Scaling_Factor
+                0x000027cc                PID_Reset_IError
+                0x00002b08                PID_Get_PError_Product
+                0x00002af6                PID_Get_Max_IError
+                0x00002b7a                PID_Init_Module
+                0x00002b50                PID_Get_Output
+                0x000028e0                PID_Calculate_Error_Products
+                0x00002742                PID_Set_Constants
+                0x00002b1a                PID_Get_IError_Product
+                0x000027de                PID_Calculate_Error
+                0x00002b3e                PID_Get_Scaling_Factor
+                0x00002ac0                PID_Get_PError
+                0x00002730                PID_Set_Kd
+ .text          0x00002c10       0x80 thdbg.o
+                0x00002c3a                ThreadedDbg_Execution_Enable
+                0x00002c82                ThreadedDbg_Init
+                0x00002c1e                ThreadedDbg_Add_Function
+                0x00002c48                ThreadedDbg_Execute_Function
+                0x00002c42                ThreadedDbg_Execution_Disable
+                0x00002c10                ThreadedDbg_Struct_Init
+ .text          0x00002c90        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+ .text          0x00002c90        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .text          0x00002c90        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+ .text          0x00002c90        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x00002c90        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x00002c90        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x00002c90                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00002c8c       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
-                0x00002c8c                __mulsi3
- .text.libgcc   0x00002cca       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
-                0x00002cca                __udivmodsi4
- .text.libgcc   0x00002d0e       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
-                0x00002d0e                __divmodsi4
- .text.libgcc   0x00002d44        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x00002d44        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x00002d44        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x00002d44                . = ALIGN (0x2)
+ .text.libgcc   0x00002c90       0x3e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mulsi3.o)
+                0x00002c90                __mulsi3
+ .text.libgcc   0x00002cce       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x00002cce                __udivmodsi4
+ .text.libgcc   0x00002d12       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+                0x00002d12                __divmodsi4
+ .text.libgcc   0x00002d48        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00002d48        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00002d48        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x00002d48                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00002d44        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00002d44                exit
-                0x00002d44                _exit
+ .fini9         0x00002d48        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00002d48                exit
+                0x00002d48                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -471,11 +473,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00002d44        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x00002d48        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00002d48                _etext = .
+                0x00002d4c                _etext = .
 
-.data           0x00800100       0xa0 load address 0x00002d48
+.data           0x00800100       0xa0 load address 0x00002d4c
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
@@ -524,8 +526,8 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  COMMON         0x00800243       0x2b thdbg.o
                 0x00800243                ThreadedDbg
                 0x0080026e                PROVIDE (__bss_end, .)
-                0x00002d48                __data_load_start = LOADADDR (.data)
-                0x00002de8                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00002d4c                __data_load_start = LOADADDR (.data)
+                0x00002dec                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080026e        0x0
                 0x0080026e                PROVIDE (__noinit_start, .)
@@ -599,7 +601,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x000000a0       0x20 thdbg.o
 
 .debug_pubnames
-                0x00000000     0x196b
+                0x00000000     0x19ad
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000       0x1b main.o
@@ -608,20 +610,20 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_pubnames
                 0x00000079      0xe9e timebase.o
  .debug_pubnames
-                0x00000f17      0x6dd uart.o
+                0x00000f17      0x71f uart.o
  .debug_pubnames
-                0x000015f4      0x2a3 pid.o
+                0x00001636      0x2a3 pid.o
  .debug_pubnames
-                0x00001897       0xd4 thdbg.o
+                0x000018d9       0xd4 thdbg.o
 
-.debug_info     0x00000000     0x4e44
+.debug_info     0x00000000     0x4e78
  *(.debug_info)
  .debug_info    0x00000000       0x76 main.o
  .debug_info    0x00000076       0xf1 app.o
  .debug_info    0x00000167     0x2d75 timebase.o
- .debug_info    0x00002edc     0x14c3 uart.o
- .debug_info    0x0000439f      0x916 pid.o
- .debug_info    0x00004cb5      0x18f thdbg.o
+ .debug_info    0x00002edc     0x14f7 uart.o
+ .debug_info    0x000043d3      0x916 pid.o
+ .debug_info    0x00004ce9      0x18f thdbg.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000      0x958
@@ -633,38 +635,38 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_abbrev  0x0000069a      0x1c5 pid.o
  .debug_abbrev  0x0000085f       0xf9 thdbg.o
 
-.debug_line     0x00000000     0x2aaa
+.debug_line     0x00000000     0x2ac7
  *(.debug_line)
  .debug_line    0x00000000       0x70 main.o
  .debug_line    0x00000070      0x164 app.o
  .debug_line    0x000001d4     0x13fc timebase.o
- .debug_line    0x000015d0      0xf19 uart.o
- .debug_line    0x000024e9      0x465 pid.o
- .debug_line    0x0000294e      0x15c thdbg.o
+ .debug_line    0x000015d0      0xf36 uart.o
+ .debug_line    0x00002506      0x465 pid.o
+ .debug_line    0x0000296b      0x15c thdbg.o
 
-.debug_frame    0x00000000      0xd80
+.debug_frame    0x00000000      0xda0
  *(.debug_frame)
  .debug_frame   0x00000000       0x20 main.o
  .debug_frame   0x00000020       0x70 app.o
  .debug_frame   0x00000090      0x600 timebase.o
- .debug_frame   0x00000690      0x490 uart.o
- .debug_frame   0x00000b20      0x1f0 pid.o
- .debug_frame   0x00000d10       0x70 thdbg.o
+ .debug_frame   0x00000690      0x4b0 uart.o
+ .debug_frame   0x00000b40      0x1f0 pid.o
+ .debug_frame   0x00000d30       0x70 thdbg.o
 
-.debug_str      0x00000000     0x1c9f
+.debug_str      0x00000000     0x1cda
  *(.debug_str)
- .debug_str     0x00000000       0x94 main.o
-                                 0xc8 (size before relaxing)
- .debug_str     0x00000094       0x43 app.o
-                                 0xff (size before relaxing)
- .debug_str     0x000000d7      0xfee timebase.o
-                               0x1186 (size before relaxing)
- .debug_str     0x000010c5      0x6d8 uart.o
-                                0x7db (size before relaxing)
- .debug_str     0x0000179d      0x414 pid.o
-                                0x528 (size before relaxing)
- .debug_str     0x00001bb1       0xee thdbg.o
-                                0x1b2 (size before relaxing)
+ .debug_str     0x00000000       0x95 main.o
+                                 0xc9 (size before relaxing)
+ .debug_str     0x00000095       0x43 app.o
+                                0x100 (size before relaxing)
+ .debug_str     0x000000d8      0xfee timebase.o
+                               0x1187 (size before relaxing)
+ .debug_str     0x000010c6      0x712 uart.o
+                                0x816 (size before relaxing)
+ .debug_str     0x000017d8      0x414 pid.o
+                                0x529 (size before relaxing)
+ .debug_str     0x00001bec       0xee thdbg.o
+                                0x1b3 (size before relaxing)
 
 .debug_loc      0x00000000     0x19fd
  *(.debug_loc)
@@ -840,6 +842,7 @@ UART_Buf_Get                                      uart.o
 UART_Buf_Get_Index                                uart.o
 UART_CRC_Calculate_Block                          uart.o
 UART_CRC_Calculate_Byte                           uart.o
+UART_Clear_Interrupt_Flag                         uart.o
 UART_Config_BAUD_Rate                             uart.o
 UART_Config_Clock                                 uart.o
 UART_Config_GPIO                                  uart.o
@@ -867,6 +870,7 @@ UART_RX_Packet_Read_Complete                      uart.o
 UART_RX_Packet_Struct_Init                        uart.o
 UART_Rx_Byte                                      uart.o
 UART_Struct_Init                                  uart.o
+UART_Timer_Clear_Interrupt_Flag                   uart.o
 UART_Timer_Disable                                uart.o
 UART_Timer_Enable                                 uart.o
 UART_Timer_Get_Status                             uart.o

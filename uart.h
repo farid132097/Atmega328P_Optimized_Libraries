@@ -4,6 +4,13 @@
  * Atmega328P UART Library
  * Created on October 30, 2022, 19:00
  */
+ 
+
+
+
+
+
+
 
 void     UART_Struct_Init(void);
 void     UART_RX_Packet_Struct_Init(void);
@@ -14,6 +21,7 @@ void     UART_Config_BAUD_Rate(uint32_t baud_rate);
 void     UART_Config_Tx(void);
 void     UART_Config_Rx(void);
 void     UART_Config_Rx_Interrupt(void);
+void     UART_Clear_Interrupt_Flag(void);
 void     UART_Tx_Byte(uint8_t val);
 uint8_t  UART_Rx_Byte(void);
 
@@ -25,7 +33,7 @@ void     UART_Timer_Disable(void);
 uint8_t  UART_Timer_Get_Status(void);
 uint16_t UART_Timer_Get_Val(void);
 void     UART_Timer_Value_Reset(void);
-
+void     UART_Timer_Clear_Interrupt_Flag(void);
 
 void     UART_Tx_Buf(uint8_t *data, uint8_t len);
 
