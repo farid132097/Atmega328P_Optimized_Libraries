@@ -653,20 +653,20 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .debug_frame   0x00000b40      0x1f0 pid.o
  .debug_frame   0x00000d30       0x70 thdbg.o
 
-.debug_str      0x00000000     0x1cda
+.debug_str      0x00000000     0x1cd9
  *(.debug_str)
- .debug_str     0x00000000       0x95 main.o
-                                 0xc9 (size before relaxing)
- .debug_str     0x00000095       0x43 app.o
-                                0x100 (size before relaxing)
- .debug_str     0x000000d8      0xfee timebase.o
-                               0x1187 (size before relaxing)
- .debug_str     0x000010c6      0x712 uart.o
-                                0x816 (size before relaxing)
- .debug_str     0x000017d8      0x414 pid.o
-                                0x529 (size before relaxing)
- .debug_str     0x00001bec       0xee thdbg.o
-                                0x1b3 (size before relaxing)
+ .debug_str     0x00000000       0x94 main.o
+                                 0xc8 (size before relaxing)
+ .debug_str     0x00000094       0x43 app.o
+                                 0xff (size before relaxing)
+ .debug_str     0x000000d7      0xfee timebase.o
+                               0x1186 (size before relaxing)
+ .debug_str     0x000010c5      0x712 uart.o
+                                0x815 (size before relaxing)
+ .debug_str     0x000017d7      0x414 pid.o
+                                0x528 (size before relaxing)
+ .debug_str     0x00001beb       0xee thdbg.o
+                                0x1b2 (size before relaxing)
 
 .debug_loc      0x00000000     0x1a55
  *(.debug_loc)

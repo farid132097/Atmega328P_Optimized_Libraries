@@ -1,5 +1,8 @@
 
 
+#ifndef _DEBUG_H_
+#define _DEBUG_H_
+
 #define  DEBUG_TX_DDR     DDRD
 #define  DEBUG_TX_PORT    PORTD
 #define  DEBUG_TX_PIN     PIND
@@ -94,3 +97,6 @@ uint8_t  Debug_Rx_Buf_Data_Available(void);
 uint8_t  Debug_Rx_Buf_Available_Bytes(void);
 
 void     Debug_Init(void);
+
+
+#endif

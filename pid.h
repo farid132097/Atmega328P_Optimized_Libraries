@@ -1,5 +1,8 @@
 
 
+#ifndef _PID_H_
+#define _PID_H_
+
 
 typedef struct PID_Input_t{
   signed long    Kp;
@@ -103,5 +106,5 @@ void        PID_Init_Module(signed long kp, signed long ki, signed long kd, sign
 
 
 
-
+#endif
 

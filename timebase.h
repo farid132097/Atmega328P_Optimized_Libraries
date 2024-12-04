@@ -7,6 +7,11 @@
  */
 
 
+
+#ifndef _TIMEBASE_H_
+#define _TIMEBASE_H_
+
+
 //#define  TIMEBASE_UPCOUNTER                1
 //#define  TIMEBASE_UPCOUNTER_SUBSECONDS     1
 #define  TIMEBASE_DOWNCOUNTER              1
@@ -256,3 +261,18 @@ void     Timebase_Init(uint16_t UpdateRateHz);
 void     Timebase_Main_Loop_Executables(void);
 void     Timebase_ISR_Executables(void);
 void     Timebase_LP_ISR_Executables(void);
+
+
+
+
+#endif
+
+
+
+
+
+
+
+
+
+

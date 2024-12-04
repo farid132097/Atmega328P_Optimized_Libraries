@@ -8,7 +8,8 @@
 
 
 
-
+#ifndef _UART_H_
+#define _UART_H_
 
 
 
@@ -121,4 +122,4 @@ void     UART_RX_Packet_Read_Complete(void);
 
 void     UART_Init(uint32_t baud);
 
-
+#endif
